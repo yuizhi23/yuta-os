@@ -1284,27 +1284,24 @@ function initReminders() {
     });
   });
 
-  // Filter out any birthdays from reminders list (kept exclusively in Countdown)
+  ensureDefaultReminders();
+  renderReminders();
+  setInterval(checkReminders, 8000);
+}
+
+function ensureDefaultReminders() {
   let reminders = getStorage(STORAGE_KEYS.REMINDERS, [])
     .filter(r => !r.id.includes('bday') && !r.title.toLowerCase().includes('birthday') && !r.title.toLowerCase().includes('bday'));
 
-  // Nata's Daily Work Encouragement Reminder
-  if (!reminders.some(r => r.id === 'rem_nata_semangat' || r.title.toLowerCase().includes('semangat'))) {
-    reminders.unshift({
+  const GROUNDING_REMINDERS = [
+    {
       id: 'rem_nata_semangat',
       title: 'Semangat Kerjanya Nata 🌸',
       desc: 'Semangat kerjanya, jangan kecapean ya! Take breathers & stay hydrated 💖',
-      date: getTodayString(),
       time: '09:00',
-      reminderFor: 'nata',
       color: '#f472b6',
-      done: false,
-      notified: false
-    });
-  }
-
-  // Core Grounding & Wellness Reminders (Both & Individual)
-  const GROUNDING_REMINDERS = [
+      reminderFor: 'nata'
+    },
     {
       id: 'rem_grounding_1',
       title: 'Eat regularly 🥗',
@@ -1427,9 +1424,7 @@ function initReminders() {
   });
 
   setStorage(STORAGE_KEYS.REMINDERS, reminders);
-
-  renderReminders();
-  setInterval(checkReminders, 8000);
+  return reminders;
 }
 
 function openReminderModal() {
@@ -1492,7 +1487,10 @@ function deleteReminder(id) {
 }
 
 function renderReminders() {
-  const reminders = getStorage(STORAGE_KEYS.REMINDERS, []);
+  let reminders = getStorage(STORAGE_KEYS.REMINDERS, []);
+  if (!reminders || reminders.length === 0) {
+    reminders = ensureDefaultReminders();
+  }
   const grid = document.getElementById('remindersGrid');
   const empty = document.getElementById('remindersEmpty');
   if (!grid || !empty) return;
@@ -1859,6 +1857,12 @@ function initCountdown() {
     });
   });
 
+  ensureDefaultCountdowns();
+  renderCountdowns();
+  setInterval(renderCountdowns, 1000);
+}
+
+function ensureDefaultCountdowns() {
   let cds = getStorage(STORAGE_KEYS.COUNTDOWNS, []);
   const curYear = new Date().getFullYear();
   const now = new Date();
@@ -1914,9 +1918,7 @@ function initCountdown() {
   }
 
   setStorage(STORAGE_KEYS.COUNTDOWNS, cds);
-
-  renderCountdowns();
-  setInterval(renderCountdowns, 1000);
+  return cds;
 }
 
 function openCountdownModal() {
@@ -1958,7 +1960,10 @@ function deleteCountdown(id) {
 }
 
 function renderCountdowns() {
-  const cds = getStorage(STORAGE_KEYS.COUNTDOWNS, []);
+  let cds = getStorage(STORAGE_KEYS.COUNTDOWNS, []);
+  if (!cds || cds.length === 0) {
+    cds = ensureDefaultCountdowns();
+  }
   const grid = document.getElementById('countdownGrid');
   const empty = document.getElementById('countdownEmpty');
   if (!grid || !empty) return;
@@ -3152,11 +3157,15 @@ function applyRemoteData(remoteData) {
     }
 
     if (hasUpdatedAny) {
+      ensureDayRoutines(selectedTodoDate);
+      ensureDefaultReminders();
+      ensureDefaultCountdowns();
+
       // Re-render UI
       renderTodos();
       renderReminders();
       renderNotes();
-      renderCountdownCards();
+      renderCountdowns();
       renderReruCard();
       renderScheduleTimeline();
 
