@@ -3861,40 +3861,99 @@ body.atmo-midnight {
     margin: 0 auto !important;
   }
 
-  /* Slim & Sleek Mobile Taskbar */
+  /* Slim, Ultra-Compact & Smoothly Swipeable Mobile Taskbar */
+  .desktop-workspace {
+    padding: 6px 6px 36px !important;
+  }
+
   .xp-taskbar {
-    height: 32px !important;
+    height: 28px !important;
     padding: 0 !important;
-    box-shadow: 0 -2px 8px rgba(0,0,0,0.2) !important;
+    box-shadow: 0 -1px 6px rgba(0,0,0,0.25) !important;
     bottom: 0 !important;
     left: 0 !important;
     right: 0 !important;
     z-index: 9999 !important;
+    display: flex !important;
+    align-items: center !important;
   }
 
-  .xp-start-btn {
-    padding: 0 10px !important;
-    gap: 4px !important;
+  .start-btn-wrap {
+    flex-shrink: 0 !important;
     height: 100% !important;
   }
 
+  .xp-start-btn {
+    padding: 0 8px !important;
+    gap: 3px !important;
+    height: 100% !important;
+    border-radius: 0 6px 6px 0 !important;
+  }
+
   .start-logo {
-    width: 16px !important;
-    height: 16px !important;
+    width: 14px !important;
+    height: 14px !important;
   }
 
   .start-text {
-    font-size: 0.8rem !important;
+    font-size: 0.72rem !important;
+  }
+
+  /* Horizontally Swipeable Chips with smooth momentum */
+  .taskbar-tasks {
+    display: flex !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    touch-action: pan-x !important;
+    scrollbar-width: none !important;
+    gap: 3px !important;
+    margin: 0 4px !important;
+    padding: 2px 0 !important;
+    align-items: center !important;
+  }
+
+  .taskbar-tasks::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .taskbar-chip {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    padding: 2px 7px !important;
+    font-size: 0.64rem !important;
+    font-weight: 600 !important;
+    height: 20px !important;
+    border-radius: 3px !important;
+    display: inline-flex !important;
+    align-items: center !important;
   }
 
   .system-tray {
-    padding: 0 8px !important;
-    gap: 6px !important;
+    flex-shrink: 0 !important;
+    padding: 0 6px !important;
+    gap: 5px !important;
+    height: 100% !important;
+    margin-left: auto !important;
+  }
+
+  .tray-icon {
+    font-size: 0.72rem !important;
   }
 
   .tray-clock {
-    font-size: 0.72rem !important;
+    font-size: 0.65rem !important;
     font-weight: 700 !important;
+  }
+
+  .xp-start-menu {
+    width: 85vw !important;
+    max-width: 270px !important;
+    bottom: 28px !important;
+    left: 0 !important;
+    border-radius: 8px 8px 0 0 !important;
+    max-height: 70vh !important;
   }
 
   /* Modals Full Screen Mobile Fit */
