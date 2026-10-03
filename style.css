@@ -2797,44 +2797,6 @@ body.atmo-midnight {
   object-fit: contain;
 }
 
-/* ==================== RESPONSIVE ==================== */
-@media (max-width: 1200px) {
-  .vista-gadgets-sidebar {
-    position: static;
-    width: 100%;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-  .desktop-workspace {
-    margin-right: 24px;
-  }
-}
-
-@media (max-width: 900px) {
-  .desktop-sidebar {
-    position: static;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 10px 0;
-  }
-  .desktop-workspace {
-    margin-left: 14px;
-    margin-right: 14px;
-  }
-  .todo-grid-3col {
-    grid-template-columns: 1fr;
-  }
-  .mood-container-grid {
-    grid-template-columns: 1fr;
-  }
-  .media-player-widget {
-    display: none;
-  }
-}
-
 /* ==================== SCHEDULE PANEL ==================== */
 .schedule-today-badge {
   display: flex;
@@ -3582,43 +3544,12 @@ body.atmo-midnight {
   50% { filter: brightness(1.35) drop-shadow(0 0 16px #fbbf24); transform: scale(1.1) rotate(2deg); }
 }
 
-/* ==================== COMPREHENSIVE MOBILE & TABLET RESPONSIVENESS ==================== */
+/* ==================== RESPONSIVE: DESKTOP, TABLET & MOBILE ==================== */
 
 @media (max-width: 1024px) {
-  .desktop-sidebar {
-    display: none; /* Hide left desktop icons on tablets to free up workspace */
-  }
-
-  .vista-gadgets-sidebar {
-    display: none; /* Hide right sidebar on tablets for clean window view */
-  }
-
-  .floating-stickers {
-    display: none; /* Remove floating stickers that might cover mobile buttons */
-  }
-
+  /* Do not hide desktop sidebar or gadgets on tablets - keep desktop experience */
   .desktop-workspace {
-    margin-left: 0;
-    margin-right: 0;
-    padding: 10px 10px 65px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .aero-window {
-    width: 100%;
-    margin: 0 auto;
-  }
-
-  .inspo-hero-banner {
-    justify-content: center;
-    text-align: center;
-    gap: 8px;
-    margin-bottom: 8px;
-  }
-
-  .hero-404-container {
-    justify-content: center;
+    padding: 6px;
   }
 }
 
@@ -3644,7 +3575,7 @@ body.atmo-midnight {
     transform: none !important;
   }
 
-  /* Hide only heavy background canvas/banners on mobile */
+  /* Hide heavy decorative background elements on mobile */
   .bubble, 
   #fishContainer, 
   #goldfish1, 
@@ -3656,20 +3587,26 @@ body.atmo-midnight {
     display: none !important;
   }
 
-  /* Compact Horizontal Desktop Icon Dock on Mobile (Top) */
+  /* =========================================================
+     DESKTOP HOMESCREEN (VISIBLE WHEN WINDOW IS CLOSED)
+     ========================================================= */
+
+  /* Left Side: Desktop Shortcut Icons Grid (2 Columns) */
   .desktop-sidebar {
-    position: static !important;
-    width: 100% !important;
-    max-height: none !important;
-    display: flex !important;
-    flex-direction: row !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
+    position: fixed !important;
+    top: 10px !important;
+    left: 8px !important;
+    bottom: 36px !important;
+    width: 52vw !important;
+    max-width: 210px !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px 6px !important;
+    align-content: flex-start !important;
+    z-index: 25 !important;
+    overflow-y: auto !important;
     scrollbar-width: none !important;
-    gap: 6px !important;
-    padding: 2px 2px 6px !important;
-    margin: 0 0 2px !important;
-    z-index: 10 !important;
+    pointer-events: auto !important;
   }
 
   .desktop-sidebar::-webkit-scrollbar {
@@ -3677,101 +3614,220 @@ body.atmo-midnight {
   }
 
   .desktop-icon {
-    width: auto !important;
-    flex-shrink: 0 !important;
-    padding: 3px 6px !important;
-    border-radius: 6px !important;
-    background: rgba(255, 255, 255, 0.28) !important;
-    border: 1px solid rgba(255, 255, 255, 0.5) !important;
-    display: inline-flex !important;
-    flex-direction: row !important;
+    width: 100% !important;
+    max-width: 90px !important;
+    padding: 6px 4px !important;
+    border-radius: 8px !important;
+    display: flex !important;
+    flex-direction: column !important;
     align-items: center !important;
-    gap: 4px !important;
-    backdrop-filter: none !important;
+    text-align: center !important;
+    background: rgba(255, 255, 255, 0.22) !important;
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.45) !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2) !important;
+    cursor: pointer !important;
+    user-select: none !important;
   }
 
   .icon-img-wrap {
-    width: 18px !important;
-    height: 18px !important;
-    margin-bottom: 0 !important;
+    width: 34px !important;
+    height: 34px !important;
+    margin-bottom: 2px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
   .desktop-emoji {
-    font-size: 1rem !important;
+    font-size: 1.5rem !important;
   }
 
   .icon-label {
-    font-size: 0.62rem !important;
+    font-size: 0.68rem !important;
     color: #ffffff !important;
-    text-shadow: 1px 1px 2px #000, 0 0 4px #000 !important;
-    white-space: nowrap !important;
+    font-weight: 800 !important;
+    text-shadow: 1px 1px 2px #000, 0 0 5px #000 !important;
+    word-break: break-word !important;
+    line-height: 1.1 !important;
   }
 
-  /* Clean Edge-to-Edge Mobile Workspace (No Huge Blank Margins) */
-  .desktop-workspace {
-    padding: 2px 2px 32px !important;
-    margin: 0 !important;
+  /* Right Side: Windows Vista Aero Gadgets */
+  .vista-gadgets-sidebar {
+    position: fixed !important;
+    top: 10px !important;
+    right: 8px !important;
+    bottom: 36px !important;
+    width: clamp(120px, 40vw, 150px) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    z-index: 25 !important;
+    overflow-y: auto !important;
+    scrollbar-width: none !important;
+    pointer-events: auto !important;
+  }
+
+  .vista-gadgets-sidebar::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .gadget-card {
+    padding: 6px 8px !important;
+    border-radius: 10px !important;
+    background: rgba(255, 255, 255, 0.88) !important;
+    box-shadow: 0 3px 10px rgba(0, 50, 120, 0.2) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.9) !important;
     width: 100% !important;
     box-sizing: border-box !important;
   }
 
-  .aero-window {
-    width: 100% !important;
-    border-radius: 8px !important;
-    border: 1px solid #2563eb !important;
-    margin: 0 auto !important;
-    overflow: hidden;
+  .gadget-title {
+    font-size: 0.58rem !important;
+    font-weight: 800 !important;
   }
 
-  /* Ultra-Compact Micro Titlebar on Mobile (Only 18px) */
+  .analog-clock {
+    width: 52px !important;
+    height: 52px !important;
+    margin: 2px auto !important;
+  }
+
+  .clock-mark {
+    font-size: 0.5rem !important;
+  }
+
+  .clock-digital-time {
+    font-size: 0.65rem !important;
+    font-weight: 700 !important;
+  }
+
+  .hydro-tank-wrap {
+    height: 30px !important;
+    width: 55px !important;
+    margin: 2px auto !important;
+  }
+
+  .hydro-level-txt {
+    font-size: 0.58rem !important;
+  }
+
+  .hydro-btn, .hydro-btn-reset {
+    padding: 2px 6px !important;
+    font-size: 0.58rem !important;
+    height: 20px !important;
+  }
+
+  .pixel-mascot-wrap {
+    width: 60px !important;
+    height: 60px !important;
+    margin: 2px auto !important;
+  }
+
+  .crt-gadget-btn, .fish-feed-btn, .popoff-trigger-btn {
+    padding: 3px 6px !important;
+    font-size: 0.62rem !important;
+    min-height: 24px !important;
+  }
+
+  /* =========================================================
+     MAIN AERO WINDOW & WINDOW CONTENT
+     ========================================================= */
+
+  .desktop-workspace {
+    position: relative !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    min-height: 100vh !important;
+    box-sizing: border-box !important;
+  }
+
+  .aero-window {
+    position: fixed !important;
+    top: 6px !important;
+    left: 6px !important;
+    right: 6px !important;
+    bottom: 32px !important;
+    width: auto !important;
+    height: auto !important;
+    max-height: calc(100vh - 38px) !important;
+    border-radius: 10px !important;
+    border: 2px solid #0055ea !important;
+    z-index: 100 !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+    background: #ffffff !important;
+  }
+
+  .aero-window.window-closed {
+    display: none !important;
+  }
+
+  .aero-window.window-minimized {
+    display: none !important;
+  }
+
+  /* Standard Aesthetic XP/Aero Titlebar */
   .window-titlebar {
-    height: 18px !important;
-    padding: 0 4px !important;
+    height: 32px !important;
+    padding: 0 10px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
+    flex-shrink: 0 !important;
+    background: linear-gradient(180deg, #2b6fe5 0%, #0055ea 40%, #0040b0 100%) !important;
   }
 
   .titlebar-left {
-    gap: 4px !important;
+    gap: 6px !important;
     display: flex !important;
     align-items: center !important;
   }
 
   .titlebar-icon {
-    width: 10px !important;
-    height: 10px !important;
+    width: 18px !important;
+    height: 18px !important;
   }
 
   .titlebar-text {
-    font-size: 0.62rem !important;
-    font-weight: 600 !important;
-    letter-spacing: 0px !important;
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    text-shadow: 1px 1px 2px #000 !important;
   }
 
   .titlebar-controls {
     display: flex !important;
-    gap: 2px !important;
+    gap: 4px !important;
   }
 
   .win-btn {
-    width: 13px !important;
-    height: 12px !important;
-    font-size: 0.45rem !important;
-    border-radius: 2px !important;
+    width: 20px !important;
+    height: 20px !important;
+    font-size: 0.72rem !important;
+    font-weight: 800 !important;
+    border-radius: 4px !important;
   }
 
-  /* Compact Micro Tab Navigation directly below Titlebar */
+  /* Navigation Tabs */
   .tab-nav {
     display: flex !important;
     overflow-x: auto !important;
     flex-wrap: nowrap !important;
     -webkit-overflow-scrolling: touch !important;
     scrollbar-width: none !important;
-    padding: 2px 4px !important;
-    gap: 3px !important;
-    background: #f1f5f9 !important;
+    padding: 4px 6px !important;
+    gap: 4px !important;
+    background: #e2e8f0 !important;
     border-bottom: 1px solid #cbd5e1 !important;
+    flex-shrink: 0 !important;
+    height: 36px !important;
+    align-items: center !important;
   }
 
   .tab-nav::-webkit-scrollbar {
@@ -3781,158 +3837,92 @@ body.atmo-midnight {
   .tab-btn {
     flex-shrink: 0 !important;
     white-space: nowrap !important;
-    padding: 2px 7px !important;
-    font-size: 0.65rem !important;
-    font-weight: 600 !important;
-    border-radius: 4px !important;
-    min-height: 22px !important;
-  }
-
-  .window-body,
-  .window-content-body {
-    padding: 6px 4px !important;
-  }
-
-  /* Compact Vista Gadgets Strip on Mobile (Bottom Widget Carousel) */
-  .vista-gadgets-sidebar {
-    position: static !important;
-    width: 100% !important;
-    max-height: none !important;
-    display: flex !important;
-    flex-direction: row !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-    scrollbar-width: none !important;
-    gap: 6px !important;
-    padding: 6px 2px 6px !important;
-    margin: 4px 0 0 !important;
-    z-index: 10 !important;
-  }
-
-  .vista-gadgets-sidebar::-webkit-scrollbar {
-    display: none !important;
-  }
-
-  .gadget-card {
-    flex: 0 0 auto !important;
-    width: auto !important;
-    min-width: 84px !important;
-    padding: 4px 6px !important;
-    border-radius: 8px !important;
-    background: rgba(255, 255, 255, 0.92) !important;
-    box-shadow: 0 2px 8px rgba(0, 50, 120, 0.15) !important;
-    border: 1px solid rgba(255, 255, 255, 0.9) !important;
-  }
-
-  .gadget-header {
-    margin-bottom: 2px !important;
-  }
-
-  .gadget-title {
-    font-size: 0.52rem !important;
+    padding: 4px 10px !important;
+    font-size: 0.75rem !important;
     font-weight: 700 !important;
+    border-radius: 6px !important;
+    height: 26px !important;
+    min-height: 26px !important;
+    display: inline-flex !important;
+    align-items: center !important;
   }
 
-  /* Mini Analog Glass Clock on Mobile */
-  .analog-clock {
-    width: 42px !important;
-    height: 42px !important;
-    margin: 1px auto !important;
+  /* Window Content Body: Clean, Compactly Scaled & Scrollable */
+  .window-content-body {
+    flex: 1 1 auto !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding: 8px 8px 16px !important;
   }
 
-  .clock-mark {
-    font-size: 0.42rem !important;
-  }
-
-  .clock-digital-time {
-    font-size: 0.58rem !important;
-    margin-top: 1px !important;
-  }
-
-  /* Mini Hydration on Mobile */
-  .hydro-tank-wrap {
-    height: 28px !important;
-    width: 44px !important;
-    margin: 1px auto !important;
-  }
-
-  .hydro-level-txt {
-    font-size: 0.52rem !important;
-  }
-
-  .hydro-btn, .hydro-btn-reset {
-    padding: 1px 4px !important;
-    font-size: 0.52rem !important;
-    height: 18px !important;
-  }
-
-  /* Mini Pixel Mascot Duo on Mobile */
-  .pixel-mascot-gadget {
-    min-width: 76px !important;
-    padding: 3px 5px !important;
-  }
-
-  .pixel-mascot-wrap {
-    width: 42px !important;
-    height: 42px !important;
-    margin: 1px auto !important;
-    padding: 1px !important;
-  }
-
-  /* Mini CRT & Buttons on Mobile */
-  .crt-gadget-btn, .fish-feed-btn, .popoff-trigger-btn {
-    padding: 2px 4px !important;
-    font-size: 0.55rem !important;
-    min-height: 20px !important;
-  }
-
-  /* Ultra-Compact Panel Headers */
   .panel-header-retro {
     margin-bottom: 6px !important;
     padding-bottom: 4px !important;
-    gap: 4px !important;
-    flex-direction: row !important;
-    justify-content: space-between !important;
-    align-items: center !important;
+    gap: 6px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
   }
 
   .panel-title-group {
     display: flex !important;
     align-items: center !important;
+    gap: 6px !important;
   }
 
   .retro-heading {
-    font-size: 0.85rem !important;
-    font-weight: 700 !important;
+    font-size: 0.92rem !important;
+    font-weight: 800 !important;
     margin: 0 !important;
+    color: #0b3a6e !important;
   }
 
   .retro-subheading {
-    display: none !important;
+    font-size: 0.65rem !important;
+    color: #64748b !important;
+  }
+
+  .todo-date-bar {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    margin-bottom: 8px !important;
   }
 
   .date-selector-box {
-    gap: 3px !important;
-    margin-top: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    width: 100% !important;
   }
 
   .retro-label {
-    font-size: 0.65rem !important;
+    font-size: 0.7rem !important;
+    font-weight: 700 !important;
   }
 
   .retro-date-input {
-    padding: 2px 4px !important;
-    font-size: 0.68rem !important;
-    height: 22px !important;
-    border-radius: 4px !important;
+    padding: 3px 6px !important;
+    font-size: 0.75rem !important;
+    height: 28px !important;
+    flex: 1 !important;
+    border-radius: 6px !important;
+  }
+
+  .todo-date-btn-row {
+    display: flex !important;
+    gap: 4px !important;
+    width: 100% !important;
   }
 
   .retro-btn-today,
   .retro-btn-action {
-    padding: 2px 5px !important;
-    font-size: 0.62rem !important;
-    height: 22px !important;
-    border-radius: 4px !important;
+    flex: 1 !important;
+    padding: 3px 6px !important;
+    font-size: 0.68rem !important;
+    height: 28px !important;
+    border-radius: 6px !important;
+    text-align: center !important;
   }
 
   /* Single Column Card Stacking for High Readability */
@@ -3942,168 +3932,214 @@ body.atmo-midnight {
   .countdown-grid,
   .stats-cards-grid,
   .notes-grid {
+    display: grid !important;
     grid-template-columns: 1fr !important;
-    gap: 6px !important;
+    gap: 8px !important;
   }
 
   .todo-column,
   .todo-column-retro {
     background: #f8fafc !important;
     border-radius: 8px !important;
-    border: 1px solid #e2e8f0 !important;
-    padding: 6px 6px !important;
+    border: 1px solid #cbd5e1 !important;
+    padding: 8px !important;
   }
 
   .column-header,
   .todo-col-header {
     padding: 3px 4px !important;
-    font-size: 0.8rem !important;
-    margin-bottom: 4px !important;
-    gap: 4px !important;
+    font-size: 0.82rem !important;
+    margin-bottom: 6px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
   }
 
   .col-avatar {
-    width: 20px !important;
-    height: 20px !important;
-    font-size: 0.75rem !important;
+    width: 22px !important;
+    height: 22px !important;
+    font-size: 0.8rem !important;
     border-radius: 4px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
   .col-title {
-    font-size: 0.78rem !important;
-  }
-
-  .col-subtitle {
-    display: none !important;
-  }
-
-  .todo-item-retro {
-    padding: 8px 10px !important;
     font-size: 0.82rem !important;
-    border-radius: 8px !important;
-    margin-bottom: 6px !important;
-    background: #ffffff !important;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06) !important;
+    font-weight: 700 !important;
   }
 
-  .retro-checkbox {
-    width: 20px !important;
-    height: 20px !important;
-    min-width: 20px !important;
-  }
-
-  .todo-date-bar {
-    flex-direction: column !important;
-    gap: 6px !important;
-    align-items: stretch !important;
-  }
-
-  .todo-date-btn-row {
+  .todo-item,
+  .todo-item-retro {
+    padding: 6px 8px !important;
+    font-size: 0.8rem !important;
+    margin-bottom: 4px !important;
+    border-radius: 6px !important;
+    min-height: 32px !important;
     display: flex !important;
-    width: 100% !important;
-    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 6px !important;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+  }
+
+  .todo-item-retro.completed,
+  .todo-item.completed {
+    opacity: 0.65 !important;
+  }
+
+  .retro-checkbox,
+  .todo-checkbox {
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 18px !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+  }
+
+  .todo-text,
+  .retro-todo-text {
+    font-size: 0.8rem !important;
+    flex: 1 1 auto !important;
+    word-break: break-word !important;
   }
 
   .todo-input-row {
-    flex-direction: column !important;
-    gap: 6px !important;
-    width: 100% !important;
+    display: flex !important;
+    gap: 4px !important;
+    margin-top: 6px !important;
   }
 
-  .todo-input-row input,
-  .todo-input-row select,
-  .todo-input-row button {
-    width: 100% !important;
-    min-height: 38px !important;
-    box-sizing: border-box !important;
+  .retro-text-input {
+    flex: 1 !important;
+    padding: 4px 8px !important;
+    font-size: 0.76rem !important;
+    height: 28px !important;
+    border-radius: 6px !important;
+  }
+
+  .retro-add-btn {
+    height: 28px !important;
+    padding: 0 10px !important;
+    font-size: 0.78rem !important;
+    font-weight: 700 !important;
+    border-radius: 6px !important;
+    flex-shrink: 0 !important;
   }
 
   /* Reminders Mobile Cards */
   .reminders-grid {
+    display: grid !important;
     grid-template-columns: 1fr !important;
-    gap: 8px !important;
-  }
-
-  .reminder-card-retro {
-    padding: 10px 12px !important;
-    border-radius: 10px !important;
-    background: #ffffff !important;
-  }
-
-  /* Countdowns 2-Column Mobile Grid */
-  .countdown-grid {
-    grid-template-columns: 1fr !important;
-    gap: 8px !important;
-  }
-
-  .countdown-card-retro {
-    padding: 12px 10px !important;
-    border-radius: 10px !important;
-  }
-
-  .cd-boxes {
     gap: 6px !important;
   }
 
-  .cd-unit {
-    padding: 6px 4px !important;
+  .reminder-card-retro {
+    padding: 8px 10px !important;
+    border-radius: 8px !important;
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+  }
+
+  .reminder-title {
+    font-size: 0.84rem !important;
+    font-weight: 700 !important;
+  }
+
+  .reminder-desc {
+    font-size: 0.72rem !important;
+    color: #475569 !important;
+  }
+
+  /* Countdowns Mobile Grid */
+  .countdown-card-retro {
+    padding: 8px 10px !important;
     border-radius: 8px !important;
   }
 
+  .cd-emoji {
+    font-size: 1.3rem !important;
+  }
+
+  .cd-title {
+    font-size: 0.82rem !important;
+  }
+
+  .cd-boxes {
+    gap: 4px !important;
+  }
+
+  .cd-unit {
+    padding: 4px 2px !important;
+    border-radius: 6px !important;
+  }
+
   .cd-num {
-    font-size: 1.1rem !important;
+    font-size: 1rem !important;
+    font-weight: 800 !important;
+  }
+
+  .cd-label {
+    font-size: 0.55rem !important;
+  }
+
+  /* Schedule Table */
+  .sched-table {
+    font-size: 0.72rem !important;
+  }
+
+  .sched-table th,
+  .sched-table td {
+    padding: 4px 6px !important;
   }
 
   /* Reru Cat Companion Mobile Polish */
   .reru-3d-card {
-    grid-template-columns: 1fr !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
     text-align: center !important;
-    padding: 14px 10px !important;
-    gap: 10px !important;
-    border-radius: 14px !important;
-  }
-
-  .reru-visual-col {
-    width: 100% !important;
-    gap: 6px !important;
+    padding: 10px !important;
+    gap: 8px !important;
+    border-radius: 12px !important;
   }
 
   .reru-avatar-3d-wrap {
-    width: 110px !important;
-    height: 110px !important;
+    width: 80px !important;
+    height: 80px !important;
     margin: 0 auto !important;
-    border-radius: 18px !important;
   }
 
   .reru-actions-grid {
+    display: grid !important;
     grid-template-columns: repeat(4, 1fr) !important;
-    gap: 6px !important;
+    gap: 4px !important;
     width: 100% !important;
   }
 
   .reru-act-btn {
-    padding: 6px 2px !important;
-    min-height: 48px !important;
-    font-size: 0.72rem !important;
-    border-radius: 8px !important;
+    padding: 4px 2px !important;
+    min-height: 40px !important;
+    font-size: 0.68rem !important;
+    border-radius: 6px !important;
   }
 
   .reru-speech-bubble {
-    font-size: 0.8rem !important;
-    padding: 8px 10px !important;
+    font-size: 0.76rem !important;
+    padding: 6px 8px !important;
     width: 95% !important;
-    margin: 0 auto !important;
   }
 
-  /* Slim, Ultra-Compact & Smoothly Swipeable Mobile Taskbar */
-  .desktop-workspace {
-    padding: 6px 6px 36px !important;
-  }
+  /* =========================================================
+     SLIM & RESPONSIVE WINDOWS XP TASKBAR
+     ========================================================= */
 
   .xp-taskbar {
     height: 28px !important;
     padding: 0 !important;
     box-shadow: 0 -1px 6px rgba(0,0,0,0.25) !important;
+    position: fixed !important;
     bottom: 0 !important;
     left: 0 !important;
     right: 0 !important;
@@ -4133,7 +4169,6 @@ body.atmo-midnight {
     font-size: 0.72rem !important;
   }
 
-  /* Horizontally Swipeable Chips with smooth momentum */
   .taskbar-tasks {
     display: flex !important;
     flex: 1 1 auto !important;
