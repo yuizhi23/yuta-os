@@ -332,17 +332,20 @@ body.crt-active .crt-overlay {
   text-align: center;
   flex-shrink: 0;
   user-select: none;
+  background: transparent;
+  border: 1px solid transparent;
 }
 
 .desktop-icon:hover {
-  background: rgba(255, 255, 255, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   box-shadow: 0 4px 14px rgba(0, 100, 200, 0.25);
   transform: translateY(-1px);
 }
 
 .desktop-icon:active {
   background: rgba(0, 85, 234, 0.35);
+  border: 1px solid rgba(0, 85, 234, 0.6);
 }
 
 .icon-img-wrap {
@@ -3595,22 +3598,23 @@ body.atmo-midnight {
      DESKTOP HOMESCREEN (VISIBLE WHEN WINDOW IS CLOSED)
      ========================================================= */
 
-  /* Left Side: Desktop Shortcut Icons Grid (Smaller & Neater) */
+  /* Left Side: Desktop Shortcut Icons Grid (Transparent & Highly Clickable) */
   .desktop-sidebar {
     position: fixed !important;
     top: 10px !important;
     left: 8px !important;
     bottom: 34px !important;
-    width: 108px !important;
-    max-width: 108px !important;
+    width: 110px !important;
+    max-width: 110px !important;
     display: grid !important;
-    grid-template-columns: repeat(2, 48px) !important;
+    grid-template-columns: repeat(2, 52px) !important;
     gap: 6px 4px !important;
     align-content: flex-start !important;
-    z-index: 5 !important;
+    z-index: 50 !important;
     overflow-y: auto !important;
     scrollbar-width: none !important;
     pointer-events: auto !important;
+    touch-action: manipulation !important;
   }
 
   .desktop-sidebar::-webkit-scrollbar {
@@ -3618,59 +3622,73 @@ body.atmo-midnight {
   }
 
   .desktop-icon {
-    width: 48px !important;
-    max-width: 48px !important;
+    width: 52px !important;
+    max-width: 52px !important;
     padding: 3px 2px !important;
     border-radius: 6px !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     text-align: center !important;
-    background: rgba(255, 255, 255, 0.22) !important;
-    backdrop-filter: blur(4px) !important;
-    -webkit-backdrop-filter: blur(4px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.45) !important;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
     cursor: pointer !important;
     user-select: none !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+    transition: transform 0.1s ease, background 0.15s ease !important;
+  }
+
+  .desktop-icon:hover,
+  .desktop-icon:active {
+    background: rgba(255, 255, 255, 0.28) !important;
+    border-radius: 6px !important;
+    transform: scale(0.96) !important;
   }
 
   .icon-img-wrap {
-    width: 22px !important;
-    height: 22px !important;
+    width: 28px !important;
+    height: 28px !important;
     margin-bottom: 2px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    pointer-events: none !important;
   }
 
   .desktop-emoji {
-    font-size: 1.1rem !important;
+    font-size: 1.3rem !important;
+    pointer-events: none !important;
   }
 
   .icon-label {
-    font-size: 0.54rem !important;
+    font-size: 0.56rem !important;
     color: #ffffff !important;
     font-weight: 800 !important;
-    text-shadow: 1px 1px 2px #000, 0 0 4px #000 !important;
+    text-shadow: 1px 1px 2px #000, 0 0 5px #000 !important;
     word-break: break-word !important;
     line-height: 1.1 !important;
+    pointer-events: none !important;
   }
 
-  /* Right Side: Windows Vista Aero Gadgets (Smaller & Neater) */
+  /* Right Side: Windows Vista Aero Gadgets (Compact & Fully Visible) */
   .vista-gadgets-sidebar {
     position: fixed !important;
     top: 10px !important;
     right: 8px !important;
     bottom: 34px !important;
-    width: 105px !important;
+    width: 110px !important;
     display: flex !important;
     flex-direction: column !important;
     gap: 5px !important;
-    z-index: 5 !important;
+    z-index: 50 !important;
     overflow-y: auto !important;
     scrollbar-width: none !important;
     pointer-events: auto !important;
+    touch-action: manipulation !important;
   }
 
   .vista-gadgets-sidebar::-webkit-scrollbar {
@@ -3724,9 +3742,31 @@ body.atmo-midnight {
   }
 
   .pixel-mascot-wrap {
-    width: 48px !important;
-    height: 48px !important;
-    margin: 1px auto !important;
+    width: 100% !important;
+    max-width: 80px !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1 !important;
+    margin: 2px auto !important;
+    padding: 2px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    overflow: hidden !important;
+    border-radius: 8px !important;
+    background: rgba(0,0,0,0.06) !important;
+    border: 1px solid rgba(255,255,255,0.4) !important;
+  }
+
+  .pixel-mascot-gif {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+    display: block !important;
+    margin: 0 auto !important;
+    image-rendering: pixelated !important;
   }
 
   .crt-gadget-btn, .fish-feed-btn, .popoff-trigger-btn {
@@ -3762,6 +3802,8 @@ body.atmo-midnight {
     width: 100% !important;
     min-height: 100vh !important;
     box-sizing: border-box !important;
+    pointer-events: none !important;
+    z-index: 20 !important;
   }
 
   .aero-window {
@@ -3782,6 +3824,7 @@ body.atmo-midnight {
     overflow: hidden !important;
     box-shadow: 0 12px 40px rgba(0,0,0,0.6) !important;
     background: #ffffff !important;
+    pointer-events: auto !important;
   }
 
   .aero-window.window-closed {
