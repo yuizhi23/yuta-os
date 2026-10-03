@@ -3660,7 +3660,7 @@ body.atmo-midnight {
 
   /* Clean Edge-to-Edge Mobile Workspace (No Huge Blank Margins) */
   .desktop-workspace {
-    padding: 4px 4px 36px !important;
+    padding: 2px 2px 32px !important;
     margin: 0 !important;
     width: 100% !important;
     box-sizing: border-box !important;
@@ -3668,52 +3668,59 @@ body.atmo-midnight {
 
   .aero-window {
     width: 100% !important;
-    border-radius: 10px !important;
-    border: 1.5px solid #2563eb !important;
+    border-radius: 8px !important;
+    border: 1px solid #2563eb !important;
     margin: 0 auto !important;
     overflow: hidden;
   }
 
-  /* Super Compact, Sleek Mobile Titlebar (Only 24px) */
+  /* Ultra-Compact Micro Titlebar on Mobile (Only 18px) */
   .window-titlebar {
-    height: 24px !important;
-    padding: 0 8px !important;
+    height: 18px !important;
+    padding: 0 4px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
   }
 
   .titlebar-left {
-    gap: 6px !important;
+    gap: 4px !important;
     display: flex !important;
     align-items: center !important;
   }
 
   .titlebar-icon {
-    width: 13px !important;
-    height: 13px !important;
+    width: 10px !important;
+    height: 10px !important;
   }
 
   .titlebar-text {
-    font-size: 0.72rem !important;
-    font-weight: 700 !important;
+    font-size: 0.62rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0px !important;
+  }
+
+  .titlebar-controls {
+    display: flex !important;
+    gap: 2px !important;
   }
 
   .win-btn {
-    width: 15px !important;
-    height: 14px !important;
-    font-size: 0.55rem !important;
+    width: 13px !important;
+    height: 12px !important;
+    font-size: 0.45rem !important;
+    border-radius: 2px !important;
   }
 
-  /* Compact Swipeable Tab Navigation directly below Titlebar */
+  /* Compact Micro Tab Navigation directly below Titlebar */
   .tab-nav {
     display: flex !important;
     overflow-x: auto !important;
     flex-wrap: nowrap !important;
     -webkit-overflow-scrolling: touch !important;
     scrollbar-width: none !important;
-    padding: 4px 6px !important;
-    gap: 4px !important;
+    padding: 2px 4px !important;
+    gap: 3px !important;
     background: #f1f5f9 !important;
     border-bottom: 1px solid #cbd5e1 !important;
   }
@@ -3725,15 +3732,65 @@ body.atmo-midnight {
   .tab-btn {
     flex-shrink: 0 !important;
     white-space: nowrap !important;
-    padding: 4px 9px !important;
-    font-size: 0.72rem !important;
-    font-weight: 700 !important;
-    border-radius: 6px !important;
-    min-height: 28px !important;
+    padding: 2px 7px !important;
+    font-size: 0.65rem !important;
+    font-weight: 600 !important;
+    border-radius: 4px !important;
+    min-height: 22px !important;
   }
 
-  .window-body {
-    padding: 8px 6px !important;
+  .window-body,
+  .window-content-body {
+    padding: 6px 4px !important;
+  }
+
+  /* Ultra-Compact Panel Headers */
+  .panel-header-retro {
+    margin-bottom: 6px !important;
+    padding-bottom: 4px !important;
+    gap: 4px !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+  }
+
+  .panel-title-group {
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .retro-heading {
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+  }
+
+  .retro-subheading {
+    display: none !important;
+  }
+
+  .date-selector-box {
+    gap: 3px !important;
+    margin-top: 0 !important;
+  }
+
+  .retro-label {
+    font-size: 0.65rem !important;
+  }
+
+  .retro-date-input {
+    padding: 2px 4px !important;
+    font-size: 0.68rem !important;
+    height: 22px !important;
+    border-radius: 4px !important;
+  }
+
+  .retro-btn-today,
+  .retro-btn-action {
+    padding: 2px 5px !important;
+    font-size: 0.62rem !important;
+    height: 22px !important;
+    border-radius: 4px !important;
   }
 
   /* Single Column Card Stacking for High Readability */
@@ -3744,19 +3801,38 @@ body.atmo-midnight {
   .stats-cards-grid,
   .notes-grid {
     grid-template-columns: 1fr !important;
-    gap: 10px !important;
+    gap: 6px !important;
   }
 
+  .todo-column,
   .todo-column-retro {
     background: #f8fafc !important;
-    border-radius: 10px !important;
+    border-radius: 8px !important;
     border: 1px solid #e2e8f0 !important;
-    padding: 10px 8px !important;
+    padding: 6px 6px !important;
   }
 
+  .column-header,
   .todo-col-header {
-    padding: 6px 8px !important;
-    font-size: 0.85rem !important;
+    padding: 3px 4px !important;
+    font-size: 0.8rem !important;
+    margin-bottom: 4px !important;
+    gap: 4px !important;
+  }
+
+  .col-avatar {
+    width: 20px !important;
+    height: 20px !important;
+    font-size: 0.75rem !important;
+    border-radius: 4px !important;
+  }
+
+  .col-title {
+    font-size: 0.78rem !important;
+  }
+
+  .col-subtitle {
+    display: none !important;
   }
 
   .todo-item-retro {
