@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600;700&family=Titan+One&family=Silkscreen:wght@400;700&family=Quicksand:wght@500;700;800&family=Nunito:ital,wght@0,500;0,700;0,800;1,600&display=swap" rel="stylesheet" />
   
-  <link rel="stylesheet" href="style.css?v=20261003_gadgets_v18" />
+  <link rel="stylesheet" href="style.css?v=20261003_homescreen_v19" />
 </head>
 <body class="wallpaper-aero">
   <!-- Interactive Water Ripple Canvas -->
@@ -60,21 +60,33 @@
 
   <!-- Desktop Icons Sidebar (Left Side) -->
   <aside class="desktop-sidebar">
-    <div class="desktop-icon" onclick="switchTab('todo')" title="Daily Agenda">
+    <div class="desktop-icon main-yuta-icon" onclick="restoreAndSwitchTab('todo')" title="Open YuTa OS Desktop Window">
+      <div class="icon-img-wrap"><img src="assets/windows_xp.png" alt="YuTa OS" /></div>
+      <span class="icon-label">YuTa OS</span>
+    </div>
+    <div class="desktop-icon" onclick="restoreAndSwitchTab('todo')" title="Daily Agenda">
       <div class="icon-img-wrap"><span class="desktop-emoji">📋</span></div>
       <span class="icon-label">Agenda</span>
     </div>
-    <div class="desktop-icon" onclick="switchTab('reminders')" title="Alerts & Reminders">
+    <div class="desktop-icon" onclick="restoreAndSwitchTab('reminders')" title="Alerts & Reminders">
       <div class="icon-img-wrap"><img src="assets/bubble_bell.png" alt="Bell" /></div>
       <span class="icon-label">Alerts</span>
     </div>
-    <div class="desktop-icon" onclick="switchTab('schedule')" title="Class Schedule">
+    <div class="desktop-icon" onclick="restoreAndSwitchTab('schedule')" title="Class Schedule">
       <div class="icon-img-wrap"><span class="desktop-emoji">🗓️</span></div>
       <span class="icon-label">Schedule</span>
     </div>
-    <div class="desktop-icon" onclick="switchTab('lovenotes')" title="Memo Board">
+    <div class="desktop-icon" onclick="restoreAndSwitchTab('lovenotes')" title="Memo Board">
       <div class="icon-img-wrap"><span class="desktop-emoji">💌</span></div>
       <span class="icon-label">Memos</span>
+    </div>
+    <div class="desktop-icon" onclick="restoreAndSwitchTab('countdown')" title="Milestone Tracker">
+      <div class="icon-img-wrap"><span class="desktop-emoji">🎂</span></div>
+      <span class="icon-label">Milestones</span>
+    </div>
+    <div class="desktop-icon" onclick="restoreAndSwitchTab('cats')" title="Cat Sanctuary">
+      <div class="icon-img-wrap"><span class="desktop-emoji">🐾</span></div>
+      <span class="icon-label">Cats</span>
     </div>
     <div class="desktop-icon" onclick="toggleWallpaper()" title="Switch Wallpaper">
       <div class="icon-img-wrap"><span class="desktop-emoji">🖼️</span></div>
@@ -91,10 +103,6 @@
     <div class="desktop-icon" onclick="toggleMediaPlayer()" title="Media Player">
       <div class="icon-img-wrap"><img src="assets/media_player.png" alt="Media Player" /></div>
       <span class="icon-label">Music</span>
-    </div>
-    <div class="desktop-icon" onclick="switchTab('cats')" title="Cat Sanctuary">
-      <div class="icon-img-wrap"><span class="desktop-emoji">🐾</span></div>
-      <span class="icon-label">Cats</span>
     </div>
     <div class="desktop-icon" onclick="openCatDialog()" title="Cat Companion">
       <div class="icon-img-wrap"><img src="assets/cat_dialog.png" alt="Cat" /></div>
@@ -230,7 +238,7 @@
     </header>
 
     <!-- Main Aero OS Window -->
-    <div class="aero-window glass-card" id="mainAeroWindow">
+    <div class="aero-window glass-card window-closed" id="mainAeroWindow">
       
       <!-- Windows Classic Title Bar -->
       <div class="window-titlebar" id="windowTitlebar">
@@ -707,7 +715,7 @@
         <span>Bubbles</span>
       </div>
       <!-- Restore button shown when window is closed/minimized -->
-      <button class="taskbar-restore-btn" id="taskbarRestoreBtn" onclick="restoreAppWindow()">
+      <button class="taskbar-restore-btn visible" id="taskbarRestoreBtn" onclick="restoreAppWindow()">
         <span>🪟</span> YuTa OS
       </button>
     </div>
@@ -1201,6 +1209,6 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 
-  <script src="app.js?v=20261003_mobile_v13"></script>
+  <script src="app.js?v=20261003_homescreen_v19"></script>
 </body>
 </html>
