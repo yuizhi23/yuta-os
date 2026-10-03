@@ -2724,26 +2724,30 @@ body.atmo-midnight {
 /* Toast */
 .retro-toast {
   position: fixed;
-  bottom: 50px;
+  bottom: 42px;
   left: 50%;
-  transform: translateX(-50%) translateY(100px);
-  background: linear-gradient(180deg, #1f5ec9 0%, #0040b0 100%);
-  color: white;
+  transform: translateX(-50%) translateY(80px) scale(0.9);
+  background: linear-gradient(180deg, #f43f5e 0%, #ec4899 50%, #8b5cf6 100%);
+  color: #ffffff;
   padding: 10px 22px;
-  border: 1.5px solid white;
-  border-radius: 20px;
+  border: 2px solid #ffffff;
+  border-radius: 25px;
   font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 0.88rem;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-  z-index: 3000;
+  font-weight: 800;
+  font-size: 0.9rem;
+  box-shadow: 0 10px 28px rgba(236, 72, 153, 0.45), 0 0 14px rgba(255, 255, 255, 0.5);
+  z-index: 10001;
   opacity: 0;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
   pointer-events: none;
+  max-width: 90vw;
+  text-align: center;
+  word-break: break-word;
+  white-space: normal;
 }
 
 .retro-toast.show {
-  transform: translateX(-50%) translateY(0);
+  transform: translateX(-50%) translateY(0) scale(1);
   opacity: 1;
 }
 

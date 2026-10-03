@@ -1206,8 +1206,10 @@ function toggleTodo(owner, id, evt) {
     item.done = !item.done;
     setStorage(STORAGE_KEYS.TODOS, data);
     playSound(item.done ? 'check' : 'bubble');
-    if (item.done && evt && evt.clientX) {
-      spawnCelebrationSparkles(evt.clientX, evt.clientY);
+    if (item.done) {
+      triggerTaskEncouragement(owner, evt?.clientX, evt?.clientY);
+    } else {
+      showToast('Task ditandai belum selesai ↺');
     }
     renderTodos();
   }
@@ -2390,23 +2392,74 @@ function sloshWaterTank() {
   showToast('Splash! Liquid waves sloshing in the tank.');
 }
 
-// ==================== CELEBRATION SPARKLES ====================
-function spawnCelebrationSparkles(x, y) {
-  const stars = ['⭐', '✨', '💖', '🌟', '🎉'];
-  for (let i = 0; i < 8; i++) {
+// ==================== CELEBRATION SPARKLES & SWEET ENCOURAGEMENT ====================
+const SWEET_ENCOURAGEMENTS = {
+  nata: [
+    "You're doing great sayangku! ✨💖",
+    "Proud of you sayang! Semangat terus yaa 🥰",
+    "Hebat banget Nata sayang! Satu tugas selesai 🌸✨",
+    "Good job cintaa! You did amazing today 💖",
+    "Keren banget sayangku, keep it up yaa! 🌟💕",
+    "Yayy selesai! Sayang hebat banget deh 💕",
+    "You're doing great sayangku! Jangan lupa istirahat & minum yaa 🧋✨",
+    "Tugas beres! So proud of you manis 🎀✨",
+    "Sayangku juara hari ini! Tetap semangat yaa ✨🐱",
+    "One step closer sayang! I love you so much 💕"
+  ],
+  yuki: [
+    "You're doing great sayangku! ✨💖",
+    "Semangat terus sayang! Proud of you 🥰",
+    "Hebat banget Yuki sayang! Tugas terselesaikan 🌸✨",
+    "Good job sayangku! Keren banget hari ini 💖",
+    "Mantap sayang! Keep going yaa 🌟💕",
+    "Yayy satu beres! You're awesome sayang 💕",
+    "You're doing great sayangku! Jangan lupa minum air yaa 🧋✨",
+    "Bangga banget sama sayang! Love you 🎀✨"
+  ],
+  shared: [
+    "You're doing great sayangku! Kita berdua hebat! ✨💖",
+    "Duo Quest Selesai! Proud of us sayang 🥰",
+    "Team YuTa terbaik! Satu mimpi tercapai bersama 🌸✨",
+    "Good job sayangku! We did amazing today 💖",
+    "Hebat banget kita sayang! Love you so much 🌟💕"
+  ]
+};
+
+function triggerTaskEncouragement(owner, clientX, clientY) {
+  const pool = SWEET_ENCOURAGEMENTS[owner] || SWEET_ENCOURAGEMENTS.nata;
+  const quote = pool[Math.floor(Math.random() * pool.length)];
+
+  const posX = (clientX !== undefined && clientX > 0) ? clientX : (window.innerWidth / 2);
+  const posY = (clientY !== undefined && clientY > 0) ? clientY : (window.innerHeight / 2);
+
+  spawnCelebrationSparkles(posX, posY, quote);
+
+  // Companion cat reaction in sanctuary
+  const catSpeech = document.getElementById('reruSpeechText');
+  if (catSpeech) {
+    catSpeech.textContent = `Meow! ${quote}`;
+    catSpeech.style.transition = 'transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)';
+    catSpeech.style.transform = 'scale(1.08)';
+    setTimeout(() => { if (catSpeech) catSpeech.style.transform = ''; }, 600);
+  }
+}
+
+function spawnCelebrationSparkles(x, y, customToastMsg) {
+  const stars = ['⭐', '✨', '💖', '🌟', '🎉', '🌸', '🐱', '💕'];
+  for (let i = 0; i < 10; i++) {
     const star = document.createElement('div');
     star.className = 'todo-sparkle-star';
     star.textContent = stars[Math.floor(Math.random() * stars.length)];
     star.style.left = `${x}px`;
     star.style.top = `${y}px`;
-    const angle = (i / 8) * Math.PI * 2;
-    const dist = Math.random() * 45 + 30;
+    const angle = (i / 10) * Math.PI * 2;
+    const dist = Math.random() * 50 + 35;
     star.style.setProperty('--tx', `${Math.cos(angle) * dist}px`);
     star.style.setProperty('--ty', `${Math.sin(angle) * dist}px`);
     document.body.appendChild(star);
-    setTimeout(() => star.remove(), 700);
+    setTimeout(() => star.remove(), 750);
   }
-  showToast('Nice work! Task checked off ✨');
+  showToast(customToastMsg || "You're doing great sayangku! ✨💖");
 }
 
 function initTabs() {
