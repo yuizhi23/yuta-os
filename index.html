@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>YuTa — Aero OS</title>
+  <meta name="description" content="Peak Frutiger Aero desktop workspace for YuTa. Daily agenda, smart alerts, interactive goldfish pond, floating soap bubbles, and aero memo board." />
+  
+  <!-- Retro & Y2K Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600;700&family=Titan+One&family=Silkscreen:wght@400;700&family=Quicksand:wght@500;700;800&family=Nunito:ital,wght@0,500;0,700;0,800;1,600&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="style.css?v=20261003_square_fixed_v12" />
+</head>
+<body class="wallpaper-aero">
+  <!-- Interactive Water Ripple Canvas -->
+  <canvas id="waterRippleCanvas" class="water-ripple-canvas"></canvas>
+
+  <!-- Luminous Cursor Aura -->
+  <div id="cursorAeroGlow" class="cursor-aero-glow"></div>
+
+  <!-- CRT Scanlines Overlay (Toggleable) -->
+  <div class="crt-overlay" id="crtOverlay"></div>
+
+  <!-- Ambient Floating Bubbles -->
+  <div class="bubbles-container" id="bubblesContainer"></div>
+
+  <!-- Interactive Fish Pet Pond (School of Goldfishes) -->
+  <div class="swimming-fish-container" id="fishContainer" title="Click anywhere on water to drop fish food! 🐟">
+    <!-- Fish 1: Momo (Leader Goldfish) -->
+    <div class="swimming-goldfish fish-momo" id="goldfish1" data-name="Momo" style="top: 26%; left: 16%; width: 96px; height: 96px;" title="Momo 🐠 (Click to pet or feed)">
+      <img src="assets/goldfish.png" alt="Momo Goldfish" />
+    </div>
+    <!-- Fish 2: Kiko (Sunburst Yellow Goldfish) -->
+    <div class="swimming-goldfish fish-kiko" id="goldfish2" data-name="Kiko" style="top: 64%; left: 28%; width: 76px; height: 76px;" title="Kiko 🐟 (Click to pet or feed)">
+      <img src="assets/goldfish.png" alt="Kiko Goldfish" />
+    </div>
+    <!-- Fish 3: Bubbles (Rose Coral Goldfish) -->
+    <div class="swimming-goldfish fish-bubbles" id="goldfish3" data-name="Bubbles" style="top: 36%; left: 74%; width: 86px; height: 86px;" title="Bubbles 🌸 (Click to pet or feed)">
+      <img src="assets/goldfish.png" alt="Bubbles Goldfish" />
+    </div>
+    <!-- Fish 4: Poko (Aqua Shimmer Baby Fish) -->
+    <div class="swimming-goldfish fish-poko" id="goldfish4" data-name="Poko" style="top: 72%; left: 60%; width: 56px; height: 56px;" title="Poko 🫧 (Click to pet or feed)">
+      <img src="assets/goldfish.png" alt="Poko Goldfish" />
+    </div>
+    <!-- Fish 5: Nori (Amber Sparkle Goldfish) -->
+    <div class="swimming-goldfish fish-nori" id="goldfish5" data-name="Nori" style="top: 18%; left: 78%; width: 78px; height: 78px;" title="Nori ✨ (Click to pet or feed)">
+      <img src="assets/goldfish.png" alt="Nori Goldfish" />
+    </div>
+  </div>
+
+  <!-- Floating Stickers with 3D Shimmer (Draggable & Interactive) -->
+  <div class="floating-stickers">
+    <img src="assets/star.png" class="sticker sticker-star" id="stickerStar" alt="Shiny Star" title="Drag me or click for Star sparkle! ⭐" />
+    <img src="assets/clover.png" class="sticker sticker-clover" id="stickerClover" alt="Four-leaf clover" title="Drag me or click for Lucky 4-Leaf Clover 🍀" />
+    <img src="assets/cd_disc.png" class="sticker sticker-cd" id="stickerCd" alt="CD Disc" title="Drag me or click for Media Player 💿" />
+    <img src="assets/windows_xp.png" class="sticker sticker-xp" id="stickerXp" alt="Windows XP" title="Drag me or click for Aero XP Orb ✨" />
+  </div>
+
+  <!-- Desktop Icons Sidebar (Left Side) -->
+  <aside class="desktop-sidebar">
+    <div class="desktop-icon" onclick="switchTab('todo')" title="Daily Agenda">
+      <div class="icon-img-wrap"><span class="desktop-emoji">📋</span></div>
+      <span class="icon-label">Agenda</span>
+    </div>
+    <div class="desktop-icon" onclick="switchTab('reminders')" title="Alerts & Reminders">
+      <div class="icon-img-wrap"><img src="assets/bubble_bell.png" alt="Bell" /></div>
+      <span class="icon-label">Alerts</span>
+    </div>
+    <div class="desktop-icon" onclick="switchTab('schedule')" title="Class Schedule">
+      <div class="icon-img-wrap"><span class="desktop-emoji">🗓️</span></div>
+      <span class="icon-label">Schedule</span>
+    </div>
+    <div class="desktop-icon" onclick="switchTab('lovenotes')" title="Memo Board">
+      <div class="icon-img-wrap"><span class="desktop-emoji">💌</span></div>
+      <span class="icon-label">Memos</span>
+    </div>
+    <div class="desktop-icon" onclick="toggleWallpaper()" title="Switch Wallpaper">
+      <div class="icon-img-wrap"><span class="desktop-emoji">🖼️</span></div>
+      <span class="icon-label">Wallpaper</span>
+    </div>
+    <div class="desktop-icon" onclick="spawnFloatingBubbleSwarm()" title="Spawn Bubbles">
+      <div class="icon-img-wrap"><span class="desktop-emoji">🫧</span></div>
+      <span class="icon-label">Bubbles</span>
+    </div>
+    <div class="desktop-icon" onclick="openPaintModal()" title="Paint Canvas">
+      <div class="icon-img-wrap"><span class="desktop-emoji">🎨</span></div>
+      <span class="icon-label">Paint</span>
+    </div>
+    <div class="desktop-icon" onclick="toggleMediaPlayer()" title="Media Player">
+      <div class="icon-img-wrap"><img src="assets/media_player.png" alt="Media Player" /></div>
+      <span class="icon-label">Music</span>
+    </div>
+    <div class="desktop-icon" onclick="switchTab('cats')" title="Cat Sanctuary">
+      <div class="icon-img-wrap"><span class="desktop-emoji">🐾</span></div>
+      <span class="icon-label">Cats</span>
+    </div>
+    <div class="desktop-icon" onclick="openCatDialog()" title="Cat Companion">
+      <div class="icon-img-wrap"><img src="assets/cat_dialog.png" alt="Cat" /></div>
+      <span class="icon-label">Purrr</span>
+    </div>
+  </aside>
+
+  <!-- Right Side: Windows Vista Aero Gadgets Sidebar -->
+  <aside class="vista-gadgets-sidebar" id="vistaSidebar">
+    
+    <!-- Gadget 1: Analog Aero Glass Clock -->
+    <div class="gadget-card clock-gadget glass-card">
+      <div class="gadget-header">
+        <span class="gadget-title">AERO CHRONO</span>
+        <div class="gadget-actions">
+          <button class="gadget-pin-btn" onclick="toggleCRT()" id="btnCrtQuickToggle" title="Toggle CRT Retro Scanlines">📺</button>
+          <button class="gadget-pin-btn" onclick="toggleSoundFx()" id="btnSoundToggle" title="Audio Effects Toggle">🔊</button>
+        </div>
+      </div>
+      <div class="analog-clock" id="analogClock">
+        <div class="clock-face">
+          <div class="clock-mark m12">12</div>
+          <div class="clock-mark m3">3</div>
+          <div class="clock-mark m6">6</div>
+          <div class="clock-mark m9">9</div>
+          <div class="clock-hand hour-hand" id="hourHand"></div>
+          <div class="clock-hand min-hand" id="minHand"></div>
+          <div class="clock-hand sec-hand" id="secHand"></div>
+          <div class="clock-pin"></div>
+        </div>
+      </div>
+      <div class="clock-digital-time" id="gadgetDigitalTime">00:00:00</div>
+    </div>
+
+    <!-- Gadget 2: Hydration Meter -->
+    <div class="gadget-card hydro-gadget glass-card">
+      <div class="gadget-header">
+        <span class="gadget-title">HYDRATION</span>
+        <span class="hydro-level-txt" id="hydroLevelTxt">1,250 / 2,000 ml</span>
+      </div>
+      <div class="hydro-tank-wrap" onclick="sloshWaterTank()" title="Click to slosh water">
+        <div class="hydro-water-fill" id="hydroWaterFill" style="height: 62%;">
+          <div class="water-wave"></div>
+        </div>
+      </div>
+      <div class="hydro-action-row">
+        <button class="hydro-btn" onclick="addWater(250)">+250ml</button>
+        <button class="hydro-btn-reset" onclick="resetWater()" title="Reset">↺</button>
+      </div>
+    </div>
+
+    <!-- Gadget 3: Interactive Bubble Lab & Sparkle Blaster -->
+    <div class="gadget-card popoff-gadget glass-card">
+      <div class="gadget-header">
+        <span class="gadget-title">BUBBLE LAB</span>
+      </div>
+      <button class="popoff-trigger-btn" onclick="spawnFloatingBubbleSwarm()" title="Click to spawn floating bubbles">
+        <span class="popoff-glow-text">SPAWN BUBBLES</span>
+        <span class="popoff-sub-btn">Pop for Chimes</span>
+      </button>
+    </div>
+
+    <!-- Gadget 4: Interactive Goldfish Pond & Feeding Station -->
+    <div class="gadget-card fish-gadget glass-card">
+      <div class="gadget-header">
+        <span class="gadget-title">AERO POND</span>
+        <span class="fish-count-badge" id="fishCountBadge">5 Fish</span>
+      </div>
+      <div class="fish-gadget-status">
+        <span class="fish-happy-label">Happiness: <strong id="fishHappyTxt">0</strong></span>
+      </div>
+      <button class="fish-feed-btn" onclick="feedFishScatter(4)" title="Drop tasty food pellets for the goldfish!">
+        <span class="feed-btn-text">FEED FISH</span>
+        <small class="feed-sub-label">Scatter 4 Pellets</small>
+      </button>
+    </div>
+
+    <!-- Gadget 5: CRT Scanlines Retro Display Filter -->
+    <div class="gadget-card crt-gadget glass-card">
+      <div class="gadget-header">
+        <span class="gadget-title">CRT SCANLINES</span>
+        <span class="crt-badge" id="crtStatusBadge">OFF</span>
+      </div>
+      <button class="crt-gadget-btn" onclick="toggleCRT()" id="crtGadgetBtn" title="Toggle Retro CRT Scanlines Effect">
+        <span class="crt-btn-icon">📺</span>
+        <span class="crt-btn-label">Toggle Scanlines</span>
+      </button>
+    </div>
+
+    <!-- Gadget 6: YuTa Pixel Duo (Square 1:1 Below CRT Scanlines) -->
+    <div class="gadget-card pixel-mascot-gadget glass-card" onclick="sparklePixelBuddy(event)" title="YuTa Pixel Duo ✨ — Click for sparkles!" style="flex:0 0 auto !important; height:auto !important; max-height:none !important; padding:6px 8px 8px !important; width:100% !important; box-sizing:border-box !important;">
+      <div class="gadget-header" style="width:100%; display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+        <span class="gadget-title">YUTA PIXEL DUO</span>
+        <span class="mascot-badge" style="font-size:0.6rem; color:#ec4899; font-weight:bold;">✨ Live</span>
+      </div>
+      <div class="pixel-mascot-wrap" style="width:130px !important; height:130px !important; aspect-ratio:1/1 !important; margin:0 auto !important; display:flex !important; justify-content:center !important; align-items:center !important; border-radius:10px !important; background:rgba(0,0,0,0.08) !important; border:1px solid rgba(255,255,255,0.4) !important; padding:4px !important; box-sizing:border-box !important; overflow:hidden !important;">
+        <img src="assets/pixel/yuta_loop.gif" alt="YuTa Pixel Duo" class="pixel-mascot-gif" id="pixelSidebarGif" style="width:100% !important; height:100% !important; max-width:100% !important; max-height:100% !important; object-fit:contain !important; display:block !important; margin:0 auto !important; image-rendering:pixelated !important;" />
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- Main Window Container -->
+  <div class="desktop-workspace">
+    
+    <!-- Top Hero Banner (YuTa Aero OS) -->
+    <header class="inspo-hero-banner">
+      <div class="hero-404-container">
+        <div class="yuta-hero-title-wrap" onclick="triggerSparkleBoost()" title="Click for YuTa Sparkle Burst!">
+          <h1 class="yuta-hero-title">YuTa</h1>
+          <span class="yuta-sub-sparkle">SPACE</span>
+        </div>
+        <div class="hero-interactive-hint" onclick="triggerSparkleBoost()" title="Interactive Aero Desktop — Click and drag everything!">
+          <span class="hint-live-pulse"></span>
+          <span class="hint-text">Interactive Desktop • Connected & Synced</span>
+        </div>
+        <div class="hero-pill-badge" onclick="openCloudSyncModal()" title="Klik untuk membuka Pengaturan Live Sync Yuki ↔ Nata">
+          <span class="pill-text" id="heroSyncPillText">☁️ Live Sync • Siap</span>
+        </div>
+        <div class="hero-pill-badge gcal-pill-badge" onclick="openGCalSyncModal()" title="Sync to Google Calendar (Lifetime)">
+          <span class="pill-text">📅 Google Calendar Sync</span>
+        </div>
+        <div class="yuta-badge" onclick="spawnFloatingBubbleSwarm()" title="Spawn floating bubbles">
+          <span class="yuta-text">Bubble Burst</span>
+          <span class="pop-pill">POP</span>
+        </div>
+      </div>
+      <div class="hero-pretty-mode" onclick="toggleAtmosphereMode()" title="Click to change atmosphere mode!">
+        <span class="pretty-text" id="atmoTitle">Aqua</span>
+        <span class="mode-text">Breeze</span>
+        <span class="sub-mode" id="atmoSub">[Live Sky]</span>
+      </div>
+    </header>
+
+    <!-- Main Aero OS Window -->
+    <div class="aero-window glass-card" id="mainAeroWindow">
+      
+      <!-- Windows Classic Title Bar -->
+      <div class="window-titlebar" id="windowTitlebar">
+        <div class="titlebar-left">
+          <img src="assets/windows_xp.png" class="titlebar-icon" alt="XP" />
+          <span class="titlebar-text">YuTa — Aero OS</span>
+        </div>
+        <div class="titlebar-controls">
+          <button class="win-btn win-min" title="Minimize" onclick="minimizeWindow()">_</button>
+          <button class="win-btn win-max" title="Maximize" onclick="maximizeWindow()">□</button>
+          <button class="win-btn win-close" title="Close" onclick="closeAppWindow()">✕</button>
+        </div>
+      </div>
+
+      <!-- Classic Menu Bar -->
+      <div class="window-menubar">
+        <span class="menu-item" onclick="switchTab('todo')"><u>F</u>ile</span>
+        <span class="menu-item" onclick="openPaintModal()"><u>E</u>dit</span>
+        <span class="menu-item" onclick="spawnFloatingBubbleSwarm()"><u>B</u>ubbles</span>
+        <span class="menu-item" onclick="switchTab('lovenotes')"><u>F</u>avorites</span>
+        <span class="menu-item" onclick="toggleMediaPlayer()"><u>T</u>ools</span>
+        <span class="menu-item" onclick="openCatDialog()"><u>H</u>elp</span>
+        <div class="menubar-time" id="menubarClock">00:00:00</div>
+      </div>
+
+      <!-- Navigation Tabs (Glossy Aero Style) -->
+      <nav class="tab-nav" role="tablist">
+        <button class="tab-btn active" data-tab="todo" id="tab-todo" role="tab" onclick="switchTab('todo')">
+          Daily Agenda
+        </button>
+        <button class="tab-btn" data-tab="reminders" id="tab-reminders" role="tab" onclick="switchTab('reminders')">
+          Gentle Reminders
+        </button>
+        <button class="tab-btn" data-tab="schedule" id="tab-schedule" role="tab" onclick="switchTab('schedule')">
+          Class Schedule
+        </button>
+        <button class="tab-btn" data-tab="lovenotes" id="tab-lovenotes" role="tab" onclick="switchTab('lovenotes')">
+          Love Notes
+        </button>
+        <button class="tab-btn" data-tab="countdown" id="tab-countdown" role="tab" onclick="switchTab('countdown')">
+          Our Milestones
+        </button>
+        <button class="tab-btn" data-tab="mood" id="tab-mood" role="tab" onclick="switchTab('mood')">
+          Vibe Check
+        </button>
+        <button class="tab-btn" data-tab="cats" id="tab-cats" role="tab" onclick="switchTab('cats')">
+          Cat Sanctuary 🐾
+        </button>
+      </nav>
+
+      <!-- Main Content Panels -->
+      <div class="window-content-body">
+
+        <!-- ==================== TODO PANEL ==================== -->
+        <section class="tab-panel active" id="panel-todo" role="tabpanel">
+          <div class="panel-header-retro">
+            <div class="panel-title-group">
+              <h2 class="retro-heading">Daily Agenda</h2>
+              <span class="retro-subheading">Daily quests & small wins for both of us</span>
+            </div>
+            <div class="date-selector-box">
+              <span class="retro-label">Date:</span>
+              <input type="date" id="todoDatePicker" class="retro-date-input" />
+              <button class="retro-btn-today" onclick="setTodoToday()">Today</button>
+              <button class="retro-btn-action" style="padding: 4px 10px; font-size: 0.72rem; margin-left: 6px;" onclick="openGCalSyncModal()" title="Sync Daily Routine to Google Calendar">📅 GCal Sync</button>
+            </div>
+          </div>
+
+          <div class="todo-grid-3col">
+            <!-- Yuki Column -->
+            <div class="todo-column yuki-col tilt-card">
+              <div class="column-header">
+                <div class="col-avatar yuki-av" title="Yuki (Orange Cat)">🐱</div>
+                <div class="col-title-wrap">
+                  <h3 class="col-title">Yuki's Quests</h3>
+                  <span class="col-subtitle">Orange cat locking in</span>
+                </div>
+              </div>
+              <div class="todo-input-wrap">
+                <input type="text" id="yukiTodoInput" class="retro-text-input" placeholder="Drop a task for Yuki..." />
+                <button class="retro-add-btn" onclick="addTodo('yuki')">＋</button>
+              </div>
+              <ul class="todo-list" id="yukiTodoList">
+                <li class="todo-item" onclick="toggleTodo('yuki', 'y_lms', event)"><div class="todo-checkbox"></div><span class="todo-text">Open LMS &amp; check courses 💻</span><button class="todo-delete" onclick="deleteTodo('yuki', 'y_lms')">✕</button></li>
+                <li class="todo-item" onclick="toggleTodo('yuki', 'y_tugas', event)"><div class="todo-checkbox"></div><span class="todo-text">Work on assignments 📚</span><button class="todo-delete" onclick="deleteTodo('yuki', 'y_tugas')">✕</button></li>
+                <li class="todo-item" onclick="toggleTodo('yuki', 'y_skripsi', event)"><div class="todo-checkbox"></div><span class="todo-text">Work on thesis ✍️</span><button class="todo-delete" onclick="deleteTodo('yuki', 'y_skripsi')">✕</button></li>
+                <li class="todo-item" onclick="toggleTodo('yuki', 'y_kerja', event)"><div class="todo-checkbox"></div><span class="todo-text">Job hunting &amp; applications 💼</span><button class="todo-delete" onclick="deleteTodo('yuki', 'y_kerja')">✕</button></li>
+              </ul>
+              <div class="todo-footer-retro">
+                <span class="status-counter" id="yukiCount">0 / 4 completed</span>
+                <div style="display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end;">
+                  <button class="clear-btn" style="color:#0284c7; border-color:rgba(2,132,199,0.4);" onclick="syncYukiGCal()" title="Tarik Jadwal Google Calendar Yuki">📅 Sync GCal</button>
+                  <button class="clear-btn" style="color:#fb923c; border-color:rgba(251,146,60,0.4);" onclick="loadYukiRoutine()" title="Reload Yuki's 4 Tasks">⚡ Routine</button>
+                  <button class="clear-btn" onclick="clearCompleted('yuki')">Clear</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Nata Column -->
+            <div class="todo-column nata-col tilt-card">
+              <div class="column-header">
+                <div class="col-avatar nata-av" title="Nata (Black Cat)">🐈‍⬛</div>
+                <div class="col-title-wrap">
+                  <h3 class="col-title">Nata's Quests</h3>
+                  <span class="col-subtitle">Black cat doing her thing</span>
+                </div>
+              </div>
+              <div class="todo-input-wrap">
+                <input type="text" id="nataTodoInput" class="retro-text-input" placeholder="Drop a task for Nata..." />
+                <button class="retro-add-btn" onclick="addTodo('nata')">＋</button>
+              </div>
+              <ul class="todo-list" id="nataTodoList">
+                <li class="todo-item" onclick="toggleTodo('nata', 'n_spender', event)"><div class="todo-checkbox"></div><span class="todo-text">Reply to spenders 💬</span><button class="todo-delete" onclick="deleteTodo('nata', 'n_spender')">✕</button></li>
+                <li class="todo-item" onclick="toggleTodo('nata', 'n_live', event)"><div class="todo-checkbox"></div><span class="todo-text">Daily 1-hour stream before dual persona stream 📹</span><button class="todo-delete" onclick="deleteTodo('nata', 'n_live')">✕</button></li>
+                <li class="todo-item" onclick="toggleTodo('nata', 'n_laporan', event)"><div class="todo-checkbox"></div><span class="todo-text">Send live stream report to group 📊</span><button class="todo-delete" onclick="deleteTodo('nata', 'n_laporan')">✕</button></li>
+                <li class="todo-item" onclick="toggleTodo('nata', 'n_absen', event)"><div class="todo-checkbox"></div><span class="todo-text">Clock-in & clock-out attendance ⏰</span><button class="todo-delete" onclick="deleteTodo('nata', 'n_absen')">✕</button></li>
+              </ul>
+              <div class="todo-footer-retro">
+                <span class="status-counter" id="nataCount">0 / 4 completed</span>
+                <div style="display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end;">
+                  <button class="clear-btn" style="color:#ec4899; border-color:rgba(236,72,153,0.4);" onclick="syncNataGCal()" title="Tarik Jadwal Google Calendar Nata">📅 Sync GCal</button>
+                  <button class="clear-btn" style="color:#38bdf8; border-color:rgba(56,189,248,0.4);" onclick="loadNataRoutine()" title="Reload Nata's 4 Tasks">⚡ Routine</button>
+                  <button class="clear-btn" onclick="clearCompleted('nata')">Clear</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Shared Column -->
+            <div class="todo-column shared-col tilt-card">
+              <div class="column-header">
+                <div class="col-avatar shared-av">&</div>
+                <div class="col-title-wrap">
+                  <h3 class="col-title">Duo Quests</h3>
+                  <span class="col-subtitle">Side quests & date plans</span>
+                </div>
+              </div>
+              <div class="todo-input-wrap">
+                <input type="text" id="sharedTodoInput" class="retro-text-input" placeholder="Add something for the duo..." />
+                <button class="retro-add-btn" onclick="addTodo('shared')">＋</button>
+              </div>
+              <ul class="todo-list" id="sharedTodoList">
+                <li class="todo-item" onclick="toggleTodo('shared', 'duo_cuddles', event)"><div class="todo-checkbox"></div><span class="todo-text">Daily cuddles &amp; cozy time 🫂💖</span><button class="todo-delete" onclick="deleteTodo('shared', 'duo_cuddles')">✕</button></li>
+                <li class="todo-item" onclick="toggleTodo('shared', 'duo_laundry', event)"><div class="todo-checkbox"></div><span class="todo-text">Weekly laundry 🧺🫧</span><button class="todo-delete" onclick="deleteTodo('shared', 'duo_laundry')">✕</button></li>
+                <li class="todo-item" onclick="toggleTodo('shared', 'duo_date', event)"><div class="todo-checkbox"></div><span class="todo-text">Weekly date night 🍿✨</span><button class="todo-delete" onclick="deleteTodo('shared', 'duo_date')">✕</button></li>
+                <li class="todo-item" onclick="toggleTodo('shared', 'duo_groceries', event)"><div class="todo-checkbox"></div><span class="todo-text">Grocery shopping 🛒🥑</span><button class="todo-delete" onclick="deleteTodo('shared', 'duo_groceries')">✕</button></li>
+              </ul>
+              <div class="todo-footer-retro">
+                <span class="status-counter" id="sharedCount">0 / 4 completed</span>
+                <div style="display: flex; gap: 6px;">
+                  <button class="clear-btn" style="color:#c084fc; border-color:rgba(192,132,252,0.4);" onclick="loadDuoRoutine()" title="Reload Duo Quests">⚡ Load Quests</button>
+                  <button class="clear-btn" onclick="clearCompleted('shared')">Clear Done</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== REMINDERS PANEL ==================== -->
+        <section class="tab-panel" id="panel-reminders" role="tabpanel">
+          <div class="panel-header-retro">
+            <div class="panel-title-group">
+              <h2 class="retro-heading">Gentle Reminders</h2>
+              <span class="retro-subheading">Little alerts to keep us healthy, happy & on track</span>
+            </div>
+            <button class="retro-btn-action" onclick="openReminderModal()">＋ New Reminder</button>
+          </div>
+          <div class="reminders-grid" id="remindersGrid"></div>
+          <div class="empty-state-retro" id="remindersEmpty">
+            <img src="assets/bubble_bell.png" class="empty-bell-icon" alt="Bell" />
+            <p>No reminders right now.<br />Click <strong>"+ New Reminder"</strong> to set a gentle nudge.</p>
+          </div>
+        </section>
+
+        <!-- ==================== MEMO BOARD PANEL ==================== -->
+        <section class="tab-panel" id="panel-lovenotes" role="tabpanel">
+          <div class="panel-header-retro">
+            <div class="panel-title-group">
+              <h2 class="retro-heading">Love Notes & Memos</h2>
+              <span class="retro-subheading">Sweet thoughts, doodles & little reminders left for each other</span>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button class="retro-btn-action" onclick="openNoteModal()">＋ Leave a Note</button>
+              <button class="retro-btn-secondary" onclick="openPaintModal()">Open Canvas</button>
+            </div>
+          </div>
+          <div class="notes-grid" id="notesGrid"></div>
+          <div class="empty-state-retro" id="notesEmpty">
+            <span class="empty-icon-emoji">💌</span>
+            <p>No notes yet.<br />Leave a sweet message or doodle for them to wake up to.</p>
+          </div>
+        </section>
+
+        <!-- ==================== COUNTDOWN PANEL ==================== -->
+        <section class="tab-panel" id="panel-countdown" role="tabpanel">
+          <div class="panel-header-retro">
+            <div class="panel-title-group">
+              <h2 class="retro-heading">Our Milestones</h2>
+              <span class="retro-subheading">Counting down to all our special days & memories</span>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="retro-btn-action" style="background: linear-gradient(180deg, #60a5fa 0%, #2563eb 100%);" onclick="openGCalSyncModal()" title="Sync Milestones & Anniv to Google Calendar">📅 Sync to Google Calendar</button>
+              <button class="retro-btn-action" onclick="openCountdownModal()">＋ Track Milestone</button>
+            </div>
+          </div>
+          <div class="countdown-grid" id="countdownGrid"></div>
+          <div class="empty-state-retro" id="countdownEmpty">
+            <img src="assets/star.png" class="empty-star-icon" alt="Star" />
+            <p>No countdowns yet.<br />Track an upcoming date, trip, or birthday.</p>
+          </div>
+        </section>
+
+        <!-- ==================== MOOD TRACKER PANEL ==================== -->
+        <section class="tab-panel" id="panel-mood" role="tabpanel">
+          <div class="panel-header-retro">
+            <div class="panel-title-group">
+              <h2 class="retro-heading">Vibe Check</h2>
+              <span class="retro-subheading">Daily mood log & check-in for both of us</span>
+            </div>
+            <div class="date-selector-box">
+              <span class="retro-label">Date:</span>
+              <input type="date" id="moodDatePicker" class="retro-date-input" />
+            </div>
+          </div>
+
+          <div class="mood-container-grid">
+            <!-- Yuki Mood -->
+            <div class="mood-box-retro yuki-mood-box tilt-card">
+              <div class="mood-box-header">
+                <span class="mood-avatar yuki-mood-av" title="Yuki (Orange Cat)">🐱</span>
+                <div>
+                  <h3 class="col-title">Yuki's Vibe Check</h3>
+                  <span class="col-subtitle">Today's energy & headspace</span>
+                </div>
+              </div>
+              <div class="mood-emoji-selector" id="yukiMoodEmojis">
+                <button class="mood-pick" data-mood="😄" data-person="yuki" title="Radiant">😄</button>
+                <button class="mood-pick" data-mood="🥰" data-person="yuki" title="Loved">🥰</button>
+                <button class="mood-pick" data-mood="😊" data-person="yuki" title="Peaceful">😊</button>
+                <button class="mood-pick" data-mood="🤩" data-person="yuki" title="Hyped">🤩</button>
+                <button class="mood-pick" data-mood="😐" data-person="yuki" title="Neutral">😐</button>
+                <button class="mood-pick" data-mood="😴" data-person="yuki" title="Sleepy">😴</button>
+                <button class="mood-pick" data-mood="🥺" data-person="yuki" title="Soft">🥺</button>
+                <button class="mood-pick" data-mood="😔" data-person="yuki" title="Low">😔</button>
+                <button class="mood-pick" data-mood="😤" data-person="yuki" title="Restless">😤</button>
+                <button class="mood-pick" data-mood="😰" data-person="yuki" title="Busy">😰</button>
+              </div>
+              <div class="mood-status-row">
+                <span>Selected:</span>
+                <span class="mood-selected-big" id="yukiSelectedEmoji">—</span>
+              </div>
+              <textarea id="yukiMoodNote" class="retro-textarea" placeholder="How was your day? Spill anything on your mind..."></textarea>
+              <button class="retro-btn-save" onclick="saveMood('yuki')">Log Yuki's Vibe</button>
+            </div>
+
+            <!-- Nata Mood -->
+            <div class="mood-box-retro nata-mood-box tilt-card">
+              <div class="mood-box-header">
+                <span class="mood-avatar nata-mood-av" title="Nata (Black Cat)">🐈‍⬛</span>
+                <div>
+                  <h3 class="col-title">Nata's Vibe Check</h3>
+                  <span class="col-subtitle">Today's energy & headspace</span>
+                </div>
+              </div>
+              <div class="mood-emoji-selector" id="nataMoodEmojis">
+                <button class="mood-pick" data-mood="😄" data-person="nata" title="Radiant">😄</button>
+                <button class="mood-pick" data-mood="🥰" data-person="nata" title="Loved">🥰</button>
+                <button class="mood-pick" data-mood="😊" data-person="nata" title="Peaceful">😊</button>
+                <button class="mood-pick" data-mood="🤩" data-person="nata" title="Hyped">🤩</button>
+                <button class="mood-pick" data-mood="😐" data-person="nata" title="Neutral">😐</button>
+                <button class="mood-pick" data-mood="😴" data-person="nata" title="Sleepy">😴</button>
+                <button class="mood-pick" data-mood="🥺" data-person="nata" title="Soft">🥺</button>
+                <button class="mood-pick" data-mood="😔" data-person="nata" title="Low">😔</button>
+                <button class="mood-pick" data-mood="😤" data-person="nata" title="Restless">😤</button>
+                <button class="mood-pick" data-mood="😰" data-person="nata" title="Busy">😰</button>
+              </div>
+              <div class="mood-status-row">
+                <span>Selected:</span>
+                <span class="mood-selected-big" id="nataSelectedEmoji">—</span>
+              </div>
+              <textarea id="nataMoodNote" class="retro-textarea" placeholder="How was your day? Drop your thoughts here..."></textarea>
+              <button class="retro-btn-save" onclick="saveMood('nata')">Log Nata's Vibe</button>
+            </div>
+          </div>
+
+          <!-- Mood History -->
+          <div class="mood-history-wrapper">
+            <h3 class="history-title">Recent Vibe Checks</h3>
+            <div id="moodHistory" class="mood-history-cards"></div>
+          </div>
+        </section>
+
+        <!-- ==================== SCHEDULE PANEL ==================== -->
+        <section class="tab-panel" id="panel-schedule" role="tabpanel">
+          <div class="panel-header-retro">
+            <div class="panel-title-group">
+              <h2 class="retro-heading">Class Timetable</h2>
+              <span class="retro-subheading">Weekly university timetable side by side</span>
+            </div>
+            <div class="schedule-today-badge" id="scheduleTodayBadge">
+              <span class="sched-badge-icon">📍</span>
+              <span id="scheduleTodayLabel">Loading...</span>
+            </div>
+          </div>
+
+          <!-- Day Selector Tabs -->
+          <div class="sched-day-tabs">
+            <button class="sched-day-btn active" data-day="1" onclick="switchScheduleDay(1)">Mon</button>
+            <button class="sched-day-btn" data-day="2" onclick="switchScheduleDay(2)">Tue</button>
+            <button class="sched-day-btn" data-day="3" onclick="switchScheduleDay(3)">Wed</button>
+            <button class="sched-day-btn" data-day="4" onclick="switchScheduleDay(4)">Thu</button>
+            <button class="sched-day-btn" data-day="5" onclick="switchScheduleDay(5)">Fri</button>
+            <button class="sched-day-btn weekend" data-day="6" onclick="switchScheduleDay(6)">Sat</button>
+          </div>
+
+          <!-- Schedule Timeline -->
+          <div class="schedule-timeline" id="scheduleTimeline">
+            <!-- Rendered by JS -->
+          </div>
+
+          <!-- No class message -->
+          <div class="sched-empty" id="schedEmpty" style="display:none;">
+            <p>No classes today! Zero lectures, 100% free time to chill.</p>
+          </div>
+
+          <!-- Legend -->
+          <div class="sched-legend">
+            <span class="sched-legend-item yuki-sched">🐱 Yuki</span>
+            <span class="sched-legend-item nata-sched">🐈‍⬛ Nata</span>
+            <span class="sched-legend-item both-sched">YuTa Duo</span>
+          </div>
+        </section>
+
+        <!-- ==================== VIRTUAL CAT COMPANION: RERU (3D ORANGE CAT) ==================== -->
+        <section class="tab-panel" id="panel-cats" role="tabpanel">
+          <div class="panel-header-retro">
+            <div class="panel-title-group">
+              <h2 class="retro-heading">Reru's Sanctuary</h2>
+              <span class="retro-subheading">Your interactive 3D orange cat companion 🐾</span>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button class="retro-btn-action" onclick="feedReru(event)">🐟 Give Salmon</button>
+              <button class="retro-btn-secondary" onclick="petReru(event)">💖 Pet Reru</button>
+            </div>
+          </div>
+
+          <!-- Reru Single 3D Pet Stage -->
+          <div class="reru-pet-stage">
+            <div class="reru-3d-card tilt-card" id="reruCard">
+              <!-- Dynamically rendered by JS -->
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Windows Media Player Floating Widget (Closed by default so it doesn't block view) -->
+  <div class="media-player-widget closed" id="mediaPlayerWidget">
+    <div class="player-titlebar">
+      <div class="player-title">
+        <img src="assets/cd_disc.png" class="player-mini-disc" id="playerMiniDisc" alt="CD" />
+        <span>Media Player 11</span>
+      </div>
+      <button class="player-close-btn" onclick="closeMediaPlayer()">✕</button>
+    </div>
+    <div class="player-screen">
+      <div class="equalizer-bars" id="equalizerBars">
+        <span class="eq-bar"></span>
+        <span class="eq-bar"></span>
+        <span class="eq-bar"></span>
+        <span class="eq-bar"></span>
+        <span class="eq-bar"></span>
+        <span class="eq-bar"></span>
+        <span class="eq-bar"></span>
+        <span class="eq-bar"></span>
+      </div>
+      <div class="now-playing-info">
+        <span class="np-title" id="nowPlayingTitle">Aqua Horizon & Blue Sky</span>
+        <span class="np-artist">Aero Soundscape Station</span>
+      </div>
+    </div>
+    <div class="player-controls">
+      <button class="p-btn" onclick="togglePlayMusic()" id="btnPlayPause" title="Play / Pause">▶</button>
+      <button class="p-btn" onclick="switchAmbientSound()" title="Next Track">⏭</button>
+      <div class="volume-slider-wrap">
+        <span class="vol-icon">🔊</span>
+        <input type="range" min="0" max="100" value="70" class="volume-slider" id="playerVolume" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Retro Windows XP Start Menu & Taskbar -->
+  <footer class="xp-taskbar">
+    <div class="start-btn-wrap">
+      <button class="xp-start-btn" id="xpStartBtn" onclick="toggleStartMenu()">
+        <img src="assets/windows_xp.png" alt="XP" class="start-logo" />
+        <span class="start-text">start</span>
+      </button>
+
+      <!-- Start Menu Popup -->
+      <div class="xp-start-menu" id="xpStartMenu">
+        <div class="start-menu-header">
+          <div class="user-avatar-bubble">
+            <img src="assets/windows_xp.png" alt="XP" style="width: 28px; height: 28px; object-fit: contain;" />
+          </div>
+          <div class="user-info">
+            <span class="user-name">YuTa OS</span>
+            <span class="user-status">Session: Connected & Synced</span>
+          </div>
+        </div>
+        <div class="start-menu-items">
+          <div class="start-item" onclick="restoreAndSwitchTab('todo'); toggleStartMenu();">
+            <span class="item-icon">📋</span>
+            <div class="item-text"><strong>Daily Agenda</strong><small>Our daily tasks & priorities</small></div>
+          </div>
+          <div class="start-item" onclick="restoreAndSwitchTab('reminders'); toggleStartMenu();">
+            <span class="item-icon">🔔</span>
+            <div class="item-text"><strong>Gentle Reminders</strong><small>Alerts & health nudges</small></div>
+          </div>
+          <div class="start-item" onclick="restoreAndSwitchTab('schedule'); toggleStartMenu();">
+            <span class="item-icon">🗓️</span>
+            <div class="item-text"><strong>Class Schedule</strong><small>University timetable</small></div>
+          </div>
+          <div class="start-item" onclick="restoreAndSwitchTab('lovenotes'); toggleStartMenu();">
+            <span class="item-icon">💌</span>
+            <div class="item-text"><strong>Love Notes</strong><small>Sweet messages & doodles</small></div>
+          </div>
+          <div class="start-item" onclick="spawnFloatingBubbleSwarm(); toggleStartMenu();">
+            <span class="item-icon">🫧</span>
+            <div class="item-text"><strong>Bubble Lab</strong><small>Floating soap bubbles</small></div>
+          </div>
+          <div class="start-item" onclick="openPaintModal(); toggleStartMenu();">
+            <span class="item-icon">🎨</span>
+            <div class="item-text"><strong>Paint Studio</strong><small>Doodle a canvas note</small></div>
+          </div>
+          <div class="start-item" onclick="openCaptchaModal(); toggleStartMenu();">
+            <span class="item-icon">🧩</span>
+            <div class="item-text"><strong>Connection Check</strong><small>Our synergy test</small></div>
+          </div>
+          <div class="start-divider"></div>
+          <div class="start-item" onclick="openCloudSyncModal(); toggleStartMenu();">
+            <span class="item-icon">☁️</span>
+            <div class="item-text"><strong>Live Cloud Sync</strong><small>Hubungkan HP Yuki & Nata Real-Time</small></div>
+          </div>
+          <div class="start-item" onclick="exportDataBackup(); toggleStartMenu();">
+            <span class="item-icon">💾</span>
+            <div class="item-text"><strong>Backup Data (JSON)</strong><small>Download lifetime snapshot</small></div>
+          </div>
+          <div class="start-item" onclick="document.getElementById('fileImportInput').click(); toggleStartMenu();">
+            <span class="item-icon">📂</span>
+            <div class="item-text"><strong>Restore Data (JSON)</strong><small>Import snapshot file</small></div>
+            <input type="file" id="fileImportInput" style="display:none;" accept=".json" onchange="importDataBackup(event)" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Active Tasks on Taskbar -->
+    <div class="taskbar-tasks">
+      <div class="taskbar-chip active" onclick="restoreAndSwitchTab('todo')">
+        <span>Agenda</span>
+      </div>
+      <div class="taskbar-chip" onclick="restoreAndSwitchTab('reminders')">
+        <span>Alerts</span>
+      </div>
+      <div class="taskbar-chip" onclick="restoreAndSwitchTab('schedule')">
+        <span>Schedule</span>
+      </div>
+      <div class="taskbar-chip" onclick="restoreAndSwitchTab('lovenotes')">
+        <span>Memos</span>
+      </div>
+      <div class="taskbar-chip" onclick="spawnFloatingBubbleSwarm()">
+        <span>Bubbles</span>
+      </div>
+      <!-- Restore button shown when window is closed/minimized -->
+      <button class="taskbar-restore-btn" id="taskbarRestoreBtn" onclick="restoreAppWindow()">
+        <span>🪟</span> YuTa OS
+      </button>
+    </div>
+
+    <!-- System Tray -->
+    <div class="system-tray">
+      <span class="tray-icon" onclick="toggleMediaPlayer()" title="Media Player">💿</span>
+      <span class="tray-icon" onclick="toggleCRT()" title="Toggle Scanlines">⚡</span>
+      <span class="tray-icon" onclick="toggleWallpaper()" title="Switch Wallpaper">🖼️</span>
+      <div class="tray-clock" id="taskbarClock">00:00</div>
+    </div>
+  </footer>
+
+  <!-- ==================== MODALS & POPUPS ==================== -->
+
+  <!-- MS Paint Drawing Canvas Modal -->
+  <div class="modal-overlay" id="paintModal" role="dialog" aria-modal="true">
+    <div class="modal-window paint-window">
+      <div class="window-titlebar">
+        <div class="titlebar-left">
+          <img src="assets/windows_xp.png" class="titlebar-icon" alt="XP" />
+          <span class="titlebar-text">🎨 untitled - Paint [Canvas Studio]</span>
+        </div>
+        <button class="win-btn win-close" onclick="closeModal('paintModal')">✕</button>
+      </div>
+      <div class="paint-menubar">
+        <span>File</span>
+        <span>Edit</span>
+        <span>View</span>
+        <span>Image</span>
+        <span>Colors</span>
+        <span>Help</span>
+      </div>
+      <div class="paint-body">
+        <div class="paint-toolbar">
+          <button class="tool-btn active" id="toolPencil" onclick="setPaintTool('pencil')" title="Pencil">✏️</button>
+          <button class="tool-btn" id="toolBrush" onclick="setPaintTool('brush')" title="Brush">🖌️</button>
+          <button class="tool-btn" id="toolEraser" onclick="setPaintTool('eraser')" title="Eraser">🧹</button>
+          <button class="tool-btn" id="toolHeart" onclick="setPaintTool('heart')" title="Heart Stamp">💖</button>
+          <button class="tool-btn" id="toolStar" onclick="setPaintTool('star')" title="Star Stamp">⭐</button>
+          <div class="paint-size-picker">
+            <label>Size:</label>
+            <input type="range" id="brushSize" min="1" max="25" value="4" />
+          </div>
+          <button class="retro-btn-clear-canvas" onclick="clearCanvas()">Clear</button>
+        </div>
+        <div class="paint-canvas-container">
+          <canvas id="paintCanvas" width="460" height="300"></canvas>
+        </div>
+      </div>
+      <!-- Color Palette at bottom -->
+      <div class="paint-color-palette" id="paintPalette"></div>
+      <div class="paint-actions">
+        <button class="retro-btn-action" onclick="saveDoodleAsNote()">Pin to Memo Board</button>
+        <button class="retro-btn-secondary" onclick="downloadDoodle()">Export PNG</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Purrr Cat Dialog Box -->
+  <div class="modal-overlay" id="catDialogModal" role="dialog" aria-modal="true">
+    <div class="modal-window cat-dialog-window">
+      <div class="window-titlebar">
+        <div class="titlebar-left">
+          <img src="assets/windows_xp.png" class="titlebar-icon" alt="XP" />
+          <span class="titlebar-text">Purrr.exe — Cat Companion</span>
+        </div>
+        <button class="win-btn win-close" onclick="closeModal('catDialogModal')">✕</button>
+      </div>
+      <div class="cat-dialog-content">
+        <img src="assets/cat_dialog.png" class="cat-pixel-img" alt="Pixel Cat" />
+        <div class="cat-question-text">
+          <p id="catQuestionPrompt">Did you remember to tell your favorite person how much they mean to you today?</p>
+        </div>
+      </div>
+      <div class="cat-dialog-buttons">
+        <button class="win-retro-btn" onclick="answerCatDialog(true)">Told them already 💕</button>
+        <button class="win-retro-btn" onclick="answerCatDialog(true)">Sending love right now 🐾</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- YuTa Synergy Verification Modal -->
+  <div class="modal-overlay" id="captchaModal" role="dialog" aria-modal="true">
+    <div class="modal-window captcha-window">
+      <div class="captcha-header">
+        <span class="captcha-sub">Select all the little things that make us 'us'</span>
+        <h3 class="captcha-main-title">YuTa Connection</h3>
+        <span class="captcha-sub">Click verify to synchronize our vibes</span>
+      </div>
+      <div class="captcha-grid" id="captchaGrid">
+        <div class="captcha-tile" onclick="toggleCaptchaTile(this)">
+          <span class="tile-emoji">☕</span>
+          <span class="tile-title">Late night calls & quiet talks</span>
+          <div class="tile-check">✓</div>
+        </div>
+        <div class="captcha-tile" onclick="toggleCaptchaTile(this)">
+          <span class="tile-emoji">✨</span>
+          <span class="tile-title">Shared laughs & silly jokes</span>
+          <div class="tile-check">✓</div>
+        </div>
+        <div class="captcha-tile" onclick="toggleCaptchaTile(this)">
+          <span class="tile-emoji">🛡️</span>
+          <span class="tile-title">Having each other's back</span>
+          <div class="tile-check">✓</div>
+        </div>
+        <div class="captcha-tile" onclick="toggleCaptchaTile(this)">
+          <span class="tile-emoji">🌸</span>
+          <span class="tile-title">Random cute texts & check-ins</span>
+          <div class="tile-check">✓</div>
+        </div>
+        <div class="captcha-tile" onclick="toggleCaptchaTile(this)">
+          <span class="tile-emoji">🫧</span>
+          <span class="tile-title">Our cozy comfort zone</span>
+          <div class="tile-check">✓</div>
+        </div>
+        <div class="captcha-tile" onclick="toggleCaptchaTile(this)">
+          <span class="tile-emoji">💫</span>
+          <span class="tile-title">Cheering each other on</span>
+          <div class="tile-check">✓</div>
+        </div>
+      </div>
+      <div class="captcha-footer">
+        <button class="captcha-verify-btn" onclick="verifyLoveCaptcha()">VERIFY CONNECTION</button>
+        <button class="captcha-close-btn" onclick="closeModal('captchaModal')">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reminder Add Modal -->
+  <div class="modal-overlay" id="reminderModal" role="dialog" aria-modal="true">
+    <div class="modal-window retro-form-window">
+      <div class="window-titlebar">
+        <div class="titlebar-left">
+          <img src="assets/windows_xp.png" class="titlebar-icon" alt="XP" />
+          <span class="titlebar-text">New Scheduled Reminder</span>
+        </div>
+        <button class="win-btn win-close" onclick="closeModal('reminderModal')">✕</button>
+      </div>
+      <div class="modal-inner-padding">
+        <div class="form-group-retro">
+          <label for="reminderTitle">Reminder Title</label>
+          <input type="text" id="reminderTitle" class="retro-text-input" placeholder="e.g. Afternoon stretch, review targets..." />
+        </div>
+        <div class="form-group-retro">
+          <label for="reminderDesc">Notes (optional)</label>
+          <textarea id="reminderDesc" class="retro-textarea" placeholder="Add specific context..."></textarea>
+        </div>
+        <div class="form-group-retro">
+          <label for="reminderFor">Target:</label>
+          <select id="reminderFor" class="retro-select">
+            <option value="both">YuTa (Joint)</option>
+            <option value="yuki">Yuki</option>
+            <option value="nata">Nata</option>
+          </select>
+        </div>
+        <div class="form-group-retro">
+          <label>Aero Accent Color</label>
+          <div class="color-dot-picker" id="reminderColorPicker">
+            <button class="color-dot active" data-color="#5bc8e8" style="background:#5bc8e8;"></button>
+            <button class="color-dot" data-color="#7ed957" style="background:#7ed957;"></button>
+            <button class="color-dot" data-color="#f6a4c9" style="background:#f6a4c9;"></button>
+            <button class="color-dot" data-color="#ffcf67" style="background:#ffcf67;"></button>
+            <button class="color-dot" data-color="#b39ddb" style="background:#b39ddb;"></button>
+          </div>
+        </div>
+        <div class="modal-btn-row">
+          <button class="retro-btn-action" onclick="saveReminder()">Save Alert</button>
+          <button class="retro-btn-secondary" onclick="closeModal('reminderModal')">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Memo Add Modal -->
+  <div class="modal-overlay" id="noteModal" role="dialog" aria-modal="true">
+    <div class="modal-window retro-form-window">
+      <div class="window-titlebar">
+        <div class="titlebar-left">
+          <img src="assets/windows_xp.png" class="titlebar-icon" alt="XP" />
+          <span class="titlebar-text">Post New Memo</span>
+        </div>
+        <button class="win-btn win-close" onclick="closeModal('noteModal')">✕</button>
+      </div>
+      <div class="modal-inner-padding">
+        <div class="form-row-retro">
+          <div class="form-group-retro">
+            <label for="noteFrom">From:</label>
+            <select id="noteFrom" class="retro-select">
+              <option value="yuki">Yuki</option>
+              <option value="nata">Nata</option>
+            </select>
+          </div>
+          <div class="form-group-retro">
+            <label for="noteTo">To:</label>
+            <select id="noteTo" class="retro-select">
+              <option value="nata">Nata</option>
+              <option value="yuki">Yuki</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group-retro">
+          <label for="noteTitle">Subject</label>
+          <input type="text" id="noteTitle" class="retro-text-input" placeholder="e.g. Quick reminder, great job today..." />
+        </div>
+        <div class="form-group-retro">
+          <label for="noteContent">Message</label>
+          <textarea id="noteContent" class="retro-textarea" style="min-height:120px;" placeholder="Write your thoughts..."></textarea>
+        </div>
+        <div class="form-group-retro">
+          <label>Badge Icon</label>
+          <div class="emoji-selector-row" id="noteEmojiPicker">
+            <button class="emoji-btn active" data-emoji="✨">✨</button>
+            <button class="emoji-btn" data-emoji="🌸">🌸</button>
+            <button class="emoji-btn" data-emoji="⚡">⚡</button>
+            <button class="emoji-btn" data-emoji="🫧">🫧</button>
+            <button class="emoji-btn" data-emoji="⭐">⭐</button>
+            <button class="emoji-btn" data-emoji="🍀">🍀</button>
+            <button class="emoji-btn" data-emoji="☕">☕</button>
+            <button class="emoji-btn" data-emoji="🐠">🐠</button>
+          </div>
+        </div>
+        <div class="modal-btn-row">
+          <button class="retro-btn-action" onclick="saveNote()">Post Memo</button>
+          <button class="retro-btn-secondary" onclick="closeModal('noteModal')">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Countdown Add Modal -->
+  <div class="modal-overlay" id="countdownModal" role="dialog" aria-modal="true">
+    <div class="modal-window retro-form-window">
+      <div class="window-titlebar">
+        <div class="titlebar-left">
+          <img src="assets/windows_xp.png" class="titlebar-icon" alt="XP" />
+          <span class="titlebar-text">Track New Milestone</span>
+        </div>
+        <button class="win-btn win-close" onclick="closeModal('countdownModal')">✕</button>
+      </div>
+      <div class="modal-inner-padding">
+        <div class="form-group-retro">
+          <label for="countdownName">Milestone Name</label>
+          <input type="text" id="countdownName" class="retro-text-input" placeholder="e.g. Kyoto Trip, Anniversary, Project Launch..." />
+        </div>
+        <div class="form-group-retro">
+          <label for="countdownDate">Target Date</label>
+          <input type="date" id="countdownDate" class="retro-date-input" />
+        </div>
+        <div class="form-group-retro">
+          <label>Select Badge</label>
+          <div class="emoji-selector-row" id="countdownEmojiPicker">
+            <button class="emoji-btn active" data-emoji="🎉">🎉</button>
+            <button class="emoji-btn" data-emoji="✈️">✈️</button>
+            <button class="emoji-btn" data-emoji="🎂">🎂</button>
+            <button class="emoji-btn" data-emoji="🌟">🌟</button>
+            <button class="emoji-btn" data-emoji="🏖️">🏖️</button>
+            <button class="emoji-btn" data-emoji="💍">💍</button>
+            <button class="emoji-btn" data-emoji="🎬">🎬</button>
+            <button class="emoji-btn" data-emoji="🚀">🚀</button>
+          </div>
+        </div>
+        <div class="modal-btn-row">
+          <button class="retro-btn-action" onclick="saveCountdown()">Save Milestone</button>
+          <button class="retro-btn-secondary" onclick="closeModal('countdownModal')">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Real-Time Cloud Live Sync Modal (Yuki & Nata Multi-Device Pair) -->
+  <div class="modal-overlay" id="cloudSyncModal" role="dialog" aria-modal="true">
+    <div class="modal-window cloud-sync-window">
+      <div class="window-titlebar">
+        <div class="titlebar-left">
+          <img src="assets/windows_xp.png" class="titlebar-icon" alt="XP" />
+          <span class="titlebar-text">☁️ YuTa OS — Real-Time Live Sync (Yuki ↔ Nata)</span>
+        </div>
+        <button class="win-btn win-close" onclick="closeModal('cloudSyncModal')">✕</button>
+      </div>
+      <div class="sync-modal-body">
+        <div class="sync-status-card" id="syncStatusCard">
+          <div class="sync-status-icon-wrap">
+            <span class="sync-status-pulse" id="syncPulseDot"></span>
+            <span class="sync-status-emoji" id="syncStatusEmoji">☁️</span>
+          </div>
+          <div>
+            <strong class="sync-status-title" id="syncStatusTitle">Penyimpanan Lokal (Offline)</strong>
+            <p class="sync-status-desc" id="syncStatusDesc">Data tersimpan di perangkat ini. Hubungkan Firebase untuk Live Update 2 arah otomatis!</p>
+          </div>
+        </div>
+
+        <div class="sync-form-group">
+          <label for="syncRoomId"><strong>Nama Kamar Bersama (Shared Room ID):</strong></label>
+          <input type="text" id="syncRoomId" class="retro-input" value="yuta-space-2026" placeholder="contoh: yuta-space-2026" />
+          <small class="sync-help-text">💡 Masukkan nama kamar yang sama persis di HP/Laptop Yuki & Nata.</small>
+        </div>
+
+        <div class="sync-form-group">
+          <label for="syncDbUrl"><strong>Firebase Database URL / Project Config:</strong></label>
+          <input type="text" id="syncDbUrl" class="retro-input" value="https://yuta-os-f9a95-default-rtdb.asia-southeast1.firebasedatabase.app" placeholder="https://yuta-os-f9a95-default-rtdb.asia-southeast1.firebasedatabase.app" />
+          <small class="sync-help-text">🔥 URL Realtime Database resmi YuTa OS (Gratis & Real-Time Sync).</small>
+        </div>
+
+        <div class="sync-quick-guide">
+          <details>
+            <summary><strong>📖 Cara Bikin Database Firebase Gratis 1 Menit (Klik di sini)</strong></summary>
+            <ol style="padding-left: 18px; font-size: 0.74rem; line-height: 1.45; color: #1e3a8a; margin-top: 6px;">
+              <li>Buka <a href="https://console.firebase.google.com" target="_blank" style="color:#0284c7; font-weight:bold;">console.firebase.google.com</a> & login Google.</li>
+              <li>Klik <strong>Add Project</strong> (Beri nama misal: <code>yuta-os</code>) lalu klik Create.</li>
+              <li>Pilih menu <strong>Build → Realtime Database → Create Database</strong> (Pilih Singapore/US, pilih <em>Start in Test Mode</em>).</li>
+              <li>Salin link database (misal: <code>https://yuta-os-default-rtdb.asia-southeast1.firebasedatabase.app</code>) dan paste di kotak atas!</li>
+            </ol>
+          </details>
+        </div>
+
+        <div class="modal-btn-row" style="margin-top: 12px; gap: 6px;">
+          <button class="retro-btn-action" onclick="saveAndConnectCloudSync()">🔗 Sambungkan Live Sync</button>
+          <button class="retro-btn-secondary" onclick="forcePushToCloud()" id="btnForcePush" title="Upload semua data lokal ke Cloud">⬆️ Push ke Cloud</button>
+          <button class="retro-btn-secondary" onclick="forcePullFromCloud()" id="btnForcePull" title="Download data terbaru dari Cloud">⬇️ Tarik Cloud</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Google Calendar Lifetime Sync Modal -->
+  <div class="modal-overlay" id="gcalSyncModal" role="dialog" aria-modal="true">
+    <div class="modal-window gcal-sync-window">
+      <div class="window-titlebar">
+        <div class="titlebar-left">
+          <img src="assets/windows_xp.png" class="titlebar-icon" alt="XP" />
+          <span class="titlebar-text">📅 YuTa — Google Calendar Lifetime Sync</span>
+        </div>
+        <button class="win-btn win-close" onclick="closeModal('gcalSyncModal')">✕</button>
+      </div>
+      <div class="sync-modal-body">
+        <div class="sync-status-card gcal-status-card">
+          <div class="sync-status-icon-wrap">
+            <span class="sync-status-emoji">📅</span>
+          </div>
+          <div>
+            <strong class="sync-status-title">Google Calendar Lifetime Integration</strong>
+            <p class="sync-status-desc">Simpan semua jadwal & agenda Yuki-Nata secara permanen di Google Calendar (Android, iPhone, Mac & Windows).</p>
+          </div>
+        </div>
+
+        <!-- 1-Click All-in-One Lifetime Export -->
+        <div class="gcal-export-box">
+          <div class="gcal-export-info">
+            <strong style="color: #1e3a8a; font-size: 0.86rem; display: block;">⚡ 1-Click Universal Sync (.ics File)</strong>
+            <span style="font-size: 0.74rem; color: #475569; line-height: 1.35; display: block; margin-top: 2px;">
+              Download file kalender lengkap: Agenda harian Yuki, Tugas Nata, Duo Plans, <strong>Anniversary (17 Feb 2026)</strong>, dan Ulang Tahun dengan jadwal berulang otomatis.
+            </span>
+          </div>
+          <button class="retro-btn-action gcal-big-btn" onclick="downloadLifetimeICS()">
+            📥 Download All to Google Calendar (.ics)
+          </button>
+        </div>
+
+        <!-- Quick Individual 1-Click Direct Links -->
+        <div class="gcal-quick-grid-title">✨ Atau Tambahkan Langsung per Acara (1-Klik Buka GCal):</div>
+        <div class="gcal-quick-grid">
+          <div class="gcal-quick-card" onclick="syncEventToGoogleCalendar('anniversary')">
+            <span class="gcal-card-icon">💍</span>
+            <div class="gcal-card-info">
+              <strong>Our Anniversary</strong>
+              <span>17 Feb 2026 (Repeats Yearly)</span>
+            </div>
+            <button class="gcal-add-badge">＋ Add</button>
+          </div>
+
+          <div class="gcal-quick-card" onclick="syncEventToGoogleCalendar('yuki_bday')">
+            <span class="gcal-card-icon">🐱</span>
+            <div class="gcal-card-info">
+              <strong>Yuki's Birthday</strong>
+              <span>23 Oct (Repeats Yearly)</span>
+            </div>
+            <button class="gcal-add-badge">＋ Add</button>
+          </div>
+
+          <div class="gcal-quick-card" onclick="syncEventToGoogleCalendar('nata_bday')">
+            <span class="gcal-card-icon">🐈‍⬛</span>
+            <div class="gcal-card-info">
+              <strong>Nata's Birthday</strong>
+              <span>24 Sep (Repeats Yearly)</span>
+            </div>
+            <button class="gcal-add-badge">＋ Add</button>
+          </div>
+
+          <div class="gcal-quick-card" onclick="syncEventToGoogleCalendar('yuki_routine')">
+            <span class="gcal-card-icon">💻</span>
+            <div class="gcal-card-info">
+              <strong>Yuki's 4 Quests</strong>
+              <span>LMS, Assignments, Thesis, Job Hunt</span>
+            </div>
+            <button class="gcal-add-badge">＋ Add</button>
+          </div>
+
+          <div class="gcal-quick-card" onclick="syncEventToGoogleCalendar('nata_routine')">
+            <span class="gcal-card-icon">🌸</span>
+            <div class="gcal-card-info">
+              <strong>Nata's Daily Quests</strong>
+              <span>Spenders, Stream, Report, Attendance</span>
+            </div>
+            <button class="gcal-add-badge">＋ Add</button>
+          </div>
+
+          <div class="gcal-quick-card" onclick="syncEventToGoogleCalendar('duo_date')">
+            <span class="gcal-card-icon">🍿</span>
+            <div class="gcal-card-info">
+              <strong>YuTa Date Night</strong>
+              <span>Every Saturday Night (Weekly)</span>
+            </div>
+            <button class="gcal-add-badge">＋ Add</button>
+          </div>
+        </div>
+
+        <!-- TWO-WAY IMPORT: FROM GOOGLE CALENDAR TO WEB APP -->
+        <div class="gcal-export-box" style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-color: #86efac;">
+          <div class="gcal-export-info">
+            <strong style="color: #166534; font-size: 0.88rem; display: block;">⚡ Tarik Otomatis dari Google Calendar (Yuki & Nata)</strong>
+            <span style="font-size: 0.74rem; color: #374151; line-height: 1.35; display: block; margin-top: 2px;">
+              Akun Google Calendar Yuki & Nata sudah terhubung! Klik tombol di bawah untuk langsung menyelaraskan jadwal ke web:
+            </span>
+          </div>
+
+          <!-- Dual 1-Click Sync Buttons -->
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button class="retro-btn-action" style="flex: 1; background: linear-gradient(180deg, #38bdf8 0%, #0284c7 100%); font-size: 0.78rem; padding: 8px 12px;" onclick="syncYukiGCal()">
+              🐱 Tarik Kalender Yuki
+            </button>
+            <button class="retro-btn-action" style="flex: 1; background: linear-gradient(180deg, #f472b6 0%, #db2777 100%); font-size: 0.78rem; padding: 8px 12px;" onclick="syncNataGCal()">
+              🐈‍⬛ Tarik Kalender Nata
+            </button>
+            <button class="retro-btn-action" style="width: 100%; background: linear-gradient(180deg, #10b981 0%, #047857 100%); font-size: 0.82rem; font-weight: 800; padding: 9px 14px;" onclick="syncBothGCal()">
+              ✨ Tarik Keduanya Sekaligus (Yuki 🐱 & Nata 🐈‍⬛)
+            </button>
+          </div>
+
+          <div style="border-top: 1px dashed #86efac; margin-top: 6px; padding-top: 6px; display: flex; gap: 8px; align-items: center;">
+            <select id="gcalImportTarget" class="retro-input" style="flex: 1; padding: 5px 8px; font-size: 0.74rem;">
+              <option value="yuki">🐱 Masukkan ke: Yuki's Quests</option>
+              <option value="nata">🐈‍⬛ Masukkan ke: Nata's Quests</option>
+              <option value="reminders">🔔 Masukkan ke: Gentle Reminders</option>
+            </select>
+            <input type="file" id="gcalIcsFileInput" accept=".ics,text/calendar" style="display:none;" onchange="handleGCalFileImport(event)" />
+            <button class="retro-btn-secondary" style="font-size: 0.72rem; padding: 5px 10px;" onclick="document.getElementById('gcalIcsFileInput').click()">
+              📂 Upload Manual .ics
+            </button>
+          </div>
+        </div>
+
+        <!-- 3-Step Instant Guide -->
+        <div class="sync-quick-guide">
+          <details>
+            <summary><strong>📖 Panduan Lengkap: Cara Sambungkan 2 Arah (Google Cal ↔ Web)</strong></summary>
+            <ol style="padding-left: 18px; font-size: 0.74rem; line-height: 1.45; color: #1e3a8a; margin-top: 6px;">
+              <li><strong>Dari Web ke Google Cal:</strong> Klik <em>"Download All (.ics)"</em> di atas, lalu import di <a href="https://calendar.google.com/calendar/u/0/r/settings/export" target="_blank" style="color:#0284c7; font-weight:bold;">Google Calendar Settings</a>.</li>
+              <li><strong>Dari Google Cal ke Web:</strong> Di Google Calendar, klik ⚙️ Settings → Export untuk dapat file <code>.ics</code>, lalu klik tombol hijau <strong>"📂 Upload File .ics"</strong> di atas. Semua tugas Google Calendar langsung muncul di web ini!</li>
+              <li><strong>Atau via Link Live Feed:</strong> Buka Google Calendar Settings → Pilih nama Kalender → Salin <em>"Alamat rahasia dalam format iCal"</em> dan paste di kotak URL di atas.</li>
+            </ol>
+          </details>
+        </div>
+
+        <div class="modal-btn-row" style="margin-top: 8px;">
+          <button class="retro-btn-secondary" style="width: 100%; font-weight: bold;" onclick="closeModal('gcalSyncModal')">Close Window</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="retro-toast" id="toast"></div>
+
+  <!-- Reminder Popup Notification Alert -->
+  <div class="reminder-popup-alert" id="reminderAlert" style="display:none;">
+    <div class="popup-alert-bar">
+      <span>Aero System Notification</span>
+      <button onclick="dismissAlert()">✕</button>
+    </div>
+    <div class="popup-alert-body">
+      <img src="assets/bubble_bell.png" class="alert-icon-bell" alt="Bell" />
+      <div>
+        <strong id="reminderAlertTitle">Reminder Alert</strong>
+        <p id="reminderAlertDesc">Scheduled alert triggered.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase Realtime Database SDK (Compat CDN) -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+
+  <script src="app.js?v=20261003_cloud_v10"></script>
+</body>
+</html>
