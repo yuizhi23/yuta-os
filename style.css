@@ -3696,10 +3696,12 @@ body.atmo-midnight {
 
   .gadget-card {
     padding: 4px 6px !important;
-    border-radius: 8px !important;
-    background: rgba(255, 255, 255, 0.9) !important;
-    box-shadow: 0 2px 8px rgba(0, 50, 120, 0.18) !important;
-    border: 1px solid rgba(255, 255, 255, 0.9) !important;
+    border-radius: 10px !important;
+    background: rgba(255, 255, 255, 0.42) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    box-shadow: 0 4px 14px rgba(0, 50, 120, 0.16), inset 0 1px 1px rgba(255, 255, 255, 0.75) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.68) !important;
     width: 100% !important;
     box-sizing: border-box !important;
   }
@@ -3753,8 +3755,8 @@ body.atmo-midnight {
     align-items: center !important;
     overflow: hidden !important;
     border-radius: 8px !important;
-    background: rgba(0,0,0,0.06) !important;
-    border: 1px solid rgba(255,255,255,0.4) !important;
+    background: rgba(255, 255, 255, 0.25) !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
   }
 
   .pixel-mascot-gif {
