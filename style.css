@@ -315,7 +315,7 @@ body.crt-active .crt-overlay {
   display: flex;
   flex-direction: column;
   gap: clamp(2px, 0.4vh, 4px);
-  z-index: 25;
+  z-index: 5;
   overflow: hidden;
   padding-bottom: 4px;
 }
@@ -387,7 +387,7 @@ body.crt-active .crt-overlay {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  z-index: 20;
+  z-index: 5;
   padding-right: 2px;
 }
 
@@ -3595,14 +3595,6 @@ body.atmo-midnight {
      DESKTOP HOMESCREEN (VISIBLE WHEN WINDOW IS CLOSED)
      ========================================================= */
 
-  /* Hide Desktop Icons & Gadgets completely when Aero Window is open on mobile */
-  body.aero-window-open .desktop-sidebar,
-  body.aero-window-open .vista-gadgets-sidebar {
-    display: none !important;
-    pointer-events: none !important;
-    visibility: hidden !important;
-  }
-
   /* Left Side: Desktop Shortcut Icons Grid (Smaller & Neater) */
   .desktop-sidebar {
     position: fixed !important;
@@ -3615,7 +3607,7 @@ body.atmo-midnight {
     grid-template-columns: repeat(2, 48px) !important;
     gap: 6px 4px !important;
     align-content: flex-start !important;
-    z-index: 10 !important;
+    z-index: 5 !important;
     overflow-y: auto !important;
     scrollbar-width: none !important;
     pointer-events: auto !important;
@@ -3675,7 +3667,7 @@ body.atmo-midnight {
     display: flex !important;
     flex-direction: column !important;
     gap: 5px !important;
-    z-index: 10 !important;
+    z-index: 5 !important;
     overflow-y: auto !important;
     scrollbar-width: none !important;
     pointer-events: auto !important;
@@ -3741,6 +3733,22 @@ body.atmo-midnight {
     padding: 2px 4px !important;
     font-size: 0.56rem !important;
     min-height: 20px !important;
+  }
+
+  /* CRITICAL: HIDE Desktop Icons and Gadgets whenever Aero Window or Modals are OPEN on Mobile */
+  body.aero-window-open .desktop-sidebar,
+  body.aero-window-open .vista-gadgets-sidebar,
+  body:has(#mainAeroWindow:not(.window-closed):not(.window-minimized)) .desktop-sidebar,
+  body:has(#mainAeroWindow:not(.window-closed):not(.window-minimized)) .vista-gadgets-sidebar,
+  body:has(.modal-overlay.open) .desktop-sidebar,
+  body:has(.modal-overlay.open) .vista-gadgets-sidebar,
+  body:has(.modal-overlay.active) .desktop-sidebar,
+  body:has(.modal-overlay.active) .vista-gadgets-sidebar {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    opacity: 0 !important;
+    z-index: -10 !important;
   }
 
   /* =========================================================
