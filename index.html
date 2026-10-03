@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600;700&family=Titan+One&family=Silkscreen:wght@400;700&family=Quicksand:wght@500;700;800&family=Nunito:ital,wght@0,500;0,700;0,800;1,600&display=swap" rel="stylesheet" />
   
-  <link rel="stylesheet" href="style.css?v=20261004_frosted_v26" />
+  <link rel="stylesheet" href="style.css?v=20261004_reru_v27" />
 </head>
 <body class="wallpaper-aero">
   <!-- Interactive Water Ripple Canvas -->
@@ -84,9 +84,9 @@
       <div class="icon-img-wrap"><span class="desktop-emoji">🎂</span></div>
       <span class="icon-label">Milestones</span>
     </div>
-    <div class="desktop-icon" onclick="restoreAndSwitchTab('cats')" title="Cat Sanctuary">
-      <div class="icon-img-wrap"><span class="desktop-emoji">🐾</span></div>
-      <span class="icon-label">Cats</span>
+    <div class="desktop-icon" onclick="restoreAndSwitchTab('cats')" title="Reru Cat Sanctuary">
+      <div class="icon-img-wrap" style="border-radius:50%; overflow:hidden; border:1.5px solid rgba(255,255,255,0.85); box-shadow:0 2px 6px rgba(0,0,0,0.3);"><img src="assets/reru_cat.jpg" alt="Reru Cat" style="width:100%; height:100%; object-fit:cover;" /></div>
+      <span class="icon-label">Reru 🐱</span>
     </div>
     <div class="desktop-icon" onclick="toggleWallpaper()" title="Switch Wallpaper">
       <div class="icon-img-wrap"><span class="desktop-emoji">🖼️</span></div>
@@ -190,6 +190,23 @@
         <span class="crt-btn-icon">📺</span>
         <span class="crt-btn-label">Toggle Scanlines</span>
       </button>
+    </div>
+
+    <!-- Gadget: Reru Oyen Cat Companion Widget -->
+    <div class="gadget-card reru-mini-gadget glass-card" onclick="restoreAndSwitchTab('cats')" title="🐾 Reru Cat Companion — Click to visit sanctuary!" style="cursor:pointer;">
+      <div class="gadget-header">
+        <span class="gadget-title">RERU OYEN 🐾</span>
+        <span class="mascot-badge" style="color:#f59e0b;" id="reruMiniLvl">Lv. 1</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:6px; margin-top:2px;">
+        <div style="width:34px; height:34px; border-radius:50%; overflow:hidden; border:1.5px solid rgba(255,255,255,0.85); flex-shrink:0; box-shadow:0 2px 6px rgba(0,0,0,0.25);">
+          <img src="assets/reru_cat.jpg" alt="Reru" style="width:100%; height:100%; object-fit:cover;" />
+        </div>
+        <div style="flex:1; min-width:0;">
+          <div style="font-size:0.56rem; font-weight:800; color:#0f172a; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">🐾 Reru</div>
+          <div style="font-size:0.5rem; color:#475569; line-height:1.1;" id="reruMiniMoodText">😸 Senyum & Manja</div>
+        </div>
+      </div>
     </div>
 
     <!-- Gadget 6: YuTa Pixel Duo (Responsive 1:1 Below CRT Scanlines) -->
@@ -1209,6 +1226,6 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 
-  <script src="app.js?v=20261004_fixcheck_v25"></script>
+  <script src="app.js?v=20261004_reru_v27"></script>
 </body>
 </html>

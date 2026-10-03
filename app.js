@@ -2721,6 +2721,11 @@ function renderReruCard() {
   const statusText = isAngry ? 'MARAH & GALAK' : reru.mood === 'sleepy' ? 'Tidur Zzz' : reru.mood === 'playful' ? 'Zoomies' : 'Senyum & Manja';
   const tagClass = isAngry ? 'tag-angry' : reru.mood === 'playful' ? 'tag-playful' : reru.mood === 'sleepy' ? 'tag-sleepy' : 'tag-happy';
 
+  const miniLvl = document.getElementById('reruMiniLvl');
+  if (miniLvl) miniLvl.textContent = `Lv. ${reru.level}`;
+  const miniMood = document.getElementById('reruMiniMoodText');
+  if (miniMood) miniMood.textContent = `${faceEmoji} ${statusText}`;
+
   cardContainer.innerHTML = `
     <!-- Left 3D Visual Column (Photo 100% Unobstructed) -->
     <div class="reru-visual-col">
