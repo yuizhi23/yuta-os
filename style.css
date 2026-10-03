@@ -3595,19 +3595,27 @@ body.atmo-midnight {
      DESKTOP HOMESCREEN (VISIBLE WHEN WINDOW IS CLOSED)
      ========================================================= */
 
-  /* Left Side: Desktop Shortcut Icons Grid (2 Columns) */
+  /* Hide Desktop Icons & Gadgets completely when Aero Window is open on mobile */
+  body.aero-window-open .desktop-sidebar,
+  body.aero-window-open .vista-gadgets-sidebar {
+    display: none !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
+  }
+
+  /* Left Side: Desktop Shortcut Icons Grid (Smaller & Neater) */
   .desktop-sidebar {
     position: fixed !important;
     top: 10px !important;
     left: 8px !important;
-    bottom: 36px !important;
-    width: 52vw !important;
-    max-width: 210px !important;
+    bottom: 34px !important;
+    width: 108px !important;
+    max-width: 108px !important;
     display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 8px 6px !important;
+    grid-template-columns: repeat(2, 48px) !important;
+    gap: 6px 4px !important;
     align-content: flex-start !important;
-    z-index: 25 !important;
+    z-index: 10 !important;
     overflow-y: auto !important;
     scrollbar-width: none !important;
     pointer-events: auto !important;
@@ -3618,10 +3626,10 @@ body.atmo-midnight {
   }
 
   .desktop-icon {
-    width: 100% !important;
-    max-width: 90px !important;
-    padding: 6px 4px !important;
-    border-radius: 8px !important;
+    width: 48px !important;
+    max-width: 48px !important;
+    padding: 3px 2px !important;
+    border-radius: 6px !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
@@ -3630,14 +3638,14 @@ body.atmo-midnight {
     backdrop-filter: blur(4px) !important;
     -webkit-backdrop-filter: blur(4px) !important;
     border: 1px solid rgba(255, 255, 255, 0.45) !important;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2) !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important;
     cursor: pointer !important;
     user-select: none !important;
   }
 
   .icon-img-wrap {
-    width: 34px !important;
-    height: 34px !important;
+    width: 22px !important;
+    height: 22px !important;
     margin-bottom: 2px !important;
     display: flex !important;
     align-items: center !important;
@@ -3645,29 +3653,29 @@ body.atmo-midnight {
   }
 
   .desktop-emoji {
-    font-size: 1.5rem !important;
+    font-size: 1.1rem !important;
   }
 
   .icon-label {
-    font-size: 0.68rem !important;
+    font-size: 0.54rem !important;
     color: #ffffff !important;
     font-weight: 800 !important;
-    text-shadow: 1px 1px 2px #000, 0 0 5px #000 !important;
+    text-shadow: 1px 1px 2px #000, 0 0 4px #000 !important;
     word-break: break-word !important;
     line-height: 1.1 !important;
   }
 
-  /* Right Side: Windows Vista Aero Gadgets */
+  /* Right Side: Windows Vista Aero Gadgets (Smaller & Neater) */
   .vista-gadgets-sidebar {
     position: fixed !important;
     top: 10px !important;
     right: 8px !important;
-    bottom: 36px !important;
-    width: clamp(120px, 40vw, 150px) !important;
+    bottom: 34px !important;
+    width: 105px !important;
     display: flex !important;
     flex-direction: column !important;
-    gap: 6px !important;
-    z-index: 25 !important;
+    gap: 5px !important;
+    z-index: 10 !important;
     overflow-y: auto !important;
     scrollbar-width: none !important;
     pointer-events: auto !important;
@@ -3678,65 +3686,65 @@ body.atmo-midnight {
   }
 
   .gadget-card {
-    padding: 6px 8px !important;
-    border-radius: 10px !important;
-    background: rgba(255, 255, 255, 0.88) !important;
-    box-shadow: 0 3px 10px rgba(0, 50, 120, 0.2) !important;
-    border: 1.5px solid rgba(255, 255, 255, 0.9) !important;
+    padding: 4px 6px !important;
+    border-radius: 8px !important;
+    background: rgba(255, 255, 255, 0.9) !important;
+    box-shadow: 0 2px 8px rgba(0, 50, 120, 0.18) !important;
+    border: 1px solid rgba(255, 255, 255, 0.9) !important;
     width: 100% !important;
     box-sizing: border-box !important;
   }
 
   .gadget-title {
-    font-size: 0.58rem !important;
+    font-size: 0.52rem !important;
     font-weight: 800 !important;
   }
 
   .analog-clock {
-    width: 52px !important;
-    height: 52px !important;
-    margin: 2px auto !important;
+    width: 44px !important;
+    height: 44px !important;
+    margin: 1px auto !important;
   }
 
   .clock-mark {
-    font-size: 0.5rem !important;
+    font-size: 0.45rem !important;
   }
 
   .clock-digital-time {
-    font-size: 0.65rem !important;
+    font-size: 0.58rem !important;
     font-weight: 700 !important;
   }
 
   .hydro-tank-wrap {
-    height: 30px !important;
-    width: 55px !important;
-    margin: 2px auto !important;
+    height: 24px !important;
+    width: 46px !important;
+    margin: 1px auto !important;
   }
 
   .hydro-level-txt {
-    font-size: 0.58rem !important;
+    font-size: 0.52rem !important;
   }
 
   .hydro-btn, .hydro-btn-reset {
-    padding: 2px 6px !important;
-    font-size: 0.58rem !important;
-    height: 20px !important;
+    padding: 1px 4px !important;
+    font-size: 0.52rem !important;
+    height: 18px !important;
   }
 
   .pixel-mascot-wrap {
-    width: 60px !important;
-    height: 60px !important;
-    margin: 2px auto !important;
+    width: 48px !important;
+    height: 48px !important;
+    margin: 1px auto !important;
   }
 
   .crt-gadget-btn, .fish-feed-btn, .popoff-trigger-btn {
-    padding: 3px 6px !important;
-    font-size: 0.62rem !important;
-    min-height: 24px !important;
+    padding: 2px 4px !important;
+    font-size: 0.56rem !important;
+    min-height: 20px !important;
   }
 
   /* =========================================================
-     MAIN AERO WINDOW & WINDOW CONTENT
+     MAIN AERO WINDOW & WINDOW CONTENT (ALWAYS TOP Z-INDEX)
      ========================================================= */
 
   .desktop-workspace {
@@ -3759,12 +3767,12 @@ body.atmo-midnight {
     max-height: calc(100vh - 38px) !important;
     border-radius: 10px !important;
     border: 2px solid #0055ea !important;
-    z-index: 100 !important;
+    z-index: 500 !important;
     margin: 0 !important;
     display: flex !important;
     flex-direction: column !important;
     overflow: hidden !important;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.6) !important;
     background: #ffffff !important;
   }
 

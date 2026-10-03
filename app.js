@@ -869,6 +869,15 @@ function switchTab(tabId) {
   }
 }
 
+function syncWindowState() {
+  const win = document.querySelector('.aero-window');
+  if (!win) return;
+  const isClosed = win.classList.contains('window-closed') || win.classList.contains('window-minimized');
+  document.body.classList.toggle('aero-window-open', !isClosed);
+  const restoreBtn = document.getElementById('taskbarRestoreBtn');
+  if (restoreBtn) restoreBtn.classList.toggle('visible', isClosed);
+}
+
 function minimizeWindow() {
   const win = document.querySelector('.aero-window');
   if (!win) return;
@@ -878,8 +887,7 @@ function minimizeWindow() {
     restoreAppWindow();
   } else {
     win.classList.add('window-minimized');
-    const restoreBtn = document.getElementById('taskbarRestoreBtn');
-    if (restoreBtn) restoreBtn.classList.add('visible');
+    syncWindowState();
     showToast('Window minimized — click taskbar chip to restore.');
   }
 }
@@ -902,8 +910,7 @@ function closeAppWindow() {
   if (!win) return;
   playSound('delete');
   win.classList.add('window-closed');
-  const restoreBtn = document.getElementById('taskbarRestoreBtn');
-  if (restoreBtn) restoreBtn.classList.add('visible');
+  syncWindowState();
   showToast('Window closed — click YuTa OS on taskbar to reopen.');
 }
 
@@ -913,8 +920,7 @@ function restoreAppWindow() {
   playSound('bubble');
   win.classList.remove('window-closed', 'window-minimized');
   win.style.opacity = '';
-  const restoreBtn = document.getElementById('taskbarRestoreBtn');
-  if (restoreBtn) restoreBtn.classList.remove('visible');
+  syncWindowState();
   showToast('Welcome back to YuTa OS ✨');
 }
 
@@ -2506,6 +2512,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPixelBuddy();
   initSchedule();
   initCloudSync();
+  syncWindowState();
 });
 
 // ==================== PIXEL DUO TINY RIGHT-SIDE ACCESSORY ====================
