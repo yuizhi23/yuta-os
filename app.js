@@ -482,6 +482,7 @@ function spawnBubbleBurstAt(x, y) {
 
 // ==================== 3D CARD TILT EFFECT ====================
 function initTiltCards() {
+  if (window.innerWidth <= 768 || 'ontouchstart' in window) return;
   const cards = document.querySelectorAll('.tilt-card, .aero-window');
 
   cards.forEach(card => {
@@ -586,6 +587,12 @@ function initFishPet() {
   const fish = document.getElementById('goldfish1');
   const container = document.getElementById('fishContainer');
   if (!fish) return;
+
+  if (window.innerWidth <= 768) {
+    if (fish) fish.style.display = 'none';
+    if (container) container.style.display = 'none';
+    return;
+  }
 
   fish.addEventListener('click', (e) => {
     e.stopPropagation();
@@ -711,7 +718,7 @@ function escapeHtml(str) {
 // ==================== BUBBLES GENERATOR ====================
 function initBubbles() {
   const container = document.getElementById('bubblesContainer');
-  if (!container) return;
+  if (!container || window.innerWidth <= 768) return;
 
   function spawnBubble() {
     const b = document.createElement('div');

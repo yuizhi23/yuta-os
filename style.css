@@ -3626,164 +3626,256 @@ body.atmo-midnight {
   html, body {
     overflow-x: hidden;
     touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
 
+  /* Remove laggy blur effects on mobile for silky 60fps */
+  .aero-window,
+  .tilt-card,
+  .retro-panel,
+  .reru-3d-card,
+  .cloud-sync-window,
+  .gcal-sync-window,
+  .modal-window {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: #ffffff !important;
+    box-shadow: 0 4px 16px rgba(0, 50, 120, 0.12) !important;
+    transform: none !important;
+  }
+
+  /* Hide CPU heavy background elements on mobile */
+  .bubble, #fishContainer, #goldfish1, .floating-stickers, .desktop-sidebar, .vista-gadgets-sidebar, .crop-404-img, .hero-404-container {
+    display: none !important;
+  }
+
+  /* Clean Edge-to-Edge Mobile Workspace */
   .desktop-workspace {
-    padding: 6px 6px 60px;
+    padding: 6px 6px 50px !important;
+    margin: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
+  .aero-window {
+    width: 100% !important;
+    border-radius: 12px !important;
+    border: 1.5px solid #2563eb !important;
+    margin: 0 auto !important;
+    overflow: hidden;
+  }
+
+  /* Compact Sleek Mobile Hero */
   .inspo-hero-banner {
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding: 10px 8px 6px !important;
+    gap: 6px !important;
+    text-align: center !important;
   }
 
   .yuta-hero-title {
-    font-size: 2rem;
+    font-size: 1.6rem !important;
+    letter-spacing: -0.5px !important;
+    margin: 0 !important;
+  }
+
+  .hero-pill-badges {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 4px !important;
   }
 
   .hero-pill-badge, .hero-interactive-hint, .yuta-badge {
-    padding: 3px 9px;
-    font-size: 0.68rem;
+    padding: 4px 8px !important;
+    font-size: 0.68rem !important;
+    border-radius: 6px !important;
   }
 
-  /* Smooth Swipeable Navigation Tabs */
+  /* Sleek Swipeable Tab Navigation */
   .tab-nav {
-    display: flex;
-    overflow-x: auto;
+    display: flex !important;
+    overflow-x: auto !important;
     flex-wrap: nowrap !important;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding: 6px 6px 8px;
-    gap: 5px;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    padding: 6px 4px !important;
+    gap: 6px !important;
+    background: #f1f5f9 !important;
+    border-bottom: 1px solid #cbd5e1 !important;
   }
 
   .tab-nav::-webkit-scrollbar {
-    display: none;
+    display: none !important;
   }
 
   .tab-btn {
-    flex-shrink: 0;
-    white-space: nowrap;
-    padding: 6px 12px;
-    font-size: 0.78rem;
-    border-radius: 8px;
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    padding: 7px 12px !important;
+    font-size: 0.78rem !important;
+    font-weight: 700 !important;
+    border-radius: 8px !important;
+    min-height: 36px !important;
   }
 
-  /* Window Menubar Scrollable */
-  .window-menubar {
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding: 3px 6px;
-    gap: 8px;
-  }
-
-  .window-menubar::-webkit-scrollbar {
-    display: none;
-  }
-
-  .menu-item {
-    flex-shrink: 0;
-    white-space: nowrap;
-  }
-
-  .menubar-time {
-    display: none; /* Hide in menubar to save width, clock is in taskbar */
-  }
-
-  /* Grids Collapse to Single Column */
+  /* Single Column Card Stacking for High Readability */
   .todo-grid-3col,
   .mood-container-grid,
   .habit-grid,
   .countdown-grid,
-  .stats-cards-grid {
+  .stats-cards-grid,
+  .notes-grid {
     grid-template-columns: 1fr !important;
-    gap: 10px;
+    gap: 10px !important;
   }
 
-  .panel-header-retro {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+  .todo-column-retro {
+    background: #f8fafc !important;
+    border-radius: 10px !important;
+    border: 1px solid #e2e8f0 !important;
+    padding: 10px 8px !important;
+  }
+
+  .todo-col-header {
+    padding: 6px 8px !important;
+    font-size: 0.85rem !important;
+  }
+
+  .todo-item-retro {
+    padding: 8px 10px !important;
+    font-size: 0.82rem !important;
+    border-radius: 8px !important;
+    margin-bottom: 6px !important;
+    background: #ffffff !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06) !important;
+  }
+
+  .retro-checkbox {
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 20px !important;
+  }
+
+  .todo-date-bar {
+    flex-direction: column !important;
+    gap: 6px !important;
+    align-items: stretch !important;
+  }
+
+  .todo-date-btn-row {
+    display: flex !important;
+    width: 100% !important;
+    justify-content: space-between !important;
   }
 
   .todo-input-row {
-    flex-direction: column;
-    width: 100%;
-    gap: 6px;
+    flex-direction: column !important;
+    gap: 6px !important;
+    width: 100% !important;
   }
 
   .todo-input-row input,
   .todo-input-row select,
   .todo-input-row button {
     width: 100% !important;
-    min-height: 40px;
-    box-sizing: border-box;
+    min-height: 38px !important;
+    box-sizing: border-box !important;
   }
 
-  .filter-pill-group {
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding-bottom: 4px;
-    width: 100%;
+  /* Reminders Mobile Cards */
+  .reminders-grid {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
   }
 
-  .filter-pill {
-    flex-shrink: 0;
-    white-space: nowrap;
+  .reminder-card-retro {
+    padding: 10px 12px !important;
+    border-radius: 10px !important;
+    background: #ffffff !important;
   }
 
-  /* Schedule Tabs */
-  .sched-day-tabs {
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding-bottom: 6px;
-    margin: 10px 0 12px;
+  /* Countdowns 2-Column Mobile Grid */
+  .countdown-grid {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
   }
 
-  .sched-day-tabs::-webkit-scrollbar {
-    display: none;
+  .countdown-card-retro {
+    padding: 12px 10px !important;
+    border-radius: 10px !important;
   }
 
-  .sched-day-btn {
-    flex-shrink: 0;
-    white-space: nowrap;
-    padding: 6px 14px;
-    font-size: 0.72rem;
+  .cd-boxes {
+    gap: 6px !important;
   }
 
-  .timeline-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-    padding: 10px;
+  .cd-unit {
+    padding: 6px 4px !important;
+    border-radius: 8px !important;
   }
 
-  .timeline-time-badge {
-    width: auto;
+  .cd-num {
+    font-size: 1.1rem !important;
   }
 
-  /* Slim & Sleek Mobile Taskbar (Compact, No Huge Scroll) */
-  .desktop-workspace {
-    padding: 6px 6px 36px !important;
+  /* Reru Cat Companion Mobile Polish */
+  .reru-3d-card {
+    grid-template-columns: 1fr !important;
+    text-align: center !important;
+    padding: 14px 10px !important;
+    gap: 10px !important;
+    border-radius: 14px !important;
   }
 
+  .reru-visual-col {
+    width: 100% !important;
+    gap: 6px !important;
+  }
+
+  .reru-avatar-3d-wrap {
+    width: 110px !important;
+    height: 110px !important;
+    margin: 0 auto !important;
+    border-radius: 18px !important;
+  }
+
+  .reru-actions-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 6px !important;
+    width: 100% !important;
+  }
+
+  .reru-act-btn {
+    padding: 6px 2px !important;
+    min-height: 48px !important;
+    font-size: 0.72rem !important;
+    border-radius: 8px !important;
+  }
+
+  .reru-speech-bubble {
+    font-size: 0.8rem !important;
+    padding: 8px 10px !important;
+    width: 95% !important;
+    margin: 0 auto !important;
+  }
+
+  /* Slim & Sleek Mobile Taskbar */
   .xp-taskbar {
-    height: 28px !important;
-    padding: 0;
-    box-shadow: 0 -1px 4px rgba(0,0,0,0.25);
+    height: 32px !important;
+    padding: 0 !important;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.2) !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 9999 !important;
   }
 
   .xp-start-btn {
-    padding: 0 9px !important;
+    padding: 0 10px !important;
     gap: 4px !important;
-    border-radius: 0 6px 6px 0 !important;
+    height: 100% !important;
   }
 
   .start-logo {
@@ -3792,171 +3884,30 @@ body.atmo-midnight {
   }
 
   .start-text {
-    font-size: 0.78rem !important;
-  }
-
-  .taskbar-tasks {
-    margin-left: 5px !important;
-    gap: 3px !important;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  .taskbar-tasks::-webkit-scrollbar {
-    display: none;
-  }
-
-  .taskbar-chip {
-    padding: 2px 7px !important;
-    font-size: 0.65rem !important;
-    border-radius: 3px !important;
-    white-space: nowrap !important;
-    height: 20px !important;
+    font-size: 0.8rem !important;
   }
 
   .system-tray {
-    padding: 0 7px !important;
+    padding: 0 8px !important;
     gap: 6px !important;
   }
 
-  .tray-icon {
-    font-size: 0.78rem !important;
-  }
-
   .tray-clock {
-    font-size: 0.65rem !important;
+    font-size: 0.72rem !important;
     font-weight: 700 !important;
   }
 
-  .xp-start-menu {
-    width: 88vw !important;
-    max-width: 290px !important;
-    bottom: 28px !important;
-    left: 2px !important;
-    border-radius: 8px 8px 0 0 !important;
-    max-height: 72vh !important;
-  }
-
-  /* Modals */
-  .retro-modal-content {
-    width: 95vw !important;
-    max-width: 95vw !important;
-    max-height: 88vh !important;
-    padding: 12px !important;
-    margin: auto;
+  /* Modals Full Screen Mobile Fit */
+  .modal-window,
+  .cloud-sync-window,
+  .gcal-sync-window {
+    width: 96vw !important;
+    max-width: 96vw !important;
+    max-height: 90vh !important;
+    border-radius: 12px !important;
+    margin: auto !important;
   }
 }
-
-@media (max-width: 520px) {
-  .taskbar-chip:not(.active) {
-    display: none; /* Hide inactive taskbar chips on narrow phones for ultra clean look */
-  }
-
-  .system-tray .tray-icon {
-    display: none; /* Show only clock on small screens */
-  }
-
-  .system-tray {
-    padding: 0 6px !important;
-  }
-  .yuta-hero-title {
-    font-size: 1.65rem;
-  }
-
-  .window-titlebar {
-    padding: 2px 8px;
-    height: 30px;
-  }
-
-  .titlebar-text {
-    font-size: 0.78rem;
-  }
-
-  .win-btn {
-    width: 22px;
-    height: 20px;
-    font-size: 0.72rem;
-  }
-
-  /* Reru Cat Sanctuary Mobile Layout (Enlarged & Comfortable) */
-  .reru-pet-stage {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .reru-3d-card {
-    grid-template-columns: 1fr !important;
-    text-align: center;
-    padding: 14px 12px;
-    gap: 12px;
-    border-radius: 18px;
-  }
-
-  .reru-visual-col {
-    width: 100%;
-    gap: 8px;
-  }
-
-  .reru-avatar-3d-wrap {
-    width: 120px;
-    height: 120px;
-    margin: 0 auto;
-    border-radius: 22px;
-  }
-
-  .reru-speech-bubble {
-    font-size: 0.82rem;
-    padding: 8px 12px;
-    min-height: 42px;
-    margin: 0 auto;
-    width: 96%;
-    line-height: 1.35;
-  }
-
-  .reru-name {
-    font-size: 1.25rem;
-  }
-
-  .reru-bio {
-    font-size: 0.76rem;
-  }
-
-  .reru-header-row {
-    justify-content: center;
-    text-align: center;
-    gap: 6px;
-  }
-
-  .reru-actions-grid {
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 8px !important;
-    width: 100%;
-    margin-top: 8px;
-  }
-
-  .reru-act-btn {
-    padding: 8px 4px;
-    min-height: 52px;
-    border-radius: 12px;
-    font-size: 0.78rem;
-  }
-
-  .reru-act-btn .cat-btn-icon {
-    font-size: 1.3rem;
-  }
-
-  .cat-stats-list {
-    width: 100%;
-    gap: 6px;
-  }
-
-  .cat-bar-track {
-    height: 12px;
-  }
-
-  .cat-stat-item {
-    font-size: 0.78rem;
-  }
 
 /* ==================== CLOUD REALTIME SYNC MODAL ==================== */
 .cloud-sync-window {
