@@ -3644,18 +3644,67 @@ body.atmo-midnight {
     transform: none !important;
   }
 
-  /* Hide CPU heavy background elements & bulky banners on mobile */
+  /* Hide only heavy background canvas/banners on mobile */
   .bubble, 
   #fishContainer, 
   #goldfish1, 
   .floating-stickers, 
-  .desktop-sidebar, 
-  .vista-gadgets-sidebar, 
   .crop-404-img, 
   .hero-404-container,
   .inspo-hero-banner,
   .window-menubar {
     display: none !important;
+  }
+
+  /* Compact Horizontal Desktop Icon Dock on Mobile (Top) */
+  .desktop-sidebar {
+    position: static !important;
+    width: 100% !important;
+    max-height: none !important;
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    gap: 6px !important;
+    padding: 2px 2px 6px !important;
+    margin: 0 0 2px !important;
+    z-index: 10 !important;
+  }
+
+  .desktop-sidebar::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .desktop-icon {
+    width: auto !important;
+    flex-shrink: 0 !important;
+    padding: 3px 6px !important;
+    border-radius: 6px !important;
+    background: rgba(255, 255, 255, 0.28) !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    display: inline-flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 4px !important;
+    backdrop-filter: none !important;
+  }
+
+  .icon-img-wrap {
+    width: 18px !important;
+    height: 18px !important;
+    margin-bottom: 0 !important;
+  }
+
+  .desktop-emoji {
+    font-size: 1rem !important;
+  }
+
+  .icon-label {
+    font-size: 0.62rem !important;
+    color: #ffffff !important;
+    text-shadow: 1px 1px 2px #000, 0 0 4px #000 !important;
+    white-space: nowrap !important;
   }
 
   /* Clean Edge-to-Edge Mobile Workspace (No Huge Blank Margins) */
@@ -3742,6 +3791,99 @@ body.atmo-midnight {
   .window-body,
   .window-content-body {
     padding: 6px 4px !important;
+  }
+
+  /* Compact Vista Gadgets Strip on Mobile (Bottom Widget Carousel) */
+  .vista-gadgets-sidebar {
+    position: static !important;
+    width: 100% !important;
+    max-height: none !important;
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    gap: 6px !important;
+    padding: 6px 2px 6px !important;
+    margin: 4px 0 0 !important;
+    z-index: 10 !important;
+  }
+
+  .vista-gadgets-sidebar::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .gadget-card {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    min-width: 84px !important;
+    padding: 4px 6px !important;
+    border-radius: 8px !important;
+    background: rgba(255, 255, 255, 0.92) !important;
+    box-shadow: 0 2px 8px rgba(0, 50, 120, 0.15) !important;
+    border: 1px solid rgba(255, 255, 255, 0.9) !important;
+  }
+
+  .gadget-header {
+    margin-bottom: 2px !important;
+  }
+
+  .gadget-title {
+    font-size: 0.52rem !important;
+    font-weight: 700 !important;
+  }
+
+  /* Mini Analog Glass Clock on Mobile */
+  .analog-clock {
+    width: 42px !important;
+    height: 42px !important;
+    margin: 1px auto !important;
+  }
+
+  .clock-mark {
+    font-size: 0.42rem !important;
+  }
+
+  .clock-digital-time {
+    font-size: 0.58rem !important;
+    margin-top: 1px !important;
+  }
+
+  /* Mini Hydration on Mobile */
+  .hydro-tank-wrap {
+    height: 28px !important;
+    width: 44px !important;
+    margin: 1px auto !important;
+  }
+
+  .hydro-level-txt {
+    font-size: 0.52rem !important;
+  }
+
+  .hydro-btn, .hydro-btn-reset {
+    padding: 1px 4px !important;
+    font-size: 0.52rem !important;
+    height: 18px !important;
+  }
+
+  /* Mini Pixel Mascot Duo on Mobile */
+  .pixel-mascot-gadget {
+    min-width: 76px !important;
+    padding: 3px 5px !important;
+  }
+
+  .pixel-mascot-wrap {
+    width: 42px !important;
+    height: 42px !important;
+    margin: 1px auto !important;
+    padding: 1px !important;
+  }
+
+  /* Mini CRT & Buttons on Mobile */
+  .crt-gadget-btn, .fish-feed-btn, .popoff-trigger-btn {
+    padding: 2px 4px !important;
+    font-size: 0.55rem !important;
+    min-height: 20px !important;
   }
 
   /* Ultra-Compact Panel Headers */
