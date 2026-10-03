@@ -3644,14 +3644,23 @@ body.atmo-midnight {
     transform: none !important;
   }
 
-  /* Hide CPU heavy background elements on mobile */
-  .bubble, #fishContainer, #goldfish1, .floating-stickers, .desktop-sidebar, .vista-gadgets-sidebar, .crop-404-img, .hero-404-container {
+  /* Hide CPU heavy background elements & bulky banners on mobile */
+  .bubble, 
+  #fishContainer, 
+  #goldfish1, 
+  .floating-stickers, 
+  .desktop-sidebar, 
+  .vista-gadgets-sidebar, 
+  .crop-404-img, 
+  .hero-404-container,
+  .inspo-hero-banner,
+  .window-menubar {
     display: none !important;
   }
 
-  /* Clean Edge-to-Edge Mobile Workspace */
+  /* Clean Edge-to-Edge Mobile Workspace (No Huge Blank Margins) */
   .desktop-workspace {
-    padding: 6px 6px 50px !important;
+    padding: 4px 4px 36px !important;
     margin: 0 !important;
     width: 100% !important;
     box-sizing: border-box !important;
@@ -3659,16 +3668,25 @@ body.atmo-midnight {
 
   .aero-window {
     width: 100% !important;
-    border-radius: 12px !important;
+    border-radius: 10px !important;
     border: 1.5px solid #2563eb !important;
     margin: 0 auto !important;
     overflow: hidden;
   }
 
-  /* Compact Window Titlebar on Mobile */
+  /* Super Compact, Sleek Mobile Titlebar (Only 24px) */
   .window-titlebar {
-    height: 22px !important;
-    padding: 2px 6px !important;
+    height: 24px !important;
+    padding: 0 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+
+  .titlebar-left {
+    gap: 6px !important;
+    display: flex !important;
+    align-items: center !important;
   }
 
   .titlebar-icon {
@@ -3678,6 +3696,7 @@ body.atmo-midnight {
 
   .titlebar-text {
     font-size: 0.72rem !important;
+    font-weight: 700 !important;
   }
 
   .win-btn {
@@ -3686,49 +3705,15 @@ body.atmo-midnight {
     font-size: 0.55rem !important;
   }
 
-  .window-menubar {
-    padding: 2px 6px !important;
-    font-size: 0.68rem !important;
-    gap: 8px !important;
-  }
-
-  /* Compact Sleek Mobile Hero */
-  .inspo-hero-banner {
-    flex-direction: column !important;
-    align-items: center !important;
-    padding: 6px 6px 4px !important;
-    gap: 4px !important;
-    text-align: center !important;
-  }
-
-  .yuta-hero-title {
-    font-size: 1.25rem !important;
-    letter-spacing: -0.5px !important;
-    margin: 0 !important;
-  }
-
-  .hero-pill-badges {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-    gap: 3px !important;
-  }
-
-  .hero-pill-badge, .hero-interactive-hint, .yuta-badge {
-    padding: 2px 6px !important;
-    font-size: 0.62rem !important;
-    border-radius: 4px !important;
-  }
-
-  /* Sleek Swipeable Tab Navigation */
+  /* Compact Swipeable Tab Navigation directly below Titlebar */
   .tab-nav {
     display: flex !important;
     overflow-x: auto !important;
     flex-wrap: nowrap !important;
     -webkit-overflow-scrolling: touch !important;
     scrollbar-width: none !important;
-    padding: 6px 4px !important;
-    gap: 6px !important;
+    padding: 4px 6px !important;
+    gap: 4px !important;
     background: #f1f5f9 !important;
     border-bottom: 1px solid #cbd5e1 !important;
   }
@@ -3740,11 +3725,15 @@ body.atmo-midnight {
   .tab-btn {
     flex-shrink: 0 !important;
     white-space: nowrap !important;
-    padding: 7px 12px !important;
-    font-size: 0.78rem !important;
+    padding: 4px 9px !important;
+    font-size: 0.72rem !important;
     font-weight: 700 !important;
-    border-radius: 8px !important;
-    min-height: 36px !important;
+    border-radius: 6px !important;
+    min-height: 28px !important;
+  }
+
+  .window-body {
+    padding: 8px 6px !important;
   }
 
   /* Single Column Card Stacking for High Readability */
