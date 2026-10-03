@@ -1206,8 +1206,10 @@ function addTodo(owner) {
 }
 
 function toggleTodo(owner, id, evt) {
-  const data = getStorage(STORAGE_KEYS.TODOS, {});
-  const item = data[selectedTodoDate]?.[owner]?.find(t => t.id === id);
+  const data = ensureDayRoutines(selectedTodoDate);
+  const items = data[selectedTodoDate]?.[owner];
+  if (!items) return;
+  const item = items.find(t => t.id === id);
   if (item) {
     item.done = !item.done;
     setStorage(STORAGE_KEYS.TODOS, data);
@@ -1222,7 +1224,7 @@ function toggleTodo(owner, id, evt) {
 }
 
 function deleteTodo(owner, id) {
-  const data = getStorage(STORAGE_KEYS.TODOS, {});
+  const data = ensureDayRoutines(selectedTodoDate);
   if (data[selectedTodoDate]?.[owner]) {
     data[selectedTodoDate][owner] = data[selectedTodoDate][owner].filter(t => t.id !== id);
     setStorage(STORAGE_KEYS.TODOS, data);
@@ -1232,7 +1234,7 @@ function deleteTodo(owner, id) {
 }
 
 function clearCompleted(owner) {
-  const data = getStorage(STORAGE_KEYS.TODOS, {});
+  const data = ensureDayRoutines(selectedTodoDate);
   if (data[selectedTodoDate]?.[owner]) {
     data[selectedTodoDate][owner] = data[selectedTodoDate][owner].filter(t => {
       const isPermanent = PERMANENT_ROUTINES[owner]?.some(p => p.id === t.id);
@@ -1273,13 +1275,13 @@ function renderTodos() {
       const li = document.createElement('li');
       li.className = `todo-item ${item.done ? 'done' : ''}`;
       li.onclick = (e) => {
-        if (e.target.closest('.todo-delete')) return;
+        if (e.target.closest('.todo-delete') || e.target.closest('.todo-checkbox')) return;
         toggleTodo(owner, item.id, e);
       };
       li.innerHTML = `
-        <div class="todo-checkbox">${item.done ? '✓' : ''}</div>
+        <div class="todo-checkbox" onclick="event.stopPropagation(); toggleTodo('${owner}', '${item.id}', event)">${item.done ? '✓' : ''}</div>
         <span class="todo-text">${escapeHtml(item.text)}</span>
-        <button class="todo-delete" onclick="deleteTodo('${owner}', '${item.id}')">✕</button>
+        <button class="todo-delete" onclick="event.stopPropagation(); deleteTodo('${owner}', '${item.id}')">✕</button>
       `;
       listEl.appendChild(li);
     });
