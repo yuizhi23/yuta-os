@@ -1575,9 +1575,38 @@ function initLoveNotes() {
     });
   });
 
-  // Empty out notes as requested by user
-  setStorage(STORAGE_KEYS.NOTES, []);
+  ensureDefaultNotes();
   renderNotes();
+}
+
+const DEFAULT_LOVE_NOTES = [
+  {
+    id: 'note_welcome_1',
+    from: 'yuki',
+    to: 'nata',
+    title: 'Untuk Nata Tersayang 🌸',
+    content: 'Semangat selalu yaa cantikk! Jangan lupa makan teratur dan minum air putih. Aku selalu ada buat kamu 💕',
+    emoji: '💖',
+    date: '17 Feb 2026'
+  },
+  {
+    id: 'note_welcome_2',
+    from: 'nata',
+    to: 'yuki',
+    title: 'Buat Yuki Hebat 💻',
+    content: 'Semangat thesis dan job huntingnya! Jangan overthinking, kita lewatin semuanya bareng-bareng yaa ✨',
+    emoji: '✨',
+    date: '17 Feb 2026'
+  }
+];
+
+function ensureDefaultNotes() {
+  let notes = getStorage(STORAGE_KEYS.NOTES, []);
+  if (!notes || notes.length === 0) {
+    notes = DEFAULT_LOVE_NOTES;
+    setStorage(STORAGE_KEYS.NOTES, notes);
+  }
+  return notes;
 }
 
 function openNoteModal() {
@@ -1625,7 +1654,10 @@ function deleteNote(id) {
 }
 
 function renderNotes() {
-  const notes = getStorage(STORAGE_KEYS.NOTES, []);
+  let notes = getStorage(STORAGE_KEYS.NOTES, []);
+  if (!notes || notes.length === 0) {
+    notes = ensureDefaultNotes();
+  }
   const grid = document.getElementById('notesGrid');
   const empty = document.getElementById('notesEmpty');
   if (!grid || !empty) return;
@@ -3160,6 +3192,7 @@ function applyRemoteData(remoteData) {
       ensureDayRoutines(selectedTodoDate);
       ensureDefaultReminders();
       ensureDefaultCountdowns();
+      ensureDefaultNotes();
 
       // Re-render UI
       renderTodos();
@@ -3167,7 +3200,11 @@ function applyRemoteData(remoteData) {
       renderNotes();
       renderCountdowns();
       renderReruCard();
-      renderScheduleTimeline();
+      if (typeof renderSchedule === 'function') {
+        renderSchedule();
+      } else if (typeof switchScheduleDay === 'function') {
+        switchScheduleDay(activeScheduleDay);
+      }
 
       playSound('chime');
       spawnCelebrationSparkles(window.innerWidth / 2, 80);
@@ -3254,7 +3291,7 @@ function forcePushToCloud() {
   const cleanRoom = (config.roomId || 'yuta-space-2026').replace(/[^a-zA-Z0-9_\-]/g, '_');
 
   const fullData = {
-    'aero_todos': { payload: getStorage(STORAGE_KEYS.TODOS, []), updatedAt: Date.now() },
+    'aero_todos': { payload: getStorage(STORAGE_KEYS.TODOS, {}), updatedAt: Date.now() },
     'aero_reminders': { payload: getStorage(STORAGE_KEYS.REMINDERS, []), updatedAt: Date.now() },
     'aero_notes': { payload: getStorage(STORAGE_KEYS.NOTES, []), updatedAt: Date.now() },
     'aero_countdowns': { payload: getStorage(STORAGE_KEYS.COUNTDOWNS, []), updatedAt: Date.now() },
@@ -3273,7 +3310,7 @@ function forcePushToCloud() {
 function forcePushToCloudQuiet(cleanRoom) {
   if (!firebaseDb || !cleanRoom) return;
   const fullData = {
-    'aero_todos': { payload: getStorage(STORAGE_KEYS.TODOS, []), updatedAt: Date.now() },
+    'aero_todos': { payload: getStorage(STORAGE_KEYS.TODOS, {}), updatedAt: Date.now() },
     'aero_reminders': { payload: getStorage(STORAGE_KEYS.REMINDERS, []), updatedAt: Date.now() },
     'aero_notes': { payload: getStorage(STORAGE_KEYS.NOTES, []), updatedAt: Date.now() },
     'aero_countdowns': { payload: getStorage(STORAGE_KEYS.COUNTDOWNS, []), updatedAt: Date.now() },
