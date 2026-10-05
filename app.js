@@ -3334,6 +3334,9 @@ let isCloudConnected = false;
 
 function initCloudSync() {
   const config = getSyncConfig();
+  // Ensure default config is saved permanently in storage
+  setStorage(STORAGE_KEY_SYNC_CONFIG, config);
+
   updateSyncUIStatus(false, 'Menghubungkan ke Cloud...');
 
   const dbUrl = config.dbUrl || OFFICIAL_RTDB_URL;
@@ -3341,6 +3344,19 @@ function initCloudSync() {
 
   connectFirebaseDatabase(dbUrl, roomId);
 }
+
+// Auto-reconnect when user returns to app / unlocks phone
+window.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    initCloudSync();
+  }
+});
+window.addEventListener('focus', () => {
+  initCloudSync();
+});
+window.addEventListener('online', () => {
+  initCloudSync();
+});
 
 function connectFirebaseDatabase(dbUrl, roomId) {
   if (typeof firebase === 'undefined') {
@@ -3356,11 +3372,18 @@ function connectFirebaseDatabase(dbUrl, roomId) {
     if (cleanUrl.endsWith('/')) cleanUrl = cleanUrl.slice(0, -1);
 
     // Initialize or reuse app
-    const appName = 'yutaSyncApp';
     try {
-      firebaseApp = firebase.app(appName);
+      if (!firebase.apps || !firebase.apps.length) {
+        firebaseApp = firebase.initializeApp({ databaseURL: cleanUrl });
+      } else {
+        firebaseApp = firebase.app();
+      }
     } catch (_) {
-      firebaseApp = firebase.initializeApp({ databaseURL: cleanUrl }, appName);
+      try {
+        firebaseApp = firebase.app('yutaSyncApp');
+      } catch (e2) {
+        firebaseApp = firebase.initializeApp({ databaseURL: cleanUrl }, 'yutaSyncApp');
+      }
     }
 
     firebaseDb = firebase.database(firebaseApp);
@@ -3403,7 +3426,7 @@ function connectFirebaseDatabase(dbUrl, roomId) {
         updateSyncUIStatus(true, `Live Sync Aktif: "${cleanRoom}" 🟢`);
       } else {
         if (!isCloudConnected) {
-          updateSyncUIStatus(false, 'Mencoba Menyambung Ulang... 🟡');
+          updateSyncUIStatus(false, 'Menghubungkan ke Cloud...');
         }
       }
     });
@@ -3509,7 +3532,7 @@ function applyRemoteData(remoteData) {
 function updateSyncUIStatus(isConnected, message) {
   const pillText = document.getElementById('heroSyncPillText');
   if (pillText) {
-    pillText.textContent = isConnected ? '🟢 Live Sync • Terhubung' : '☁️ Live Sync • Offline';
+    pillText.textContent = isConnected ? '🟢 Live Sync • Terhubung' : '🟡 Menghubungkan...';
   }
 
   const card = document.getElementById('syncStatusCard');
@@ -3522,14 +3545,14 @@ function updateSyncUIStatus(isConnected, message) {
       card.classList.add('connected');
       if (title) title.textContent = '🟢 Terhubung & Live (Real-Time)';
       if (emoji) emoji.textContent = '⚡';
+      if (desc) desc.textContent = message || 'Live Sync aktif otomatis di kamar "yuta-space-2026".';
     } else {
-      card.classList.remove('connected');
-      if (title) title.textContent = 'Penyimpanan Lokal (Offline)';
-      if (emoji) emoji.textContent = '☁️';
+      card.classList.add('connected');
+      if (title) title.textContent = '🟡 Sedang Menyambung Otomatis...';
+      if (emoji) emoji.textContent = '⏳';
+      if (desc) desc.textContent = message || 'Menghubungkan ke Cloud Database...';
     }
   }
-
-  if (desc) desc.textContent = message;
 }
 
 function openCloudSyncModal() {
@@ -3547,7 +3570,8 @@ function openCloudSyncModal() {
   if (isCloudConnected) {
     updateSyncUIStatus(true, `Live Sync Aktif: "${config.roomId || 'yuta-space-2026'}" 🟢`);
   } else {
-    updateSyncUIStatus(false, 'Data tersimpan di perangkat ini. Klik "Sambungkan Live Sync" untuk menghubungkan.');
+    updateSyncUIStatus(false, 'Menghubungkan otomatis ke Cloud...');
+    initCloudSync();
   }
 
   modal.classList.add('open');
