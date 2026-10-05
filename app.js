@@ -877,7 +877,10 @@ const STORAGE_KEYS = {
   NOTES: 'aero_retro_notes_en_v3',
   COUNTDOWNS: 'aero_retro_countdowns_en_v3',
   MOODS: 'aero_retro_moods_en_v3',
-  CATS: 'aero_virtual_cats_v1'
+  CATS: 'aero_virtual_cats_v1',
+  FINANCES: 'yuta_couple_finances',
+  FINANCE_BUDGETS: 'yuta_couple_finance_budgets',
+  FINANCE_GOALS: 'yuta_couple_finance_goals'
 };
 
 function getStorage(key, defaultVal) {
@@ -2725,6 +2728,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initWindowDragAndControls();
   initPixelBuddy();
   initSchedule();
+  initFinances();
   initCloudSync();
   syncWindowState();
 });
@@ -3404,16 +3408,42 @@ function connectFirebaseDatabase(dbUrl, roomId) {
   }
 }
 
+function getCloudKey(localKey) {
+  if (localKey === STORAGE_KEYS.TODOS || localKey === 'aero_todos' || localKey === 'aero_retro_todos_en_v3') return 'aero_todos';
+  if (localKey === STORAGE_KEYS.REMINDERS || localKey === 'aero_reminders' || localKey === 'aero_retro_reminders_en_v3') return 'aero_reminders';
+  if (localKey === STORAGE_KEYS.NOTES || localKey === 'aero_notes' || localKey === 'aero_retro_notes_en_v3') return 'aero_notes';
+  if (localKey === STORAGE_KEYS.COUNTDOWNS || localKey === 'aero_countdowns' || localKey === 'aero_retro_countdowns_en_v3') return 'aero_countdowns';
+  if (localKey === STORAGE_KEYS.MOODS || localKey === 'aero_moods' || localKey === 'aero_retro_moods_en_v3') return 'aero_moods';
+  if (localKey === STORAGE_KEY_RERU || localKey === 'aero_reru_pet_v3') return 'aero_reru_pet_v3';
+  if (localKey === STORAGE_KEYS.FINANCES || localKey === 'yuta_couple_finances') return 'yuta_couple_finances';
+  if (localKey === STORAGE_KEYS.FINANCE_GOALS || localKey === 'yuta_couple_finance_goals') return 'yuta_couple_finance_goals';
+  if (localKey === STORAGE_KEYS.FINANCE_BUDGETS || localKey === 'yuta_couple_finance_budgets') return 'yuta_couple_finance_budgets';
+  return localKey.replace(/[^a-zA-Z0-9_]/g, '_');
+}
+
+function getLocalKey(cloudKey) {
+  if (cloudKey === 'aero_todos' || cloudKey === 'aero_retro_todos_en_v3') return STORAGE_KEYS.TODOS;
+  if (cloudKey === 'aero_reminders' || cloudKey === 'aero_retro_reminders_en_v3') return STORAGE_KEYS.REMINDERS;
+  if (cloudKey === 'aero_notes' || cloudKey === 'aero_retro_notes_en_v3') return STORAGE_KEYS.NOTES;
+  if (cloudKey === 'aero_countdowns' || cloudKey === 'aero_retro_countdowns_en_v3') return STORAGE_KEYS.COUNTDOWNS;
+  if (cloudKey === 'aero_moods' || cloudKey === 'aero_retro_moods_en_v3') return STORAGE_KEYS.MOODS;
+  if (cloudKey === 'aero_reru_pet_v3') return STORAGE_KEY_RERU;
+  if (cloudKey === 'yuta_couple_finances') return STORAGE_KEYS.FINANCES;
+  if (cloudKey === 'yuta_couple_finance_goals') return STORAGE_KEYS.FINANCE_GOALS;
+  if (cloudKey === 'yuta_couple_finance_budgets') return STORAGE_KEYS.FINANCE_BUDGETS;
+  return cloudKey;
+}
+
 function pushKeyToCloud(key, value) {
   if (!firebaseDb) return;
   const config = getSyncConfig();
   if (!config.dbUrl || !config.roomId) return;
 
   const cleanRoom = (config.roomId || 'yuta-space-2026').replace(/[^a-zA-Z0-9_\-]/g, '_');
-  const safeKey = key.replace(/[^a-zA-Z0-9_]/g, '_');
+  const cloudKey = getCloudKey(key);
 
   try {
-    firebaseDb.ref(`yuta_spaces/${cleanRoom}/${safeKey}`).set({
+    firebaseDb.ref(`yuta_spaces/${cleanRoom}/${cloudKey}`).set({
       payload: value,
       updatedAt: Date.now(),
       sender: 'YuTa_Device'
@@ -3430,23 +3460,10 @@ function applyRemoteData(remoteData) {
   let hasUpdatedAny = false;
 
   try {
-    // Map remote keys to local storage keys
-    const keyMap = {
-      'aero_todos': STORAGE_KEYS.TODOS,
-      'aero_reminders': STORAGE_KEYS.REMINDERS,
-      'aero_notes': STORAGE_KEYS.NOTES,
-      'aero_countdowns': STORAGE_KEYS.COUNTDOWNS,
-      'aero_moods': STORAGE_KEYS.MOODS,
-      'aero_reru_pet_v3': STORAGE_KEY_RERU,
-      'yuta_couple_finances': STORAGE_KEYS.FINANCES,
-      'yuta_couple_finance_goals': STORAGE_KEYS.FINANCE_GOALS,
-      'yuta_couple_finance_budgets': STORAGE_KEYS.FINANCE_BUDGETS
-    };
-
     for (const [cloudKey, record] of Object.entries(remoteData)) {
       if (!record || typeof record !== 'object' || record.payload === undefined) continue;
 
-      const localKey = keyMap[cloudKey] || cloudKey;
+      const localKey = getLocalKey(cloudKey);
       const currentLocal = localStorage.getItem(localKey);
       const newPayloadJson = JSON.stringify(record.payload);
 
@@ -3457,11 +3474,6 @@ function applyRemoteData(remoteData) {
     }
 
     if (hasUpdatedAny) {
-      ensureDayRoutines(selectedTodoDate);
-      ensureDefaultReminders();
-      ensureDefaultCountdowns();
-      ensureDefaultNotes();
-
       // Re-render UI
       renderTodos();
       renderReminders();
@@ -3478,7 +3490,6 @@ function applyRemoteData(remoteData) {
       }
 
       playSound('chime');
-      spawnCelebrationSparkles(window.innerWidth / 2, 80);
       showToast('✨ Update data baru masuk dari pasangan! (Live Sync)');
     }
   } catch (err) {
