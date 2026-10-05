@@ -3636,12 +3636,101 @@ body.atmo-midnight {
 
 /* ==================== RESPONSIVE: DESKTOP, TABLET & MOBILE ==================== */
 
-@media (max-width: 1024px) {
-  /* Do not hide desktop sidebar or gadgets on tablets - keep desktop experience */
+/* ==================== TABLET OPTIMIZATIONS (iPad & Android Tablets: 769px - 1024px) ==================== */
+@media (min-width: 769px) and (max-width: 1024px) {
   .desktop-workspace {
-    padding: 6px;
+    padding: 12px 14px 60px !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Hero Banner layout on Tablet */
+  .inspo-hero-banner {
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    justify-content: space-between !important;
+    margin-bottom: 12px !important;
+  }
+
+  .hero-404-container {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  /* Main Window for Tablet */
+  .aero-window {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 30px rgba(0, 50, 120, 0.18) !important;
+  }
+
+  /* Navigation Tabs on Tablet */
+  .tab-nav {
+    display: flex !important;
+    overflow-x: auto !important;
+    flex-wrap: nowrap !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding: 6px 10px !important;
+    gap: 6px !important;
+    background: #e2e8f0 !important;
+    scrollbar-width: none !important;
+  }
+
+  .tab-nav::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .tab-btn {
+    flex-shrink: 0 !important;
+    padding: 6px 14px !important;
+    font-size: 0.82rem !important;
+    white-space: nowrap !important;
+  }
+
+  /* To-Do 2-Column Grid for Yuki & Nata on Tablet */
+  .todo-grid-3col {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px !important;
+  }
+
+  /* YuTa Wallet on Tablet */
+  .wallet-cards-showcase {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  .wallet-bento-grid.wallet-bento-dual {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 14px !important;
+  }
+
+  .bento-inputs-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  .bento-nav-actions {
+    display: flex !important;
+    gap: 8px !important;
+  }
+
+  /* Notes, Reminders & Milestones Grid on Tablet */
+  .notes-grid,
+  .reminders-grid,
+  .countdown-grid,
+  .habit-grid,
+  .mood-container-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 14px !important;
   }
 }
+
 
 @media (max-width: 768px) {
   html, body {
