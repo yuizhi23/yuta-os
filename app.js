@@ -224,15 +224,22 @@ function playSound(type = 'bubble') {
   } catch (e) {}
 }
 
-// Ambient Background Music Generator (Lo-fi Aero Pad)
+// Ambient Background Music Generator (10 Retro Frutiger Aero Soundscapes)
 let ambientTimer = null;
 let isMusicPlaying = false;
 let currentTrackIndex = 0;
+
 const TRACK_NAMES = [
-  'Cozy Afternoon with You',
-  'Stargazing & Low-fi Waves',
-  'Warm Rain on the Window',
-  'Sunlight & Liquid Crystal'
+  'Aqua Horizon & Blue Sky 🌊',
+  'Cozy Afternoon with You ☕',
+  'Stargazing & Dream Waves ✨',
+  'Sunlight & Liquid Crystal 💎',
+  'Late Night Chill & Soft Rain 🌧️',
+  'Sakura Bloom & Spring Breeze 🌸',
+  'Y2K Windows Vista Melody 💿',
+  'Bubble Bath & Floating Clouds 🫧',
+  'Lo-Fi Love Letter for Nata 💌',
+  'Midnight Coffee & Starlight 🌙'
 ];
 
 function togglePlayMusic() {
@@ -246,21 +253,29 @@ function togglePlayMusic() {
     if (btn) btn.textContent = '▶';
     if (widget) widget.classList.remove('playing');
     if (miniDisc) miniDisc.style.animation = 'none';
-    showToast('Playback paused');
+    showToast('Music Paused ⏸');
   } else {
     isMusicPlaying = true;
     if (btn) btn.textContent = '⏸';
     if (widget) widget.classList.add('playing');
     if (miniDisc) miniDisc.style.animation = 'rotateCD 4s linear infinite';
     startAmbientSynth();
-    showToast(`Playing: ${TRACK_NAMES[currentTrackIndex]}`);
+    showToast(`Now Playing: ${TRACK_NAMES[currentTrackIndex]}`);
   }
 }
 
-function switchAmbientSound() {
+function updateTrackUI() {
+  const titleEl = document.getElementById('nowPlayingTitle');
+  const artistEl = document.getElementById('nowPlayingArtist');
+  if (titleEl) titleEl.textContent = TRACK_NAMES[currentTrackIndex];
+  if (artistEl) artistEl.textContent = `Track ${currentTrackIndex + 1}/10 • Aero Ambient Synth`;
+  renderPlayerPlaylist();
+}
+
+function nextAmbientSound() {
   currentTrackIndex = (currentTrackIndex + 1) % TRACK_NAMES.length;
-  document.getElementById('nowPlayingTitle').textContent = TRACK_NAMES[currentTrackIndex];
-  playSound('chime');
+  updateTrackUI();
+  playSound('bubble');
   if (isMusicPlaying) {
     if (ambientTimer) clearInterval(ambientTimer);
     startAmbientSynth();
@@ -268,23 +283,188 @@ function switchAmbientSound() {
   showToast(`Track: ${TRACK_NAMES[currentTrackIndex]}`);
 }
 
+function prevAmbientSound() {
+  currentTrackIndex = (currentTrackIndex - 1 + TRACK_NAMES.length) % TRACK_NAMES.length;
+  updateTrackUI();
+  playSound('bubble');
+  if (isMusicPlaying) {
+    if (ambientTimer) clearInterval(ambientTimer);
+    startAmbientSynth();
+  }
+  showToast(`Track: ${TRACK_NAMES[currentTrackIndex]}`);
+}
+
+function switchAmbientSound() {
+  nextAmbientSound();
+}
+
+function playTrack(idx) {
+  if (idx < 0 || idx >= TRACK_NAMES.length) return;
+  currentTrackIndex = idx;
+  updateTrackUI();
+  playSound('chime');
+  if (!isMusicPlaying) {
+    togglePlayMusic();
+  } else {
+    if (ambientTimer) clearInterval(ambientTimer);
+    startAmbientSynth();
+    showToast(`Now Playing: ${TRACK_NAMES[currentTrackIndex]}`);
+  }
+}
+
+function toggleTrackList() {
+  const pl = document.getElementById('playerPlaylist');
+  if (!pl) return;
+  const isHidden = pl.style.display === 'none' || pl.style.display === '';
+  pl.style.display = isHidden ? 'block' : 'none';
+  playSound('bubble');
+  if (isHidden) renderPlayerPlaylist();
+}
+
+function renderPlayerPlaylist() {
+  const pl = document.getElementById('playerPlaylist');
+  if (!pl) return;
+  pl.innerHTML = TRACK_NAMES.map((name, i) => `
+    <div class="media-playlist-item ${i === currentTrackIndex ? 'active' : ''}" onclick="playTrack(${i})">
+      <span>${i + 1}. ${name}</span>
+      <span>${i === currentTrackIndex && isMusicPlaying ? '🔊' : '▶'}</span>
+    </div>
+  `).join('');
+}
+
+window.togglePlayMusic = togglePlayMusic;
+window.nextAmbientSound = nextAmbientSound;
+window.prevAmbientSound = prevAmbientSound;
+window.switchAmbientSound = switchAmbientSound;
+window.playTrack = playTrack;
+window.toggleTrackList = toggleTrackList;
+
 function startAmbientSynth() {
-  const ambientChords = [
-    [261.63, 329.63, 392.00], // C major
-    [220.00, 261.63, 329.63], // A minor
-    [349.23, 440.00, 523.25], // F major
-    [392.00, 493.88, 587.33]  // G major
-  ];
-
-  // Upbeat Aqua Blue Sky Arpeggio
-  const popOffRiffs = [
-    [523.25, 659.25, 783.99, 1046.50],
-    [587.33, 698.46, 880.00, 1174.66],
-    [659.25, 783.99, 987.77, 1318.51],
-    [523.25, 783.99, 1046.50, 1567.98]
-  ];
-
   let loopIdx = 0;
+
+  // Track Profiles (Frequencies in Hz)
+  const TRACK_PROFILES = [
+    // 0: Aqua Horizon (Sparkling Arpeggio)
+    {
+      type: 'arp',
+      rate: 1100,
+      notes: [
+        [523.25, 659.25, 783.99, 1046.50],
+        [587.33, 698.46, 880.00, 1174.66],
+        [659.25, 783.99, 987.77, 1318.51],
+        [523.25, 783.99, 1046.50, 1567.98]
+      ],
+      wave: 'triangle'
+    },
+    // 1: Cozy Afternoon (Lush Rhodes Pad)
+    {
+      type: 'chord',
+      rate: 2600,
+      chords: [
+        [261.63, 329.63, 392.00, 493.88], // Cmaj7
+        [220.00, 261.63, 329.63, 392.00], // Am7
+        [174.61, 220.00, 261.63, 329.63], // Fmaj7
+        [196.00, 246.94, 293.66, 349.23]  // G7
+      ],
+      wave: 'sine'
+    },
+    // 2: Stargazing (Celeste Bell Chimes)
+    {
+      type: 'arp',
+      rate: 1400,
+      notes: [
+        [659.25, 880.00, 1046.50, 1318.51, 1760.00],
+        [587.33, 783.99, 987.77, 1174.66, 1567.98],
+        [523.25, 659.25, 783.99, 1046.50, 1318.51],
+        [698.46, 880.00, 1046.50, 1396.91, 1760.00]
+      ],
+      wave: 'sine'
+    },
+    // 3: Sunlight & Crystal (Marimba Glass)
+    {
+      type: 'arp',
+      rate: 900,
+      notes: [
+        [440.00, 554.37, 659.25, 880.00],
+        [493.88, 587.33, 739.99, 987.77],
+        [554.37, 659.25, 830.61, 1108.73],
+        [440.00, 659.25, 880.00, 1318.51]
+      ],
+      wave: 'triangle'
+    },
+    // 4: Late Night Chill (Minor 7th Warm Waves)
+    {
+      type: 'chord',
+      rate: 3000,
+      chords: [
+        [146.83, 220.00, 261.63, 349.23], // Dm7
+        [164.81, 246.94, 293.66, 392.00], // Em7
+        [174.61, 261.63, 329.63, 440.00], // Fmaj7
+        [196.00, 293.66, 349.23, 440.00]  // G7sus4
+      ],
+      wave: 'sine'
+    },
+    // 5: Sakura Bloom (Pentatonic Koto Synth)
+    {
+      type: 'arp',
+      rate: 1200,
+      notes: [
+        [293.66, 329.63, 392.00, 440.00, 587.33],
+        [329.63, 392.00, 440.00, 587.33, 659.25],
+        [392.00, 440.00, 587.33, 659.25, 783.99],
+        [440.00, 587.33, 659.25, 783.99, 880.00]
+      ],
+      wave: 'triangle'
+    },
+    // 6: Y2K Windows Vista Melody (Orchestral Glass Chord)
+    {
+      type: 'chord',
+      rate: 2800,
+      chords: [
+        [261.63, 392.00, 523.25, 659.25, 783.99],
+        [220.00, 329.63, 440.00, 523.25, 659.25],
+        [349.23, 440.00, 523.25, 698.46, 880.00],
+        [196.00, 293.66, 392.00, 493.88, 587.33]
+      ],
+      wave: 'sine'
+    },
+    // 7: Bubble Bath (Resonant Water Droplets)
+    {
+      type: 'arp',
+      rate: 1000,
+      notes: [
+        [523.25, 783.99, 1046.50, 1567.98],
+        [587.33, 880.00, 1174.66, 1760.00],
+        [659.25, 987.77, 1318.51, 1975.53],
+        [523.25, 659.25, 783.99, 1046.50]
+      ],
+      wave: 'sine'
+    },
+    // 8: Lo-Fi Love Letter (Romantic Jazz Major 9th)
+    {
+      type: 'chord',
+      rate: 2900,
+      chords: [
+        [174.61, 261.63, 329.63, 392.00, 523.25], // Fmaj9
+        [220.00, 261.63, 329.63, 392.00, 493.88], // Am9
+        [130.81, 196.00, 246.94, 293.66, 392.00], // Cmaj9
+        [146.83, 220.00, 261.63, 329.63, 440.00]  // Dm9
+      ],
+      wave: 'sine'
+    },
+    // 9: Midnight Coffee & Starlight (Deep Space Cosmic)
+    {
+      type: 'chord',
+      rate: 3200,
+      chords: [
+        [110.00, 164.81, 220.00, 329.63, 659.25],
+        [130.81, 196.00, 261.63, 392.00, 783.99],
+        [146.83, 220.00, 293.66, 440.00, 880.00],
+        [123.47, 185.00, 246.94, 369.99, 739.99]
+      ],
+      wave: 'sine'
+    }
+  ];
 
   function playSynthStep() {
     if (!isMusicPlaying) return;
@@ -293,48 +473,48 @@ function startAmbientSynth() {
       const volInput = document.getElementById('playerVolume');
       const volumeLevel = volInput ? (volInput.value / 100) * 0.12 : 0.08;
 
-      if (currentTrackIndex === 0) {
-        // Sparkling Aqua Crystal Arpeggio
-        const riff = popOffRiffs[loopIdx % popOffRiffs.length];
+      const profile = TRACK_PROFILES[currentTrackIndex % TRACK_PROFILES.length];
+
+      if (profile.type === 'arp') {
+        const riff = profile.notes[loopIdx % profile.notes.length];
         loopIdx++;
         riff.forEach((freq, i) => {
           const osc = ctx.createOscillator();
           const gain = ctx.createGain();
           osc.connect(gain);
           gain.connect(ctx.destination);
-          osc.type = i % 2 === 0 ? 'triangle' : 'sine';
-          const t = ctx.currentTime + i * 0.16;
+          osc.type = profile.wave;
+          const t = ctx.currentTime + i * 0.14;
           osc.frequency.setValueAtTime(freq, t);
-          gain.gain.setValueAtTime(0.001, t);
-          gain.gain.linearRampToValueAtTime(volumeLevel * 1.2, t + 0.04);
-          gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.35);
+          gain.gain.setValueAtTime(0.0001, t);
+          gain.gain.linearRampToValueAtTime(volumeLevel * 1.1, t + 0.03);
+          gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.32);
           osc.start(t);
-          osc.stop(t + 0.36);
+          osc.stop(t + 0.33);
         });
       } else {
-        // Lush Ambient Pad Chords
-        const chord = ambientChords[loopIdx % ambientChords.length];
+        const chord = profile.chords[loopIdx % profile.chords.length];
         loopIdx++;
-        chord.forEach(freq => {
+        chord.forEach((freq, i) => {
           const osc = ctx.createOscillator();
           const gain = ctx.createGain();
           osc.connect(gain);
           gain.connect(ctx.destination);
-          osc.type = 'sine';
+          osc.type = profile.wave;
           osc.frequency.setValueAtTime(freq, ctx.currentTime);
-          gain.gain.setValueAtTime(0.001, ctx.currentTime);
-          gain.gain.linearRampToValueAtTime(volumeLevel, ctx.currentTime + 0.6);
-          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 2.6);
+          gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+          gain.gain.linearRampToValueAtTime(volumeLevel * (0.9 / chord.length), ctx.currentTime + 0.5);
+          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 2.5);
           osc.start(ctx.currentTime);
-          osc.stop(ctx.currentTime + 2.7);
+          osc.stop(ctx.currentTime + 2.6);
         });
       }
     } catch (e) {}
   }
 
   playSynthStep();
-  const intervalTime = currentTrackIndex === 0 ? 1200 : 2800;
-  ambientTimer = setInterval(playSynthStep, intervalTime);
+  const activeProfile = TRACK_PROFILES[currentTrackIndex % TRACK_PROFILES.length];
+  ambientTimer = setInterval(playSynthStep, activeProfile.rate || 2000);
 }
 
 // ==================== INTERACTIVE WATER RIPPLES SIMULATION ====================
@@ -480,28 +660,12 @@ function spawnBubbleBurstAt(x, y) {
   }
 }
 
-// ==================== 3D CARD TILT EFFECT ====================
+// ==================== 3D CARD TILT EFFECT (DISABLED FOR STABILITY) ====================
 function initTiltCards() {
-  if (window.innerWidth <= 768 || 'ontouchstart' in window) return;
+  // Disabled: Keep OS window and cards completely steady to prevent motion sickness
   const cards = document.querySelectorAll('.tilt-card, .aero-window');
-
   cards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-
-      const rotateX = ((y - centerY) / centerY) * -5;
-      const rotateY = ((x - centerX) / centerX) * 5;
-
-      card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-    });
-
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg)';
-    });
+    card.style.transform = 'none';
   });
 }
 
@@ -579,53 +743,55 @@ function updateWaterDisplay() {
 }
 
 // ==================== INTERACTIVE GOLDFISH PET ====================
-let fishTargetX = 20;
-let fishTargetY = 30;
 let fishHappiness = 0;
 
 function initFishPet() {
-  const fish = document.getElementById('goldfish1');
   const container = document.getElementById('fishContainer');
-  if (!fish) return;
+  const allFishes = document.querySelectorAll('.swimming-goldfish');
+  if (allFishes.length === 0) return;
 
   if (window.innerWidth <= 768) {
-    if (fish) fish.style.display = 'none';
+    allFishes.forEach(f => { f.style.display = 'none'; });
     if (container) container.style.display = 'none';
     return;
   }
 
-  fish.addEventListener('click', (e) => {
-    e.stopPropagation();
-    playSound('splash');
-    fishHappiness += 2;
-    showToast(`Blub blub! Goldfish Happiness: Level ${fishHappiness}`);
-    spawnBubbleBurst(e);
-    fish.style.transform = 'scale(1.35) rotate(25deg)';
-    setTimeout(() => { fish.style.transform = ''; }, 450);
+  allFishes.forEach((fish, idx) => {
+    fish.addEventListener('click', (e) => {
+      petOrFeedFish(e, idx + 1);
+    });
   });
 
   if (container) {
     container.addEventListener('click', (e) => {
-      feedFishAt(e.clientX, e.clientY);
+      feedFishFromClick(e);
     });
   }
 
-  // Random peaceful swimming every 7.5 seconds
+  // Random peaceful swimming motion every 6-8 seconds
   setInterval(() => {
-    fishTargetX = Math.floor(Math.random() * 70) + 10;
-    fishTargetY = Math.floor(Math.random() * 60) + 15;
-    fish.style.left = `${fishTargetX}%`;
-    fish.style.top = `${fishTargetY}%`;
-    fish.style.transform = fishTargetX > 50 ? 'scaleX(-1)' : 'scaleX(1)';
+    allFishes.forEach((fish, idx) => {
+      const tx = Math.floor(Math.random() * 75) + 8;
+      const ty = Math.floor(Math.random() * 65) + 12;
+      const curX = parseFloat(fish.style.left) || 20;
+      fish.style.left = `${tx}%`;
+      fish.style.top = `${ty}%`;
+      fish.style.transform = tx > curX ? 'scaleX(-1)' : 'scaleX(1)';
+    });
   }, 7500);
 }
 
 function feedFishAt(clientX, clientY) {
-  const crumb = document.getElementById('fishCrumb');
-  const fish = document.getElementById('goldfish1');
-  if (!crumb || !fish) return;
+  let crumb = document.getElementById('fishCrumb');
+  const container = document.getElementById('fishContainer') || document.body;
+  if (!crumb) {
+    crumb = document.createElement('div');
+    crumb.id = 'fishCrumb';
+    crumb.className = 'fish-food-crumb';
+    container.appendChild(crumb);
+  }
 
-  const pctX = Math.max(5, Math.min(90, (clientX / window.innerWidth) * 100));
+  const pctX = Math.max(5, Math.min(92, (clientX / window.innerWidth) * 100));
   const pctY = Math.max(5, Math.min(85, (clientY / window.innerHeight) * 100));
 
   crumb.style.left = `${pctX}%`;
@@ -634,36 +800,75 @@ function feedFishAt(clientX, clientY) {
 
   playSound('bubble');
   if (typeof addRipple === 'function') addRipple(clientX, clientY);
-  showToast('Dropped breadcrumb for the goldfish.');
+  showToast('🐟 Food dropped! Fish swimming over...');
 
-  // Fish smoothly turns & swims to crumb
-  const curX = parseFloat(fish.style.left) || 20;
-  fish.style.transform = pctX > curX ? 'scaleX(-1)' : 'scaleX(1)';
-  fish.style.left = `${pctX}%`;
-  fish.style.top = `${pctY}%`;
+  // Animate all fishes towards food
+  const fishes = document.querySelectorAll('.swimming-goldfish');
+  fishes.forEach((fish, idx) => {
+    const curX = parseFloat(fish.style.left) || 20;
+    const delay = idx * 100;
+    setTimeout(() => {
+      fish.style.transform = pctX > curX ? 'scaleX(-1) scale(1.15)' : 'scaleX(1) scale(1.15)';
+      const offsetX = (idx - 2) * 4;
+      const offsetY = (idx - 2) * 3;
+      fish.style.left = `${Math.max(5, Math.min(90, pctX + offsetX))}%`;
+      fish.style.top = `${Math.max(5, Math.min(85, pctY + offsetY))}%`;
+    }, delay);
+  });
 
   setTimeout(() => {
     crumb.style.display = 'none';
     playSound('splash');
     fishHappiness++;
-    showToast(`Nom nom! Goldfish Happiness: Level ${fishHappiness}`);
+    showToast(`Nom nom! 🐠 Goldfish Happiness: Level ${fishHappiness}`);
     
     // Spawn floating heart particle
     const heart = document.createElement('div');
     heart.className = 'fish-heart-pop';
-    heart.textContent = '❤️';
+    heart.textContent = '💖';
     heart.style.left = `${pctX}%`;
     heart.style.top = `${pctY}%`;
     document.body.appendChild(heart);
     setTimeout(() => heart.remove(), 1200);
 
     spawnBubbleBurstAt(clientX, clientY);
-  }, 1600);
+
+    setTimeout(() => {
+      fishes.forEach(fish => {
+        fish.style.transform = fish.style.transform.replace(' scale(1.15)', '');
+      });
+    }, 600);
+  }, 1300);
+}
+
+function feedFishFromClick(event) {
+  if (event.target.closest('.swimming-goldfish')) return;
+  feedFishAt(event.clientX, event.clientY);
+}
+
+function petOrFeedFish(event, fishNum) {
+  event.stopPropagation();
+  const fish = document.getElementById(`goldfish${fishNum}`) || event.currentTarget;
+  playSound('splash');
+  fishHappiness += 2;
+  const name = fish?.getAttribute('data-name') || 'Goldfish';
+  showToast(`Blub blub! ${name} is happy! 🥰 (Level ${fishHappiness})`);
+  spawnBubbleBurst(event);
+  if (fish) {
+    fish.style.transform = 'scale(1.35) rotate(20deg)';
+    setTimeout(() => { fish.style.transform = ''; }, 450);
+  }
+  feedFishAt(event.clientX, event.clientY);
 }
 
 function feedFishAtCenter() {
   feedFishAt(window.innerWidth * 0.5, window.innerHeight * 0.4);
 }
+
+window.feedFishAt = feedFishAt;
+window.feedFishFromClick = feedFishFromClick;
+window.petOrFeedFish = petOrFeedFish;
+window.feedFishAtCenter = feedFishAtCenter;
 
 // ==================== STORAGE SYSTEM ====================
 const STORAGE_KEYS = {
@@ -866,6 +1071,12 @@ function switchTab(tabId) {
     renderCountdowns();
   } else if (tabId === 'reminders' && typeof renderReminders === 'function') {
     renderReminders();
+  } else if (tabId === 'finance' && typeof renderFinances === 'function') {
+    renderFinances();
+  } else if ((tabId === 'cats' || tabId === 'cat') && typeof renderReruCard === 'function') {
+    renderReruCard();
+  } else if (tabId === 'mood' && typeof loadMoodsForDate === 'function') {
+    loadMoodsForDate();
   }
 }
 
@@ -1520,7 +1731,7 @@ function renderReminders() {
   empty.style.display = 'none';
 
   grid.innerHTML = reminders.map(r => {
-    const forLabel = r.reminderFor === 'yuki' ? '🐱 Yuki' : r.reminderFor === 'nata' ? '🐈‍⬛ Nata' : '🤝 Joint';
+    const forLabel = r.reminderFor === 'yuki' ? '🐈 Yuki' : r.reminderFor === 'nata' ? '🐈‍⬛ Nata' : '🤝 Joint';
     return `
       <div class="reminder-card-retro tilt-card" style="border-left-color:${r.color || '#5bc8e8'}; opacity:${r.done ? '0.6' : '1'}">
         <div class="reminder-top-row">
@@ -1580,18 +1791,7 @@ function dismissAlert() {
 }
 
 // ==================== MEMO BOARD & DOODLE ====================
-let selectedNoteEmoji = '✨';
-
 function initLoveNotes() {
-  document.querySelectorAll('#noteEmojiPicker .emoji-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('#noteEmojiPicker .emoji-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      selectedNoteEmoji = btn.getAttribute('data-emoji') || '✨';
-      playSound('bubble');
-    });
-  });
-
   ensureDefaultNotes();
   renderNotes();
 }
@@ -1603,7 +1803,6 @@ const DEFAULT_LOVE_NOTES = [
     to: 'nata',
     title: 'Untuk Nata Tersayang 🌸',
     content: 'Semangat selalu yaa cantikk! Jangan lupa makan teratur dan minum air putih. Aku selalu ada buat kamu 💕',
-    emoji: '💖',
     date: '17 Feb 2026'
   },
   {
@@ -1612,7 +1811,6 @@ const DEFAULT_LOVE_NOTES = [
     to: 'yuki',
     title: 'Buat Yuki Hebat 💻',
     content: 'Semangat thesis dan job huntingnya! Jangan overthinking, kita lewatin semuanya bareng-bareng yaa ✨',
-    emoji: '✨',
     date: '17 Feb 2026'
   }
 ];
@@ -1650,7 +1848,6 @@ function saveNote() {
     to,
     title,
     content,
-    emoji: selectedNoteEmoji,
     date: new Date().toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })
   });
   setStorage(STORAGE_KEYS.NOTES, notes);
@@ -1694,10 +1891,9 @@ function renderNotes() {
       <div class="note-card-retro tilt-card">
         ${n.doodleData ? `<img src="${n.doodleData}" class="note-doodle-img" alt="Doodle" />` : ''}
         <div class="note-header-wrap">
-          <span class="note-stamp">${n.emoji || '💌'}</span>
-          <button class="clear-btn" onclick="deleteNote('${n.id}')">✕</button>
+          <div class="note-badge-to">From: ${fromLabel} ➔ To: ${toLabel}</div>
+          <button class="clear-btn" onclick="deleteNote('${n.id}')" title="Hapus note">✕</button>
         </div>
-        <div class="note-badge-to">From: ${fromLabel} ➔ To: ${toLabel}</div>
         <h4 class="note-title-text">${escapeHtml(n.title)}</h4>
         <p class="note-body-text">${escapeHtml(n.content)}</p>
         <span class="note-date-text">📅 ${n.date}</span>
@@ -2059,6 +2255,26 @@ let selectedMoodDate = getTodayString();
 let selectedMoodYuki = '';
 let selectedMoodNata = '';
 
+function selectMoodEmoji(person, emoji, btnEl) {
+  if (person === 'yuki') {
+    selectedMoodYuki = emoji;
+    const disp = document.getElementById('yukiSelectedEmoji');
+    if (disp) disp.textContent = emoji;
+    document.querySelectorAll('#yukiMoodEmojis .mood-pick').forEach(b => {
+      b.classList.toggle('selected', b.getAttribute('data-mood') === emoji);
+    });
+  } else {
+    selectedMoodNata = emoji;
+    const disp = document.getElementById('nataSelectedEmoji');
+    if (disp) disp.textContent = emoji;
+    document.querySelectorAll('#nataMoodEmojis .mood-pick').forEach(b => {
+      b.classList.toggle('selected', b.getAttribute('data-mood') === emoji);
+    });
+  }
+  playSound('bubble');
+}
+window.selectMoodEmoji = selectMoodEmoji;
+
 function initMoodTracker() {
   const dp = document.getElementById('moodDatePicker');
   if (dp) {
@@ -2071,22 +2287,18 @@ function initMoodTracker() {
   }
 
   document.querySelectorAll('#yukiMoodEmojis .mood-pick').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('#yukiMoodEmojis .mood-pick').forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
-      selectedMoodYuki = btn.getAttribute('data-mood');
-      document.getElementById('yukiSelectedEmoji').textContent = selectedMoodYuki;
-      playSound('bubble');
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const emoji = btn.getAttribute('data-mood');
+      selectMoodEmoji('yuki', emoji, btn);
     });
   });
 
   document.querySelectorAll('#nataMoodEmojis .mood-pick').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('#nataMoodEmojis .mood-pick').forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
-      selectedMoodNata = btn.getAttribute('data-mood');
-      document.getElementById('nataSelectedEmoji').textContent = selectedMoodNata;
-      playSound('bubble');
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const emoji = btn.getAttribute('data-mood');
+      selectMoodEmoji('nata', emoji, btn);
     });
   });
 
@@ -2294,7 +2506,7 @@ const YUTA_SPARKLE_QUOTES = [
   'Main character duo energy unlocked ✨',
   'Always rooting for you, no matter what 💙',
   'You make every single day better, no cap 🌸',
-  'Two cats locked in and thriving 🐱🐈‍⬛',
+  'Two cats locked in and thriving 🐈🐈‍⬛',
   'Soft days, good coffee & cozy vibes ☕',
   'My favorite human in every universe 💫',
   'Duo queue champions forever 🫧'
@@ -2411,7 +2623,7 @@ const SWEET_ENCOURAGEMENTS = {
     "Yayy selesai! Sayang hebat banget deh 💕",
     "You're doing great sayangku! Jangan lupa istirahat & minum yaa 🧋✨",
     "Tugas beres! So proud of you manis 🎀✨",
-    "Sayangku juara hari ini! Tetap semangat yaa ✨🐱",
+    "Sayangku juara hari ini! Tetap semangat yaa ✨🐈",
     "One step closer sayang! I love you so much 💕"
   ],
   yuki: [
@@ -2453,7 +2665,7 @@ function triggerTaskEncouragement(owner, clientX, clientY) {
 }
 
 function spawnCelebrationSparkles(x, y, customToastMsg) {
-  const stars = ['⭐', '✨', '💖', '🌟', '🎉', '🌸', '🐱', '💕'];
+  const stars = ['⭐', '✨', '💖', '🌟', '🎉', '🌸', '🐈', '💕'];
   for (let i = 0; i < 10; i++) {
     const star = document.createElement('div');
     star.className = 'todo-sparkle-star';
@@ -2612,7 +2824,7 @@ function switchScheduleDay(day) {
 
   timeline.innerHTML = filteredSlots.map(slot => {
     const cardClass = slot.who === 'yuki' ? 'yuki-card' : slot.who === 'nata' ? 'nata-card' : 'both-card';
-    const whoBadge = slot.who === 'yuki' ? '🐱 Yuki' : slot.who === 'nata' ? '🐈‍⬛ Nata' : 'YuTa Duo';
+    const whoBadge = slot.who === 'yuki' ? '🐈 Yuki' : slot.who === 'nata' ? '🐈‍⬛ Nata' : 'YuTa Duo';
     return `
       <div class="sched-slot">
         <div class="sched-time-col">
@@ -2693,10 +2905,12 @@ let moodResetTimer = null;
 
 function initCatSanctuary() {
   const data = getStorage(STORAGE_KEY_RERU, DEFAULT_RERU_DATA);
-  if (!data.name || data.name !== 'Reru' || !data.sub || data.sub.includes('Playful • Fluffy')) {
+  if (!data.name || data.name !== 'Reru' || !data.sub || !data.avatarImg || data.avatarImg !== 'assets/reru_cat.jpg') {
+    data.name = 'Reru';
     data.sub = DEFAULT_RERU_DATA.sub;
     data.type = DEFAULT_RERU_DATA.type;
-    data.dialog = DEFAULT_RERU_DATA.dialog;
+    data.dialog = data.dialog || DEFAULT_RERU_DATA.dialog;
+    data.avatarImg = 'assets/reru_cat.jpg';
     setStorage(STORAGE_KEY_RERU, data);
   }
   renderReruCard();
@@ -2827,32 +3041,9 @@ function renderReruCard() {
 }
 
 function attachReru3DParallax(card) {
+  // Disabled: Keep card stable without dizzying 3D rotation
   if (!card) return;
-  card.onmousemove = (e) => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const rotX = ((y - centerY) / centerY) * -6; // -6deg to +6deg
-    const rotY = ((x - centerX) / centerX) * 6;  // -6deg to +6deg
-
-    card.style.transform = `perspective(800px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale3d(1.01, 1.01, 1.01)`;
-
-    const img = document.getElementById('reruAvatarImg');
-    if (img) {
-      const offsetX = ((x - centerX) / centerX) * 4;
-      const offsetY = ((y - centerY) / centerY) * 4;
-      img.style.transform = `translate(${offsetX.toFixed(1)}px, ${offsetY.toFixed(1)}px) scale(1.04)`;
-    }
-  };
-
-  card.onmouseleave = () => {
-    card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-    const img = document.getElementById('reruAvatarImg');
-    if (img) img.style.transform = 'translate(0px, 0px) scale(1)';
-  };
+  card.style.transform = 'none';
 }
 
 function triggerReruAnimation(animClass, durationMs = 600) {
@@ -3246,7 +3437,10 @@ function applyRemoteData(remoteData) {
       'aero_notes': STORAGE_KEYS.NOTES,
       'aero_countdowns': STORAGE_KEYS.COUNTDOWNS,
       'aero_moods': STORAGE_KEYS.MOODS,
-      'aero_reru_pet_v3': STORAGE_KEY_RERU
+      'aero_reru_pet_v3': STORAGE_KEY_RERU,
+      'yuta_couple_finances': STORAGE_KEYS.FINANCES,
+      'yuta_couple_finance_goals': STORAGE_KEYS.FINANCE_GOALS,
+      'yuta_couple_finance_budgets': STORAGE_KEYS.FINANCE_BUDGETS
     };
 
     for (const [cloudKey, record] of Object.entries(remoteData)) {
@@ -3274,6 +3468,9 @@ function applyRemoteData(remoteData) {
       renderNotes();
       renderCountdowns();
       renderReruCard();
+      if (typeof renderFinances === 'function') {
+        renderFinances();
+      }
       if (typeof renderSchedule === 'function') {
         renderSchedule();
       } else if (typeof switchScheduleDay === 'function') {
@@ -3370,7 +3567,10 @@ function forcePushToCloud() {
     'aero_notes': { payload: getStorage(STORAGE_KEYS.NOTES, []), updatedAt: Date.now() },
     'aero_countdowns': { payload: getStorage(STORAGE_KEYS.COUNTDOWNS, []), updatedAt: Date.now() },
     'aero_moods': { payload: getStorage(STORAGE_KEYS.MOODS, {}), updatedAt: Date.now() },
-    'aero_reru_pet_v3': { payload: getStorage(STORAGE_KEY_RERU, DEFAULT_RERU_DATA), updatedAt: Date.now() }
+    'aero_reru_pet_v3': { payload: getStorage(STORAGE_KEY_RERU, DEFAULT_RERU_DATA), updatedAt: Date.now() },
+    'yuta_couple_finances': { payload: getStorage(STORAGE_KEYS.FINANCES, []), updatedAt: Date.now() },
+    'yuta_couple_finance_goals': { payload: getStorage(STORAGE_KEYS.FINANCE_GOALS, DEFAULT_FINANCE_GOALS), updatedAt: Date.now() },
+    'yuta_couple_finance_budgets': { payload: getStorage(STORAGE_KEYS.FINANCE_BUDGETS, DEFAULT_FINANCE_BUDGETS), updatedAt: Date.now() }
   };
 
   firebaseDb.ref('yuta_spaces/' + cleanRoom).set(fullData).then(() => {
@@ -3389,7 +3589,10 @@ function forcePushToCloudQuiet(cleanRoom) {
     'aero_notes': { payload: getStorage(STORAGE_KEYS.NOTES, []), updatedAt: Date.now() },
     'aero_countdowns': { payload: getStorage(STORAGE_KEYS.COUNTDOWNS, []), updatedAt: Date.now() },
     'aero_moods': { payload: getStorage(STORAGE_KEYS.MOODS, {}), updatedAt: Date.now() },
-    'aero_reru_pet_v3': { payload: getStorage(STORAGE_KEY_RERU, DEFAULT_RERU_DATA), updatedAt: Date.now() }
+    'aero_reru_pet_v3': { payload: getStorage(STORAGE_KEY_RERU, DEFAULT_RERU_DATA), updatedAt: Date.now() },
+    'yuta_couple_finances': { payload: getStorage(STORAGE_KEYS.FINANCES, []), updatedAt: Date.now() },
+    'yuta_couple_finance_goals': { payload: getStorage(STORAGE_KEYS.FINANCE_GOALS, DEFAULT_FINANCE_GOALS), updatedAt: Date.now() },
+    'yuta_couple_finance_budgets': { payload: getStorage(STORAGE_KEYS.FINANCE_BUDGETS, DEFAULT_FINANCE_BUDGETS), updatedAt: Date.now() }
   };
   try {
     firebaseDb.ref('yuta_spaces/' + cleanRoom).set(fullData);
@@ -3480,7 +3683,7 @@ function syncEventToGoogleCalendar(type) {
 
     case 'yuki_bday':
       url = generateGoogleCalendarUrl(
-        '🎂 Yuki\'s Birthday 🐱🎉',
+        '🎂 Yuki\'s Birthday 🐈🎉',
         'Happy Birthday Yuki! Wishing a fantastic year filled with joy and success.',
         '20261023T090000',
         '20261023T110000',
@@ -3500,7 +3703,7 @@ function syncEventToGoogleCalendar(type) {
 
     case 'yuki_routine':
       url = generateGoogleCalendarUrl(
-        '🐱 Yuki Daily Routine: 4 Quests 💻📚✍️💼',
+        '🐈 Yuki Daily Routine: 4 Quests 💻📚✍️💼',
         'Yuki\'s Daily Quests:\n1. 💻 Open LMS & check courses\n2. 📚 Work on assignments\n3. ✍️ Work on thesis\n4. 💼 Job hunting & applications',
         '20261004T080000',
         '20261004T180000',
@@ -3582,7 +3785,7 @@ function downloadLifetimeICS() {
   addICSEvent('anniv_20260217', '💍 Our Anniversary (Yuki & Nata) 💖', 'Happy Anniversary Yuki & Nata! Lifetime love milestone and celebration.', '20260217T090000', '20260217T110000', 'FREQ=YEARLY');
 
   // 2. Yuki Birthday
-  addICSEvent('bday_yuki', '🎂 Yuki\'s Birthday 🐱🎉', 'Happy Birthday Yuki! Wishing you joy and blessings.', '20261023T090000', '20261023T110000', 'FREQ=YEARLY');
+  addICSEvent('bday_yuki', '🎂 Yuki\'s Birthday 🐈🎉', 'Happy Birthday Yuki! Wishing you joy and blessings.', '20261023T090000', '20261023T110000', 'FREQ=YEARLY');
 
   // 3. Nata Birthday
   addICSEvent('bday_nata', '🎂 Nata\'s Birthday 🐈‍⬛🌸', 'Happy Birthday Nata! Wishing you endless happiness and love.', '20260924T090000', '20260924T110000', 'FREQ=YEARLY');
@@ -3804,7 +4007,7 @@ async function syncBothGCal() {
 
   if (yukiIcs || nataIcs) {
     playSound('chime');
-    showToast('🎉 Sukses sinkronisasi Google Calendar Yuki 🐱 & Nata 🐈‍⬛!');
+    showToast('🎉 Sukses sinkronisasi Google Calendar Yuki 🐈 & Nata 🐈‍⬛!');
   } else {
     showToast('⚠️ Gagal mengambil jadwal Google Calendar.');
   }
@@ -3842,3 +4045,807 @@ window.parseAndApplyICS = parseAndApplyICS;
 window.syncYukiGCal = syncYukiGCal;
 window.syncNataGCal = syncNataGCal;
 window.syncBothGCal = syncBothGCal;
+
+// ==========================================================================
+// ==================== YUTA COUPLE FINANCE WALLET ENGINE ====================
+// ==========================================================================
+
+STORAGE_KEYS.FINANCES = 'yuta_couple_finances';
+STORAGE_KEYS.FINANCE_BUDGETS = 'yuta_couple_finance_budgets';
+STORAGE_KEYS.FINANCE_GOALS = 'yuta_couple_finance_goals';
+
+const FINANCE_CATEGORIES = {
+  food: { label: 'Food & Dining', icon: '🍜', image: 'assets/wallet/cat_food.jpg', color: '#f97316' },
+  shopping: { label: 'Shopping & Mart', icon: '🛍️', image: 'assets/wallet/cat_shop.jpg', color: '#ec4899' },
+  date: { label: 'Date & Romance', icon: '💖', image: 'assets/wallet/cat_date.jpg', color: '#f43f5e' },
+  pets: { label: 'Pets & Cat Care', icon: '🐈', image: 'assets/wallet/cat_pet.jpg', color: '#f59e0b' },
+  transport: { label: 'Transport & Fuel', icon: '🛵', image: 'assets/wallet/cat_transport.jpg', color: '#0284c7' },
+  bills: { label: 'Bills & Utilities', icon: '⚡', image: 'assets/wallet/cat_bills.jpg', color: '#eab308' },
+  salary: { label: 'Salary & Income', icon: '💵', image: 'assets/wallet/cat_salary.jpg', color: '#10b981' },
+  work: { label: 'Work & Study', icon: '💻', image: 'assets/wallet/cat_bills.jpg', color: '#6366f1' },
+  reward: { label: 'Treats & Gifts', icon: '🎁', image: 'assets/wallet/cat_shop.jpg', color: '#d946ef' },
+  pocket: { label: 'Pocket & Allowance', icon: '💰', image: 'assets/wallet/cat_salary.jpg', color: '#8b5cf6' },
+  other: { label: 'Other', icon: '✨', image: 'assets/wallet/cat_food.jpg', color: '#64748b' }
+};
+
+const DEFAULT_FINANCE_BUDGETS = {
+  food: 2000000,
+  shopping: 1500000,
+  date: 1500000,
+  pets: 800000,
+  transport: 800000,
+  bills: 2000000,
+  work: 500000,
+  other: 500000
+};
+
+const DEFAULT_FINANCE_GOALS = [
+  {
+    id: 'goal_yuki_1',
+    owner: 'yuki',
+    title: 'MacBook Pro & Setup 💻',
+    targetAmount: 18000000,
+    currentAmount: 0,
+    deadline: '2026-12-25'
+  },
+  {
+    id: 'goal_yuki_2',
+    owner: 'yuki',
+    title: 'Liburan ke Jepang 🌸',
+    targetAmount: 15000000,
+    currentAmount: 0,
+    deadline: '2027-04-15'
+  },
+  {
+    id: 'goal_nata_1',
+    owner: 'nata',
+    title: 'Beli HP Baru 📱✨',
+    targetAmount: 15000000,
+    currentAmount: 0,
+    deadline: '2026-11-30'
+  },
+  {
+    id: 'goal_nata_2',
+    owner: 'nata',
+    title: 'Cat Playground & Vet Care 🐈',
+    targetAmount: 3000000,
+    currentAmount: 0,
+    deadline: '2026-10-31'
+  }
+];
+
+function getInitialCoupleFinances() {
+  return [];
+}
+
+let financeQuickType = 'expense';
+let financeModalType = 'expense';
+let financeFilterPerson = 'all';
+let financeFilterType = 'all';
+let financeSearchQuery = '';
+let financeSelectedMonth = '';
+
+function formatRupiah(number) {
+  const num = Number(number) || 0;
+  return 'Rp ' + Math.round(num).toLocaleString('id-ID');
+}
+
+function getFinances() {
+  const resetZeroKey = 'yuta_wallet_zero_clean_v3';
+  if (!localStorage.getItem(resetZeroKey)) {
+    localStorage.setItem(STORAGE_KEYS.FINANCES, JSON.stringify([]));
+    localStorage.setItem(resetZeroKey, 'true');
+    return [];
+  }
+  let finances = getStorage(STORAGE_KEYS.FINANCES, []);
+  if (!Array.isArray(finances)) {
+    finances = [];
+    setStorage(STORAGE_KEYS.FINANCES, finances);
+  }
+  return finances;
+}
+
+function resetWalletBalances() {
+  if (confirm('Apakah kamu yakin ingin mereset semua saldo dan riwayat transaksi wallet menjadi Rp 0?')) {
+    setStorage(STORAGE_KEYS.FINANCES, []);
+    playSound('delete');
+    renderFinances();
+    showToast('Semua saldo dan transaksi wallet telah direset ke Rp 0.');
+  }
+}
+window.resetWalletBalances = resetWalletBalances;
+
+function getFinanceBudgets() {
+  return getStorage(STORAGE_KEYS.FINANCE_BUDGETS, { ...DEFAULT_FINANCE_BUDGETS });
+}
+
+function getFinanceGoals() {
+  const goalsKey = 'yuta_goals_hp_nata_v1';
+  if (!localStorage.getItem(goalsKey)) {
+    localStorage.setItem(STORAGE_KEYS.FINANCE_GOALS, JSON.stringify(DEFAULT_FINANCE_GOALS));
+    localStorage.setItem(goalsKey, 'true');
+    return [ ...DEFAULT_FINANCE_GOALS ];
+  }
+  return getStorage(STORAGE_KEYS.FINANCE_GOALS, [ ...DEFAULT_FINANCE_GOALS ]);
+}
+
+function initFinances() {
+  renderFinances();
+}
+
+function onGlobalMonthChange(event) {
+  financeSelectedMonth = event?.target?.value || '';
+  playSound('bubble');
+  renderFinances();
+}
+
+function renderFinances() {
+  const allFinances = getFinances();
+
+  // 1. Calculate stats for Yuki and Nata separately
+  let yukiIncome = 0;
+  let yukiExpense = 0;
+  let nataIncome = 0;
+  let nataExpense = 0;
+  let totalIncome = 0;
+  let totalExpense = 0;
+  let countIncome = 0;
+  let countExpense = 0;
+
+  const catExpenseMap = {};
+
+  allFinances.forEach(tx => {
+    const amt = Number(tx.amount) || 0;
+    const isYuki = tx.person === 'yuki' || tx.wallet === 'yuki';
+
+    if (tx.type === 'income') {
+      totalIncome += amt;
+      countIncome++;
+      if (isYuki) yukiIncome += amt;
+      else nataIncome += amt;
+    } else {
+      totalExpense += amt;
+      countExpense++;
+      if (isYuki) yukiExpense += amt;
+      else nataExpense += amt;
+
+      const catKey = tx.category || 'other';
+      catExpenseMap[catKey] = (catExpenseMap[catKey] || 0) + amt;
+    }
+  });
+
+  const yukiBalance = yukiIncome - yukiExpense;
+  const nataBalance = nataIncome - nataExpense;
+  const yukiExpRatio = yukiIncome > 0 ? Math.min(100, Math.round((yukiExpense / yukiIncome) * 100)) : 0;
+  const nataExpRatio = nataIncome > 0 ? Math.min(100, Math.round((nataExpense / nataIncome) * 100)) : 0;
+
+  // 2. Update Dompet Yuki Bento Master Card
+  const yukiBalEl = document.getElementById('yukiBalAmount');
+  const yukiIncEl = document.getElementById('yukiIncomeAmount');
+  const yukiOutEl = document.getElementById('yukiOutcomeAmount');
+  const yukiExpBarEl = document.getElementById('yukiExpBar');
+  const yukiRatioText = document.getElementById('yukiExpRatioText');
+  const yukiExpAmtEl = document.getElementById('yukiExpAmount');
+  const yukiStatusBadge = document.getElementById('yukiStatusBadge');
+
+  if (yukiBalEl) yukiBalEl.textContent = formatRupiah(yukiBalance);
+  if (yukiIncEl) yukiIncEl.textContent = '+' + formatRupiah(yukiIncome);
+  if (yukiOutEl) yukiOutEl.textContent = '-' + formatRupiah(yukiExpense);
+  if (yukiExpBarEl) yukiExpBarEl.style.width = `${yukiExpRatio}%`;
+  if (yukiRatioText) yukiRatioText.textContent = `Outcome ${yukiExpRatio}% dari Income`;
+  if (yukiExpAmtEl) yukiExpAmtEl.textContent = `Outcome: ${formatRupiah(yukiExpense)}`;
+  if (yukiStatusBadge) {
+    yukiStatusBadge.textContent = yukiBalance >= 0 ? 'Surplus 🟢' : 'Defisit ⚠️';
+    yukiStatusBadge.className = yukiBalance >= 0 ? 'bento-tag-pill tag-yuki-pill' : 'bento-tag-pill tag-danger';
+  }
+
+  // 3. Update Dompet Nata Bento Master Card
+  const nataBalEl = document.getElementById('nataBalAmount');
+  const nataIncEl = document.getElementById('nataIncomeAmount');
+  const nataOutEl = document.getElementById('nataOutcomeAmount');
+  const nataExpBarEl = document.getElementById('nataExpBar');
+  const nataRatioText = document.getElementById('nataExpRatioText');
+  const nataExpAmtEl = document.getElementById('nataExpAmount');
+  const nataStatusBadge = document.getElementById('nataStatusBadge');
+
+  if (nataBalEl) nataBalEl.textContent = formatRupiah(nataBalance);
+  if (nataIncEl) nataIncEl.textContent = '+' + formatRupiah(nataIncome);
+  if (nataOutEl) nataOutEl.textContent = '-' + formatRupiah(nataExpense);
+  if (nataExpBarEl) nataExpBarEl.style.width = `${nataExpRatio}%`;
+  if (nataRatioText) nataRatioText.textContent = `Outcome ${nataExpRatio}% dari Income`;
+  if (nataExpAmtEl) nataExpAmtEl.textContent = `Outcome: ${formatRupiah(nataExpense)}`;
+  if (nataStatusBadge) {
+    nataStatusBadge.textContent = nataBalance >= 0 ? 'Surplus 🟢' : 'Defisit ⚠️';
+    nataStatusBadge.className = nataBalance >= 0 ? 'bento-tag-pill tag-nata-pill' : 'bento-tag-pill tag-danger';
+  }
+
+  // 4. Update 3D Virtual Cards Showcase
+  const vcardYukiAmt = document.getElementById('vcardYukiAmt');
+  const vcardYukiShare = document.getElementById('vcardYukiShare');
+  const vcardYukiSubStats = document.getElementById('vcardYukiSubStats');
+
+  const vcardNataAmt = document.getElementById('vcardNataAmt');
+  const vcardNataShare = document.getElementById('vcardNataShare');
+  const vcardNataSubStats = document.getElementById('vcardNataSubStats');
+
+  if (vcardYukiAmt) vcardYukiAmt.textContent = formatRupiah(yukiBalance);
+  if (vcardYukiShare) vcardYukiShare.textContent = yukiBalance >= 0 ? 'Surplus 🟢' : 'Defisit ⚠️';
+  if (vcardYukiSubStats) vcardYukiSubStats.textContent = `In: +${formatRupiah(yukiIncome)} | Out: -${formatRupiah(yukiExpense)}`;
+
+  if (vcardNataAmt) vcardNataAmt.textContent = formatRupiah(nataBalance);
+  if (vcardNataShare) vcardNataShare.textContent = nataBalance >= 0 ? 'Surplus 🟢' : 'Defisit ⚠️';
+  if (vcardNataSubStats) vcardNataSubStats.textContent = `In: +${formatRupiah(nataIncome)} | Out: -${formatRupiah(nataExpense)}`;
+
+  // 5. Update Savings Motivation Quote
+  updateSavingQuotesUI();
+
+  // 6. Render Category Breakdown Visual Tiles
+  const catGridEl = document.getElementById('financeCatGrid');
+  if (catGridEl) {
+    const sortedCats = Object.keys(FINANCE_CATEGORIES).map(k => {
+      const spent = catExpenseMap[k] || 0;
+      const pct = totalExpense > 0 ? Math.round((spent / totalExpense) * 100) : 0;
+      return { 
+        key: k, 
+        label: FINANCE_CATEGORIES[k].label, 
+        icon: FINANCE_CATEGORIES[k].icon, 
+        spent, 
+        pct 
+      };
+    }).sort((a, b) => b.spent - a.spent);
+
+    catGridEl.innerHTML = sortedCats.map(cat => `
+      <div class="cat-tile-card cat-tile-clean" onclick="quickFilterByCategory('${cat.key}')" title="Filter kategori ${cat.label}">
+        <div class="cat-tile-clean-top">
+          <div class="cat-clean-icon-box">${cat.icon}</div>
+          <span class="cat-clean-pct">${cat.pct}%</span>
+        </div>
+        <div class="cat-tile-clean-body">
+          <span class="cat-clean-title">${cat.label}</span>
+          <span class="cat-clean-amount">${formatRupiah(cat.spent)}</span>
+        </div>
+        <div class="cat-tile-bar-track">
+          <div class="cat-tile-bar-fill" style="width: ${cat.pct}%;"></div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // 7. Render Individual Savings Goals (Yuki & Nata)
+  renderSavingsGoals();
+
+  // 8. Filter & Render Transaction History List
+  let filtered = allFinances.filter(tx => {
+    if (financeFilterPerson !== 'all' && tx.person !== financeFilterPerson) return false;
+    if (financeFilterType !== 'all' && tx.type !== financeFilterType) return false;
+    if (financeSearchQuery) {
+      const catLabel = FINANCE_CATEGORIES[tx.category]?.label || '';
+      const text = `${tx.desc || ''} ${catLabel} ${tx.person || ''} ${tx.amount}`.toLowerCase();
+      if (!text.includes(financeSearchQuery)) return false;
+    }
+    return true;
+  });
+
+  const listEl = document.getElementById('financeTransactionsList');
+  const emptyEl = document.getElementById('financeEmpty');
+  const countLabel = document.getElementById('transCountLabel');
+
+  if (countLabel) countLabel.textContent = `${filtered.length} Entries`;
+
+  if (!listEl) return;
+
+  if (filtered.length === 0) {
+    listEl.innerHTML = '';
+    if (emptyEl) emptyEl.style.display = 'block';
+    return;
+  }
+
+  if (emptyEl) emptyEl.style.display = 'none';
+
+  listEl.innerHTML = filtered.map(tx => {
+    const isIncome = tx.type === 'income';
+    const isYuki = tx.person === 'yuki' || tx.wallet === 'yuki';
+    const personLabel = isYuki ? '🐈 Yuki' : '🐈‍⬛ Nata';
+    const walletLabel = isYuki ? 'Dompet Yuki' : 'Dompet Nata';
+    const personClass = isYuki ? 'tag-yuki' : 'tag-nata';
+
+    return `
+      <div class="trans-item-card ${isIncome ? 'is-income' : 'is-expense'}">
+        <div class="trans-icon-bubble" title="${cat.label}">${cat.icon}</div>
+        <div class="trans-info-col">
+          <div class="trans-title-line">
+            <span class="trans-title">${escapeHtml(tx.desc || cat.label)}</span>
+            <span class="trans-person-tag ${personClass}">${personLabel}</span>
+          </div>
+          <div class="trans-meta-line">
+            <span class="trans-category-tag">${cat.label}</span>
+            <span>•</span>
+            <span>💳 ${walletLabel}</span>
+            <span>•</span>
+            <span>📅 ${tx.date || 'Today'}</span>
+          </div>
+        </div>
+        <div class="trans-amount-col">
+          <span class="trans-amount ${isIncome ? 'amount-income' : 'amount-expense'}">
+            ${isIncome ? '+' : '-'}${formatRupiah(tx.amount)}
+          </span>
+        </div>
+        <div class="trans-actions-col">
+          <button class="trans-btn-icon" onclick="openFinanceModal('${tx.type}', '${tx.id}')" title="Edit Entry">✏️</button>
+          <button class="trans-btn-icon trans-btn-del" onclick="deleteFinanceTransaction('${tx.id}')" title="Delete Entry">🗑️</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// ==================== COUPLE SAVINGS MOTIVATION QUOTES ====================
+const SAVING_MOTIVATION_QUOTES = [
+  { quote: "Sedikit demi sedikit, lama-lama jadi rumah impian & liburan bareng kita berdua! 🏡🌸", author: "Yuki & Nata Future Fund ✨" },
+  { quote: "Semangat nabung sayang! Setiap rupiah yang kita simpan hari ini adalah senyuman di masa depan kita. 💖🐈", author: "Pesan Cinta untuk Yuki & Nata" },
+  { quote: "Menabung bukan tentang menahan diri, tapi tentang mewujudkan mimpi indah kita bersama! ✈️🇯🇵", author: "Rencana Indah Masa Depan 🌸" },
+  { quote: "Uang yang kita jaga hari ini akan menjaga kebahagiaan dan kebebasan kita besok. 🐈‍⬛✨", author: "Semangat Nabung Bareng" },
+  { quote: "Yuki hebat, Nata hebat! Bareng-bareng kita pasti bisa capai semua wishlist impian kita! 🌟💎", author: "Couple Goals YuTa 💕" },
+  { quote: "Konsisten adalah kunci. Biar receh asal rutin, mimpi besar kita pasti terwujud! 💰🌷", author: "Tabungan Bahagia Kita" }
+];
+
+let savingQuoteIdx = 0;
+
+function nextSavingQuote() {
+  savingQuoteIdx = (savingQuoteIdx + 1) % SAVING_MOTIVATION_QUOTES.length;
+  updateSavingQuotesUI();
+  playSound('bubble');
+}
+
+function updateSavingQuotesUI() {
+  const quoteEl = document.getElementById('savingsQuoteText');
+  const authEl = document.getElementById('savingsQuoteAuthor');
+  if (quoteEl && authEl) {
+    quoteEl.style.opacity = 0;
+    setTimeout(() => {
+      quoteEl.textContent = `"${SAVING_MOTIVATION_QUOTES[savingQuoteIdx].quote}"`;
+      authEl.textContent = `~ ${SAVING_MOTIVATION_QUOTES[savingQuoteIdx].author}`;
+      quoteEl.style.opacity = 1;
+    }, 180);
+  }
+}
+
+window.nextSavingQuote = nextSavingQuote;
+
+// Individual Savings Goals (Yuki & Nata)
+function renderSavingsGoals() {
+  const yukiGrid = document.getElementById('yukiGoalsGrid');
+  const nataGrid = document.getElementById('nataGoalsGrid');
+  const yukiBadge = document.getElementById('yukiGoalsCountBadge');
+  const nataBadge = document.getElementById('nataGoalsCountBadge');
+
+  const goals = getFinanceGoals();
+  const yukiGoals = goals.filter(g => g.owner === 'yuki' || !g.owner);
+  const nataGoals = goals.filter(g => g.owner === 'nata');
+
+  if (yukiBadge) yukiBadge.textContent = `${yukiGoals.length} Target`;
+  if (nataBadge) nataBadge.textContent = `${nataGoals.length} Target`;
+
+  const renderGoalList = (list, ownerName) => {
+    if (list.length === 0) {
+      return `<div style="text-align:center; padding: 18px 10px; color:#64748b; font-size:0.8rem;">Belum ada target untuk ${ownerName}. Klik "+ Tambah Target"!</div>`;
+    }
+    return list.map(g => {
+      const pct = Math.min(100, Math.round((g.currentAmount / g.targetAmount) * 100));
+      return `
+        <div class="goal-card">
+          <div class="goal-top">
+            <h4 class="goal-title">${escapeHtml(g.title)}</h4>
+            <span class="goal-pct-badge">${pct}%</span>
+          </div>
+          <div>
+            <div class="goal-amounts">
+              <span>${formatRupiah(g.currentAmount)}</span>
+              <span style="color:#64748b;">dari ${formatRupiah(g.targetAmount)}</span>
+            </div>
+            <div class="goal-bar-track">
+              <div class="goal-bar-fill" style="width: ${pct}%;"></div>
+            </div>
+          </div>
+          <div class="goal-actions">
+            <button class="primary-btn-sm" onclick="openGoalDepositModal('${g.id}')">➕ Menabung</button>
+            <button class="secondary-btn" onclick="deleteSavingsGoal('${g.id}')">🗑️</button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  };
+
+  if (yukiGrid) yukiGrid.innerHTML = renderGoalList(yukiGoals, 'Yuki');
+  if (nataGrid) nataGrid.innerHTML = renderGoalList(nataGoals, 'Nata');
+}
+
+// Quick Log Handlers
+function setDirectQuickType(type) {
+  financeQuickType = type;
+  document.getElementById('quickToggleExpense').classList.toggle('active', type === 'expense');
+  document.getElementById('quickToggleIncome').classList.toggle('active', type === 'income');
+  playSound('bubble');
+}
+
+function addDirectQuickNominal(val) {
+  const inp = document.getElementById('quickDirectAmount');
+  if (!inp) return;
+  const cur = Number(inp.value) || 0;
+  inp.value = cur + val;
+  playSound('bubble');
+}
+
+function resetDirectQuickNominal() {
+  const inp = document.getElementById('quickDirectAmount');
+  if (inp) inp.value = '';
+  playSound('delete');
+}
+
+function onQuickPersonChange(val) {
+  const walletSelect = document.getElementById('quickDirectWallet');
+  if (walletSelect) {
+    walletSelect.value = val === 'nata' ? 'nata' : 'yuki';
+  }
+}
+window.onQuickPersonChange = onQuickPersonChange;
+
+function submitDirectQuickFinance() {
+  const amtInp = document.getElementById('quickDirectAmount');
+  const catInp = document.getElementById('quickDirectCategory');
+  const personInp = document.getElementById('quickDirectPerson');
+  const walletInp = document.getElementById('quickDirectWallet');
+  const payInp = document.getElementById('quickDirectPayment');
+  const descInp = document.getElementById('quickDirectDesc');
+
+  const amount = Number(amtInp?.value) || 0;
+  if (amount <= 0) {
+    alert('Please enter a valid amount in Rupiah.');
+    return;
+  }
+
+  const category = catInp?.value || 'other';
+  const person = personInp?.value || 'yuki';
+  const wallet = walletInp?.value || person;
+  const paymentMethod = payInp?.value || 'qris';
+  const desc = descInp?.value.trim() || (FINANCE_CATEGORIES[category]?.label || 'Transaction');
+  const isSplit = financeQuickType === 'expense';
+  const splitOwedAmount = isSplit ? Math.round(amount * 0.5) : 0;
+
+  const newTx = {
+    id: 'tx_' + Date.now(),
+    type: financeQuickType,
+    amount,
+    category,
+    person,
+    wallet,
+    paymentMethod,
+    desc,
+    date: getTodayString(),
+    isSplit: false,
+    splitRatio: 50,
+    splitPaidBy: person,
+    splitOwedAmount: 0
+  };
+
+  const finances = getFinances();
+  finances.unshift(newTx);
+  setStorage(STORAGE_KEYS.FINANCES, finances);
+
+  if (amtInp) amtInp.value = '';
+  if (descInp) descInp.value = '';
+
+  playSound('chime');
+  renderFinances();
+  showToast(`Recorded in Dompet ${person === 'yuki' ? 'Yuki' : 'Nata'}: ${formatRupiah(amount)} ✨`);
+}
+
+function quickFilterByCategory(catKey) {
+  const cat = FINANCE_CATEGORIES[catKey];
+  if (!cat) return;
+  const searchInp = document.getElementById('financeSearchInput');
+  if (searchInp) searchInp.value = cat.label;
+  financeSearchQuery = cat.label.toLowerCase();
+  playSound('bubble');
+  renderFinances();
+  const feedBox = document.querySelector('.bento-feed-box');
+  if (feedBox) feedBox.scrollIntoView({ behavior: 'smooth' });
+}
+
+function setFinanceFilterPerson(person) {
+  financeFilterPerson = person;
+  document.querySelectorAll('.bento-toolbar-right [data-person]').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-person') === person);
+  });
+  playSound('bubble');
+  renderFinances();
+}
+
+function setFinanceFilterType(type) {
+  financeFilterType = type;
+  document.querySelectorAll('.bento-toolbar-right [data-type]').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-type') === type);
+  });
+  playSound('bubble');
+  renderFinances();
+}
+
+function onFinanceSearchChange(event) {
+  financeSearchQuery = (event.target.value || '').trim().toLowerCase();
+  renderFinances();
+}
+
+// Floating Modal Handlers
+function openFinanceModal(type = 'expense', editId = null) {
+  financeModalType = type;
+  document.getElementById('financeEditId').value = editId || '';
+  document.getElementById('financeModalTitle').textContent = editId ? 'Edit Transaction' : 'Record Transaction';
+  document.getElementById('btnSaveFinanceModalLabel').textContent = editId ? 'Update Transaction' : 'Save Transaction';
+
+  const modal = document.getElementById('financeModal');
+  if (!modal) return;
+
+  if (editId) {
+    const finances = getFinances();
+    const tx = finances.find(t => t.id === editId);
+    if (tx) {
+      financeModalType = tx.type;
+      document.getElementById('financeModalAmount').value = tx.amount;
+      document.getElementById('financeModalDesc').value = tx.desc || '';
+      document.getElementById('financeModalDate').value = tx.date || getTodayString();
+      if (tx.person === 'yuki') document.getElementById('radioFinanceYuki').checked = true;
+      else document.getElementById('radioFinanceNata').checked = true;
+      document.getElementById('financeModalWallet').value = tx.wallet === 'nata' ? 'nata' : 'yuki';
+      document.getElementById('financeModalPayment').value = tx.paymentMethod || 'qris';
+      document.getElementById('financeModalToggleSplit').checked = !!tx.isSplit;
+      document.getElementById('financeModalSplitDrawer').style.display = tx.isSplit ? 'flex' : 'none';
+      setModalSplitRatio(tx.splitRatio || 50);
+    }
+  } else {
+    document.getElementById('financeModalAmount').value = '';
+    document.getElementById('financeModalDesc').value = '';
+    document.getElementById('financeModalDate').value = getTodayString();
+    document.getElementById('radioFinanceYuki').checked = true;
+    document.getElementById('financeModalWallet').value = 'yuki';
+    document.getElementById('financeModalPayment').value = 'qris';
+    document.getElementById('financeModalToggleSplit').checked = false;
+    document.getElementById('financeModalSplitDrawer').style.display = 'none';
+  }
+
+  setModalFinanceType(financeModalType);
+  updateModalFinancePreview();
+  modal.style.display = 'flex';
+}
+
+function closeFinanceModal() {
+  const modal = document.getElementById('financeModal');
+  if (modal) modal.style.display = 'none';
+}
+
+function setModalFinanceType(type) {
+  financeModalType = type;
+  document.getElementById('modalToggleExpense').classList.toggle('active', type === 'expense');
+  document.getElementById('modalToggleIncome').classList.toggle('active', type === 'income');
+
+  const catGrid = document.getElementById('modalFinanceCatGrid');
+  if (!catGrid) return;
+
+  const cats = Object.keys(FINANCE_CATEGORIES);
+  catGrid.innerHTML = cats.map(k => {
+    const c = FINANCE_CATEGORIES[k];
+    return `
+      <button type="button" class="cat-select-btn ${k === 'food' ? 'selected' : ''}" data-cat="${k}" onclick="selectModalFinanceCategory('${k}')">
+        <span class="cat-ico">${c.icon}</span>
+        <span>${c.label}</span>
+      </button>
+    `;
+  }).join('');
+  document.getElementById('financeModalCategory').value = 'food';
+}
+
+function selectModalFinanceCategory(catKey) {
+  document.getElementById('financeModalCategory').value = catKey;
+  document.querySelectorAll('#modalFinanceCatGrid .cat-select-btn').forEach(btn => {
+    btn.classList.toggle('selected', btn.getAttribute('data-cat') === catKey);
+  });
+}
+
+function updateModalFinancePreview() {
+  const val = Number(document.getElementById('financeModalAmount').value) || 0;
+  const prev = document.getElementById('financeModalPreview');
+  if (prev) prev.textContent = val > 0 ? formatRupiah(val) : 'Nol Rupiah';
+}
+
+function onToggleModalSplitChange(event) {
+  const drawer = document.getElementById('financeModalSplitDrawer');
+  if (drawer) drawer.style.display = event.target.checked ? 'flex' : 'none';
+}
+
+let modalSplitRatioVal = 50;
+function setModalSplitRatio(ratio) {
+  modalSplitRatioVal = ratio;
+  document.querySelectorAll('#financeModalSplitDrawer .split-ratio-btn').forEach(b => {
+    b.classList.toggle('active', parseInt(b.getAttribute('data-ratio'), 10) === ratio);
+  });
+}
+
+function saveFinanceModalTransaction(event) {
+  event.preventDefault();
+  const editId = document.getElementById('financeEditId').value;
+  const amount = Number(document.getElementById('financeModalAmount').value) || 0;
+  if (amount <= 0) {
+    alert('Please enter a valid amount.');
+    return;
+  }
+
+  const category = document.getElementById('financeModalCategory').value;
+  const desc = document.getElementById('financeModalDesc').value.trim() || FINANCE_CATEGORIES[category]?.label;
+  const date = document.getElementById('financeModalDate').value || getTodayString();
+  const person = document.getElementById('radioFinanceYuki').checked ? 'yuki' : 'nata';
+  const wallet = document.getElementById('financeModalWallet').value;
+  const paymentMethod = document.getElementById('financeModalPayment').value;
+  const txData = {
+    id: editId || 'tx_' + Date.now(),
+    type: financeModalType,
+    amount,
+    category,
+    desc,
+    date,
+    person,
+    wallet,
+    paymentMethod
+  };
+
+  const finances = getFinances();
+  if (editId) {
+    const idx = finances.findIndex(t => t.id === editId);
+    if (idx !== -1) finances[idx] = txData;
+    showToast('Transaction updated ✨');
+  } else {
+    finances.unshift(txData);
+    showToast('Transaction added ✨');
+  }
+
+  setStorage(STORAGE_KEYS.FINANCES, finances);
+  closeFinanceModal();
+  playSound('chime');
+  renderFinances();
+}
+
+function deleteFinanceTransaction(id) {
+  if (confirm('Delete this transaction record?')) {
+    let finances = getFinances();
+    finances = finances.filter(t => t.id !== id);
+    setStorage(STORAGE_KEYS.FINANCES, finances);
+    playSound('delete');
+    renderFinances();
+    showToast('Transaction deleted 🗑️');
+  }
+}
+
+// Goals Modals
+function openAddSavingsGoalModal(defaultOwner = 'yuki') {
+  document.getElementById('goalInputTitle').value = '';
+  document.getElementById('goalInputTarget').value = '';
+  document.getElementById('goalInputInitial').value = '0';
+  document.getElementById('goalInputDeadline').value = '';
+  if (defaultOwner === 'nata') {
+    document.getElementById('radioGoalNata').checked = true;
+  } else {
+    document.getElementById('radioGoalYuki').checked = true;
+  }
+  document.getElementById('modalSavingsGoal').style.display = 'flex';
+}
+
+function closeSavingsGoalModal() {
+  document.getElementById('modalSavingsGoal').style.display = 'none';
+}
+
+function saveSavingsGoalForm(event) {
+  event.preventDefault();
+  const owner = document.getElementById('radioGoalNata').checked ? 'nata' : 'yuki';
+  const title = document.getElementById('goalInputTitle').value.trim();
+  const targetAmount = Number(document.getElementById('goalInputTarget').value);
+  const initial = Number(document.getElementById('goalInputInitial').value) || 0;
+  const deadline = document.getElementById('goalInputDeadline').value;
+
+  if (!title || !targetAmount) return;
+
+  const goals = getFinanceGoals();
+  goals.push({
+    id: 'goal_' + Date.now(),
+    owner,
+    title,
+    targetAmount,
+    currentAmount: initial,
+    deadline
+  });
+
+  setStorage(STORAGE_KEYS.FINANCE_GOALS, goals);
+  closeSavingsGoalModal();
+  playSound('chime');
+  renderFinances();
+  showToast(`Target tabungan ${owner === 'yuki' ? 'Yuki' : 'Nata'} ditambahkan! 🌟`);
+}
+
+function openGoalDepositModal(goalId) {
+  const goals = getFinanceGoals();
+  const goal = goals.find(g => g.id === goalId);
+  if (!goal) return;
+
+  document.getElementById('depositGoalId').value = goalId;
+  document.getElementById('modalDepositGoalTitle').textContent = `Menabung untuk: ${goal.title}`;
+  document.getElementById('depositAmount').value = '';
+  document.getElementById('modalGoalDeposit').style.display = 'flex';
+}
+
+function closeGoalDepositModal() {
+  document.getElementById('modalGoalDeposit').style.display = 'none';
+}
+
+function saveGoalDepositForm(event) {
+  event.preventDefault();
+  const goalId = document.getElementById('depositGoalId').value;
+  const amt = Number(document.getElementById('depositAmount').value);
+  if (!amt || amt <= 0) return;
+
+  const goals = getFinanceGoals();
+  const goal = goals.find(g => g.id === goalId);
+  if (goal) {
+    goal.currentAmount += amt;
+    setStorage(STORAGE_KEYS.FINANCE_GOALS, goals);
+    
+    if (goal.currentAmount >= goal.targetAmount && typeof confetti === 'function') {
+      confetti({ particleCount: 100, spread: 80, origin: { y: 0.6 } });
+      showToast(`🎉 Target "${goal.title}" Tercapai!`);
+    } else {
+      showToast(`Berhasil menabung ${formatRupiah(amt)} ✨`);
+    }
+  }
+
+  closeGoalDepositModal();
+  playSound('chime');
+  renderFinances();
+}
+
+function deleteSavingsGoal(goalId) {
+  if (confirm('Hapus target tabungan ini?')) {
+    let goals = getFinanceGoals();
+    goals = goals.filter(g => g.id !== goalId);
+    setStorage(STORAGE_KEYS.FINANCE_GOALS, goals);
+    renderFinances();
+    showToast('Target tabungan dihapus');
+  }
+}
+
+// Bind all finance functions to window
+window.initFinances = initFinances;
+window.renderFinances = renderFinances;
+window.onGlobalMonthChange = onGlobalMonthChange;
+window.setDirectQuickType = setDirectQuickType;
+window.addDirectQuickNominal = addDirectQuickNominal;
+window.resetDirectQuickNominal = resetDirectQuickNominal;
+window.submitDirectQuickFinance = submitDirectQuickFinance;
+window.quickFilterByCategory = quickFilterByCategory;
+window.setFinanceFilterPerson = setFinanceFilterPerson;
+window.setFinanceFilterType = setFinanceFilterType;
+window.onFinanceSearchChange = onFinanceSearchChange;
+window.settleUpDebts = settleUpDebts;
+window.openFinanceModal = openFinanceModal;
+window.closeFinanceModal = closeFinanceModal;
+window.setModalFinanceType = setModalFinanceType;
+window.selectModalFinanceCategory = selectModalFinanceCategory;
+window.updateModalFinancePreview = updateModalFinancePreview;
+window.onToggleModalSplitChange = onToggleModalSplitChange;
+window.setModalSplitRatio = setModalSplitRatio;
+window.saveFinanceModalTransaction = saveFinanceModalTransaction;
+window.deleteFinanceTransaction = deleteFinanceTransaction;
+window.openAddSavingsGoalModal = openAddSavingsGoalModal;
+window.closeSavingsGoalModal = closeSavingsGoalModal;
+window.saveSavingsGoalForm = saveSavingsGoalForm;
+window.openGoalDepositModal = openGoalDepositModal;
+window.closeGoalDepositModal = closeGoalDepositModal;
+window.saveGoalDepositForm = saveGoalDepositForm;
+window.deleteSavingsGoal = deleteSavingsGoal;
+window.formatRupiah = formatRupiah;
+
