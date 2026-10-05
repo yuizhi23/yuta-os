@@ -6402,6 +6402,350 @@ body.atmo-midnight {
   cursor: pointer;
 }
 
+/* ==================== MOBILE OPTIMIZATIONS FOR YUTA WALLET ==================== */
+@media (max-width: 768px) {
+  #panel-finance {
+    padding: 10px 8px !important;
+  }
+
+  /* 1. Header & Breadcrumb */
+  .bento-top-navbar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+    padding: 12px 14px !important;
+  }
+
+  .bento-nav-actions {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 6px !important;
+    width: 100% !important;
+  }
+
+  .bento-pill-btn {
+    padding: 7px 6px !important;
+    font-size: 0.72rem !important;
+    justify-content: center !important;
+    border-radius: 12px !important;
+    white-space: nowrap !important;
+  }
+
+  .bento-pill-btn span:first-child {
+    font-size: 0.75rem !important;
+  }
+
+  /* 2. 3D Virtual Cards Showcase */
+  .wallet-cards-showcase {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .vcard-card-box {
+    border-radius: 16px !important;
+    aspect-ratio: 16 / 9 !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12) !important;
+  }
+
+  .vcard-meta-glass {
+    padding: 8px 12px !important;
+    gap: 2px !important;
+  }
+
+  .vcard-owner-badge {
+    font-size: 0.84rem !important;
+  }
+
+  .vcard-sum {
+    font-size: 1.05rem !important;
+  }
+
+  .vcard-sub-stats {
+    font-size: 0.68rem !important;
+  }
+
+  /* 3. Master Bento Dual Grid */
+  .wallet-bento-grid.wallet-bento-dual {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .bento-card.bento-wallet-master {
+    padding: 14px 14px !important;
+    min-height: auto !important;
+    border-radius: 18px !important;
+  }
+
+  .bento-card-header {
+    margin-bottom: 6px !important;
+  }
+
+  .bento-badge-chip {
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 0.95rem !important;
+  }
+
+  .bento-main-amount {
+    font-size: 1.45rem !important;
+    margin: 2px 0 6px !important;
+  }
+
+  .wallet-mini-stats-grid {
+    gap: 8px !important;
+    margin: 6px 0 4px !important;
+  }
+
+  .mini-stat-box {
+    padding: 6px 8px !important;
+    border-radius: 10px !important;
+  }
+
+  .mini-stat-label {
+    font-size: 0.6rem !important;
+  }
+
+  .mini-stat-val {
+    font-size: 0.8rem !important;
+  }
+
+  .bento-progress-track {
+    height: 5px !important;
+    margin: 4px 0 !important;
+  }
+
+  .bento-card-footer {
+    font-size: 0.7rem !important;
+  }
+
+  /* 4. Quick Log Entry Box */
+  .bento-quick-box {
+    padding: 14px 12px !important;
+    border-radius: 18px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .bento-quick-top {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .bento-section-heading {
+    font-size: 0.92rem !important;
+  }
+
+  .bento-section-sub {
+    font-size: 0.68rem !important;
+  }
+
+  .bento-inputs-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .bento-styled-input, .bento-styled-select {
+    padding: 7px 10px !important;
+    font-size: 0.78rem !important;
+    border-radius: 10px !important;
+  }
+
+  .bento-input-prefix-wrap .bento-styled-input {
+    padding-left: 32px !important;
+  }
+
+  .bento-prefix {
+    left: 8px !important;
+    font-size: 0.74rem !important;
+  }
+
+  .bento-note-btn-row {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+
+  .bento-save-btn {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 8px 16px !important;
+    font-size: 0.8rem !important;
+    border-radius: 10px !important;
+  }
+
+  .bento-chips-row {
+    gap: 4px !important;
+  }
+
+  .bento-chip {
+    padding: 4px 8px !important;
+    font-size: 0.68rem !important;
+  }
+
+  /* 5. Spending by Category */
+  .wallet-category-breakdown-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .cat-tile-card.cat-tile-clean {
+    padding: 10px 10px !important;
+    border-radius: 14px !important;
+    gap: 6px !important;
+  }
+
+  .cat-clean-icon-box {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 1.1rem !important;
+    border-radius: 9px !important;
+  }
+
+  .cat-clean-pct {
+    font-size: 0.65rem !important;
+    padding: 2px 6px !important;
+  }
+
+  .cat-clean-title {
+    font-size: 0.68rem !important;
+  }
+
+  .cat-clean-amount {
+    font-size: 0.88rem !important;
+  }
+
+  /* 6. Savings Goals & Motivation */
+  .savings-motivation-card {
+    padding: 10px 12px !important;
+    gap: 10px !important;
+    border-radius: 14px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .motivation-icon-wrap {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 10px !important;
+  }
+
+  .motivation-emoji {
+    font-size: 1.15rem !important;
+  }
+
+  .motivation-quote {
+    font-size: 0.76rem !important;
+  }
+
+  .motivation-refresh-btn {
+    padding: 4px 8px !important;
+    font-size: 0.65rem !important;
+  }
+
+  .individual-goals-wrapper {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .person-goals-card-box {
+    padding: 12px 12px !important;
+    border-radius: 16px !important;
+    gap: 10px !important;
+  }
+
+  .person-goals-title {
+    font-size: 0.88rem !important;
+  }
+
+  .goal-card {
+    padding: 10px 12px !important;
+    border-radius: 14px !important;
+    gap: 8px !important;
+  }
+
+  .goal-title {
+    font-size: 0.84rem !important;
+  }
+
+  .goal-amounts {
+    font-size: 0.72rem !important;
+  }
+
+  /* 7. Transaction Feed */
+  .bento-feed-box {
+    padding: 14px 12px !important;
+    border-radius: 18px !important;
+    margin-top: 14px !important;
+  }
+
+  .bento-feed-top {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .bento-toolbar-right {
+    width: 100% !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+  }
+
+  .bento-pill-group {
+    display: flex !important;
+    width: 100% !important;
+    justify-content: space-between !important;
+  }
+
+  .wallet-pill {
+    flex: 1 !important;
+    text-align: center !important;
+    padding: 4px 6px !important;
+    font-size: 0.7rem !important;
+  }
+
+  .bento-search-wrap, .bento-search-input {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .trans-item-card {
+    padding: 10px 10px !important;
+    gap: 10px !important;
+    border-radius: 12px !important;
+  }
+
+  .trans-icon-bubble {
+    width: 34px !important;
+    height: 34px !important;
+    font-size: 1.15rem !important;
+    border-radius: 10px !important;
+  }
+
+  .trans-title {
+    font-size: 0.82rem !important;
+  }
+
+  .trans-meta-line {
+    font-size: 0.65rem !important;
+  }
+
+  .trans-amount {
+    font-size: 0.88rem !important;
+  }
+
+  .trans-btn-icon {
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 0.72rem !important;
+  }
+}
+
 
 
 
