@@ -1484,7 +1484,10 @@
         </div>
 
         <div class="sync-form-group">
-          <label for="syncDbUrl"><strong>Firebase Database URL / Project Config:</strong></label>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+            <label for="syncDbUrl" style="margin-bottom:0;"><strong>Firebase Database URL:</strong></label>
+            <button type="button" onclick="fillOfficialDatabaseUrl()" style="background: rgba(2, 132, 199, 0.18); border: 1px solid #0284c7; color: #0284c7; border-radius: 6px; padding: 2px 8px; font-size: 0.72rem; cursor: pointer; font-weight: 700; transition: all 0.2s;">⚡ Pasang URL Resmi</button>
+          </div>
           <input type="text" id="syncDbUrl" class="retro-input" value="https://yuta-os-f9a95-default-rtdb.asia-southeast1.firebasedatabase.app" placeholder="https://yuta-os-f9a95-default-rtdb.asia-southeast1.firebasedatabase.app" />
           <small class="sync-help-text">🔥 URL Realtime Database resmi YuTa OS (Gratis & Real-Time Sync).</small>
         </div>
@@ -1886,6 +1889,6 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 
-  <script src="app.js?v=20261005_v72"></script>
+  <script src="app.js?v=20261005_v73"></script>
 </body>
 </html>

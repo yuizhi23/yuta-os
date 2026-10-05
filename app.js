@@ -3336,12 +3336,10 @@ function initCloudSync() {
   const config = getSyncConfig();
   updateSyncUIStatus(false, 'Menghubungkan ke Cloud...');
 
-  if (!config.dbUrl || !config.roomId) {
-    updateSyncUIStatus(false, 'Penyimpanan Lokal (Offline)');
-    return;
-  }
+  const dbUrl = config.dbUrl || OFFICIAL_RTDB_URL;
+  const roomId = config.roomId || 'yuta-space-2026';
 
-  connectFirebaseDatabase(config.dbUrl, config.roomId);
+  connectFirebaseDatabase(dbUrl, roomId);
 }
 
 function connectFirebaseDatabase(dbUrl, roomId) {
@@ -3554,6 +3552,15 @@ function openCloudSyncModal() {
 
   modal.classList.add('open');
   playSound('bubble');
+}
+
+function fillOfficialDatabaseUrl() {
+  const dbUrlInput = document.getElementById('syncDbUrl');
+  if (dbUrlInput) {
+    dbUrlInput.value = OFFICIAL_RTDB_URL;
+  }
+  saveAndConnectCloudSync();
+  showToast('⚡ URL Database Resmi dipasang & disambungkan!');
 }
 
 function saveAndConnectCloudSync() {
