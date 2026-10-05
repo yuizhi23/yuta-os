@@ -3330,6 +3330,8 @@ function getSyncConfig() {
   };
 }
 
+let isCloudConnected = false;
+
 function initCloudSync() {
   const config = getSyncConfig();
   updateSyncUIStatus(false, 'Menghubungkan ke Cloud...');
@@ -3344,13 +3346,14 @@ function initCloudSync() {
 
 function connectFirebaseDatabase(dbUrl, roomId) {
   if (typeof firebase === 'undefined') {
+    isCloudConnected = false;
     updateSyncUIStatus(false, 'SDK Firebase Tidak Termuat');
     return;
   }
 
   try {
     // Sanitize DB URL
-    let cleanUrl = dbUrl.trim();
+    let cleanUrl = (dbUrl || OFFICIAL_RTDB_URL).trim();
     if (!cleanUrl.startsWith('http')) cleanUrl = 'https://' + cleanUrl;
     if (cleanUrl.endsWith('/')) cleanUrl = cleanUrl.slice(0, -1);
 
@@ -3376,6 +3379,7 @@ function connectFirebaseDatabase(dbUrl, roomId) {
     // Listen to real-time value changes
     cloudSyncListener = roomRef;
     roomRef.on('value', (snapshot) => {
+      isCloudConnected = true;
       const remoteData = snapshot.val();
       if (!remoteData) {
         updateSyncUIStatus(true, `Live Sync Aktif: "${cleanRoom}" 🟢 (Kamar Baru)`);
@@ -3390,20 +3394,25 @@ function connectFirebaseDatabase(dbUrl, roomId) {
       applyRemoteData(remoteData);
     }, (err) => {
       console.warn('Firebase Sync Error:', err);
+      isCloudConnected = false;
       updateSyncUIStatus(false, 'Gagal Menyambung: ' + (err.message || 'Izin ditolak'));
     });
 
     // Test connection ping
     firebaseDb.ref('.info/connected').on('value', (snap) => {
       if (snap.val() === true) {
+        isCloudConnected = true;
         updateSyncUIStatus(true, `Live Sync Aktif: "${cleanRoom}" 🟢`);
       } else {
-        updateSyncUIStatus(false, 'Mencoba Menyambung Ulang... 🟡');
+        if (!isCloudConnected) {
+          updateSyncUIStatus(false, 'Mencoba Menyambung Ulang... 🟡');
+        }
       }
     });
 
   } catch (err) {
     console.error('Failed to init Firebase:', err);
+    isCloudConnected = false;
     updateSyncUIStatus(false, 'Error: ' + err.message);
   }
 }
@@ -3534,7 +3543,14 @@ function openCloudSyncModal() {
   const dbUrlInput = document.getElementById('syncDbUrl');
 
   if (roomInput) roomInput.value = config.roomId || 'yuta-space-2026';
-  if (dbUrlInput) dbUrlInput.value = config.dbUrl || '';
+  if (dbUrlInput) dbUrlInput.value = config.dbUrl || OFFICIAL_RTDB_URL;
+
+  // Refresh status card immediately based on current live connection
+  if (isCloudConnected) {
+    updateSyncUIStatus(true, `Live Sync Aktif: "${config.roomId || 'yuta-space-2026'}" 🟢`);
+  } else {
+    updateSyncUIStatus(false, 'Data tersimpan di perangkat ini. Klik "Sambungkan Live Sync" untuk menghubungkan.');
+  }
 
   modal.classList.add('open');
   playSound('bubble');
@@ -3545,21 +3561,17 @@ function saveAndConnectCloudSync() {
   const dbUrlInput = document.getElementById('syncDbUrl');
 
   const roomId = roomInput ? roomInput.value.trim() : 'yuta-space-2026';
-  const dbUrl = dbUrlInput ? dbUrlInput.value.trim() : '';
-
-  if (!dbUrl) {
-    showToast('⚠️ Masukkan Firebase Database URL terlebih dahulu!');
-    return;
-  }
+  const dbUrl = dbUrlInput ? dbUrlInput.value.trim() : OFFICIAL_RTDB_URL;
 
   const config = {
     enabled: true,
     roomId: roomId || 'yuta-space-2026',
-    dbUrl: dbUrl
+    dbUrl: dbUrl || OFFICIAL_RTDB_URL
   };
 
   setStorage(STORAGE_KEY_SYNC_CONFIG, config);
-  connectFirebaseDatabase(dbUrl, config.roomId);
+  connectFirebaseDatabase(config.dbUrl, config.roomId);
+  playSound('chime');
   showToast('🔗 Menyambungkan ke Cloud Database...');
 }
 
