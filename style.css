@@ -6744,8 +6744,43 @@ body.atmo-midnight {
     height: 24px !important;
     font-size: 0.72rem !important;
   }
+
+  /* ==================== GLOBAL MOBILE PERFORMANCE & ANTI-LAG ==================== */
+  #waterRippleCanvas,
+  #cursorAeroGlow,
+  #bubblesContainer,
+  #fishContainer,
+  .swimming-fish-container,
+  .crt-overlay {
+    display: none !important;
+  }
+
+  .glass-card,
+  .aero-window,
+  .bento-card,
+  .bento-top-navbar,
+  .bento-quick-box,
+  .vcard-card-box,
+  .todo-column-card,
+  .reminder-category-card,
+  .memo-glass-card,
+  .modal-window {
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  body,
+  .desktop-workspace,
+  .window-content-body,
+  .tab-panel {
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior-y: contain !important;
+    transform: translateZ(0);
+  }
+
+  button, input, select, textarea, .tab-btn, .bento-pill-btn, .retro-btn-action {
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: transparent !important;
+  }
 }
-
-
-
-

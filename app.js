@@ -520,11 +520,14 @@ function startAmbientSynth() {
 // ==================== INTERACTIVE WATER RIPPLES SIMULATION ====================
 let rippleCanvas, rippleCtx;
 const ripples = [];
+let isRippling = false;
 
 function initWaterRipples() {
+  if (window.innerWidth <= 768 || 'ontouchstart' in window) return;
+
   rippleCanvas = document.getElementById('waterRippleCanvas');
   if (!rippleCanvas) return;
-  rippleCtx = rippleCanvas.getContext('2d');
+  rippleCtx = rippleCanvas.getContext('2d', { alpha: true });
 
   function resize() {
     rippleCanvas.width = window.innerWidth;
@@ -535,47 +538,55 @@ function initWaterRipples() {
 
   // Trigger ripple anywhere clicked
   window.addEventListener('click', (e) => {
-    // Exclude clicking on text inputs or select buttons
-    if (['INPUT', 'TEXTAREA', 'BUTTON'].includes(e.target.tagName)) return;
+    if (['INPUT', 'TEXTAREA', 'BUTTON', 'SELECT'].includes(e.target.tagName)) return;
     addRipple(e.clientX, e.clientY);
   });
+}
 
-  // Animation frame loop
-  function animateRipples() {
-    rippleCtx.clearRect(0, 0, rippleCanvas.width, rippleCanvas.height);
-
-    for (let i = ripples.length - 1; i >= 0; i--) {
-      const r = ripples[i];
-      r.radius += r.speed;
-      r.alpha -= 0.015;
-
-      if (r.alpha <= 0) {
-        ripples.splice(i, 1);
-        continue;
-      }
-
-      // Outer wave ring
-      rippleCtx.beginPath();
-      rippleCtx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
-      rippleCtx.strokeStyle = `rgba(255, 255, 255, ${r.alpha * 0.8})`;
-      rippleCtx.lineWidth = 2.5;
-      rippleCtx.stroke();
-
-      // Cyan specular refraction ring
-      rippleCtx.beginPath();
-      rippleCtx.arc(r.x, r.y, Math.max(0, r.radius - 8), 0, Math.PI * 2);
-      rippleCtx.strokeStyle = `rgba(56, 189, 248, ${r.alpha * 0.45})`;
-      rippleCtx.lineWidth = 1.5;
-      rippleCtx.stroke();
-    }
-
-    requestAnimationFrame(animateRipples);
+function animateRipples() {
+  if (!rippleCtx || ripples.length === 0) {
+    if (rippleCtx && rippleCanvas) rippleCtx.clearRect(0, 0, rippleCanvas.width, rippleCanvas.height);
+    isRippling = false;
+    return;
   }
 
-  animateRipples();
+  rippleCtx.clearRect(0, 0, rippleCanvas.width, rippleCanvas.height);
+
+  for (let i = ripples.length - 1; i >= 0; i--) {
+    const r = ripples[i];
+    r.radius += r.speed;
+    r.alpha -= 0.02;
+
+    if (r.alpha <= 0) {
+      ripples.splice(i, 1);
+      continue;
+    }
+
+    // Outer wave ring
+    rippleCtx.beginPath();
+    rippleCtx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
+    rippleCtx.strokeStyle = `rgba(255, 255, 255, ${r.alpha * 0.8})`;
+    rippleCtx.lineWidth = 2;
+    rippleCtx.stroke();
+
+    // Cyan specular refraction ring
+    rippleCtx.beginPath();
+    rippleCtx.arc(r.x, r.y, Math.max(0, r.radius - 8), 0, Math.PI * 2);
+    rippleCtx.strokeStyle = `rgba(56, 189, 248, ${r.alpha * 0.45})`;
+    rippleCtx.lineWidth = 1.2;
+    rippleCtx.stroke();
+  }
+
+  if (ripples.length > 0) {
+    requestAnimationFrame(animateRipples);
+  } else {
+    isRippling = false;
+    if (rippleCtx && rippleCanvas) rippleCtx.clearRect(0, 0, rippleCanvas.width, rippleCanvas.height);
+  }
 }
 
 function addRipple(x, y) {
+  if (window.innerWidth <= 768 || 'ontouchstart' in window) return;
   ripples.push({
     x,
     y,
@@ -583,10 +594,20 @@ function addRipple(x, y) {
     speed: 3.5,
     alpha: 0.65
   });
+  if (!isRippling) {
+    isRippling = true;
+    requestAnimationFrame(animateRipples);
+  }
 }
 
 // ==================== LUMINOUS CURSOR TRACKING ====================
 function initCursorGlow() {
+  if (window.innerWidth <= 768 || 'ontouchstart' in window) {
+    const glow = document.getElementById('cursorAeroGlow');
+    if (glow) glow.style.display = 'none';
+    return;
+  }
+
   const glow = document.getElementById('cursorAeroGlow');
   if (!glow) return;
 
@@ -597,15 +618,16 @@ function initCursorGlow() {
 
     // Spawn subtle bubble if moved fast
     const dist = Math.hypot(e.clientX - lastX, e.clientY - lastY);
-    if (dist > 45 && Math.random() < 0.18) {
+    if (dist > 60 && Math.random() < 0.12) {
       spawnMiniBubbleAt(e.clientX, e.clientY);
       lastX = e.clientX;
       lastY = e.clientY;
     }
-  });
+  }, { passive: true });
 }
 
 function spawnMiniBubbleAt(x, y) {
+  if (window.innerWidth <= 768) return;
   const container = document.getElementById('bubblesContainer');
   if (!container) return;
 
