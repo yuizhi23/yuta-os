@@ -15,7 +15,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
-  <link rel="stylesheet" href="style.css?v=20261005_v72" />
+  <link rel="stylesheet" href="style.css?v=20261005_v74" />
 </head>
 <body class="wallpaper-aero">
   <!-- Interactive Water Ripple Canvas -->
@@ -283,6 +283,7 @@
         <span class="menu-item" onclick="spawnFloatingBubbleSwarm()"><u>B</u>ubbles</span>
         <span class="menu-item" onclick="switchTab('lovenotes')"><u>F</u>avorites</span>
         <span class="menu-item" onclick="toggleMediaPlayer()"><u>T</u>ools</span>
+        <span class="menu-item" onclick="openCloudSyncModal()" style="font-weight: bold; color: #0369a1;">☁️ <u>C</u>loud Sync</span>
         <span class="menu-item" onclick="openCatDialog()"><u>H</u>elp</span>
         <div class="menubar-time" id="menubarClock">00:00:00</div>
       </div>
@@ -312,6 +313,9 @@
         </button>
         <button class="tab-btn" data-tab="cats" id="tab-cats" role="tab" onclick="switchTab('cats')">
           Cat Sanctuary
+        </button>
+        <button class="tab-btn sync-tab-btn" id="tab-sync" role="tab" onclick="openCloudSyncModal()" style="color: #0369a1; font-weight: 700;">
+          ☁️ Live Sync
         </button>
       </nav>
 
@@ -1204,6 +1208,7 @@
 
     <!-- System Tray -->
     <div class="system-tray">
+      <span class="tray-icon" onclick="openCloudSyncModal()" title="Live Cloud Sync Yuki ↔ Nata" style="font-size: 1.05rem; cursor: pointer;">☁️</span>
       <span class="tray-icon" onclick="toggleMediaPlayer()" title="Media Player">💿</span>
       <span class="tray-icon" onclick="toggleCRT()" title="Toggle Scanlines">⚡</span>
       <span class="tray-icon" onclick="toggleWallpaper()" title="Switch Wallpaper">🖼️</span>
@@ -1889,6 +1894,6 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 
-  <script src="app.js?v=20261005_v73"></script>
+  <script src="app.js?v=20261005_v74"></script>
 </body>
 </html>
