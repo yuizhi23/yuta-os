@@ -523,7 +523,7 @@ const ripples = [];
 let isRippling = false;
 
 function initWaterRipples() {
-  if (window.innerWidth <= 768 || 'ontouchstart' in window) return;
+  if (window.innerWidth <= 1024 || 'ontouchstart' in window) return;
 
   rippleCanvas = document.getElementById('waterRippleCanvas');
   if (!rippleCanvas) return;
@@ -534,13 +534,13 @@ function initWaterRipples() {
     rippleCanvas.height = window.innerHeight;
   }
   resize();
-  window.addEventListener('resize', resize);
+  window.addEventListener('resize', resize, { passive: true });
 
   // Trigger ripple anywhere clicked
   window.addEventListener('click', (e) => {
     if (['INPUT', 'TEXTAREA', 'BUTTON', 'SELECT'].includes(e.target.tagName)) return;
     addRipple(e.clientX, e.clientY);
-  });
+  }, { passive: true });
 }
 
 function animateRipples() {
@@ -555,7 +555,7 @@ function animateRipples() {
   for (let i = ripples.length - 1; i >= 0; i--) {
     const r = ripples[i];
     r.radius += r.speed;
-    r.alpha -= 0.02;
+    r.alpha -= 0.03;
 
     if (r.alpha <= 0) {
       ripples.splice(i, 1);
@@ -565,15 +565,8 @@ function animateRipples() {
     // Outer wave ring
     rippleCtx.beginPath();
     rippleCtx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
-    rippleCtx.strokeStyle = `rgba(255, 255, 255, ${r.alpha * 0.8})`;
-    rippleCtx.lineWidth = 2;
-    rippleCtx.stroke();
-
-    // Cyan specular refraction ring
-    rippleCtx.beginPath();
-    rippleCtx.arc(r.x, r.y, Math.max(0, r.radius - 8), 0, Math.PI * 2);
-    rippleCtx.strokeStyle = `rgba(56, 189, 248, ${r.alpha * 0.45})`;
-    rippleCtx.lineWidth = 1.2;
+    rippleCtx.strokeStyle = `rgba(255, 255, 255, ${r.alpha * 0.7})`;
+    rippleCtx.lineWidth = 1.8;
     rippleCtx.stroke();
   }
 
@@ -586,13 +579,14 @@ function animateRipples() {
 }
 
 function addRipple(x, y) {
-  if (window.innerWidth <= 768 || 'ontouchstart' in window) return;
+  if (window.innerWidth <= 1024 || 'ontouchstart' in window) return;
+  if (ripples.length >= 2) return;
   ripples.push({
     x,
     y,
     radius: 4,
-    speed: 3.5,
-    alpha: 0.65
+    speed: 4,
+    alpha: 0.5
   });
   if (!isRippling) {
     isRippling = true;
@@ -602,55 +596,26 @@ function addRipple(x, y) {
 
 // ==================== LUMINOUS CURSOR TRACKING ====================
 function initCursorGlow() {
-  if (window.innerWidth <= 768 || 'ontouchstart' in window) {
-    const glow = document.getElementById('cursorAeroGlow');
-    if (glow) glow.style.display = 'none';
-    return;
-  }
-
   const glow = document.getElementById('cursorAeroGlow');
   if (!glow) return;
 
-  let lastX = 0, lastY = 0;
+  if (window.innerWidth <= 1024 || 'ontouchstart' in window) {
+    glow.style.display = 'none';
+    return;
+  }
 
+  let rafId = null;
   window.addEventListener('mousemove', (e) => {
-    glow.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
-
-    // Spawn subtle bubble if moved fast
-    const dist = Math.hypot(e.clientX - lastX, e.clientY - lastY);
-    if (dist > 60 && Math.random() < 0.12) {
-      spawnMiniBubbleAt(e.clientX, e.clientY);
-      lastX = e.clientX;
-      lastY = e.clientY;
-    }
+    if (rafId) return;
+    rafId = requestAnimationFrame(() => {
+      glow.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+      rafId = null;
+    });
   }, { passive: true });
 }
 
 function spawnMiniBubbleAt(x, y) {
-  if (window.innerWidth <= 768) return;
-  const container = document.getElementById('bubblesContainer');
-  if (!container) return;
-
-  const b = document.createElement('div');
-  b.className = 'bubble';
-  const size = Math.floor(Math.random() * 18) + 12;
-  b.style.width = `${size}px`;
-  b.style.height = `${size}px`;
-  b.style.left = `${x - size / 2}px`;
-  b.style.top = `${y - size / 2}px`;
-  b.style.animationDuration = '4s';
-
-  b.addEventListener('click', (e) => {
-    e.stopPropagation();
-    playSound('bubble');
-    spawnBubbleBurstAt(x, y);
-    b.remove();
-  });
-
-  container.appendChild(b);
-  setTimeout(() => {
-    if (b.parentNode) b.remove();
-  }, 4000);
+  // Disabled continuous bubble DOM generation on mousemove to guarantee zero lag
 }
 
 // ==================== BUBBLE PARTICLE BURST ====================
@@ -772,17 +737,24 @@ function initFishPet() {
   const allFishes = document.querySelectorAll('.swimming-goldfish');
   if (allFishes.length === 0) return;
 
-  if (window.innerWidth <= 768) {
+  if (window.innerWidth <= 1024 || 'ontouchstart' in window) {
     allFishes.forEach(f => { f.style.display = 'none'; });
     if (container) container.style.display = 'none';
     return;
   }
 
+  // Keep Momo & Kiko active on desktop, hide others to ensure solid 60fps
   allFishes.forEach((fish, idx) => {
+    if (idx >= 2) {
+      fish.style.display = 'none';
+      return;
+    }
     fish.addEventListener('click', (e) => {
       petOrFeedFish(e, idx + 1);
     });
   });
+
+  const activeFishes = Array.from(allFishes).slice(0, 2);
 
   if (container) {
     container.addEventListener('click', (e) => {
@@ -790,17 +762,17 @@ function initFishPet() {
     });
   }
 
-  // Random peaceful swimming motion every 6-8 seconds
+  // Gentle swimming motion every 9s (no rapid loops)
   setInterval(() => {
-    allFishes.forEach((fish, idx) => {
-      const tx = Math.floor(Math.random() * 75) + 8;
-      const ty = Math.floor(Math.random() * 65) + 12;
+    activeFishes.forEach((fish) => {
+      const tx = Math.floor(Math.random() * 70) + 12;
+      const ty = Math.floor(Math.random() * 55) + 15;
       const curX = parseFloat(fish.style.left) || 20;
       fish.style.left = `${tx}%`;
       fish.style.top = `${ty}%`;
       fish.style.transform = tx > curX ? 'scaleX(-1)' : 'scaleX(1)';
     });
-  }, 7500);
+  }, 9000);
 }
 
 function feedFishAt(clientX, clientY) {
@@ -948,36 +920,38 @@ function escapeHtml(str) {
 // ==================== BUBBLES GENERATOR ====================
 function initBubbles() {
   const container = document.getElementById('bubblesContainer');
-  if (!container || window.innerWidth <= 768) return;
+  if (!container || window.innerWidth <= 1024 || 'ontouchstart' in window) {
+    if (container) container.style.display = 'none';
+    return;
+  }
 
-  function spawnBubble() {
+  // Create 5 lightweight persistent bubbles once - NO infinite setInterval to eliminate lag!
+  container.innerHTML = '';
+  const bubbleSizes = [36, 26, 42, 30, 22];
+  const bubbleLefts = [14, 32, 56, 75, 88];
+  const bubbleDurs = [14, 18, 13, 16, 20];
+  const bubbleDelays = [0, 4, 2, 7, 5];
+
+  for (let i = 0; i < 5; i++) {
     const b = document.createElement('div');
     b.className = 'bubble';
-    const size = Math.floor(Math.random() * 45) + 20;
-    const left = Math.random() * 100;
-    const dur = Math.random() * 8 + 8;
-
-    b.style.width = `${size}px`;
-    b.style.height = `${size}px`;
-    b.style.left = `${left}%`;
-    b.style.animationDuration = `${dur}s`;
+    b.style.width = `${bubbleSizes[i]}px`;
+    b.style.height = `${bubbleSizes[i]}px`;
+    b.style.left = `${bubbleLefts[i]}%`;
+    b.style.animationDuration = `${bubbleDurs[i]}s`;
+    b.style.animationDelay = `${bubbleDelays[i]}s`;
 
     b.addEventListener('click', (e) => {
       e.stopPropagation();
       playSound('bubble');
       const rect = b.getBoundingClientRect();
-      spawnBubbleBurstAt(rect.left + size / 2, rect.top + size / 2);
-      b.remove();
+      spawnBubbleBurstAt(rect.left + bubbleSizes[i] / 2, rect.top + bubbleSizes[i] / 2);
+      b.style.opacity = '0';
+      setTimeout(() => { b.style.opacity = ''; }, 3500);
     });
 
     container.appendChild(b);
-    setTimeout(() => {
-      if (b.parentNode) b.remove();
-    }, dur * 1000);
   }
-
-  for (let i = 0; i < 15; i++) spawnBubble();
-  setInterval(spawnBubble, 1500);
 }
 
 // ==================== STICKERS INTERACTION & DRAG ====================

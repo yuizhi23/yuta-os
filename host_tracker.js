@@ -19,7 +19,7 @@
   let spenderSearch = '';
   let spenderSort = 'koin_desc'; // 'koin_desc' | 'hadiah_desc' | 'tier_desc' | 'name_asc' | 'uncontacted_first'
   let spenderPage = 1;
-  const SPENDER_PAGE_SIZE = 35; // Lightweight pagination to prevent any lag
+  const SPENDER_PAGE_SIZE = 25; // Lightweight pagination to prevent any lag
   let taskFilter = 'all'; // 'all' | 'pending' | 'completed'
   let taskSearch = '';
   let selectedSpenderForChat = null;
@@ -350,148 +350,158 @@
       return;
     }
 
-    // Render Table Rows (for Desktop & Tablet) - Only 35 rows for lightning-fast rendering!
+    const isMobileView = window.innerWidth <= 768;
+
+    // Render Table Rows (for Desktop & Tablet) - Only 25 rows for instant 60fps rendering!
     if (tbody) {
-      tbody.innerHTML = paginatedList.map((s, idx) => {
-        const index = startIndex + idx;
+      if (!isMobileView) {
+        tbody.innerHTML = paginatedList.map((s, idx) => {
+          const index = startIndex + idx;
 
-        // Badge label
-        let labelBadge = '';
-        const lbl = (s.labelUtama || '').toLowerCase();
-        if (lbl.includes('whale')) {
-          labelBadge = `<span class="badge-spender badge-whale" title="Spender Koin Teratas">🐋 Whale</span>`;
-        } else if (lbl.includes('high')) {
-          labelBadge = `<span class="badge-spender badge-high" title="High Spender">⭐ High</span>`;
-        } else if (lbl.includes('supporter')) {
-          labelBadge = `<span class="badge-spender badge-supporter" title="Room Supporter">💖 Supporter</span>`;
-        } else {
-          labelBadge = `<span class="badge-spender badge-general">${s.labelUtama || 'Member'}</span>`;
-        }
+          // Badge label
+          let labelBadge = '';
+          const lbl = (s.labelUtama || '').toLowerCase();
+          if (lbl.includes('whale')) {
+            labelBadge = `<span class="badge-spender badge-whale" title="Spender Koin Teratas">🐋 Whale</span>`;
+          } else if (lbl.includes('high')) {
+            labelBadge = `<span class="badge-spender badge-high" title="High Spender">⭐ High</span>`;
+          } else if (lbl.includes('supporter')) {
+            labelBadge = `<span class="badge-spender badge-supporter" title="Room Supporter">💖 Supporter</span>`;
+          } else {
+            labelBadge = `<span class="badge-spender badge-general">${s.labelUtama || 'Member'}</span>`;
+          }
 
-        // Tier badge
-        const tierBadge = s.tier ? `<span class="badge-tier">Lv.${s.tier}</span>` : '';
+          // Tier badge
+          const tierBadge = s.tier ? `<span class="badge-tier">Lv.${s.tier}</span>` : '';
 
-        // Chat status button
-        const chatBtn = s.sudahChat
-          ? `<button class="host-status-btn status-done" onclick="window.HostTracker.toggleChat(${s.id})" title="Klik untuk ubah jadi Belum">✅ Sudah Chat</button>`
-          : `<button class="host-status-btn status-pending" onclick="window.HostTracker.toggleChat(${s.id})" title="Klik untuk tandai Sudah Chat">⏳ Belum Chat</button>`;
+          // Chat status button
+          const chatBtn = s.sudahChat
+            ? `<button class="host-status-btn status-done" onclick="window.HostTracker.toggleChat(${s.id})" title="Klik untuk ubah jadi Belum">✅ Sudah Chat</button>`
+            : `<button class="host-status-btn status-pending" onclick="window.HostTracker.toggleChat(${s.id})" title="Klik untuk tandai Sudah Chat">⏳ Belum Chat</button>`;
 
-        // Replied status button
-        const replyBtn = s.sudahDibalas
-          ? `<button class="host-status-btn status-reply-done" onclick="window.HostTracker.toggleReply(${s.id})" title="Klik untuk ubah">💌 Dibalas</button>`
-          : `<button class="host-status-btn status-reply-none" onclick="window.HostTracker.toggleReply(${s.id})" title="Klik untuk tandai Dibalas">⏳ Belum</button>`;
+          // Replied status button
+          const replyBtn = s.sudahDibalas
+            ? `<button class="host-status-btn status-reply-done" onclick="window.HostTracker.toggleReply(${s.id})" title="Klik untuk ubah">💌 Dibalas</button>`
+            : `<button class="host-status-btn status-reply-none" onclick="window.HostTracker.toggleReply(${s.id})" title="Klik untuk tandai Dibalas">⏳ Belum</button>`;
 
-        return `
-          <tr class="spender-row ${s.sudahChat ? 'is-contacted' : 'is-uncontacted'}" id="spender-row-${s.id}">
-            <td class="col-num">${index + 1}</td>
-            <td class="col-account">
-              <div class="spender-account-info" onclick="window.HostTracker.openTikTokById(${s.id})" title="Klik untuk Langsung Buka / Cari Akun TikTok">
-                <div class="spender-name-row">
-                  <span class="spender-display-name link-tiktok">${escapeHtml(s.name)}</span>
-                  <button type="button" class="tiktok-badge-pill" onclick="event.stopPropagation(); window.HostTracker.openTikTokById(${s.id})" title="Buka Profil / Cari Akun TikTok">🎵 TikTok</button>
+          return `
+            <tr class="spender-row ${s.sudahChat ? 'is-contacted' : 'is-uncontacted'}" id="spender-row-${s.id}">
+              <td class="col-num">${index + 1}</td>
+              <td class="col-account">
+                <div class="spender-account-info" onclick="window.HostTracker.openTikTokById(${s.id})" title="Klik untuk Langsung Buka / Cari Akun TikTok">
+                  <div class="spender-name-row">
+                    <span class="spender-display-name link-tiktok">${escapeHtml(s.name)}</span>
+                    <button type="button" class="tiktok-badge-pill" onclick="event.stopPropagation(); window.HostTracker.openTikTokById(${s.id})" title="Buka Profil / Cari Akun TikTok">🎵 TikTok</button>
+                  </div>
+                  <div class="spender-username-row">
+                    <span class="spender-uname" onclick="event.stopPropagation(); window.HostTracker.openTikTokById(${s.id})">${escapeHtml(s.username || '-')}</span>
+                    <button type="button" class="mini-copy-btn" onclick="event.stopPropagation(); window.HostTracker.copyUsernameById(${s.id})" title="Salin @username">📋</button>
+                  </div>
                 </div>
-                <div class="spender-username-row">
-                  <span class="spender-uname" onclick="event.stopPropagation(); window.HostTracker.openTikTokById(${s.id})">${escapeHtml(s.username || '-')}</span>
-                  <button type="button" class="mini-copy-btn" onclick="event.stopPropagation(); window.HostTracker.copyUsernameById(${s.id})" title="Salin @username">📋</button>
+              </td>
+              <td class="col-badge">
+                <div class="badge-wrap">
+                  ${labelBadge}
+                  ${tierBadge}
                 </div>
-              </div>
-            </td>
-            <td class="col-badge">
-              <div class="badge-wrap">
-                ${labelBadge}
-                ${tierBadge}
-              </div>
-            </td>
-            <td class="col-koin">
-              <div class="koin-info">
-                <span class="koin-val">🪙 ${formatNumber(s.koin)}</span>
-                <span class="hadiah-val">🎁 ${formatNumber(s.hadiah)} gift</span>
-              </div>
-            </td>
-            <td class="col-notes">
-              <div class="notes-text" title="${escapeHtml(s.catatan || s.labelLain || '')}">
-                ${escapeHtml(s.catatan || s.labelLain || '-')}
-              </div>
-            </td>
-            <td class="col-chat">${chatBtn}</td>
-            <td class="col-reply">${replyBtn}</td>
-            <td class="col-actions">
-              <div class="host-action-btns">
-                <button type="button" class="tiktok-launch-btn" onclick="window.HostTracker.openTikTokById(${s.id})" title="Langsung Buka / Cari Akun di TikTok">
-                  🎵 Cari TikTok
-                </button>
-                <button type="button" class="host-action-icon-btn chat-template-btn" onclick="window.HostTracker.openChatTemplateModal(${s.id})" title="Buka Template Chat Sapaan">
-                  💬 Sapa
-                </button>
-                <button type="button" class="host-action-icon-btn edit-note-btn" onclick="window.HostTracker.editNote(${s.id})" title="Edit Catatan Spender">
-                  ✏️
-                </button>
-              </div>
-            </td>
-          </tr>
-        `;
-      }).join('');
+              </td>
+              <td class="col-koin">
+                <div class="koin-info">
+                  <span class="koin-val">🪙 ${formatNumber(s.koin)}</span>
+                  <span class="hadiah-val">🎁 ${formatNumber(s.hadiah)} gift</span>
+                </div>
+              </td>
+              <td class="col-notes">
+                <div class="notes-text" title="${escapeHtml(s.catatan || s.labelLain || '')}">
+                  ${escapeHtml(s.catatan || s.labelLain || '-')}
+                </div>
+              </td>
+              <td class="col-chat">${chatBtn}</td>
+              <td class="col-reply">${replyBtn}</td>
+              <td class="col-actions">
+                <div class="host-action-btns">
+                  <button type="button" class="tiktok-launch-btn" onclick="window.HostTracker.openTikTokById(${s.id})" title="Langsung Buka / Cari Akun di TikTok">
+                    🎵 Cari TikTok
+                  </button>
+                  <button type="button" class="host-action-icon-btn chat-template-btn" onclick="window.HostTracker.openChatTemplateModal(${s.id})" title="Buka Template Chat Sapaan">
+                    💬 Sapa
+                  </button>
+                  <button type="button" class="host-action-icon-btn edit-note-btn" onclick="window.HostTracker.editNote(${s.id})" title="Edit Catatan Spender">
+                    ✏️
+                  </button>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      } else {
+        tbody.innerHTML = '';
+      }
     }
 
-    // Render Cards (for Mobile View) - Only paginated items to eliminate lag completely!
+    // Render Cards (for Mobile View) - Only rendered when on mobile!
     if (cardsContainer) {
-      cardsContainer.innerHTML = paginatedList.map((s, idx) => {
-        const index = startIndex + idx;
-        let labelBadge = '';
-        const lbl = (s.labelUtama || '').toLowerCase();
-        if (lbl.includes('whale')) {
-          labelBadge = `<span class="badge-spender badge-whale">🐋 Whale</span>`;
-        } else if (lbl.includes('high')) {
-          labelBadge = `<span class="badge-spender badge-high">⭐ High</span>`;
-        } else if (lbl.includes('supporter')) {
-          labelBadge = `<span class="badge-spender badge-supporter">💖 Supporter</span>`;
-        } else {
-          labelBadge = `<span class="badge-spender badge-general">${s.labelUtama || 'Member'}</span>`;
-        }
+      if (isMobileView) {
+        cardsContainer.innerHTML = paginatedList.map((s, idx) => {
+          const index = startIndex + idx;
+          let labelBadge = '';
+          const lbl = (s.labelUtama || '').toLowerCase();
+          if (lbl.includes('whale')) {
+            labelBadge = `<span class="badge-spender badge-whale">🐋 Whale</span>`;
+          } else if (lbl.includes('high')) {
+            labelBadge = `<span class="badge-spender badge-high">⭐ High</span>`;
+          } else if (lbl.includes('supporter')) {
+            labelBadge = `<span class="badge-spender badge-supporter">💖 Supporter</span>`;
+          } else {
+            labelBadge = `<span class="badge-spender badge-general">${s.labelUtama || 'Member'}</span>`;
+          }
 
-        return `
-          <div class="spender-mobile-card ${s.sudahChat ? 'is-contacted' : ''}">
-            <div class="sm-card-top">
-              <div class="sm-num">#${index + 1}</div>
-              <div class="sm-name-group" onclick="window.HostTracker.openTikTokById(${s.id})" style="cursor: pointer;" title="Klik untuk Buka / Cari di TikTok">
-                <strong class="sm-name link-tiktok">${escapeHtml(s.name)} 🎵</strong>
-                <span class="sm-uname">${escapeHtml(s.username || '')}</span>
+          return `
+            <div class="spender-mobile-card ${s.sudahChat ? 'is-contacted' : ''}">
+              <div class="sm-card-top">
+                <div class="sm-num">#${index + 1}</div>
+                <div class="sm-name-group" onclick="window.HostTracker.openTikTokById(${s.id})" style="cursor: pointer;" title="Klik untuk Buka / Cari di TikTok">
+                  <strong class="sm-name link-tiktok">${escapeHtml(s.name)} 🎵</strong>
+                  <span class="sm-uname">${escapeHtml(s.username || '')}</span>
+                </div>
+                <div class="sm-badges">
+                  ${labelBadge}
+                  ${s.tier ? `<span class="badge-tier">Lv.${s.tier}</span>` : ''}
+                </div>
               </div>
-              <div class="sm-badges">
-                ${labelBadge}
-                ${s.tier ? `<span class="badge-tier">Lv.${s.tier}</span>` : ''}
+              
+              <div class="sm-card-meta">
+                <span class="sm-koin">🪙 ${formatNumber(s.koin)} koin</span>
+                <span class="sm-hadiah">🎁 ${formatNumber(s.hadiah)} hadiah</span>
+              </div>
+
+              ${(s.catatan || s.labelLain) ? `
+                <div class="sm-note">
+                  ℹ️ ${escapeHtml(s.catatan || s.labelLain)}
+                </div>
+              ` : ''}
+
+              <div class="sm-card-actions">
+                <button type="button" class="tiktok-launch-btn" onclick="window.HostTracker.openTikTokById(${s.id})">
+                  🎵 Cari TikTok
+                </button>
+                <button type="button" class="host-status-btn ${s.sudahChat ? 'status-done' : 'status-pending'}" onclick="window.HostTracker.toggleChat(${s.id})">
+                  ${s.sudahChat ? '✅ Sudah Chat' : '⏳ Belum Chat'}
+                </button>
+                <button type="button" class="host-status-btn ${s.sudahDibalas ? 'status-reply-done' : 'status-reply-none'}" onclick="window.HostTracker.toggleReply(${s.id})">
+                  ${s.sudahDibalas ? '💌 Dibalas' : '⏳ Balas'}
+                </button>
+                <button type="button" class="host-action-icon-btn chat-template-btn" onclick="window.HostTracker.openChatTemplateModal(${s.id})">
+                  💬 Sapa
+                </button>
+                <button type="button" class="mini-copy-btn" onclick="window.HostTracker.copyUsernameById(${s.id})" title="Copy @username">📋</button>
               </div>
             </div>
-            
-            <div class="sm-card-meta">
-              <span class="sm-koin">🪙 ${formatNumber(s.koin)} koin</span>
-              <span class="sm-hadiah">🎁 ${formatNumber(s.hadiah)} hadiah</span>
-            </div>
-
-            ${(s.catatan || s.labelLain) ? `
-              <div class="sm-note">
-                ℹ️ ${escapeHtml(s.catatan || s.labelLain)}
-              </div>
-            ` : ''}
-
-            <div class="sm-card-actions">
-              <button type="button" class="tiktok-launch-btn" onclick="window.HostTracker.openTikTokById(${s.id})">
-                🎵 Cari TikTok
-              </button>
-              <button type="button" class="host-status-btn ${s.sudahChat ? 'status-done' : 'status-pending'}" onclick="window.HostTracker.toggleChat(${s.id})">
-                ${s.sudahChat ? '✅ Sudah Chat' : '⏳ Belum Chat'}
-              </button>
-              <button type="button" class="host-status-btn ${s.sudahDibalas ? 'status-reply-done' : 'status-reply-none'}" onclick="window.HostTracker.toggleReply(${s.id})">
-                ${s.sudahDibalas ? '💌 Dibalas' : '⏳ Balas'}
-              </button>
-              <button type="button" class="host-action-icon-btn chat-template-btn" onclick="window.HostTracker.openChatTemplateModal(${s.id})">
-                💬 Sapa
-              </button>
-              <button type="button" class="mini-copy-btn" onclick="window.HostTracker.copyUsernameById(${s.id})" title="Copy @username">📋</button>
-            </div>
-          </div>
-        `;
-      }).join('');
+          `;
+        }).join('');
+      } else {
+        cardsContainer.innerHTML = '';
+      }
     }
   }
 
@@ -1195,13 +1205,17 @@
         };
       });
 
-      // Bind search & filter inputs
+      // Bind search & filter inputs (Debounced for silky-smooth typing)
+      let spenderDebounce = null;
       const searchInput = document.getElementById('spenderSearchInput');
       if (searchInput) {
         searchInput.addEventListener('input', (e) => {
-          spenderSearch = e.target.value;
-          spenderPage = 1;
-          renderSpendersTable();
+          clearTimeout(spenderDebounce);
+          spenderDebounce = setTimeout(() => {
+            spenderSearch = e.target.value;
+            spenderPage = 1;
+            renderSpendersTable();
+          }, 120);
         });
       }
 
@@ -1214,11 +1228,15 @@
         });
       }
 
+      let taskDebounce = null;
       const taskSearchInput = document.getElementById('taskSearchInput');
       if (taskSearchInput) {
         taskSearchInput.addEventListener('input', (e) => {
-          taskSearch = e.target.value;
-          renderTasksList();
+          clearTimeout(taskDebounce);
+          taskDebounce = setTimeout(() => {
+            taskSearch = e.target.value;
+            renderTasksList();
+          }, 100);
         });
       }
     },
