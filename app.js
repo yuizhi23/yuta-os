@@ -3524,6 +3524,77 @@ function applyRemoteData(remoteData) {
     for (const [cloudKey, record] of Object.entries(remoteData)) {
       if (!record || typeof record !== 'object' || record.payload === undefined) continue;
 
+      if (cloudKey === 'yuta_couple_finances' && Array.isArray(record.payload)) {
+        const requiredTxs = [
+          {
+            id: 'tx_yuki_inc_240k',
+            type: 'income',
+            amount: 240000,
+            category: 'salary',
+            person: 'yuki',
+            wallet: 'yuki',
+            paymentMethod: 'transfer',
+            desc: 'Dapet 240k / Income Yuki',
+            date: '2026-10-10',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'yuki',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_yuki_exp_ketoprak',
+            type: 'expense',
+            amount: 28000,
+            category: 'food',
+            person: 'yuki',
+            wallet: 'yuki',
+            paymentMethod: 'qris',
+            desc: 'Beli ketoprak',
+            date: '2026-10-10',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'yuki',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_yuki_exp_esteh',
+            type: 'expense',
+            amount: 10000,
+            category: 'food',
+            person: 'yuki',
+            wallet: 'yuki',
+            paymentMethod: 'cash',
+            desc: 'Es teh',
+            date: '2026-10-10',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'yuki',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_yuki_exp_charger',
+            type: 'expense',
+            amount: 28000,
+            category: 'shopping',
+            person: 'yuki',
+            wallet: 'yuki',
+            paymentMethod: 'qris',
+            desc: 'Charger',
+            date: '2026-10-10',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'yuki',
+            splitOwedAmount: 0
+          }
+        ];
+        const existingIds = new Set(record.payload.map(f => f.id));
+        requiredTxs.forEach(tx => {
+          if (!existingIds.has(tx.id)) {
+            record.payload.unshift(tx);
+          }
+        });
+      }
+
       const localKey = getLocalKey(cloudKey);
       const currentLocal = localStorage.getItem(localKey);
       const newPayloadJson = JSON.stringify(record.payload);
@@ -4216,85 +4287,85 @@ function formatRupiah(number) {
 }
 
 function getFinances() {
-  const yukiOctKey = 'yuta_wallet_yuki_tx_oct26_v1';
   let finances = getStorage(STORAGE_KEYS.FINANCES, []);
   if (!Array.isArray(finances)) {
     finances = [];
   }
 
-  if (!localStorage.getItem(yukiOctKey)) {
-    const initialTxs = [
-      {
-        id: 'tx_yuki_inc_240k',
-        type: 'income',
-        amount: 240000,
-        category: 'salary',
-        person: 'yuki',
-        wallet: 'yuki',
-        paymentMethod: 'transfer',
-        desc: 'Dapat dana / Income Yuki',
-        date: getTodayString(),
-        isSplit: false,
-        splitRatio: 50,
-        splitPaidBy: 'yuki',
-        splitOwedAmount: 0
-      },
-      {
-        id: 'tx_yuki_exp_ketoprak',
-        type: 'expense',
-        amount: 28000,
-        category: 'food',
-        person: 'yuki',
-        wallet: 'yuki',
-        paymentMethod: 'qris',
-        desc: 'Beli ketoprak',
-        date: getTodayString(),
-        isSplit: false,
-        splitRatio: 50,
-        splitPaidBy: 'yuki',
-        splitOwedAmount: 0
-      },
-      {
-        id: 'tx_yuki_exp_esteh',
-        type: 'expense',
-        amount: 10000,
-        category: 'food',
-        person: 'yuki',
-        wallet: 'yuki',
-        paymentMethod: 'cash',
-        desc: 'Es teh',
-        date: getTodayString(),
-        isSplit: false,
-        splitRatio: 50,
-        splitPaidBy: 'yuki',
-        splitOwedAmount: 0
-      },
-      {
-        id: 'tx_yuki_exp_charger',
-        type: 'expense',
-        amount: 28000,
-        category: 'shopping',
-        person: 'yuki',
-        wallet: 'yuki',
-        paymentMethod: 'qris',
-        desc: 'Charger',
-        date: getTodayString(),
-        isSplit: false,
-        splitRatio: 50,
-        splitPaidBy: 'yuki',
-        splitOwedAmount: 0
-      }
-    ];
+  const initialTxs = [
+    {
+      id: 'tx_yuki_inc_240k',
+      type: 'income',
+      amount: 240000,
+      category: 'salary',
+      person: 'yuki',
+      wallet: 'yuki',
+      paymentMethod: 'transfer',
+      desc: 'Dapet 240k / Income Yuki',
+      date: '2026-10-10',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'yuki',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_yuki_exp_ketoprak',
+      type: 'expense',
+      amount: 28000,
+      category: 'food',
+      person: 'yuki',
+      wallet: 'yuki',
+      paymentMethod: 'qris',
+      desc: 'Beli ketoprak',
+      date: '2026-10-10',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'yuki',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_yuki_exp_esteh',
+      type: 'expense',
+      amount: 10000,
+      category: 'food',
+      person: 'yuki',
+      wallet: 'yuki',
+      paymentMethod: 'cash',
+      desc: 'Es teh',
+      date: '2026-10-10',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'yuki',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_yuki_exp_charger',
+      type: 'expense',
+      amount: 28000,
+      category: 'shopping',
+      person: 'yuki',
+      wallet: 'yuki',
+      paymentMethod: 'qris',
+      desc: 'Charger',
+      date: '2026-10-10',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'yuki',
+      splitOwedAmount: 0
+    }
+  ];
 
-    const existingIds = new Set(finances.map(f => f.id));
-    initialTxs.forEach(tx => {
-      if (!existingIds.has(tx.id)) {
-        finances.unshift(tx);
-      }
-    });
+  let hasChanged = false;
+  const existingIds = new Set(finances.map(f => f.id));
+  initialTxs.forEach(tx => {
+    if (!existingIds.has(tx.id)) {
+      finances.unshift(tx);
+      hasChanged = true;
+    }
+  });
 
+  if (hasChanged) {
     setStorage(STORAGE_KEYS.FINANCES, finances);
-    localStorage.setItem(yukiOctKey, 'true');
   }
 
   return finances;
