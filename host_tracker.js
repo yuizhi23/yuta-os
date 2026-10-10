@@ -30,7 +30,7 @@
       id: 'hey_texting',
       title: '💬 Sapaan Utama (Casual)',
       badge: 'Pilihan Utama',
-      text: (name) => `heyy, hope you don't mind me texting you! i just wanted to say hi hehehe`
+      text: (name) => `hii! hope you don't mind me saying hi. i'd love to get to know you, nice to meet you! 😊`
     },
     {
       id: 'thanks_gift',
