@@ -230,6 +230,10 @@
       list = list.filter(s => (s.labelUtama || '').toLowerCase().includes('high'));
     } else if (spenderFilter === 'supporter') {
       list = list.filter(s => (s.labelUtama || '').toLowerCase().includes('supporter'));
+    } else if (spenderFilter === 'unfollowed') {
+      list = list.filter(s => !s.sudahFollow);
+    } else if (spenderFilter === 'followed') {
+      list = list.filter(s => s.sudahFollow);
     } else if (spenderFilter === 'uncontacted') {
       list = list.filter(s => !s.sudahChat);
     } else if (spenderFilter === 'contacted') {
@@ -345,7 +349,7 @@
           <button class="bento-pill-btn" onclick="window.HostTracker.resetSpenderFilter()">Reset Filter</button>
         </div>
       `;
-      if (tbody) tbody.innerHTML = `<tr><td colspan="8">${emptyHtml}</td></tr>`;
+      if (tbody) tbody.innerHTML = `<tr><td colspan="9">${emptyHtml}</td></tr>`;
       if (cardsContainer) cardsContainer.innerHTML = emptyHtml;
       return;
     }
@@ -373,6 +377,11 @@
 
           // Tier badge
           const tierBadge = s.tier ? `<span class="badge-tier">Lv.${s.tier}</span>` : '';
+
+          // Follow status button
+          const followBtn = s.sudahFollow
+            ? `<button class="host-status-btn status-follow-done" onclick="window.HostTracker.toggleFollow(${s.id})" title="Klik untuk ubah jadi Belum">✨ Sudah Follow</button>`
+            : `<button class="host-status-btn status-follow-none" onclick="window.HostTracker.toggleFollow(${s.id})" title="Klik untuk tandai Sudah Follow">➕ Belum Follow</button>`;
 
           // Chat status button
           const chatBtn = s.sudahChat
@@ -416,6 +425,7 @@
                   ${escapeHtml(s.catatan || s.labelLain || '-')}
                 </div>
               </td>
+              <td class="col-follow">${followBtn}</td>
               <td class="col-chat">${chatBtn}</td>
               <td class="col-reply">${replyBtn}</td>
               <td class="col-actions">
@@ -485,6 +495,9 @@
                 <button type="button" class="tiktok-launch-btn" onclick="window.HostTracker.openTikTokById(${s.id})">
                   🎵 Cari TikTok
                 </button>
+                <button type="button" class="host-status-btn ${s.sudahFollow ? 'status-follow-done' : 'status-follow-none'}" onclick="window.HostTracker.toggleFollow(${s.id})">
+                  ${s.sudahFollow ? '✨ Sudah Follow' : '➕ Follow'}
+                </button>
                 <button type="button" class="host-status-btn ${s.sudahChat ? 'status-done' : 'status-pending'}" onclick="window.HostTracker.toggleChat(${s.id})">
                   ${s.sudahChat ? '✅ Sudah Chat' : '⏳ Belum Chat'}
                 </button>
@@ -503,6 +516,23 @@
         cardsContainer.innerHTML = '';
       }
     }
+  }
+
+  // Toggle Follow Status for Spender
+  function toggleSpenderFollow(id) {
+    const spender = spendersData.find(s => s.id === id);
+    if (!spender) return;
+
+    spender.sudahFollow = !spender.sudahFollow;
+    saveSpenders();
+    triggerSound(spender.sudahFollow ? 'check' : 'bubble');
+
+    notify(spender.sudahFollow
+      ? `✨ ${spender.name} (${spender.username || ''}) ditandai SUDAH di-follow!`
+      : `➕ ${spender.name} diubah jadi BELUM di-follow.`
+    );
+
+    renderSpendersTable();
   }
 
   // Toggle Chat Status for Spender
@@ -992,7 +1022,7 @@
   // ==================== EXPORT DATA (CSV) ====================
 
   function exportSpendersCSV() {
-    let csv = 'No,Nama Akun,Username,Hadiah,Tier,Koin Total,Label Utama,Catatan,Sudah Chat,Sudah Dibalas\n';
+    let csv = 'No,Nama Akun,Username,Hadiah,Tier,Koin Total,Label Utama,Catatan,Sudah Follow,Sudah Chat,Sudah Dibalas\n';
     spendersData.forEach((s, idx) => {
       const row = [
         idx + 1,
@@ -1003,6 +1033,7 @@
         s.koin || 0,
         `"${(s.labelUtama || '').replace(/"/g, '""')}"`,
         `"${(s.catatan || s.labelLain || '').replace(/"/g, '""')}"`,
+        s.sudahFollow ? 'Sudah' : 'Belum',
         s.sudahChat ? 'Sudah' : 'Belum',
         s.sudahDibalas ? 'Sudah' : 'Belum'
       ];
@@ -1274,6 +1305,7 @@
       triggerSound('bubble');
       renderTasksList();
     },
+    toggleFollow: toggleSpenderFollow,
     toggleChat: toggleSpenderChat,
     toggleReply: toggleSpenderReply,
     copyUsername: copyUsername,

@@ -20,7 +20,7 @@
   <link rel="shortcut icon" type="image/png" href="assets/windows_xp.png" />
   <link rel="apple-touch-icon" href="assets/windows_xp.png" />
   
-  <link rel="stylesheet" href="style.css?v=20261010_v5" />
+  <link rel="stylesheet" href="style.css?v=20261010_v6" />
 </head>
 <body class="wallpaper-aero">
   <!-- Interactive Water Ripple Canvas -->
@@ -1166,6 +1166,8 @@
               <!-- Filter Pills -->
               <div class="toolbar-filters">
                 <button class="filter-pill-btn active" data-filter="all" onclick="window.HostTracker.setSpenderFilter('all')">Semua (329)</button>
+                <button class="filter-pill-btn" data-filter="unfollowed" onclick="window.HostTracker.setSpenderFilter('unfollowed')">➕ Belum Follow</button>
+                <button class="filter-pill-btn" data-filter="followed" onclick="window.HostTracker.setSpenderFilter('followed')">✨ Sudah Follow</button>
                 <button class="filter-pill-btn" data-filter="uncontacted" onclick="window.HostTracker.setSpenderFilter('uncontacted')">⏳ Belum Chat</button>
                 <button class="filter-pill-btn" data-filter="contacted" onclick="window.HostTracker.setSpenderFilter('contacted')">✅ Sudah Chat</button>
                 <button class="filter-pill-btn" data-filter="replied" onclick="window.HostTracker.setSpenderFilter('replied')">💌 Dibalas</button>
@@ -1204,12 +1206,13 @@
                 <thead>
                   <tr>
                     <th style="width: 45px;">No</th>
-                    <th style="width: 220px;">Nama Akun &amp; TikTok</th>
-                    <th style="width: 140px;">Label &amp; Tier</th>
-                    <th style="width: 170px;">Total Koin &amp; Hadiah</th>
+                    <th style="width: 210px;">Nama Akun &amp; TikTok</th>
+                    <th style="width: 130px;">Label &amp; Tier</th>
+                    <th style="width: 160px;">Total Koin &amp; Hadiah</th>
                     <th>Catatan &amp; Keterangan</th>
-                    <th style="width: 130px; text-align: center;">Sudah Chat?</th>
-                    <th style="width: 110px; text-align: center;">Dibalas?</th>
+                    <th style="width: 125px; text-align: center;">Sudah Follow?</th>
+                    <th style="width: 125px; text-align: center;">Sudah Chat?</th>
+                    <th style="width: 100px; text-align: center;">Dibalas?</th>
                     <th style="width: 150px; text-align: center;">Aksi TikTok</th>
                   </tr>
                 </thead>
@@ -2241,8 +2244,8 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 
   <!-- Yume's Host Tracker Data & Logic -->
-  <script src="host_tracker_data.js?v=20261010_v4"></script>
-  <script src="app.js?v=20261010_v4"></script>
-  <script src="host_tracker.js?v=20261010_v4"></script>
+  <script src="host_tracker_data.js?v=20261010_v6"></script>
+  <script src="app.js?v=20261010_v6"></script>
+  <script src="host_tracker.js?v=20261010_v6"></script>
 </body>
 </html>
