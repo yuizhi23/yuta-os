@@ -8300,6 +8300,31 @@ body.atmo-midnight {
   opacity: 0.9;
 }
 
+.tmpl-copy-btn.btn-tmpl-launch {
+  background: linear-gradient(135deg, #0284c7, #0f172a);
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);
+}
+
+.tmpl-copy-btn.btn-tmpl-secondary {
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+}
+
+.tmpl-copy-btn.btn-tmpl-secondary:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.btn-direct-tiktok-dm {
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.btn-direct-tiktok-dm:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.1);
+}
+
 .chat-editor-wrap {
   margin-bottom: 14px;
 }

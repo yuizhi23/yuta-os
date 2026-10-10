@@ -20,7 +20,7 @@
   <link rel="shortcut icon" type="image/png" href="assets/windows_xp.png" />
   <link rel="apple-touch-icon" href="assets/windows_xp.png" />
   
-  <link rel="stylesheet" href="style.css?v=20261010_v7" />
+  <link rel="stylesheet" href="style.css?v=20261010_v8" />
 </head>
 <body class="wallpaper-aero">
   <!-- Interactive Water Ripple Canvas -->
@@ -2122,11 +2122,14 @@
           <textarea id="chatCustomEditor" class="chat-custom-textarea" placeholder="Teks template akan muncul di sini..."></textarea>
         </div>
 
-        <div class="modal-footer-retro" style="display: flex; justify-content: space-between; align-items: center;">
-          <span style="font-size: 0.72rem; color: #64748b;">💡 <em>Menyalin pesan akan otomatis menandai spender 'Sudah Chat'</em></span>
-          <div style="display: flex; gap: 8px;">
+        <div class="modal-footer-retro" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap;">
+          <span style="font-size: 0.72rem; color: #0284c7; font-weight: 700;">💡 <em>Pesan otomatis disalin ke clipboard &amp; TikTok dibuka, tinggal Tempel (Paste) lalu Kirim!</em></span>
+          <div style="display: flex; gap: 8px; align-items: center;">
             <button type="button" class="retro-btn-cancel" onclick="window.HostTracker.closeChatModal()">Tutup</button>
-            <button type="button" class="primary-btn" onclick="window.HostTracker.copyCustomEditorText()">📋 Salin Teks</button>
+            <button type="button" class="bento-pill-btn" onclick="window.HostTracker.copyCustomEditorText()" title="Hanya salin pesan ke clipboard">📋 Salin Saja</button>
+            <button type="button" class="primary-btn btn-direct-tiktok-dm" onclick="window.HostTracker.copyAndOpenTikTokDM()" style="background: linear-gradient(135deg, #0284c7, #0f172a); color: #fff; font-weight: 800; border: none; box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);">
+              🚀 Salin &amp; Buka TikTok DM
+            </button>
           </div>
         </div>
       </div>
@@ -2244,8 +2247,8 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 
   <!-- Yume's Host Tracker Data & Logic -->
-  <script src="host_tracker_data.js?v=20261010_v7"></script>
-  <script src="app.js?v=20261010_v7"></script>
-  <script src="host_tracker.js?v=20261010_v7"></script>
+  <script src="host_tracker_data.js?v=20261010_v8"></script>
+  <script src="app.js?v=20261010_v8"></script>
+  <script src="host_tracker.js?v=20261010_v8"></script>
 </body>
 </html>

@@ -891,9 +891,14 @@
               <span class="tmpl-badge">${tmpl.badge}</span>
             </div>
             <div class="tmpl-body">${escapeHtml(generated)}</div>
-            <button class="tmpl-copy-btn" onclick="event.stopPropagation(); window.HostTracker.copyTemplateText('${tmpl.id}')">
-              📋 Salin Pesan Ini
-            </button>
+            <div class="tmpl-btn-row" style="display: flex; gap: 8px; margin-top: 8px;">
+              <button type="button" class="tmpl-copy-btn btn-tmpl-launch" onclick="event.stopPropagation(); window.HostTracker.copyTemplateAndOpen('${tmpl.id}')" title="Salin pesan ini & langsung buka TikTok">
+                🚀 Salin &amp; Buka TikTok
+              </button>
+              <button type="button" class="tmpl-copy-btn btn-tmpl-secondary" onclick="event.stopPropagation(); window.HostTracker.copyTemplateText('${tmpl.id}')" title="Hanya salin teks ke clipboard">
+                📋 Salin
+              </button>
+            </div>
           </div>
         `;
       }).join('');
@@ -923,6 +928,39 @@
       editor.value = tmpl.text(selectedSpenderForChat.name);
     }
     triggerSound('bubble');
+  }
+
+  // Salin pesan & langsung buka profil / DM TikTok spender
+  function copyAndOpenTikTokDM(customText = null) {
+    if (!selectedSpenderForChat) return;
+    const editor = document.getElementById('chatCustomEditor');
+    const textToCopy = (customText || (editor ? editor.value : '') || CHAT_TEMPLATES[0].text(selectedSpenderForChat.name)).trim();
+
+    navigator.clipboard.writeText(textToCopy).then(() => {
+      triggerSound('chime');
+      selectedSpenderForChat.sudahChat = true;
+      saveSpenders();
+      renderSpendersTable();
+
+      notify(`🚀 Pesan disalin! Membuka TikTok ${selectedSpenderForChat.name}... tinggal Tempel (Paste) & Kirim!`);
+
+      // Buka TikTok akun spender
+      openTikTokAccount(selectedSpenderForChat.name, selectedSpenderForChat.username);
+
+      setTimeout(() => {
+        closeChatModal();
+      }, 700);
+    }).catch(() => {
+      openTikTokAccount(selectedSpenderForChat.name, selectedSpenderForChat.username);
+    });
+  }
+
+  function copyTemplateAndOpen(templateId) {
+    if (!selectedSpenderForChat) return;
+    const tmpl = CHAT_TEMPLATES.find(t => t.id === templateId);
+    if (!tmpl) return;
+    const text = tmpl.text(selectedSpenderForChat.name);
+    copyAndOpenTikTokDM(text);
   }
 
   function copyTemplateText(templateId) {
@@ -1330,6 +1368,8 @@
     selectChatTemplate: selectChatTemplate,
     copyTemplateText: copyTemplateText,
     copyCustomEditorText: copyCustomEditorText,
+    copyAndOpenTikTokDM: copyAndOpenTikTokDM,
+    copyTemplateAndOpen: copyTemplateAndOpen,
     closeChatModal: closeChatModal,
     openAddSpenderModal: openAddSpenderModal,
     closeAddSpenderModal: closeAddSpenderModal,
