@@ -20,9 +20,17 @@
   <link rel="shortcut icon" type="image/png" href="assets/windows_xp.png" />
   <link rel="apple-touch-icon" href="assets/windows_xp.png" />
   
-  <link rel="stylesheet" href="style.css?v=20261010_v9" />
+  <link rel="stylesheet" href="style.css?v=20261010_v10" />
+  
+  <!-- Preload Wallpapers for Instant Zero-Lag Rendering -->
+  <link rel="preload" as="image" href="background.png" />
+  <link rel="preload" as="image" href="wallpaper_bliss.jpg" />
+  <link rel="preload" as="image" href="wallpaper.jpg" />
 </head>
 <body class="wallpaper-aero">
+  <!-- Hardware-Accelerated Wallpaper Layer (Direct GPU Compositor, Zero Lag) -->
+  <div id="desktopWallpaper" class="desktop-wallpaper"></div>
+
   <!-- Interactive Water Ripple Canvas -->
   <canvas id="waterRippleCanvas" class="water-ripple-canvas"></canvas>
 
@@ -2247,8 +2255,8 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 
   <!-- Yume's Host Tracker Data & Logic -->
-  <script src="host_tracker_data.js?v=20261010_v9"></script>
-  <script src="app.js?v=20261010_v9"></script>
-  <script src="host_tracker.js?v=20261010_v9"></script>
+  <script src="host_tracker_data.js?v=20261010_v10"></script>
+  <script src="app.js?v=20261010_v10"></script>
+  <script src="host_tracker.js?v=20261010_v10"></script>
 </body>
 </html>

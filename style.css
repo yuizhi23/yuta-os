@@ -47,24 +47,39 @@ html, body {
   color: #102a45;
   overflow-x: hidden;
   user-select: none;
-  background: url('background.png') no-repeat center center fixed;
+  background-color: transparent;
+}
+
+/* Hardware-Accelerated Wallpaper Layer (Direct GPU Compositor, Zero Scroll Lag) */
+.desktop-wallpaper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  background-position: center center;
+  background-repeat: no-repeat;
   background-size: cover;
+  pointer-events: none;
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* Wallpapers */
-body.wallpaper-aero {
-  background: url('background.png') no-repeat center center fixed;
-  background-size: cover;
+body.wallpaper-aero .desktop-wallpaper {
+  background-image: url('background.png');
 }
 
-body.wallpaper-bliss {
-  background: url('wallpaper_bliss.jpg') no-repeat center center fixed;
-  background-size: cover;
+body.wallpaper-bliss .desktop-wallpaper {
+  background-image: url('wallpaper_bliss.jpg');
 }
 
-body.wallpaper-dolphins {
-  background: url('wallpaper.jpg') no-repeat center center fixed;
-  background-size: cover;
+body.wallpaper-dolphins .desktop-wallpaper {
+  background-image: url('wallpaper.jpg');
 }
 
 /* ==================== WATER RIPPLE CANVAS ==================== */
