@@ -27,9 +27,15 @@
   // Pre-defined host chat templates (Personalized for Yume)
   const CHAT_TEMPLATES = [
     {
+      id: 'hey_texting',
+      title: '💬 Sapaan Utama (Casual)',
+      badge: 'Pilihan Utama',
+      text: (name) => `heyy, hope you don't mind me texting you! i just wanted to say hi hehehe`
+    },
+    {
       id: 'thanks_gift',
       title: '🌸 Terima Kasih Gift Semalam',
-      badge: 'Paling Populer',
+      badge: 'Apresiasi Gift',
       text: (name) => `Halo kak ${name}! 🥰 Makasih banyaaak yaa sudah mampir dan support room live Yume semalam. Apresiasi dan gift dari kakak bener-bener bikin Yume semangat banget! Semoga hari ini kakak sehat selalu dan rezekinya makin lancar yaa kak~ ✨`
     },
     {
