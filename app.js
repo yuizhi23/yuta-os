@@ -1075,6 +1075,11 @@ function switchTab(tabId) {
     restoreAppWindow();
   }
 
+  // Normalize legacy mood tab to consolidated lovenotes
+  if (tabId === 'mood') {
+    tabId = 'lovenotes';
+  }
+
   const buttons = document.querySelectorAll('.tab-btn');
   const panels = document.querySelectorAll('.tab-panel');
   const chips = document.querySelectorAll('.taskbar-chip');
@@ -1089,7 +1094,7 @@ function switchTab(tabId) {
 
   chips.forEach(c => {
     const text = c.textContent.toLowerCase();
-    c.classList.toggle('active', text.includes(tabId));
+    c.classList.toggle('active', text.includes(tabId) || (tabId === 'lovenotes' && (text.includes('memo') || text.includes('love') || text.includes('vibe'))));
   });
 
   if (tabId === 'countdown' && typeof renderCountdowns === 'function') {
@@ -1100,8 +1105,12 @@ function switchTab(tabId) {
     renderFinances();
   } else if ((tabId === 'cats' || tabId === 'cat') && typeof renderReruCard === 'function') {
     renderReruCard();
-  } else if (tabId === 'mood' && typeof loadMoodsForDate === 'function') {
-    loadMoodsForDate();
+  } else if (tabId === 'lovenotes') {
+    if (typeof renderNotes === 'function') renderNotes();
+    if (typeof loadMoodsForDate === 'function') loadMoodsForDate();
+    if (typeof renderMoodHistory === 'function') renderMoodHistory();
+  } else if (tabId === 'hosttracker' && typeof renderHostTracker === 'function') {
+    renderHostTracker();
   }
 }
 
@@ -4207,17 +4216,87 @@ function formatRupiah(number) {
 }
 
 function getFinances() {
-  const resetZeroKey = 'yuta_wallet_zero_clean_v3';
-  if (!localStorage.getItem(resetZeroKey)) {
-    localStorage.setItem(STORAGE_KEYS.FINANCES, JSON.stringify([]));
-    localStorage.setItem(resetZeroKey, 'true');
-    return [];
-  }
+  const yukiOctKey = 'yuta_wallet_yuki_tx_oct26_v1';
   let finances = getStorage(STORAGE_KEYS.FINANCES, []);
   if (!Array.isArray(finances)) {
     finances = [];
-    setStorage(STORAGE_KEYS.FINANCES, finances);
   }
+
+  if (!localStorage.getItem(yukiOctKey)) {
+    const initialTxs = [
+      {
+        id: 'tx_yuki_inc_240k',
+        type: 'income',
+        amount: 240000,
+        category: 'salary',
+        person: 'yuki',
+        wallet: 'yuki',
+        paymentMethod: 'transfer',
+        desc: 'Dapat dana / Income Yuki',
+        date: getTodayString(),
+        isSplit: false,
+        splitRatio: 50,
+        splitPaidBy: 'yuki',
+        splitOwedAmount: 0
+      },
+      {
+        id: 'tx_yuki_exp_ketoprak',
+        type: 'expense',
+        amount: 28000,
+        category: 'food',
+        person: 'yuki',
+        wallet: 'yuki',
+        paymentMethod: 'qris',
+        desc: 'Beli ketoprak',
+        date: getTodayString(),
+        isSplit: false,
+        splitRatio: 50,
+        splitPaidBy: 'yuki',
+        splitOwedAmount: 0
+      },
+      {
+        id: 'tx_yuki_exp_esteh',
+        type: 'expense',
+        amount: 10000,
+        category: 'food',
+        person: 'yuki',
+        wallet: 'yuki',
+        paymentMethod: 'cash',
+        desc: 'Es teh',
+        date: getTodayString(),
+        isSplit: false,
+        splitRatio: 50,
+        splitPaidBy: 'yuki',
+        splitOwedAmount: 0
+      },
+      {
+        id: 'tx_yuki_exp_charger',
+        type: 'expense',
+        amount: 28000,
+        category: 'shopping',
+        person: 'yuki',
+        wallet: 'yuki',
+        paymentMethod: 'qris',
+        desc: 'Charger',
+        date: getTodayString(),
+        isSplit: false,
+        splitRatio: 50,
+        splitPaidBy: 'yuki',
+        splitOwedAmount: 0
+      }
+    ];
+
+    const existingIds = new Set(finances.map(f => f.id));
+    initialTxs.forEach(tx => {
+      if (!existingIds.has(tx.id)) {
+        finances.unshift(tx);
+      }
+    });
+
+    setStorage(STORAGE_KEYS.FINANCES, finances);
+    localStorage.setItem(yukiOctKey, 'true');
+  }
+
   return finances;
 }
 

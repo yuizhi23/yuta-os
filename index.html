@@ -87,9 +87,9 @@
       <div class="icon-img-wrap"><span class="desktop-emoji">🗓️</span></div>
       <span class="icon-label">Schedule</span>
     </div>
-    <div class="desktop-icon" onclick="restoreAndSwitchTab('lovenotes')" title="Memo Board">
+    <div class="desktop-icon" onclick="restoreAndSwitchTab('lovenotes')" title="Love Notes &amp; Vibe Check">
       <div class="icon-img-wrap"><span class="desktop-emoji">💌</span></div>
-      <span class="icon-label">Memos</span>
+      <span class="icon-label">Love &amp; Vibes</span>
     </div>
     <div class="desktop-icon" onclick="restoreAndSwitchTab('countdown')" title="Milestone Tracker">
       <div class="icon-img-wrap"><span class="desktop-emoji">🎂</span></div>
@@ -118,6 +118,10 @@
     <div class="desktop-icon" onclick="openCatDialog()" title="Cat Companion">
       <div class="icon-img-wrap"><img src="assets/cat_dialog.png" alt="Cat" /></div>
       <span class="icon-label">Purrr</span>
+    </div>
+    <div class="desktop-icon" onclick="restoreAndSwitchTab('hosttracker')" title="TikTok Host &amp; Tugas Tracker (Yume)">
+      <div class="icon-img-wrap"><span class="desktop-emoji">🎯</span></div>
+      <span class="icon-label">Host Yume</span>
     </div>
   </aside>
 
@@ -247,11 +251,8 @@
           <span class="hint-live-pulse"></span>
           <span class="hint-text">Interactive Desktop • Connected & Synced</span>
         </div>
-        <div class="hero-pill-badge" onclick="openCloudSyncModal()" title="Klik untuk membuka Pengaturan Live Sync Yuki ↔ Nata">
-          <span class="pill-text" id="heroSyncPillText">☁️ Live Sync • Siap</span>
-        </div>
         <div class="hero-pill-badge gcal-pill-badge" onclick="openGCalSyncModal()" title="Sync to Google Calendar (Lifetime)">
-          <span class="pill-text">📅 Google Calendar Sync</span>
+          <span class="pill-text">Google Calendar Sync</span>
         </div>
         <div class="yuta-badge" onclick="spawnFloatingBubbleSwarm()" title="Spawn floating bubbles">
           <span class="yuta-text">Bubble Burst</span>
@@ -288,7 +289,7 @@
         <span class="menu-item" onclick="spawnFloatingBubbleSwarm()"><u>B</u>ubbles</span>
         <span class="menu-item" onclick="switchTab('lovenotes')"><u>F</u>avorites</span>
         <span class="menu-item" onclick="toggleMediaPlayer()"><u>T</u>ools</span>
-        <span class="menu-item" onclick="openCloudSyncModal()" style="font-weight: bold; color: #0369a1;">☁️ <u>C</u>loud Sync</span>
+        <span class="menu-item" onclick="restoreAndSwitchTab('hosttracker')"><u>H</u>ost Tracker (Yume)</span>
         <span class="menu-item" onclick="openCatDialog()"><u>H</u>elp</span>
         <div class="menubar-time" id="menubarClock">00:00:00</div>
       </div>
@@ -305,7 +306,7 @@
           Class Schedule
         </button>
         <button class="tab-btn" data-tab="lovenotes" id="tab-lovenotes" role="tab" onclick="switchTab('lovenotes')">
-          Love Notes
+          Love &amp; Vibes
         </button>
         <button class="tab-btn" data-tab="countdown" id="tab-countdown" role="tab" onclick="switchTab('countdown')">
           Our Milestones
@@ -313,14 +314,11 @@
         <button class="tab-btn" data-tab="finance" id="tab-finance" role="tab" onclick="switchTab('finance')">
           YuTa Wallet
         </button>
-        <button class="tab-btn" data-tab="mood" id="tab-mood" role="tab" onclick="switchTab('mood')">
-          Vibe Check
-        </button>
         <button class="tab-btn" data-tab="cats" id="tab-cats" role="tab" onclick="switchTab('cats')">
           Cat Sanctuary
         </button>
-        <button class="tab-btn sync-tab-btn" id="tab-sync" role="tab" onclick="openCloudSyncModal()" style="color: #0369a1; font-weight: 700;">
-          ☁️ Live Sync
+        <button class="tab-btn" data-tab="hosttracker" id="tab-hosttracker" role="tab" onclick="switchTab('hosttracker')" style="color: #0284c7; font-weight: 700;">
+          Host Tracker
         </button>
       </nav>
 
@@ -386,9 +384,17 @@
                 <button class="retro-add-btn" onclick="addTodo('nata')">＋</button>
               </div>
               <ul class="todo-list" id="nataTodoList">
-                <li class="todo-item" onclick="toggleTodo('nata', 'n_spender', event)"><div class="todo-checkbox"></div><span class="todo-text">Reply to spenders 💬</span><button class="todo-delete" onclick="deleteTodo('nata', 'n_spender')">✕</button></li>
+                <li class="todo-item" onclick="toggleTodo('nata', 'n_spender', event)">
+                  <div class="todo-checkbox"></div>
+                  <span class="todo-text">Reply to spenders 💬 <button type="button" class="routine-mini-btn" onclick="event.stopPropagation(); restoreAndSwitchTab('hosttracker');" title="Buka Tracker Spender" style="margin-left: 6px; font-size: 0.7rem; padding: 2px 7px; border-radius: 6px; background: rgba(14, 165, 233, 0.2); border: 1px solid rgba(14, 165, 233, 0.4); color: #0284c7; cursor: pointer; font-weight: 700;">🎯 Buka Tracker</button></span>
+                  <button class="todo-delete" onclick="deleteTodo('nata', 'n_spender')">✕</button>
+                </li>
                 <li class="todo-item" onclick="toggleTodo('nata', 'n_live', event)"><div class="todo-checkbox"></div><span class="todo-text">Daily 1-hour stream before dual persona stream 📹</span><button class="todo-delete" onclick="deleteTodo('nata', 'n_live')">✕</button></li>
-                <li class="todo-item" onclick="toggleTodo('nata', 'n_laporan', event)"><div class="todo-checkbox"></div><span class="todo-text">Send live stream report to group 📊</span><button class="todo-delete" onclick="deleteTodo('nata', 'n_laporan')">✕</button></li>
+                <li class="todo-item" onclick="toggleTodo('nata', 'n_laporan', event)">
+                  <div class="todo-checkbox"></div>
+                  <span class="todo-text">Send live stream report to group 📊 <button type="button" class="routine-mini-btn" onclick="event.stopPropagation(); restoreAndSwitchTab('hosttracker'); window.HostTracker.switchSubTab('tasks');" title="Buka Pengumpulan Tugas" style="margin-left: 6px; font-size: 0.7rem; padding: 2px 7px; border-radius: 6px; background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.4); color: #059669; cursor: pointer; font-weight: 700;">📋 Buka Tugas</button></span>
+                  <button class="todo-delete" onclick="deleteTodo('nata', 'n_laporan')">✕</button>
+                </li>
                 <li class="todo-item" onclick="toggleTodo('nata', 'n_absen', event)"><div class="todo-checkbox"></div><span class="todo-text">Clock-in & clock-out attendance ⏰</span><button class="todo-delete" onclick="deleteTodo('nata', 'n_absen')">✕</button></li>
               </ul>
               <div class="todo-footer-retro">
@@ -447,58 +453,25 @@
           </div>
         </section>
 
-        <!-- ==================== MEMO BOARD PANEL ==================== -->
+        <!-- ==================== LOVE NOTES & VIBE CHECK PANEL ==================== -->
         <section class="tab-panel" id="panel-lovenotes" role="tabpanel">
-          <div class="panel-header-retro">
+          <div class="panel-header-retro" style="flex-wrap: wrap; gap: 10px;">
             <div class="panel-title-group">
-              <h2 class="retro-heading">Love Notes & Memos</h2>
-              <span class="retro-subheading">Sweet thoughts, doodles & little reminders left for each other</span>
+              <h2 class="retro-heading">Love Notes &amp; Vibe Check</h2>
+              <span class="retro-subheading">Sweet thoughts, little doodles &amp; daily emotional check-in for both of us</span>
             </div>
-            <div style="display:flex; gap:8px;">
+            <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+              <div class="date-selector-box" style="margin: 0; padding: 4px 8px;">
+                <span class="retro-label" style="font-size: 0.8rem;">Date:</span>
+                <input type="date" id="moodDatePicker" class="retro-date-input" style="font-size: 0.82rem; padding: 2px 6px;" />
+              </div>
               <button class="retro-btn-action" onclick="openNoteModal()">＋ Leave a Note</button>
-              <button class="retro-btn-secondary" onclick="openPaintModal()">Open Canvas</button>
-            </div>
-          </div>
-          <div class="notes-grid" id="notesGrid"></div>
-          <div class="empty-state-retro" id="notesEmpty">
-            <span class="empty-icon-emoji">💌</span>
-            <p>No notes yet.<br />Leave a sweet message or doodle for them to wake up to.</p>
-          </div>
-        </section>
-
-        <!-- ==================== COUNTDOWN PANEL ==================== -->
-        <section class="tab-panel" id="panel-countdown" role="tabpanel">
-          <div class="panel-header-retro">
-            <div class="panel-title-group">
-              <h2 class="retro-heading">Our Milestones</h2>
-              <span class="retro-subheading">Counting down to all our special days & memories</span>
-            </div>
-            <div style="display: flex; gap: 8px;">
-              <button class="retro-btn-action" style="background: linear-gradient(180deg, #60a5fa 0%, #2563eb 100%);" onclick="openGCalSyncModal()" title="Sync Milestones & Anniv to Google Calendar">📅 Sync to Google Calendar</button>
-              <button class="retro-btn-action" onclick="openCountdownModal()">＋ Track Milestone</button>
-            </div>
-          </div>
-          <div class="countdown-grid" id="countdownGrid"></div>
-          <div class="empty-state-retro" id="countdownEmpty">
-            <img src="assets/star.png" class="empty-star-icon" alt="Star" />
-            <p>No countdowns yet.<br />Track an upcoming date, trip, or birthday.</p>
-          </div>
-        </section>
-
-        <!-- ==================== MOOD TRACKER PANEL ==================== -->
-        <section class="tab-panel" id="panel-mood" role="tabpanel">
-          <div class="panel-header-retro">
-            <div class="panel-title-group">
-              <h2 class="retro-heading">Vibe Check</h2>
-              <span class="retro-subheading">Daily mood log & check-in for both of us</span>
-            </div>
-            <div class="date-selector-box">
-              <span class="retro-label">Date:</span>
-              <input type="date" id="moodDatePicker" class="retro-date-input" />
+              <button class="retro-btn-secondary" onclick="openPaintModal()">🎨 Open Canvas</button>
             </div>
           </div>
 
-          <div class="mood-container-grid">
+          <!-- Section 1: Daily Vibe Check -->
+          <div class="mood-container-grid" style="margin-bottom: 24px;">
             <!-- Yuki Mood -->
             <div class="mood-box-retro yuki-mood-box tilt-card">
               <div class="mood-box-header">
@@ -558,10 +531,45 @@
             </div>
           </div>
 
-          <!-- Mood History -->
+          <!-- Section 2: Love Notes & Memos -->
+          <div style="margin-bottom: 24px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.4); padding-bottom: 8px;">
+              <div>
+                <h3 class="history-title" style="margin: 0; font-size: 1.05rem;">Love Notes &amp; Sticky Memos</h3>
+                <span class="retro-subheading" style="font-size: 0.78rem; color: #64748b;">Little love notes, doodles, and sweet thoughts left for each other</span>
+              </div>
+              <button class="retro-btn-action" style="padding: 4px 12px; font-size: 0.8rem;" onclick="openNoteModal()">＋ Note Baru</button>
+            </div>
+            <div class="notes-grid" id="notesGrid"></div>
+            <div class="empty-state-retro" id="notesEmpty">
+              <span class="empty-icon-emoji">💌</span>
+              <p>No notes yet.<br />Leave a sweet message or doodle for them to wake up to.</p>
+            </div>
+          </div>
+
+          <!-- Section 3: Recent Vibe History -->
           <div class="mood-history-wrapper">
             <h3 class="history-title">Recent Vibe Checks</h3>
             <div id="moodHistory" class="mood-history-cards"></div>
+          </div>
+        </section>
+
+        <!-- ==================== COUNTDOWN PANEL ==================== -->
+        <section class="tab-panel" id="panel-countdown" role="tabpanel">
+          <div class="panel-header-retro">
+            <div class="panel-title-group">
+              <h2 class="retro-heading">Our Milestones</h2>
+              <span class="retro-subheading">Counting down to all our special days & memories</span>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="retro-btn-action" style="background: linear-gradient(180deg, #60a5fa 0%, #2563eb 100%);" onclick="openGCalSyncModal()" title="Sync Milestones & Anniv to Google Calendar">📅 Sync to Google Calendar</button>
+              <button class="retro-btn-action" onclick="openCountdownModal()">＋ Track Milestone</button>
+            </div>
+          </div>
+          <div class="countdown-grid" id="countdownGrid"></div>
+          <div class="empty-state-retro" id="countdownEmpty">
+            <img src="assets/star.png" class="empty-star-icon" alt="Star" />
+            <p>No countdowns yet.<br />Track an upcoming date, trip, or birthday.</p>
           </div>
         </section>
 
@@ -1079,6 +1087,197 @@
           </div>
         </section>
 
+        <!-- ==================== HOST LIVE TRACKER PANEL ==================== -->
+        <section class="tab-panel" id="panel-hosttracker" role="tabpanel">
+          
+          <!-- Top Aero Header -->
+          <div class="panel-header-retro bento-top-navbar host-tracker-header">
+            <div class="bento-breadcrumb-wrap">
+              <span class="bento-logo-icon">🎯</span>
+              <div>
+                <span class="bento-crumb-main">Yume's Host Tracker</span>
+                <span class="bento-crumb-sep">›</span>
+                <span class="bento-crumb-sub">Pengumpulan Tugas Harian TikTok Live Host</span>
+              </div>
+            </div>
+
+            <div class="bento-nav-actions">
+              <button class="bento-pill-btn btn-inflow" onclick="window.HostTracker.copyDailyReport()" title="Salin Rekap Format Laporan untuk WhatsApp / Telegram Agensi">
+                <span>📋</span>
+                <span>Salin Laporan WA</span>
+              </button>
+              <button class="bento-pill-btn" onclick="window.HostTracker.exportTasksCSV()" title="Download Rekap Tugas CSV untuk Excel">
+                <span>📥</span>
+                <span>Export CSV Tugas</span>
+              </button>
+              <button class="bento-pill-btn btn-danger-pill" onclick="window.HostTracker.resetDailyTasks()" title="Reset Checklist Hari Baru">
+                <span>🔄</span>
+                <span>Reset Hari Baru</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Hero KPI Bento (FOKUS UTAMA: PENGUMPULAN TUGAS HARIAN YUME) -->
+          <div class="host-hero-kpi-grid single-hero">
+            <div class="host-kpi-card glass-card task-kpi-hero full-width-kpi">
+              <div class="kpi-icon-wrap kpi-task-icon">📋</div>
+              <div class="kpi-details">
+                <div class="kpi-top-title-row">
+                  <span class="kpi-label" style="color: #065f46; font-size: 0.95rem;">Pengumpulan Tugas Harian Yume (Fokus Utama)</span>
+                  <span class="kpi-sub-text">Sudah Selesai: <strong id="statTasksDone" style="color: #059669;">28</strong> / <span id="statTasksTotal">54</span> | Belum: <strong id="statTasksPending" style="color: #d97706;">26</strong></span>
+                </div>
+                <div class="kpi-val" id="hostTaskProgressText" style="color: #065f46;">28 / 54 Selesai (52%)</div>
+                <div class="kpi-progress-bar bar-green" style="height: 12px;">
+                  <div class="kpi-progress-fill fill-green" id="hostTaskProgressFill" style="width: 52%;"></div>
+                </div>
+                <div class="kpi-meta-row" style="margin-top: 10px;">
+                  <span class="kpi-hint-text">💡 <em>Centang target yang sudah setor tugas, lalu klik "Salin Laporan WA" untuk langsung kirim rekap ke grup.</em></span>
+                  <div class="kpi-hero-buttons">
+                    <button class="mini-kpi-btn hero-add-btn" onclick="window.HostTracker.openAddTaskModal()" title="Tambah Target Baru">➕ Tambah Target</button>
+                    <button class="mini-kpi-btn hero-wa-btn" onclick="window.HostTracker.copyDailyReport()" title="Salin Rekap WA">📋 Salin Rekap WA</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Host Sub-Nav Switcher (2 Tab Sederhana: Tugas Utama vs Data Referensi) -->
+          <div class="host-subtab-bar">
+            <button class="host-subtab-btn active host-subtab-highlight" data-subtab="tasks" onclick="window.HostTracker.switchSubTab('tasks')">
+              <span>📋</span>
+              <span>Pengumpulan Tugas Harian (Sheet 3)</span>
+              <span class="host-subtab-badge">Fokus Harian</span>
+            </button>
+            <button class="host-subtab-btn" data-subtab="spenders" onclick="window.HostTracker.switchSubTab('spenders')">
+              <span>📖</span>
+              <span>Daftar Akun Spender (Referensi)</span>
+            </button>
+          </div>
+
+          <!-- ================= SUBPANEL 1: SPENDERS (DATA REFERENSI) ================= -->
+          <div class="host-subtab-panel" id="host-subpanel-spenders">
+            <!-- Toolbar: Search, Filters, Sort & Tambah Spender (Di Sini Saja) -->
+            <div class="host-toolbar-box glass-card">
+              <div class="toolbar-search-wrap">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="spenderSearchInput" class="host-search-input" placeholder="Cari nama akun, @username, tier, catatan..." />
+              </div>
+
+              <!-- Filter Pills -->
+              <div class="toolbar-filters">
+                <button class="filter-pill-btn active" data-filter="all" onclick="window.HostTracker.setSpenderFilter('all')">Semua (329)</button>
+                <button class="filter-pill-btn" data-filter="uncontacted" onclick="window.HostTracker.setSpenderFilter('uncontacted')">⏳ Belum Chat</button>
+                <button class="filter-pill-btn" data-filter="contacted" onclick="window.HostTracker.setSpenderFilter('contacted')">✅ Sudah Chat</button>
+                <button class="filter-pill-btn" data-filter="replied" onclick="window.HostTracker.setSpenderFilter('replied')">💌 Dibalas</button>
+                <span class="filter-divider">|</span>
+                <button class="filter-pill-btn pill-whale" data-filter="whale" onclick="window.HostTracker.setSpenderFilter('whale')">🐋 Whale</button>
+                <button class="filter-pill-btn pill-high" data-filter="high" onclick="window.HostTracker.setSpenderFilter('high')">⭐ High</button>
+                <button class="filter-pill-btn pill-supporter" data-filter="supporter" onclick="window.HostTracker.setSpenderFilter('supporter')">💖 Supporter</button>
+              </div>
+
+              <!-- Action Tambah Spender & Sort Dropdown -->
+              <div class="toolbar-sort-wrap">
+                <button type="button" class="bento-pill-btn btn-outflow" onclick="window.HostTracker.openAddSpenderModal()" title="Tambah Akun Spender Baru">
+                  <span>➕ Tambah Spender</span>
+                </button>
+                <select id="spenderSortSelect" class="host-select-input">
+                  <option value="koin_desc">🪙 Koin Tertinggi</option>
+                  <option value="hadiah_desc">🎁 Hadiah Terbanyak</option>
+                  <option value="tier_desc">⭐ Tier Tertinggi</option>
+                  <option value="uncontacted_first">⏳ Belum Chat Dahulu</option>
+                  <option value="name_asc">🔤 Nama Akun (A-Z)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Table Header Stats Info -->
+            <div class="table-meta-bar">
+              <span id="spendersCountBadge" class="table-count-badge">329 Spender (Data Referensi)</span>
+              <div class="table-hints">
+                <span>💡 <em>Klik nama akun atau tombol 🎵 Cari TikTok untuk langsung membuka profil / pencarian TikTok</em></span>
+              </div>
+            </div>
+
+            <!-- Spenders Table (Desktop) -->
+            <div class="host-table-responsive glass-card">
+              <table class="host-data-table">
+                <thead>
+                  <tr>
+                    <th style="width: 45px;">No</th>
+                    <th style="width: 220px;">Nama Akun &amp; TikTok</th>
+                    <th style="width: 140px;">Label &amp; Tier</th>
+                    <th style="width: 170px;">Total Koin &amp; Hadiah</th>
+                    <th>Catatan &amp; Keterangan</th>
+                    <th style="width: 130px; text-align: center;">Sudah Chat?</th>
+                    <th style="width: 110px; text-align: center;">Dibalas?</th>
+                    <th style="width: 150px; text-align: center;">Aksi TikTok</th>
+                  </tr>
+                </thead>
+                <tbody id="spendersTableBody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Mobile Cards Container (Visible on small screens) -->
+            <div class="host-mobile-cards-container" id="spendersCardsMobile"></div>
+
+            <!-- Spender Lightweight Pagination Bar -->
+            <div class="spender-pagination-bar" id="spenderPaginationBar"></div>
+          </div>
+
+          <!-- ================= SUBPANEL 2: TASKS (FOKUS UTAMA HARIAN YUME) ================= -->
+          <div class="host-subtab-panel active" id="host-subpanel-tasks">
+            
+            <!-- Quick Add Target Bar (Sangat Mudah & Langsung Masuk) -->
+            <div class="tasks-quick-add-box glass-card">
+              <form onsubmit="window.HostTracker.submitInlineNewTask(event)" class="tasks-inline-form">
+                <div class="tasks-inline-input-wrap">
+                  <span class="tasks-input-icon">➕</span>
+                  <input type="text" id="inlineNewTaskInput" class="tasks-inline-input" placeholder="Ketik nama akun / target tugas baru untuk Yume (lalu tekan Enter atau klik Tambah)..." autocomplete="off" />
+                </div>
+                <button type="submit" class="bento-pill-btn btn-add-target-solid">
+                  <span>➕</span>
+                  <span>Tambah Target</span>
+                </button>
+              </form>
+            </div>
+
+            <div class="tasks-toolbar glass-card">
+              <div class="tasks-toolbar-left">
+                <span class="tasks-tb-title">Checklist Pengumpulan Tugas Harian Yume (Sheet 3)</span>
+                <span class="tasks-tb-sub">Centang nama akun/target yang sudah mengumpulkan tugas hari ini</span>
+              </div>
+              <div class="tasks-toolbar-actions">
+                <button class="bento-pill-btn btn-inflow" onclick="window.HostTracker.copyDailyReport()">📋 Salin Rekap WA</button>
+                <button class="bento-pill-btn" onclick="window.HostTracker.openAddTaskModal()">➕ Tambah Target</button>
+                <button class="bento-pill-btn" onclick="window.HostTracker.markAllTasksDone()">✅ Selesai Semua</button>
+                <button class="bento-pill-btn btn-danger-pill" onclick="window.HostTracker.resetDailyTasks()">🔄 Reset Hari Baru</button>
+              </div>
+            </div>
+
+            <div class="tasks-filters-row">
+              <div class="toolbar-search-wrap" style="max-width: 280px;">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="taskSearchInput" class="host-search-input" placeholder="Cari nama tugas/target..." />
+              </div>
+
+              <div class="task-filter-pills">
+                <button class="task-filter-pill active" data-filter="all" onclick="window.HostTracker.setTaskFilter('all')">Semua (54)</button>
+                <button class="task-filter-pill" data-filter="pending" onclick="window.HostTracker.setTaskFilter('pending')">⏳ Belum Selesai</button>
+                <button class="task-filter-pill" data-filter="completed" onclick="window.HostTracker.setTaskFilter('completed')">✅ Sudah Selesai</button>
+              </div>
+
+              <span id="tasksCountBadge" class="table-count-badge">28 / 54 Selesai</span>
+            </div>
+
+            <!-- Tasks Grid Container -->
+            <div class="tasks-grid-list" id="tasksListContainer">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </section>
+
       </div>
     </div>
   </div>
@@ -1156,7 +1355,7 @@
           </div>
           <div class="start-item" onclick="restoreAndSwitchTab('lovenotes'); toggleStartMenu();">
             <span class="item-icon">💌</span>
-            <div class="item-text"><strong>Love Notes</strong><small>Sweet messages & doodles</small></div>
+            <div class="item-text"><strong>Love &amp; Vibes</strong><small>Sweet notes &amp; daily mood check-in</small></div>
           </div>
           <div class="start-item" onclick="spawnFloatingBubbleSwarm(); toggleStartMenu();">
             <span class="item-icon">🫧</span>
@@ -1169,6 +1368,10 @@
           <div class="start-item" onclick="openCaptchaModal(); toggleStartMenu();">
             <span class="item-icon">🧩</span>
             <div class="item-text"><strong>Connection Check</strong><small>Our synergy test</small></div>
+          </div>
+          <div class="start-item" onclick="restoreAndSwitchTab('hosttracker'); toggleStartMenu();">
+            <span class="item-icon">🎯</span>
+            <div class="item-text"><strong>TikTok Host Tracker</strong><small>329 VIP Spenders &amp; Tugas Live Yume</small></div>
           </div>
           <div class="start-divider"></div>
           <div class="start-item" onclick="openCloudSyncModal(); toggleStartMenu();">
@@ -1196,11 +1399,14 @@
       <div class="taskbar-chip" onclick="restoreAndSwitchTab('reminders')">
         <span>Alerts</span>
       </div>
+      <div class="taskbar-chip" onclick="restoreAndSwitchTab('hosttracker')">
+        <span>Host</span>
+      </div>
       <div class="taskbar-chip" onclick="restoreAndSwitchTab('schedule')">
         <span>Schedule</span>
       </div>
       <div class="taskbar-chip" onclick="restoreAndSwitchTab('lovenotes')">
-        <span>Memos</span>
+        <span>Love &amp; Vibes</span>
       </div>
       <div class="taskbar-chip" onclick="spawnFloatingBubbleSwarm()">
         <span>Bubbles</span>
@@ -1229,7 +1435,7 @@
       <div class="window-titlebar">
         <div class="titlebar-left">
           <img src="assets/windows_xp.png" class="titlebar-icon" alt="XP" />
-          <span class="titlebar-text">🎨 untitled - Paint [Canvas Studio]</span>
+          <span class="titlebar-text">untitled - Paint [Canvas Studio]</span>
         </div>
         <button class="win-btn win-close" onclick="closeModal('paintModal')">✕</button>
       </div>
@@ -1471,7 +1677,7 @@
       <div class="window-titlebar">
         <div class="titlebar-left">
           <img src="assets/windows_xp.png" class="titlebar-icon" alt="XP" />
-          <span class="titlebar-text">☁️ YuTa OS — Real-Time Live Sync (Yuki ↔ Nata)</span>
+          <span class="titlebar-text">YuTa OS — Real-Time Live Sync (Yuki ↔ Nata)</span>
         </div>
         <button class="win-btn win-close" onclick="closeModal('cloudSyncModal')">✕</button>
       </div>
@@ -1529,7 +1735,7 @@
       <div class="window-titlebar">
         <div class="titlebar-left">
           <img src="assets/windows_xp.png" class="titlebar-icon" alt="XP" />
-          <span class="titlebar-text">📅 YuTa — Google Calendar Lifetime Sync</span>
+          <span class="titlebar-text">YuTa — Google Calendar Lifetime Sync</span>
         </div>
         <button class="win-btn win-close" onclick="closeModal('gcalSyncModal')">✕</button>
       </div>
@@ -1799,7 +2005,7 @@
   <div class="modal-backdrop" id="modalSavingsGoal" style="display: none;" onclick="closeModalOnBackdrop(event, 'modalSavingsGoal')">
     <div class="modal-dialog" onclick="event.stopPropagation()">
       <div class="modal-header">
-        <h3 class="modal-title">🌟 Tambah Target Tabungan</h3>
+        <h3 class="modal-title">Tambah Target Tabungan</h3>
         <button class="modal-close-btn" onclick="closeSavingsGoalModal()">✕</button>
       </div>
 
@@ -1877,6 +2083,141 @@
     </div>
   </div>
 
+  <!-- ==================== MODAL: HOST CHAT TEMPLATES ==================== -->
+  <div class="modal-overlay" id="hostChatModal" role="dialog" aria-modal="true">
+    <div class="modal-window glass-card" style="max-width: 580px;">
+      <div class="modal-titlebar">
+        <div class="modal-title-left">
+          <span class="modal-icon">💬</span>
+          <span class="modal-heading">Template Sapaan Spender TikTok</span>
+        </div>
+        <button class="modal-close" onclick="window.HostTracker.closeChatModal()">✕</button>
+      </div>
+      <div class="modal-body-retro">
+        <!-- Target Spender Info -->
+        <div class="chat-modal-spender-card">
+          <div>
+            <strong class="cm-name" id="chatModalSpenderName">Spender Name</strong>
+            <span class="cm-uname" id="chatModalSpenderUname">@username</span>
+            <div id="chatModalSpenderKoin" style="font-size: 0.74rem; color: #b45309; font-weight: 700; margin-top: 2px;">🪙 0 koin</div>
+          </div>
+          <span class="cm-badge" id="chatModalSpenderBadge">Whale</span>
+        </div>
+
+        <div style="font-size: 0.78rem; font-weight: 700; color: #0369a1; margin-bottom: 8px;">
+          Pilih Template Sapaan Manis &amp; Santun untuk Nata:
+        </div>
+
+        <!-- Template cards list -->
+        <div class="chat-templates-list" id="chatTemplatesList">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Custom editor -->
+        <div class="chat-editor-wrap">
+          <label class="chat-editor-label" for="chatCustomEditor">Edit / Sesuaikan Pesan (Live):</label>
+          <textarea id="chatCustomEditor" class="chat-custom-textarea" placeholder="Teks template akan muncul di sini..."></textarea>
+        </div>
+
+        <div class="modal-footer-retro" style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 0.72rem; color: #64748b;">💡 <em>Menyalin pesan akan otomatis menandai spender 'Sudah Chat'</em></span>
+          <div style="display: flex; gap: 8px;">
+            <button type="button" class="retro-btn-cancel" onclick="window.HostTracker.closeChatModal()">Tutup</button>
+            <button type="button" class="primary-btn" onclick="window.HostTracker.copyCustomEditorText()">📋 Salin Teks</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: ADD NEW SPENDER ==================== -->
+  <div class="modal-overlay" id="addSpenderModal" role="dialog" aria-modal="true">
+    <div class="modal-window glass-card" style="max-width: 500px;">
+      <div class="modal-titlebar">
+        <div class="modal-title-left">
+          <span class="modal-icon">➕</span>
+          <span class="modal-heading">Tambah Akun Spender Baru</span>
+        </div>
+        <button class="modal-close" onclick="window.HostTracker.closeAddSpenderModal()">✕</button>
+      </div>
+      <div class="modal-body-retro">
+        <form onsubmit="window.HostTracker.submitNewSpender(event)">
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label class="form-label" for="newSpenderName">Nama Akun / Panggilan *</label>
+            <input type="text" id="newSpenderName" class="form-input" placeholder="Contoh: Kak Budi, SultanRoom, dll." required />
+          </div>
+
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label class="form-label" for="newSpenderUname">Username TikTok (@)</label>
+            <input type="text" id="newSpenderUname" class="form-input" placeholder="Contoh: @budi_tiktok123" />
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px;">
+            <div class="form-group">
+              <label class="form-label" for="newSpenderKoin">Total Koin</label>
+              <input type="number" id="newSpenderKoin" class="form-input" placeholder="0" min="0" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="newSpenderHadiah">Total Hadiah (Gifts)</label>
+              <input type="number" id="newSpenderHadiah" class="form-input" placeholder="0" min="0" />
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px;">
+            <div class="form-group">
+              <label class="form-label" for="newSpenderTier">Tier Level</label>
+              <input type="number" id="newSpenderTier" class="form-input" placeholder="Misal: 3, 4, 6" min="1" max="50" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="newSpenderLabel">Label Utama</label>
+              <select id="newSpenderLabel" class="form-input">
+                <option value="Whale">🐋 Whale (Top Spender)</option>
+                <option value="High spender">⭐ High Spender</option>
+                <option value="Supporter" selected>💖 Supporter</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label class="form-label" for="newSpenderNote">Catatan Khusus</label>
+            <input type="text" id="newSpenderNote" class="form-input" placeholder="Misal: Suka gift singa, loyal di room" />
+          </div>
+
+          <div class="modal-footer-retro" style="display: flex; justify-content: flex-end; gap: 8px;">
+            <button type="button" class="retro-btn-cancel" onclick="window.HostTracker.closeAddSpenderModal()">Batal</button>
+            <button type="submit" class="primary-btn">Simpan Spender</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: ADD NEW TASK TARGET ==================== -->
+  <div class="modal-overlay" id="addTaskModal" role="dialog" aria-modal="true">
+    <div class="modal-window glass-card" style="max-width: 440px;">
+      <div class="modal-titlebar">
+        <div class="modal-title-left">
+          <span class="modal-icon">➕</span>
+          <span class="modal-heading">Tambah Target Tugas Harian</span>
+        </div>
+        <button class="modal-close" onclick="window.HostTracker.closeAddTaskModal()">✕</button>
+      </div>
+      <div class="modal-body-retro">
+        <form onsubmit="window.HostTracker.submitModalNewTask(event)">
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label class="form-label" for="modalNewTaskInput">Nama Akun / Target Tugas *</label>
+            <input type="text" id="modalNewTaskInput" class="form-input" placeholder="Misal: kak_budi, room_vip, donatur_x" required autofocus autocomplete="off" />
+            <small style="color: #64748b; font-size: 0.72rem; display: block; margin-top: 5px;">Target ini akan langsung masuk ke checklist tugas harian Yume.</small>
+          </div>
+          <div class="modal-footer-retro" style="display: flex; justify-content: flex-end; gap: 8px;">
+            <button type="button" class="retro-btn-cancel" onclick="window.HostTracker.closeAddTaskModal()">Batal</button>
+            <button type="submit" class="primary-btn" style="background: linear-gradient(135deg, #10b981, #059669); border-color: #047857;">➕ Simpan Target</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Notification -->
   <div class="retro-toast" id="toast"></div>
 
@@ -1899,6 +2240,9 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 
+  <!-- Yume's Host Tracker Data & Logic -->
+  <script src="host_tracker_data.js"></script>
   <script src="app.js?v=20261005_v78"></script>
+  <script src="host_tracker.js"></script>
 </body>
 </html>
