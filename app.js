@@ -3895,6 +3895,11 @@ function applyRemoteData(remoteData) {
         const newTxsToAdd = requiredTxs.filter(tx => !existingIds.has(tx.id));
         if (newTxsToAdd.length > 0) {
           record.payload.unshift(...newTxsToAdd);
+          setTimeout(() => {
+            if (typeof pushKeyToCloud === 'function') {
+              pushKeyToCloud('yuta_couple_finances', record.payload);
+            }
+          }, 300);
         }
       }
 
