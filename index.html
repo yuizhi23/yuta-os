@@ -789,6 +789,7 @@
                 <label class="bento-label">Pilih Dompet:</label>
                 <select id="quickDirectWallet" class="bento-styled-select">
                   <option value="yuki" selected>🐈 Dompet Yuki</option>
+                  <option value="tabungan_yuki">🏦 Tabungan Yuki</option>
                   <option value="nata">🐈‍⬛ Dompet Nata</option>
                 </select>
               </div>
@@ -913,6 +914,7 @@
                 <div class="bento-pill-group">
                   <button class="wallet-pill active" data-person="all" onclick="setFinanceFilterPerson('all')">All</button>
                   <button class="wallet-pill" data-person="yuki" onclick="setFinanceFilterPerson('yuki')">🐈 Dompet Yuki</button>
+                  <button class="wallet-pill" data-person="tabungan_yuki" onclick="setFinanceFilterPerson('tabungan_yuki')">🏦 Tabungan Yuki</button>
                   <button class="wallet-pill" data-person="nata" onclick="setFinanceFilterPerson('nata')">🐈‍⬛ Dompet Nata</button>
                 </div>
 
@@ -1125,6 +1127,27 @@
                 <span>🔄</span>
                 <span>Reset Hari Baru</span>
               </button>
+            </div>
+          </div>
+
+          <!-- Running Ticker Marquee Announcement -->
+          <div class="host-marquee-container" title="Pesan Pengingat Chat Spender (Arahkan kursor untuk jeda)">
+            <div class="host-marquee-tag">
+              <span class="marquee-tag-pulse"></span>
+              <span class="marquee-tag-icon">💬</span>
+              <span class="marquee-tag-text">PENGINGAT VIP</span>
+            </div>
+            <div class="host-marquee-viewport">
+              <div class="host-marquee-track">
+                <span class="marquee-item-text">🚨 <strong>jangan lupa balesin:</strong> <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('kimchi')">kimchi</span>, <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('kambing')">kambing</span>, <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('fer')">fer</span>, <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('hansell')">hansell</span>! 💬💌</span>
+                <span class="marquee-dot">✦</span>
+                <span class="marquee-item-text">✨ Prioritas balas spender: <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('kimchi')">kimchi</span> • <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('kambing')">kambing</span> • <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('fer')">fer</span> • <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('hansell')">hansell</span> 🌟</span>
+                <span class="marquee-dot">✦</span>
+                <span class="marquee-item-text">🚨 <strong>jangan lupa balesin:</strong> <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('kimchi')">kimchi</span>, <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('kambing')">kambing</span>, <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('fer')">fer</span>, <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('hansell')">hansell</span>! 💬💌</span>
+                <span class="marquee-dot">✦</span>
+                <span class="marquee-item-text">✨ Prioritas balas spender: <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('kimchi')">kimchi</span> • <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('kambing')">kambing</span> • <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('fer')">fer</span> • <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('hansell')">hansell</span> 🌟</span>
+                <span class="marquee-dot">✦</span>
+              </div>
             </div>
           </div>
 
@@ -1975,6 +1998,7 @@
             <label class="form-label" for="financeModalWallet">Pilih Dompet</label>
             <select id="financeModalWallet" class="form-select">
               <option value="yuki" selected>🐈 Dompet Yuki</option>
+              <option value="tabungan_yuki">🏦 Tabungan Yuki</option>
               <option value="nata">🐈‍⬛ Dompet Nata</option>
             </select>
           </div>
@@ -2258,8 +2282,8 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 
   <!-- Yume's Host Tracker Data & Logic -->
-  <script src="host_tracker_data.js?v=20261011_v3"></script>
-  <script src="app.js?v=20261011_v3"></script>
-  <script src="host_tracker.js?v=20261011_v3"></script>
+  <script src="host_tracker_data.js?v=20261012_v2"></script>
+  <script src="app.js?v=20261012_v2"></script>
+  <script src="host_tracker.js?v=20261012_v2"></script>
 </body>
 </html>

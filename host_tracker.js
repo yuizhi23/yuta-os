@@ -1341,6 +1341,21 @@
       });
       renderSpendersTable();
     },
+    searchSpenderByName: function (name) {
+      this.switchSubTab('spenders');
+      spenderFilter = 'all';
+      spenderSearch = name;
+      spenderPage = 1;
+      const input = document.getElementById('spenderSearchInput');
+      if (input) input.value = name;
+      document.querySelectorAll('.filter-pill-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-filter') === 'all');
+      });
+      triggerSound('bubble');
+      renderSpendersTable();
+      const toolbar = document.querySelector('.host-toolbar-box');
+      if (toolbar) toolbar.scrollIntoView({ behavior: 'smooth' });
+    },
     setTaskFilter: function (filter) {
       taskFilter = filter;
       document.querySelectorAll('.task-filter-pill').forEach(btn => {

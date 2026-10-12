@@ -3501,6 +3501,114 @@ function applyRemoteData(remoteData) {
       if (cloudKey === 'yuta_couple_finances' && Array.isArray(record.payload)) {
         const requiredTxs = [
           {
+            id: 'tx_yuki_exp_nescafe_13k',
+            type: 'expense',
+            amount: 13000,
+            category: 'food',
+            person: 'yuki',
+            wallet: 'yuki',
+            paymentMethod: 'qris',
+            desc: 'Nescafe',
+            date: '2026-10-12',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'yuki',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_yuki_exp_belanja_sopi_25k',
+            type: 'expense',
+            amount: 25000,
+            category: 'shopping',
+            person: 'yuki',
+            wallet: 'yuki',
+            paymentMethod: 'qris',
+            desc: 'Belanja sopi',
+            date: '2026-10-12',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'yuki',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_yuki_exp_jus_15k',
+            type: 'expense',
+            amount: 15000,
+            category: 'food',
+            person: 'yuki',
+            wallet: 'yuki',
+            paymentMethod: 'cash',
+            desc: 'Jus',
+            date: '2026-10-12',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'yuki',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_yuki_exp_pecel_lele_47k',
+            type: 'expense',
+            amount: 47000,
+            category: 'food',
+            person: 'yuki',
+            wallet: 'yuki',
+            paymentMethod: 'qris',
+            desc: 'Pecel lele',
+            date: '2026-10-12',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'yuki',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_yuki_tab_exp_sayur_86k',
+            type: 'expense',
+            amount: 86000,
+            category: 'food',
+            person: 'yuki',
+            wallet: 'tabungan_yuki',
+            source: 'tabungan',
+            paymentMethod: 'qris',
+            desc: 'Belanja sayur',
+            date: '2026-10-12',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'yuki',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_yuki_tab_exp_ttcoins_20k',
+            type: 'expense',
+            amount: 20000,
+            category: 'reward',
+            person: 'yuki',
+            wallet: 'tabungan_yuki',
+            source: 'tabungan',
+            paymentMethod: 'qris',
+            desc: 'TT Coins',
+            date: '2026-10-12',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'yuki',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_yuki_tab_exp_bubur_14k',
+            type: 'expense',
+            amount: 14000,
+            category: 'food',
+            person: 'yuki',
+            wallet: 'tabungan_yuki',
+            source: 'tabungan',
+            paymentMethod: 'cash',
+            desc: 'Bubur',
+            date: '2026-10-12',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'yuki',
+            splitOwedAmount: 0
+          },
+          {
             id: 'tx_yuki_inc_240k',
             type: 'income',
             amount: 240000,
@@ -4602,6 +4710,114 @@ function getFinances() {
 
   const initialTxs = [
     {
+      id: 'tx_yuki_exp_nescafe_13k',
+      type: 'expense',
+      amount: 13000,
+      category: 'food',
+      person: 'yuki',
+      wallet: 'yuki',
+      paymentMethod: 'qris',
+      desc: 'Nescafe',
+      date: '2026-10-12',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'yuki',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_yuki_exp_belanja_sopi_25k',
+      type: 'expense',
+      amount: 25000,
+      category: 'shopping',
+      person: 'yuki',
+      wallet: 'yuki',
+      paymentMethod: 'qris',
+      desc: 'Belanja sopi',
+      date: '2026-10-12',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'yuki',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_yuki_exp_jus_15k',
+      type: 'expense',
+      amount: 15000,
+      category: 'food',
+      person: 'yuki',
+      wallet: 'yuki',
+      paymentMethod: 'cash',
+      desc: 'Jus',
+      date: '2026-10-12',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'yuki',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_yuki_exp_pecel_lele_47k',
+      type: 'expense',
+      amount: 47000,
+      category: 'food',
+      person: 'yuki',
+      wallet: 'yuki',
+      paymentMethod: 'qris',
+      desc: 'Pecel lele',
+      date: '2026-10-12',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'yuki',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_yuki_tab_exp_sayur_86k',
+      type: 'expense',
+      amount: 86000,
+      category: 'food',
+      person: 'yuki',
+      wallet: 'tabungan_yuki',
+      source: 'tabungan',
+      paymentMethod: 'qris',
+      desc: 'Belanja sayur',
+      date: '2026-10-12',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'yuki',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_yuki_tab_exp_ttcoins_20k',
+      type: 'expense',
+      amount: 20000,
+      category: 'reward',
+      person: 'yuki',
+      wallet: 'tabungan_yuki',
+      source: 'tabungan',
+      paymentMethod: 'qris',
+      desc: 'TT Coins',
+      date: '2026-10-12',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'yuki',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_yuki_tab_exp_bubur_14k',
+      type: 'expense',
+      amount: 14000,
+      category: 'food',
+      person: 'yuki',
+      wallet: 'tabungan_yuki',
+      source: 'tabungan',
+      paymentMethod: 'cash',
+      desc: 'Bubur',
+      date: '2026-10-12',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'yuki',
+      splitOwedAmount: 0
+    },
+    {
       id: 'tx_yuki_inc_240k',
       type: 'income',
       amount: 240000,
@@ -5048,6 +5264,8 @@ function renderFinances() {
   // 1. Calculate stats for Yuki and Nata separately
   let yukiIncome = 0;
   let yukiExpense = 0;
+  let yukiWalletExpense = 0;
+  let yukiTabunganExpense = 0;
   let nataIncome = 0;
   let nataExpense = 0;
   let totalIncome = 0;
@@ -5059,7 +5277,8 @@ function renderFinances() {
 
   allFinances.forEach(tx => {
     const amt = Number(tx.amount) || 0;
-    const isYuki = tx.person === 'yuki' || tx.wallet === 'yuki';
+    const isTabunganYuki = tx.wallet === 'tabungan_yuki' || (tx.person === 'yuki' && tx.source === 'tabungan');
+    const isYuki = tx.person === 'yuki' || tx.wallet === 'yuki' || isTabunganYuki;
 
     if (tx.type === 'income') {
       totalIncome += amt;
@@ -5069,8 +5288,16 @@ function renderFinances() {
     } else {
       totalExpense += amt;
       countExpense++;
-      if (isYuki) yukiExpense += amt;
-      else nataExpense += amt;
+      if (isYuki) {
+        yukiExpense += amt;
+        if (isTabunganYuki) {
+          yukiTabunganExpense += amt;
+        } else {
+          yukiWalletExpense += amt;
+        }
+      } else {
+        nataExpense += amt;
+      }
 
       const catKey = tx.category || 'other';
       catExpenseMap[catKey] = (catExpenseMap[catKey] || 0) + amt;
@@ -5095,8 +5322,20 @@ function renderFinances() {
   if (yukiIncEl) yukiIncEl.textContent = '+' + formatRupiah(yukiIncome);
   if (yukiOutEl) yukiOutEl.textContent = '-' + formatRupiah(yukiExpense);
   if (yukiExpBarEl) yukiExpBarEl.style.width = `${yukiExpRatio}%`;
-  if (yukiRatioText) yukiRatioText.textContent = `Outcome ${yukiExpRatio}% dari Income`;
-  if (yukiExpAmtEl) yukiExpAmtEl.textContent = `Outcome: ${formatRupiah(yukiExpense)}`;
+  if (yukiRatioText) {
+    if (yukiTabunganExpense > 0) {
+      yukiRatioText.textContent = `Outcome ${yukiExpRatio}% (Tabungan: ${formatRupiah(yukiTabunganExpense)})`;
+    } else {
+      yukiRatioText.textContent = `Outcome ${yukiExpRatio}% dari Income`;
+    }
+  }
+  if (yukiExpAmtEl) {
+    if (yukiTabunganExpense > 0) {
+      yukiExpAmtEl.textContent = `Dompet: ${formatRupiah(yukiWalletExpense)} | Tabungan: ${formatRupiah(yukiTabunganExpense)}`;
+    } else {
+      yukiExpAmtEl.textContent = `Outcome: ${formatRupiah(yukiExpense)}`;
+    }
+  }
   if (yukiStatusBadge) {
     yukiStatusBadge.textContent = yukiBalance >= 0 ? 'Surplus 🟢' : 'Defisit ⚠️';
     yukiStatusBadge.className = yukiBalance >= 0 ? 'bento-tag-pill tag-yuki-pill' : 'bento-tag-pill tag-danger';
@@ -5133,11 +5372,19 @@ function renderFinances() {
 
   if (vcardYukiAmt) vcardYukiAmt.textContent = formatRupiah(yukiBalance);
   if (vcardYukiShare) vcardYukiShare.textContent = yukiBalance >= 0 ? 'Surplus 🟢' : 'Defisit ⚠️';
-  if (vcardYukiSubStats) vcardYukiSubStats.textContent = `In: +${formatRupiah(yukiIncome)} | Out: -${formatRupiah(yukiExpense)}`;
+  if (vcardYukiSubStats) {
+    if (yukiTabunganExpense > 0) {
+      vcardYukiSubStats.textContent = `In: +${formatRupiah(yukiIncome)} | Out: -${formatRupiah(yukiExpense)} (Tab: ${formatRupiah(yukiTabunganExpense)})`;
+    } else {
+      vcardYukiSubStats.textContent = `In: +${formatRupiah(yukiIncome)} | Out: -${formatRupiah(yukiExpense)}`;
+    }
+  }
 
   if (vcardNataAmt) vcardNataAmt.textContent = formatRupiah(nataBalance);
   if (vcardNataShare) vcardNataShare.textContent = nataBalance >= 0 ? 'Surplus 🟢' : 'Defisit ⚠️';
-  if (vcardNataSubStats) vcardNataSubStats.textContent = `In: +${formatRupiah(nataIncome)} | Out: -${formatRupiah(nataExpense)}`;
+  if (vcardNataSubStats) {
+    vcardNataSubStats.textContent = `In: +${formatRupiah(nataIncome)} | Out: -${formatRupiah(nataExpense)}`;
+  }
 
   // 5. Update Savings Motivation Quote
   updateSavingQuotesUI();
@@ -5179,11 +5426,22 @@ function renderFinances() {
 
   // 8. Filter & Render Transaction History List
   let filtered = allFinances.filter(tx => {
-    if (financeFilterPerson !== 'all' && tx.person !== financeFilterPerson) return false;
+    if (financeFilterPerson !== 'all') {
+      const isTabunganYuki = tx.wallet === 'tabungan_yuki' || (tx.person === 'yuki' && tx.source === 'tabungan');
+      const isYuki = tx.person === 'yuki' || tx.wallet === 'yuki' || isTabunganYuki;
+      if (financeFilterPerson === 'tabungan_yuki') {
+        if (!isTabunganYuki) return false;
+      } else if (financeFilterPerson === 'yuki') {
+        if (!isYuki || isTabunganYuki) return false;
+      } else if (financeFilterPerson === 'nata') {
+        if (tx.person !== 'nata' && tx.wallet !== 'nata') return false;
+      }
+    }
     if (financeFilterType !== 'all' && tx.type !== financeFilterType) return false;
     if (financeSearchQuery) {
       const catLabel = FINANCE_CATEGORIES[tx.category]?.label || '';
-      const text = `${tx.desc || ''} ${catLabel} ${tx.person || ''} ${tx.amount}`.toLowerCase();
+      const walletText = (tx.wallet === 'tabungan_yuki' || tx.source === 'tabungan') ? 'tabungan' : '';
+      const text = `${tx.desc || ''} ${catLabel} ${tx.person || ''} ${tx.wallet || ''} ${walletText} ${tx.amount}`.toLowerCase();
       if (!text.includes(financeSearchQuery)) return false;
     }
     return true;
@@ -5193,7 +5451,17 @@ function renderFinances() {
   const emptyEl = document.getElementById('financeEmpty');
   const countLabel = document.getElementById('transCountLabel');
 
-  if (countLabel) countLabel.textContent = `${filtered.length} Entries`;
+  if (countLabel) {
+    if (financeFilterPerson === 'tabungan_yuki') {
+      countLabel.textContent = `${filtered.length} Tabungan Yuki`;
+    } else if (financeFilterPerson === 'yuki') {
+      countLabel.textContent = `${filtered.length} Dompet Yuki`;
+    } else if (financeFilterPerson === 'nata') {
+      countLabel.textContent = `${filtered.length} Dompet Nata`;
+    } else {
+      countLabel.textContent = `${filtered.length} Entries`;
+    }
+  }
 
   if (!listEl) return;
 
@@ -5205,41 +5473,123 @@ function renderFinances() {
 
   if (emptyEl) emptyEl.style.display = 'none';
 
-  listEl.innerHTML = filtered.map(tx => {
-    const isIncome = tx.type === 'income';
-    const isYuki = tx.person === 'yuki' || tx.wallet === 'yuki';
-    const personLabel = isYuki ? '🐈 Yuki' : '🐈‍⬛ Nata';
-    const walletLabel = isYuki ? 'Dompet Yuki' : 'Dompet Nata';
-    const personClass = isYuki ? 'tag-yuki' : 'tag-nata';
+  // Sort latest date first
+  filtered.sort((a, b) => {
+    const da = a.date || '';
+    const db = b.date || '';
+    if (da !== db) return db.localeCompare(da);
+    return (b.id || '').localeCompare(a.id || '');
+  });
 
-    return `
-      <div class="trans-item-card ${isIncome ? 'is-income' : 'is-expense'}">
-        <div class="trans-icon-bubble" title="${cat.label}">${cat.icon}</div>
-        <div class="trans-info-col">
-          <div class="trans-title-line">
-            <span class="trans-title">${escapeHtml(tx.desc || cat.label)}</span>
-            <span class="trans-person-tag ${personClass}">${personLabel}</span>
-          </div>
-          <div class="trans-meta-line">
-            <span class="trans-category-tag">${cat.label}</span>
-            <span>•</span>
-            <span>💳 ${walletLabel}</span>
-            <span>•</span>
-            <span>📅 ${tx.date || 'Today'}</span>
-          </div>
+  // Group by date
+  const groupsByDate = {};
+  filtered.forEach(tx => {
+    const d = tx.date || 'Lainnya';
+    if (!groupsByDate[d]) groupsByDate[d] = [];
+    groupsByDate[d].push(tx);
+  });
+
+  const formatFriendlyDate = (dateStr) => {
+    if (!dateStr || dateStr === 'Lainnya') return 'Tanggal Lainnya';
+    try {
+      const parts = dateStr.split('-');
+      if (parts.length === 3) {
+        const year = parseInt(parts[0], 10);
+        const month = parseInt(parts[1], 10) - 1;
+        const day = parseInt(parts[2], 10);
+        const fullMonths = [
+          'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+          'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+        ];
+        const todayStr = (typeof getTodayString === 'function') ? getTodayString() : new Date().toISOString().split('T')[0];
+        if (dateStr === todayStr) {
+          return `${day} ${fullMonths[month]} ${year} (Hari Ini)`;
+        } else if (dateStr === '2026-10-11') {
+          return `${day} ${fullMonths[month]} ${year} (Kemarin)`;
+        }
+        return `${day} ${fullMonths[month]} ${year}`;
+      }
+    } catch (e) {}
+    return dateStr;
+  };
+
+  let html = '';
+  Object.keys(groupsByDate).forEach(dStr => {
+    const groupTxs = groupsByDate[dStr];
+    const groupOutTotal = groupTxs.filter(t => t.type === 'expense').reduce((acc, t) => acc + (Number(t.amount) || 0), 0);
+    const groupInTotal = groupTxs.filter(t => t.type === 'income').reduce((acc, t) => acc + (Number(t.amount) || 0), 0);
+
+    let summaryText = `${groupTxs.length} Transaksi`;
+    if (groupOutTotal > 0 && groupInTotal > 0) {
+      summaryText += ` • Out: -${formatRupiah(groupOutTotal)} | In: +${formatRupiah(groupInTotal)}`;
+    } else if (groupOutTotal > 0) {
+      summaryText += ` • Pengeluaran: -${formatRupiah(groupOutTotal)}`;
+    } else if (groupInTotal > 0) {
+      summaryText += ` • Pemasukan: +${formatRupiah(groupInTotal)}`;
+    }
+
+    html += `
+      <div class="trans-date-group-header">
+        <div class="trans-date-left">
+          <span class="trans-date-cal-icon">📅</span>
+          <span class="trans-date-label">${formatFriendlyDate(dStr)}</span>
         </div>
-        <div class="trans-amount-col">
-          <span class="trans-amount ${isIncome ? 'amount-income' : 'amount-expense'}">
-            ${isIncome ? '+' : '-'}${formatRupiah(tx.amount)}
-          </span>
-        </div>
-        <div class="trans-actions-col">
-          <button class="trans-btn-icon" onclick="openFinanceModal('${tx.type}', '${tx.id}')" title="Edit Entry">✏️</button>
-          <button class="trans-btn-icon trans-btn-del" onclick="deleteFinanceTransaction('${tx.id}')" title="Delete Entry">🗑️</button>
-        </div>
+        <span class="trans-date-badge">${summaryText}</span>
       </div>
     `;
-  }).join('');
+
+    groupTxs.forEach(tx => {
+      const isIncome = tx.type === 'income';
+      const isTabunganYuki = tx.wallet === 'tabungan_yuki' || (tx.person === 'yuki' && tx.source === 'tabungan');
+      const isYuki = tx.person === 'yuki' || tx.wallet === 'yuki' || isTabunganYuki;
+
+      const personLabel = isYuki ? '🐈 Yuki' : '🐈‍⬛ Nata';
+      const personClass = isYuki ? 'tag-yuki' : 'tag-nata';
+
+      let walletLabel = isYuki ? '💳 Dompet Yuki' : '💳 Dompet Nata';
+      let walletClass = isYuki ? 'tag-dompet-yuki' : 'tag-dompet-nata';
+      if (isTabunganYuki) {
+        walletLabel = '🏦 Tabungan Yuki';
+        walletClass = 'tag-tabungan-yuki';
+      }
+
+      const cat = FINANCE_CATEGORIES[tx.category] || { label: 'Lainnya', icon: '✨' };
+      const payMethodLabel = tx.paymentMethod === 'qris' ? '📱 QRIS' : 
+                             tx.paymentMethod === 'transfer' ? '🏦 Transfer' : 
+                             tx.paymentMethod === 'cash' ? '💵 Cash' : '💳 Card';
+
+      html += `
+        <div class="trans-item-card ${isIncome ? 'is-income' : 'is-expense'} ${isTabunganYuki ? 'is-tabungan' : ''}">
+          <div class="trans-icon-bubble" title="${cat.label}">${cat.icon}</div>
+          <div class="trans-info-col">
+            <div class="trans-title-line">
+              <span class="trans-title">${escapeHtml(tx.desc || cat.label)}</span>
+              <span class="trans-person-tag ${personClass}">${personLabel}</span>
+              <span class="trans-wallet-tag ${walletClass}">${walletLabel}</span>
+            </div>
+            <div class="trans-meta-line">
+              <span class="trans-category-tag">${cat.icon} ${cat.label}</span>
+              <span>•</span>
+              <span>${payMethodLabel}</span>
+              <span>•</span>
+              <span>📅 ${tx.date || 'Today'}</span>
+            </div>
+          </div>
+          <div class="trans-amount-col">
+            <span class="trans-amount ${isIncome ? 'amount-income' : 'amount-expense'}">
+              ${isIncome ? '+' : '-'}${formatRupiah(tx.amount)}
+            </span>
+          </div>
+          <div class="trans-actions-col">
+            <button class="trans-btn-icon" onclick="openFinanceModal('${tx.type}', '${tx.id}')" title="Edit Entry">✏️</button>
+            <button class="trans-btn-icon trans-btn-del" onclick="deleteFinanceTransaction('${tx.id}')" title="Delete Entry">🗑️</button>
+          </div>
+        </div>
+      `;
+    });
+  });
+
+  listEl.innerHTML = html;
 }
 
 // ==================== COUPLE SAVINGS MOTIVATION QUOTES ====================
@@ -5348,7 +5698,13 @@ function resetDirectQuickNominal() {
 function onQuickPersonChange(val) {
   const walletSelect = document.getElementById('quickDirectWallet');
   if (walletSelect) {
-    walletSelect.value = val === 'nata' ? 'nata' : 'yuki';
+    if (val === 'nata') {
+      walletSelect.value = 'nata';
+    } else {
+      if (walletSelect.value !== 'tabungan_yuki') {
+        walletSelect.value = 'yuki';
+      }
+    }
   }
 }
 window.onQuickPersonChange = onQuickPersonChange;
