@@ -756,7 +756,7 @@
                 <label class="bento-label">Amount (Rupiah):</label>
                 <div class="bento-input-prefix-wrap">
                   <span class="bento-prefix">Rp</span>
-                  <input type="number" id="quickDirectAmount" class="bento-styled-input" placeholder="0" min="0" step="1000" />
+                  <input type="text" inputmode="decimal" id="quickDirectAmount" class="bento-styled-input" placeholder="0 (cth: 50k, 149.000)" />
                 </div>
               </div>
 
@@ -1938,7 +1938,7 @@
         <!-- 2. Big Amount Input with Rupiah Prefix -->
         <div class="amount-hero-input-wrap">
           <span class="amount-currency">Rp</span>
-          <input type="number" id="financeModalAmount" class="amount-hero-input" placeholder="0" min="1" step="1000" required oninput="updateModalFinancePreview()" />
+          <input type="text" inputmode="decimal" id="financeModalAmount" class="amount-hero-input" placeholder="0 (cth: 50k, 149.000)" required oninput="updateModalFinancePreview()" />
         </div>
         <div class="amount-formatted-preview" id="financeModalPreview">Nol Rupiah</div>
 
@@ -2282,8 +2282,8 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 
   <!-- Yume's Host Tracker Data & Logic -->
-  <script src="host_tracker_data.js?v=20261012_v2"></script>
-  <script src="app.js?v=20261012_v2"></script>
-  <script src="host_tracker.js?v=20261012_v2"></script>
+  <script src="host_tracker_data.js?v=20261014_v1"></script>
+  <script src="app.js?v=20261014_v1"></script>
+  <script src="host_tracker.js?v=20261014_v1"></script>
 </body>
 </html>

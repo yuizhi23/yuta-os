@@ -3501,6 +3501,351 @@ function applyRemoteData(remoteData) {
       if (cloudKey === 'yuta_couple_finances' && Array.isArray(record.payload)) {
         const requiredTxs = [
           {
+            id: 'tx_nata_exp_benerin_hp_149k',
+            type: 'expense',
+            amount: 149000,
+            category: 'bills',
+            person: 'nata',
+            wallet: 'nata',
+            paymentMethod: 'qris',
+            desc: 'Servis / Perbaikan HP',
+            date: '2026-10-14',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'nata',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_nata_exp_roti_bakar_20k',
+            type: 'expense',
+            amount: 20000,
+            category: 'food',
+            person: 'nata',
+            wallet: 'nata',
+            paymentMethod: 'qris',
+            desc: 'Roti Bakar',
+            date: '2026-10-14',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'nata',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_nata_exp_singkong_keju_13k',
+            type: 'expense',
+            amount: 13000,
+            category: 'food',
+            person: 'nata',
+            wallet: 'nata',
+            paymentMethod: 'qris',
+            desc: 'Singkong Keju',
+            date: '2026-10-14',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'nata',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_nata_exp_jus_stroberi_7k',
+            type: 'expense',
+            amount: 7000,
+            category: 'food',
+            person: 'nata',
+            wallet: 'nata',
+            paymentMethod: 'cash',
+            desc: 'Jus Stroberi Cinta',
+            date: '2026-10-14',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'nata',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_nata_exp_ayam_geprek_15k',
+            type: 'expense',
+            amount: 15000,
+            category: 'food',
+            person: 'nata',
+            wallet: 'nata',
+            paymentMethod: 'cash',
+            desc: 'Ayam Geprek Babeh',
+            date: '2026-10-14',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'nata',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_nata_exp_alfa_51k',
+            type: 'expense',
+            amount: 51000,
+            category: 'shopping',
+            person: 'nata',
+            wallet: 'nata',
+            paymentMethod: 'qris',
+            desc: 'Alfamart (bareng Kiki & Tania)',
+            date: '2026-10-14',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'nata',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_nata_exp_laundry_60k',
+            type: 'expense',
+            amount: 60000,
+            category: 'bills',
+            person: 'nata',
+            wallet: 'nata',
+            paymentMethod: 'qris',
+            desc: 'Laundry',
+            date: '2026-10-14',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'nata',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_nata_exp_latihan_busking_twice_58k',
+            type: 'expense',
+            amount: 58000,
+            category: 'other',
+            person: 'nata',
+            wallet: 'nata',
+            paymentMethod: 'transfer',
+            desc: 'Latihan & Busking TWICE',
+            date: '2026-10-14',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'nata',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_nata_exp_sei_20k5',
+            type: 'expense',
+            amount: 20500,
+            category: 'food',
+            person: 'nata',
+            wallet: 'nata',
+            paymentMethod: 'qris',
+            desc: "Se'i Sapi",
+            date: '2026-10-14',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'nata',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_nata_exp_jajan_50k',
+            type: 'expense',
+            amount: 50000,
+            category: 'food',
+            person: 'nata',
+            wallet: 'nata',
+            paymentMethod: 'transfer',
+            desc: 'Jajan',
+            date: '2026-10-14',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'nata',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_nata_inc_income_97k5',
+            type: 'income',
+            amount: 97500,
+            category: 'salary',
+            person: 'nata',
+            wallet: 'nata',
+            paymentMethod: 'transfer',
+            desc: 'Income / Pemasukan Nata',
+            date: '2026-10-14',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'nata',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_nata_exp_warkop_add_33k',
+            type: 'expense',
+            amount: 33000,
+            category: 'food',
+            person: 'nata',
+            wallet: 'nata',
+            paymentMethod: 'qris',
+            desc: 'Warkop ADD',
+            date: '2026-10-14',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'nata',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_nata_exp_obat_77k6',
+            type: 'expense',
+            amount: 77600,
+            category: 'bills',
+            person: 'nata',
+            wallet: 'nata',
+            paymentMethod: 'qris',
+            desc: 'Obat',
+            date: '2026-10-14',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'nata',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_nata_exp_galon_15k',
+            type: 'expense',
+            amount: 15000,
+            category: 'bills',
+            person: 'nata',
+            wallet: 'nata',
+            paymentMethod: 'cash',
+            desc: 'Isi Ulang Galon',
+            date: '2026-10-14',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'nata',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_nata_exp_latihan_baemon_13k3',
+            type: 'expense',
+            amount: 13300,
+            category: 'other',
+            person: 'nata',
+            wallet: 'nata',
+            paymentMethod: 'transfer',
+            desc: 'Latihan Dance Baemon',
+            date: '2026-10-14',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'nata',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_yuki_inc_tf_nata_50k',
+            type: 'income',
+            amount: 50000,
+            category: 'pocket',
+            person: 'yuki',
+            wallet: 'yuki',
+            paymentMethod: 'transfer',
+            desc: 'Transfer dari Nata',
+            date: '2026-10-14',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'yuki',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_yuki_exp_biskuku_35k',
+            type: 'expense',
+            amount: 35000,
+            category: 'food',
+            person: 'yuki',
+            wallet: 'yuki',
+            paymentMethod: 'qris',
+            desc: 'Biskuku',
+            date: '2026-10-14',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'yuki',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_yuki_exp_es_teh_10k',
+            type: 'expense',
+            amount: 10000,
+            category: 'food',
+            person: 'yuki',
+            wallet: 'yuki',
+            paymentMethod: 'cash',
+            desc: 'Es Teh',
+            date: '2026-10-14',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'yuki',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_yuki_exp_kentang_jamur_10k5',
+            type: 'expense',
+            amount: 10500,
+            category: 'food',
+            person: 'yuki',
+            wallet: 'yuki',
+            paymentMethod: 'qris',
+            desc: 'Kentang Jamur',
+            date: '2026-10-14',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'yuki',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_yuki_exp_cilok_7k',
+            type: 'expense',
+            amount: 7000,
+            category: 'food',
+            person: 'yuki',
+            wallet: 'yuki',
+            paymentMethod: 'cash',
+            desc: 'Cilok',
+            date: '2026-10-14',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'yuki',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_yuki_inc_tf_mama_50k',
+            type: 'income',
+            amount: 50000,
+            category: 'pocket',
+            person: 'yuki',
+            wallet: 'yuki',
+            paymentMethod: 'transfer',
+            desc: 'Transfer dari Mama',
+            date: '2026-10-14',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'yuki',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_yuki_exp_kuota_40k',
+            type: 'expense',
+            amount: 40000,
+            category: 'bills',
+            person: 'yuki',
+            wallet: 'yuki',
+            paymentMethod: 'qris',
+            desc: 'Paket Data / Kuota',
+            date: '2026-10-14',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'yuki',
+            splitOwedAmount: 0
+          },
+          {
+            id: 'tx_yuki_exp_gosend_12k',
+            type: 'expense',
+            amount: 12000,
+            category: 'transport',
+            person: 'yuki',
+            wallet: 'yuki',
+            paymentMethod: 'qris',
+            desc: 'Ongkir GoSend',
+            date: '2026-10-14',
+            isSplit: false,
+            splitRatio: 50,
+            splitPaidBy: 'yuki',
+            splitOwedAmount: 0
+          },
+          {
             id: 'tx_yuki_exp_nescafe_13k',
             type: 'expense',
             amount: 13000,
@@ -4003,6 +4348,22 @@ function applyRemoteData(remoteData) {
         const newTxsToAdd = requiredTxs.filter(tx => !existingIds.has(tx.id));
         if (newTxsToAdd.length > 0) {
           record.payload.unshift(...newTxsToAdd);
+        }
+
+        // Safe merge: preserve any custom transactions created on this device that aren't in remote yet
+        try {
+          const rawLocal = localStorage.getItem(STORAGE_KEYS.FINANCES);
+          const localFinances = rawLocal ? JSON.parse(rawLocal) : [];
+          if (Array.isArray(localFinances)) {
+            const currentRemoteIds = new Set(record.payload.map(f => f.id));
+            const unsyncedLocal = localFinances.filter(tx => tx && tx.id && !currentRemoteIds.has(tx.id));
+            if (unsyncedLocal.length > 0) {
+              record.payload.unshift(...unsyncedLocal);
+            }
+          }
+        } catch (_) {}
+
+        if (newTxsToAdd.length > 0) {
           setTimeout(() => {
             if (typeof pushKeyToCloud === 'function') {
               pushKeyToCloud('yuta_couple_finances', record.payload);
@@ -4702,6 +5063,53 @@ function formatRupiah(number) {
   return 'Rp ' + Math.round(num).toLocaleString('id-ID');
 }
 
+function parseNominalInput(val) {
+  if (typeof val === 'number') return isNaN(val) ? 0 : val;
+  if (!val) return 0;
+  let str = String(val).trim().toLowerCase();
+  let multiplier = 1;
+  if (str.endsWith('k') || str.endsWith('rb')) {
+    multiplier = 1000;
+    str = str.replace(/k|rb/g, '').trim();
+  } else if (str.endsWith('m') || str.endsWith('jt')) {
+    multiplier = 1000000;
+    str = str.replace(/m|jt/g, '').trim();
+  }
+  // Strip non-digit prefixes (like "rp", "+", "-")
+  str = str.replace(/^[+\-\s*rp\.]+/g, '').trim();
+
+  // If thousand separator dot or comma used
+  if (str.includes('.') && !str.includes(',')) {
+    const parts = str.split('.');
+    if (parts.length > 1 && parts.every((p, idx) => idx === 0 || p.length === 3)) {
+      str = parts.join('');
+    } else if (parts.length === 2 && parts[1].length < 3 && multiplier > 1) {
+      str = parts[0] + '.' + parts[1];
+    }
+  } else if (str.includes(',') && !str.includes('.')) {
+    const parts = str.split(',');
+    if (parts.length > 1 && parts.every((p, idx) => idx === 0 || p.length === 3)) {
+      str = parts.join('');
+    } else {
+      str = parts[0] + '.' + parts[1];
+    }
+  } else if (str.includes('.') && str.includes(',')) {
+    if (str.lastIndexOf(',') > str.lastIndexOf('.')) {
+      str = str.replace(/\./g, '').replace(',', '.');
+    } else {
+      str = str.replace(/,/g, '');
+    }
+  }
+  const num = parseFloat(str);
+  if (isNaN(num)) return 0;
+  let finalVal = Math.round(num * multiplier);
+  if (multiplier === 1 && num > 0 && num < 1000 && (String(val).includes('.') || String(val).includes(','))) {
+    finalVal = Math.round(num * 1000);
+  }
+  return finalVal;
+}
+window.parseNominalInput = parseNominalInput;
+
 function getFinances() {
   let finances = getStorage(STORAGE_KEYS.FINANCES, []);
   if (!Array.isArray(finances)) {
@@ -4709,6 +5117,351 @@ function getFinances() {
   }
 
   const initialTxs = [
+    {
+      id: 'tx_nata_exp_benerin_hp_149k',
+      type: 'expense',
+      amount: 149000,
+      category: 'bills',
+      person: 'nata',
+      wallet: 'nata',
+      paymentMethod: 'qris',
+      desc: 'Servis / Perbaikan HP',
+      date: '2026-10-14',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'nata',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_nata_exp_roti_bakar_20k',
+      type: 'expense',
+      amount: 20000,
+      category: 'food',
+      person: 'nata',
+      wallet: 'nata',
+      paymentMethod: 'qris',
+      desc: 'Roti Bakar',
+      date: '2026-10-14',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'nata',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_nata_exp_singkong_keju_13k',
+      type: 'expense',
+      amount: 13000,
+      category: 'food',
+      person: 'nata',
+      wallet: 'nata',
+      paymentMethod: 'qris',
+      desc: 'Singkong Keju',
+      date: '2026-10-14',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'nata',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_nata_exp_jus_stroberi_7k',
+      type: 'expense',
+      amount: 7000,
+      category: 'food',
+      person: 'nata',
+      wallet: 'nata',
+      paymentMethod: 'cash',
+      desc: 'Jus Stroberi Cinta',
+      date: '2026-10-14',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'nata',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_nata_exp_ayam_geprek_15k',
+      type: 'expense',
+      amount: 15000,
+      category: 'food',
+      person: 'nata',
+      wallet: 'nata',
+      paymentMethod: 'cash',
+      desc: 'Ayam Geprek Babeh',
+      date: '2026-10-14',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'nata',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_nata_exp_alfa_51k',
+      type: 'expense',
+      amount: 51000,
+      category: 'shopping',
+      person: 'nata',
+      wallet: 'nata',
+      paymentMethod: 'qris',
+      desc: 'Alfamart (bareng Kiki & Tania)',
+      date: '2026-10-14',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'nata',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_nata_exp_laundry_60k',
+      type: 'expense',
+      amount: 60000,
+      category: 'bills',
+      person: 'nata',
+      wallet: 'nata',
+      paymentMethod: 'qris',
+      desc: 'Laundry',
+      date: '2026-10-14',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'nata',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_nata_exp_latihan_busking_twice_58k',
+      type: 'expense',
+      amount: 58000,
+      category: 'other',
+      person: 'nata',
+      wallet: 'nata',
+      paymentMethod: 'transfer',
+      desc: 'Latihan & Busking TWICE',
+      date: '2026-10-14',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'nata',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_nata_exp_sei_20k5',
+      type: 'expense',
+      amount: 20500,
+      category: 'food',
+      person: 'nata',
+      wallet: 'nata',
+      paymentMethod: 'qris',
+      desc: "Se'i Sapi",
+      date: '2026-10-14',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'nata',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_nata_exp_jajan_50k',
+      type: 'expense',
+      amount: 50000,
+      category: 'food',
+      person: 'nata',
+      wallet: 'nata',
+      paymentMethod: 'transfer',
+      desc: 'Jajan',
+      date: '2026-10-14',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'nata',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_nata_inc_income_97k5',
+      type: 'income',
+      amount: 97500,
+      category: 'salary',
+      person: 'nata',
+      wallet: 'nata',
+      paymentMethod: 'transfer',
+      desc: 'Income / Pemasukan Nata',
+      date: '2026-10-14',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'nata',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_nata_exp_warkop_add_33k',
+      type: 'expense',
+      amount: 33000,
+      category: 'food',
+      person: 'nata',
+      wallet: 'nata',
+      paymentMethod: 'qris',
+      desc: 'Warkop ADD',
+      date: '2026-10-14',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'nata',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_nata_exp_obat_77k6',
+      type: 'expense',
+      amount: 77600,
+      category: 'bills',
+      person: 'nata',
+      wallet: 'nata',
+      paymentMethod: 'qris',
+      desc: 'Obat',
+      date: '2026-10-14',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'nata',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_nata_exp_galon_15k',
+      type: 'expense',
+      amount: 15000,
+      category: 'bills',
+      person: 'nata',
+      wallet: 'nata',
+      paymentMethod: 'cash',
+      desc: 'Isi Ulang Galon',
+      date: '2026-10-14',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'nata',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_nata_exp_latihan_baemon_13k3',
+      type: 'expense',
+      amount: 13300,
+      category: 'other',
+      person: 'nata',
+      wallet: 'nata',
+      paymentMethod: 'transfer',
+      desc: 'Latihan Dance Baemon',
+      date: '2026-10-14',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'nata',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_yuki_inc_tf_nata_50k',
+      type: 'income',
+      amount: 50000,
+      category: 'pocket',
+      person: 'yuki',
+      wallet: 'yuki',
+      paymentMethod: 'transfer',
+      desc: 'Transfer dari Nata',
+      date: '2026-10-14',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'yuki',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_yuki_exp_biskuku_35k',
+      type: 'expense',
+      amount: 35000,
+      category: 'food',
+      person: 'yuki',
+      wallet: 'yuki',
+      paymentMethod: 'qris',
+      desc: 'Biskuku',
+      date: '2026-10-14',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'yuki',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_yuki_exp_es_teh_10k',
+      type: 'expense',
+      amount: 10000,
+      category: 'food',
+      person: 'yuki',
+      wallet: 'yuki',
+      paymentMethod: 'cash',
+      desc: 'Es Teh',
+      date: '2026-10-14',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'yuki',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_yuki_exp_kentang_jamur_10k5',
+      type: 'expense',
+      amount: 10500,
+      category: 'food',
+      person: 'yuki',
+      wallet: 'yuki',
+      paymentMethod: 'qris',
+      desc: 'Kentang Jamur',
+      date: '2026-10-14',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'yuki',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_yuki_exp_cilok_7k',
+      type: 'expense',
+      amount: 7000,
+      category: 'food',
+      person: 'yuki',
+      wallet: 'yuki',
+      paymentMethod: 'cash',
+      desc: 'Cilok',
+      date: '2026-10-14',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'yuki',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_yuki_inc_tf_mama_50k',
+      type: 'income',
+      amount: 50000,
+      category: 'pocket',
+      person: 'yuki',
+      wallet: 'yuki',
+      paymentMethod: 'transfer',
+      desc: 'Transfer dari Mama',
+      date: '2026-10-14',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'yuki',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_yuki_exp_kuota_40k',
+      type: 'expense',
+      amount: 40000,
+      category: 'bills',
+      person: 'yuki',
+      wallet: 'yuki',
+      paymentMethod: 'qris',
+      desc: 'Paket Data / Kuota',
+      date: '2026-10-14',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'yuki',
+      splitOwedAmount: 0
+    },
+    {
+      id: 'tx_yuki_exp_gosend_12k',
+      type: 'expense',
+      amount: 12000,
+      category: 'transport',
+      person: 'yuki',
+      wallet: 'yuki',
+      paymentMethod: 'qris',
+      desc: 'Ongkir GoSend',
+      date: '2026-10-14',
+      isSplit: false,
+      splitRatio: 50,
+      splitPaidBy: 'yuki',
+      splitOwedAmount: 0
+    },
     {
       id: 'tx_yuki_exp_nescafe_13k',
       type: 'expense',
@@ -5717,9 +6470,9 @@ function submitDirectQuickFinance() {
   const payInp = document.getElementById('quickDirectPayment');
   const descInp = document.getElementById('quickDirectDesc');
 
-  const amount = Number(amtInp?.value) || 0;
+  const amount = parseNominalInput(amtInp?.value);
   if (amount <= 0) {
-    alert('Please enter a valid amount in Rupiah.');
+    alert('Please enter a valid amount in Rupiah (misal: 50000, 50k, 149.000).');
     return;
   }
 
@@ -5870,7 +6623,7 @@ function selectModalFinanceCategory(catKey) {
 }
 
 function updateModalFinancePreview() {
-  const val = Number(document.getElementById('financeModalAmount').value) || 0;
+  const val = parseNominalInput(document.getElementById('financeModalAmount')?.value);
   const prev = document.getElementById('financeModalPreview');
   if (prev) prev.textContent = val > 0 ? formatRupiah(val) : 'Nol Rupiah';
 }
@@ -5891,9 +6644,9 @@ function setModalSplitRatio(ratio) {
 function saveFinanceModalTransaction(event) {
   event.preventDefault();
   const editId = document.getElementById('financeEditId').value;
-  const amount = Number(document.getElementById('financeModalAmount').value) || 0;
+  const amount = parseNominalInput(document.getElementById('financeModalAmount').value);
   if (amount <= 0) {
-    alert('Please enter a valid amount.');
+    alert('Please enter a valid amount (misal: 50000, 50k, 149.000).');
     return;
   }
 
