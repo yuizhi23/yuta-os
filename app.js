@@ -238,7 +238,7 @@ const TRACK_NAMES = [
   'Sakura Bloom & Spring Breeze 🌸',
   'Y2K Windows Vista Melody 💿',
   'Bubble Bath & Floating Clouds 🫧',
-  'Lo-Fi Love Letter for Nata 💌',
+  'Lo-Fi Love Letter for N 💌',
   'Midnight Coffee & Starlight 🌙'
 ];
 
@@ -1384,14 +1384,14 @@ function loadYukiRoutine() {
   ensureDayRoutines(selectedTodoDate);
   playSound('chime');
   renderTodos();
-  showToast('✨ Yuki’s permanent daily quests loaded!');
+  showToast('✨ Y’s permanent daily quests loaded!');
 }
 
 function loadNataRoutine() {
   ensureDayRoutines(selectedTodoDate);
   playSound('chime');
   renderTodos();
-  showToast('✨ Nata’s permanent daily quests loaded!');
+  showToast('✨ N’s permanent daily quests loaded!');
 }
 
 function loadDuoRoutine() {
@@ -1532,7 +1532,7 @@ function ensureDefaultReminders() {
   const GROUNDING_REMINDERS = [
     {
       id: 'rem_nata_semangat',
-      title: 'Semangat Kerjanya Nata 🌸',
+      title: 'Semangat Kerjanya N 🌸',
       desc: 'Semangat kerjanya, jangan kecapean ya! Take breathers & stay hydrated 💖',
       time: '09:00',
       color: '#f472b6',
@@ -1739,7 +1739,7 @@ function renderReminders() {
   empty.style.display = 'none';
 
   grid.innerHTML = reminders.map(r => {
-    const forLabel = r.reminderFor === 'yuki' ? '🐈 Yuki' : r.reminderFor === 'nata' ? '🐈‍⬛ Nata' : '🤝 Joint';
+    const forLabel = r.reminderFor === 'yuki' ? '🐈 Y' : r.reminderFor === 'nata' ? '🐈‍⬛ N' : '🤝 Joint';
     return `
       <div class="reminder-card-retro tilt-card" style="border-left-color:${r.color || '#5bc8e8'}; opacity:${r.done ? '0.6' : '1'}">
         <div class="reminder-top-row">
@@ -1809,7 +1809,7 @@ const DEFAULT_LOVE_NOTES = [
     id: 'note_welcome_1',
     from: 'yuki',
     to: 'nata',
-    title: 'Untuk Nata Tersayang 🌸',
+    title: 'Untuk N Tersayang 🌸',
     content: 'Semangat selalu yaa cantikk! Jangan lupa makan teratur dan minum air putih. Aku selalu ada buat kamu 💕',
     date: '17 Feb 2026'
   },
@@ -1817,7 +1817,7 @@ const DEFAULT_LOVE_NOTES = [
     id: 'note_welcome_2',
     from: 'nata',
     to: 'yuki',
-    title: 'Buat Yuki Hebat 💻',
+    title: 'Buat Y Hebat 💻',
     content: 'Semangat thesis dan job huntingnya! Jangan overthinking, kita lewatin semuanya bareng-bareng yaa ✨',
     date: '17 Feb 2026'
   }
@@ -1892,8 +1892,8 @@ function renderNotes() {
   empty.style.display = 'none';
 
   grid.innerHTML = notes.map(n => {
-    const fromLabel = n.from === 'yuki' ? 'Yuki' : 'Nata';
-    const toLabel = n.to === 'yuki' ? 'Yuki' : 'Nata';
+    const fromLabel = n.from === 'yuki' ? 'Y' : 'N';
+    const toLabel = n.to === 'yuki' ? 'Y' : 'N';
 
     return `
       <div class="note-card-retro tilt-card">
@@ -2120,26 +2120,26 @@ function ensureDefaultCountdowns() {
   const curYear = new Date().getFullYear();
   const now = new Date();
 
-  const hasYukie = cds.some(c => c.id === 'cd_yukie_bday' || c.name.toLowerCase().includes('yukie'));
-  const hasNata = cds.some(c => c.id === 'cd_nata_bday' || c.name.toLowerCase().includes('nata'));
+  const hasYukie = cds.some(c => c.id === 'cd_yukie_bday' || c.name.toLowerCase().includes('yukie') || c.name.toLowerCase().includes("y's"));
+  const hasNata = cds.some(c => c.id === 'cd_nata_bday' || c.name.toLowerCase().includes('nata') || c.name.toLowerCase().includes("n's"));
 
-  // Yukie: 23 October 2005
+  // Y: 23 October 2005
   if (!hasYukie) {
     const nextYukieYear = (now.getMonth() > 9 || (now.getMonth() === 9 && now.getDate() > 23)) ? curYear + 1 : curYear;
     cds.push({
       id: 'cd_yukie_bday',
-      name: "Yukie's Birthday (23 Oct 2005)",
+      name: "Y's Birthday (23 Oct 2005)",
       date: `${nextYukieYear}-10-23`,
       emoji: '🎂'
     });
   }
 
-  // Nata: 24 September 2005
+  // N: 24 September 2005
   if (!hasNata) {
     const nextNataYear = (now.getMonth() > 8 || (now.getMonth() === 8 && now.getDate() > 24)) ? curYear + 1 : curYear;
     cds.push({
       id: 'cd_nata_bday',
-      name: "Nata's Birthday (24 Sep 2005)",
+      name: "N's Birthday (24 Sep 2005)",
       date: `${nextNataYear}-09-24`,
       emoji: '🎂'
     });
@@ -2350,7 +2350,7 @@ function saveMood(person) {
 
   playSound('chime');
   renderMoodHistory();
-  showToast(`Pulse logged for ${person === 'yuki' ? 'Yuki' : 'Nata'}.`);
+  showToast(`Pulse logged for ${person === 'yuki' ? 'Y' : 'N'}.`);
 }
 
 function renderMoodHistory() {
@@ -2370,8 +2370,8 @@ function renderMoodHistory() {
     return `
       <div class="mood-hist-card tilt-card">
         <div class="mhc-date">📅 ${dt}</div>
-        <div>Yuki: ${data.yuki?.emoji || '—'} ${data.yuki?.note ? `"${escapeHtml(data.yuki.note)}"` : ''}</div>
-        <div>Nata: ${data.nata?.emoji || '—'} ${data.nata?.note ? `"${escapeHtml(data.nata.note)}"` : ''}</div>
+        <div>Y: ${data.yuki?.emoji || '—'} ${data.yuki?.note ? `"${escapeHtml(data.yuki.note)}"` : ''}</div>
+        <div>N: ${data.nata?.emoji || '—'} ${data.nata?.note ? `"${escapeHtml(data.nata.note)}"` : ''}</div>
       </div>
     `;
   }).join('');
@@ -2625,7 +2625,7 @@ const SWEET_ENCOURAGEMENTS = {
   nata: [
     "You're doing great sayangku! ✨💖",
     "Proud of you sayang! Semangat terus yaa 🥰",
-    "Hebat banget Nata sayang! Satu tugas selesai 🌸✨",
+    "Hebat banget N sayang! Satu tugas selesai 🌸✨",
     "Good job cintaa! You did amazing today 💖",
     "Keren banget sayangku, keep it up yaa! 🌟💕",
     "Yayy selesai! Sayang hebat banget deh 💕",
@@ -2637,7 +2637,7 @@ const SWEET_ENCOURAGEMENTS = {
   yuki: [
     "You're doing great sayangku! ✨💖",
     "Semangat terus sayang! Proud of you 🥰",
-    "Hebat banget Yuki sayang! Tugas terselesaikan 🌸✨",
+    "Hebat banget Y sayang! Tugas terselesaikan 🌸✨",
     "Good job sayangku! Keren banget hari ini 💖",
     "Mantap sayang! Keep going yaa 🌟💕",
     "Yayy satu beres! You're awesome sayang 💕",
@@ -2833,7 +2833,7 @@ function switchScheduleDay(day) {
 
   timeline.innerHTML = filteredSlots.map(slot => {
     const cardClass = slot.who === 'yuki' ? 'yuki-card' : slot.who === 'nata' ? 'nata-card' : 'both-card';
-    const whoBadge = slot.who === 'yuki' ? '🐈 Yuki' : slot.who === 'nata' ? '🐈‍⬛ Nata' : 'YuTa Duo';
+    const whoBadge = slot.who === 'yuki' ? '🐈 Y' : slot.who === 'nata' ? '🐈‍⬛ N' : 'YuTa Duo';
     return `
       <div class="sched-slot">
         <div class="sched-time-col">
@@ -3313,7 +3313,7 @@ function spawnFloatingHeartAt(clientX, clientY, emoji = '💖') {
   setTimeout(() => heart.remove(), 1000);
 }
 
-// ==================== REAL-TIME CLOUD LIVE SYNC (YUKI ↔ NATA) ====================
+// ==================== REAL-TIME CLOUD LIVE SYNC (Y ↔ N) ====================
 const STORAGE_KEY_SYNC_CONFIG = 'aero_cloud_sync_config_v1';
 const OFFICIAL_RTDB_URL = 'https://yuta-os-f9a95-default-rtdb.asia-southeast1.firebasedatabase.app';
 let firebaseApp = null;
@@ -3658,7 +3658,7 @@ function applyRemoteData(remoteData) {
             person: 'nata',
             wallet: 'nata',
             paymentMethod: 'transfer',
-            desc: 'Income / Pemasukan Nata',
+            desc: 'Income / Pemasukan N',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
@@ -3733,7 +3733,7 @@ function applyRemoteData(remoteData) {
             person: 'yuki',
             wallet: 'yuki',
             paymentMethod: 'transfer',
-            desc: 'Transfer dari Nata',
+            desc: 'Transfer dari N',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
@@ -3961,7 +3961,7 @@ function applyRemoteData(remoteData) {
             person: 'yuki',
             wallet: 'yuki',
             paymentMethod: 'transfer',
-            desc: 'Dapet 240k / Income Yuki',
+            desc: 'Dapet 240k / Income Y',
             date: '2026-10-10',
             isSplit: false,
             splitRatio: 50,
@@ -4606,8 +4606,8 @@ function syncEventToGoogleCalendar(type) {
   switch (type) {
     case 'anniversary':
       url = generateGoogleCalendarUrl(
-        '💍 Our Anniversary (Yuki & Nata) 💖',
-        'Happy Anniversary Yuki & Nata! 💖 Special lifetime love milestone and celebration.',
+        '💍 Our Anniversary (Y & N) 💖',
+        'Happy Anniversary Y & N! 💖 Special lifetime love milestone and celebration.',
         '20260217T090000',
         '20260217T110000',
         'RRULE:FREQ=YEARLY'
@@ -4616,8 +4616,8 @@ function syncEventToGoogleCalendar(type) {
 
     case 'yuki_bday':
       url = generateGoogleCalendarUrl(
-        '🎂 Yuki\'s Birthday 🐈🎉',
-        'Happy Birthday Yuki! Wishing a fantastic year filled with joy and success.',
+        '🎂 Y\'s Birthday 🐈🎉',
+        'Happy Birthday Y! Wishing a fantastic year filled with joy and success.',
         '20261023T090000',
         '20261023T110000',
         'RRULE:FREQ=YEARLY'
@@ -4626,8 +4626,8 @@ function syncEventToGoogleCalendar(type) {
 
     case 'nata_bday':
       url = generateGoogleCalendarUrl(
-        '🎂 Nata\'s Birthday 🐈‍⬛🌸',
-        'Happy Birthday Nata! Wishing endless happiness, health and love.',
+        '🎂 N\'s Birthday 🐈‍⬛🌸',
+        'Happy Birthday N! Wishing endless happiness, health and love.',
         '20260924T090000',
         '20260924T110000',
         'RRULE:FREQ=YEARLY'
@@ -4636,8 +4636,8 @@ function syncEventToGoogleCalendar(type) {
 
     case 'yuki_routine':
       url = generateGoogleCalendarUrl(
-        '🐈 Yuki Daily Routine: 4 Quests 💻📚✍️💼',
-        'Yuki\'s Daily Quests:\n1. 💻 Open LMS & check courses\n2. 📚 Work on assignments\n3. ✍️ Work on thesis\n4. 💼 Job hunting & applications',
+        '🐈 Y Daily Routine: 4 Quests 💻📚✍️💼',
+        'Y\'s Daily Quests:\n1. 💻 Open LMS & check courses\n2. 📚 Work on assignments\n3. ✍️ Work on thesis\n4. 💼 Job hunting & applications',
         '20261004T080000',
         '20261004T180000',
         'RRULE:FREQ=DAILY'
@@ -4646,8 +4646,8 @@ function syncEventToGoogleCalendar(type) {
 
     case 'nata_routine':
       url = generateGoogleCalendarUrl(
-        '🐈‍⬛ Nata Daily Routine: 4 Quests 💬📹📊⏰',
-        'Nata\'s Daily Quests:\n1. 💬 Reply to spenders\n2. 📹 Daily 1-hour stream before dual persona stream\n3. 📊 Send live stream report to group\n4. ⏰ Clock-in & clock-out attendance',
+        '🐈‍⬛ N Daily Routine: 4 Quests 💬📹📊⏰',
+        'N\'s Daily Quests:\n1. 💬 Reply to spenders\n2. 📹 Daily 1-hour stream before dual persona stream\n3. 📊 Send live stream report to group\n4. ⏰ Clock-in & clock-out attendance',
         '20261004T170000',
         '20261004T210000',
         'RRULE:FREQ=DAILY'
@@ -4715,25 +4715,25 @@ function downloadLifetimeICS() {
   };
 
   // 1. Anniversary
-  addICSEvent('anniv_20260217', '💍 Our Anniversary (Yuki & Nata) 💖', 'Happy Anniversary Yuki & Nata! Lifetime love milestone and celebration.', '20260217T090000', '20260217T110000', 'FREQ=YEARLY');
+  addICSEvent('anniv_20260217', '💍 Our Anniversary (Y & N) 💖', 'Happy Anniversary Y & N! Lifetime love milestone and celebration.', '20260217T090000', '20260217T110000', 'FREQ=YEARLY');
 
-  // 2. Yuki Birthday
-  addICSEvent('bday_yuki', '🎂 Yuki\'s Birthday 🐈🎉', 'Happy Birthday Yuki! Wishing you joy and blessings.', '20261023T090000', '20261023T110000', 'FREQ=YEARLY');
+  // 2. Y Birthday
+  addICSEvent('bday_yuki', '🎂 Y\'s Birthday 🐈🎉', 'Happy Birthday Y! Wishing you joy and blessings.', '20261023T090000', '20261023T110000', 'FREQ=YEARLY');
 
-  // 3. Nata Birthday
-  addICSEvent('bday_nata', '🎂 Nata\'s Birthday 🐈‍⬛🌸', 'Happy Birthday Nata! Wishing you endless happiness and love.', '20260924T090000', '20260924T110000', 'FREQ=YEARLY');
+  // 3. N Birthday
+  addICSEvent('bday_nata', '🎂 N\'s Birthday 🐈‍⬛🌸', 'Happy Birthday N! Wishing you endless happiness and love.', '20260924T090000', '20260924T110000', 'FREQ=YEARLY');
 
   // 4. Yuki\'s 4 Quests (Daily)
-  addICSEvent('yuki_lms', '💻 Yuki: Open LMS & Check Courses', 'Daily Quest: Open LMS, check materials and course announcements.', '20261004T080000', '20261004T083000', 'FREQ=DAILY');
-  addICSEvent('yuki_tugas', '📚 Yuki: Work on Assignments', 'Daily Quest: Complete coursework and study tasks.', '20261004T090000', '20261004T103000', 'FREQ=DAILY');
-  addICSEvent('yuki_skripsi', '✍️ Yuki: Work on Thesis', 'Daily Quest: Research, draft writing, and thesis progress.', '20261004T130000', '20261004T150000', 'FREQ=DAILY');
-  addICSEvent('yuki_kerja', '💼 Yuki: Job Hunting & Applications', 'Daily Quest: Apply for jobs and submit applications.', '20261004T160000', '20261004T173000', 'FREQ=DAILY');
+  addICSEvent('yuki_lms', '💻 Y: Open LMS & Check Courses', 'Daily Quest: Open LMS, check materials and course announcements.', '20261004T080000', '20261004T083000', 'FREQ=DAILY');
+  addICSEvent('yuki_tugas', '📚 Y: Work on Assignments', 'Daily Quest: Complete coursework and study tasks.', '20261004T090000', '20261004T103000', 'FREQ=DAILY');
+  addICSEvent('yuki_skripsi', '✍️ Y: Work on Thesis', 'Daily Quest: Research, draft writing, and thesis progress.', '20261004T130000', '20261004T150000', 'FREQ=DAILY');
+  addICSEvent('yuki_kerja', '💼 Y: Job Hunting & Applications', 'Daily Quest: Apply for jobs and submit applications.', '20261004T160000', '20261004T173000', 'FREQ=DAILY');
 
   // 5. Nata\'s 4 Quests (Daily)
-  addICSEvent('nata_spender', '💬 Nata: Reply to Spenders', 'Daily Quest: Reply to messages and spenders.', '20261004T163000', '20261004T173000', 'FREQ=DAILY');
-  addICSEvent('nata_live', '📹 Nata: Daily 1-Hour Stream', 'Daily Quest: 1-hour live stream before dual persona stream.', '20261004T180000', '20261004T190000', 'FREQ=DAILY');
-  addICSEvent('nata_laporan', '📊 Nata: Send Stream Report to Group', 'Daily Quest: Submit daily live stream report to group.', '20261004T200000', '20261004T201500', 'FREQ=DAILY');
-  addICSEvent('nata_absen', '⏰ Nata: Clock-in & Attendance', 'Daily Quest: Clock-in & clock-out attendance.', '20261004T210000', '20261004T211500', 'FREQ=DAILY');
+  addICSEvent('nata_spender', '💬 N: Reply to Spenders', 'Daily Quest: Reply to messages and spenders.', '20261004T163000', '20261004T173000', 'FREQ=DAILY');
+  addICSEvent('nata_live', '📹 N: Daily 1-Hour Stream', 'Daily Quest: 1-hour live stream before dual persona stream.', '20261004T180000', '20261004T190000', 'FREQ=DAILY');
+  addICSEvent('nata_laporan', '📊 N: Send Stream Report to Group', 'Daily Quest: Submit daily live stream report to group.', '20261004T200000', '20261004T201500', 'FREQ=DAILY');
+  addICSEvent('nata_absen', '⏰ N: Clock-in & Attendance', 'Daily Quest: Clock-in & clock-out attendance.', '20261004T210000', '20261004T211500', 'FREQ=DAILY');
 
   // 6. Duo Weekly Date & Care
   addICSEvent('duo_date_weekly', '🍿 YuTa Weekly Date Night ✨', 'Cozy date night, movies, and quality time together.', '20261010T190000', '20261010T220000', 'FREQ=WEEKLY');
@@ -4909,27 +4909,27 @@ async function fetchCalendarICS(owner = 'yuki') {
 }
 
 async function syncYukiGCal() {
-  showToast('⏳ Mengambil jadwal Google Calendar Yuki...');
+  showToast('⏳ Mengambil jadwal Google Calendar Y...');
   const ics = await fetchCalendarICS('yuki');
   if (ics) {
     parseAndApplyICS(ics, 'yuki');
   } else {
-    showToast('❌ Gagal mengambil kalender Yuki.');
+    showToast('❌ Gagal mengambil kalender Y.');
   }
 }
 
 async function syncNataGCal() {
-  showToast('⏳ Mengambil jadwal Google Calendar Nata...');
+  showToast('⏳ Mengambil jadwal Google Calendar N...');
   const ics = await fetchCalendarICS('nata');
   if (ics) {
     parseAndApplyICS(ics, 'nata');
   } else {
-    showToast('❌ Gagal mengambil kalender Nata.');
+    showToast('❌ Gagal mengambil kalender N.');
   }
 }
 
 async function syncBothGCal() {
-  showToast('⏳ Menyelaraskan Google Calendar Yuki & Nata...');
+  showToast('⏳ Menyelaraskan Google Calendar Y & N...');
   const [yukiIcs, nataIcs] = await Promise.all([
     fetchCalendarICS('yuki'),
     fetchCalendarICS('nata')
@@ -4940,7 +4940,7 @@ async function syncBothGCal() {
 
   if (yukiIcs || nataIcs) {
     playSound('chime');
-    showToast('🎉 Sukses sinkronisasi Google Calendar Yuki 🐈 & Nata 🐈‍⬛!');
+    showToast('🎉 Sukses sinkronisasi Google Calendar Y 🐈 & N 🐈‍⬛!');
   } else {
     showToast('⚠️ Gagal mengambil jadwal Google Calendar.');
   }
@@ -5275,7 +5275,7 @@ function getFinances() {
       person: 'nata',
       wallet: 'nata',
       paymentMethod: 'transfer',
-      desc: 'Income / Pemasukan Nata',
+      desc: 'Income / Pemasukan N',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
@@ -5350,7 +5350,7 @@ function getFinances() {
       person: 'yuki',
       wallet: 'yuki',
       paymentMethod: 'transfer',
-      desc: 'Transfer dari Nata',
+      desc: 'Transfer dari N',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
@@ -5578,7 +5578,7 @@ function getFinances() {
       person: 'yuki',
       wallet: 'yuki',
       paymentMethod: 'transfer',
-      desc: 'Dapet 240k / Income Yuki',
+      desc: 'Dapet 240k / Income Y',
       date: '2026-10-10',
       isSplit: false,
       splitRatio: 50,
@@ -6014,7 +6014,7 @@ function onGlobalMonthChange(event) {
 function renderFinances() {
   const allFinances = getFinances();
 
-  // 1. Calculate stats for Yuki and Nata separately
+  // 1. Calculate stats for Y and N separately
   let yukiIncome = 0;
   let yukiExpense = 0;
   let yukiWalletExpense = 0;
@@ -6062,7 +6062,7 @@ function renderFinances() {
   const yukiExpRatio = yukiIncome > 0 ? Math.min(100, Math.round((yukiExpense / yukiIncome) * 100)) : 0;
   const nataExpRatio = nataIncome > 0 ? Math.min(100, Math.round((nataExpense / nataIncome) * 100)) : 0;
 
-  // 2. Update Dompet Yuki Bento Master Card
+  // 2. Update Dompet Y Bento Master Card
   const yukiBalEl = document.getElementById('yukiBalAmount');
   const yukiIncEl = document.getElementById('yukiIncomeAmount');
   const yukiOutEl = document.getElementById('yukiOutcomeAmount');
@@ -6094,7 +6094,7 @@ function renderFinances() {
     yukiStatusBadge.className = yukiBalance >= 0 ? 'bento-tag-pill tag-yuki-pill' : 'bento-tag-pill tag-danger';
   }
 
-  // 3. Update Dompet Nata Bento Master Card
+  // 3. Update Dompet N Bento Master Card
   const nataBalEl = document.getElementById('nataBalAmount');
   const nataIncEl = document.getElementById('nataIncomeAmount');
   const nataOutEl = document.getElementById('nataOutcomeAmount');
@@ -6174,7 +6174,7 @@ function renderFinances() {
     `).join('');
   }
 
-  // 7. Render Individual Savings Goals (Yuki & Nata)
+  // 7. Render Individual Savings Goals (Y & N)
   renderSavingsGoals();
 
   // 8. Filter & Render Transaction History List
@@ -6206,11 +6206,11 @@ function renderFinances() {
 
   if (countLabel) {
     if (financeFilterPerson === 'tabungan_yuki') {
-      countLabel.textContent = `${filtered.length} Tabungan Yuki`;
+      countLabel.textContent = `${filtered.length} Tabungan Y`;
     } else if (financeFilterPerson === 'yuki') {
-      countLabel.textContent = `${filtered.length} Dompet Yuki`;
+      countLabel.textContent = `${filtered.length} Dompet Y`;
     } else if (financeFilterPerson === 'nata') {
-      countLabel.textContent = `${filtered.length} Dompet Nata`;
+      countLabel.textContent = `${filtered.length} Dompet N`;
     } else {
       countLabel.textContent = `${filtered.length} Entries`;
     }
@@ -6296,13 +6296,13 @@ function renderFinances() {
       const isTabunganYuki = tx.wallet === 'tabungan_yuki' || (tx.person === 'yuki' && tx.source === 'tabungan');
       const isYuki = tx.person === 'yuki' || tx.wallet === 'yuki' || isTabunganYuki;
 
-      const personLabel = isYuki ? '🐈 Yuki' : '🐈‍⬛ Nata';
+      const personLabel = isYuki ? '🐈 Y' : '🐈‍⬛ N';
       const personClass = isYuki ? 'tag-yuki' : 'tag-nata';
 
-      let walletLabel = isYuki ? '💳 Dompet Yuki' : '💳 Dompet Nata';
+      let walletLabel = isYuki ? '💳 Dompet Y' : '💳 Dompet N';
       let walletClass = isYuki ? 'tag-dompet-yuki' : 'tag-dompet-nata';
       if (isTabunganYuki) {
-        walletLabel = '🏦 Tabungan Yuki';
+        walletLabel = '🏦 Tabungan Y';
         walletClass = 'tag-tabungan-yuki';
       }
 
@@ -6347,11 +6347,11 @@ function renderFinances() {
 
 // ==================== COUPLE SAVINGS MOTIVATION QUOTES ====================
 const SAVING_MOTIVATION_QUOTES = [
-  { quote: "Sedikit demi sedikit, lama-lama jadi rumah impian & liburan bareng kita berdua! 🏡🌸", author: "Yuki & Nata Future Fund ✨" },
-  { quote: "Semangat nabung sayang! Setiap rupiah yang kita simpan hari ini adalah senyuman di masa depan kita. 💖🐈", author: "Pesan Cinta untuk Yuki & Nata" },
+  { quote: "Sedikit demi sedikit, lama-lama jadi rumah impian & liburan bareng kita berdua! 🏡🌸", author: "Y & N Future Fund ✨" },
+  { quote: "Semangat nabung sayang! Setiap rupiah yang kita simpan hari ini adalah senyuman di masa depan kita. 💖🐈", author: "Pesan Cinta untuk Y & N" },
   { quote: "Menabung bukan tentang menahan diri, tapi tentang mewujudkan mimpi indah kita bersama! ✈️🇯🇵", author: "Rencana Indah Masa Depan 🌸" },
   { quote: "Uang yang kita jaga hari ini akan menjaga kebahagiaan dan kebebasan kita besok. 🐈‍⬛✨", author: "Semangat Nabung Bareng" },
-  { quote: "Yuki hebat, Nata hebat! Bareng-bareng kita pasti bisa capai semua wishlist impian kita! 🌟💎", author: "Couple Goals YuTa 💕" },
+  { quote: "Y hebat, N hebat! Bareng-bareng kita pasti bisa capai semua wishlist impian kita! 🌟💎", author: "Couple Goals YuTa 💕" },
   { quote: "Konsisten adalah kunci. Biar receh asal rutin, mimpi besar kita pasti terwujud! 💰🌷", author: "Tabungan Bahagia Kita" }
 ];
 
@@ -6378,7 +6378,7 @@ function updateSavingQuotesUI() {
 
 window.nextSavingQuote = nextSavingQuote;
 
-// Individual Savings Goals (Yuki & Nata)
+// Individual Savings Goals (Y & N)
 function renderSavingsGoals() {
   const yukiGrid = document.getElementById('yukiGoalsGrid');
   const nataGrid = document.getElementById('nataGoalsGrid');
@@ -6422,8 +6422,8 @@ function renderSavingsGoals() {
     }).join('');
   };
 
-  if (yukiGrid) yukiGrid.innerHTML = renderGoalList(yukiGoals, 'Yuki');
-  if (nataGrid) nataGrid.innerHTML = renderGoalList(nataGoals, 'Nata');
+  if (yukiGrid) yukiGrid.innerHTML = renderGoalList(yukiGoals, 'Y');
+  if (nataGrid) nataGrid.innerHTML = renderGoalList(nataGoals, 'N');
 }
 
 // Quick Log Handlers
@@ -6509,7 +6509,7 @@ function submitDirectQuickFinance() {
 
   playSound('chime');
   renderFinances();
-  showToast(`Recorded in Dompet ${person === 'yuki' ? 'Yuki' : 'Nata'}: ${formatRupiah(amount)} ✨`);
+  showToast(`Recorded in Dompet ${person === 'yuki' ? 'Y' : 'N'}: ${formatRupiah(amount)} ✨`);
 }
 
 function quickFilterByCategory(catKey) {
@@ -6737,7 +6737,7 @@ function saveSavingsGoalForm(event) {
   closeSavingsGoalModal();
   playSound('chime');
   renderFinances();
-  showToast(`Target tabungan ${owner === 'yuki' ? 'Yuki' : 'Nata'} ditambahkan! 🌟`);
+  showToast(`Target tabungan ${owner === 'yuki' ? 'Y' : 'N'} ditambahkan! 🌟`);
 }
 
 function openGoalDepositModal(goalId) {

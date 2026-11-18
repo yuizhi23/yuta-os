@@ -93,6 +93,42 @@
       const savedTasks = localStorage.getItem(STORAGE_TASKS_KEY);
       if (savedTasks) {
         tasksData = JSON.parse(savedTasks);
+
+        // Auto-sync: Check if there are newly added default tasks not yet in localStorage
+        const existingNames = new Set(tasksData.map(t => (t.name || '').trim().toLowerCase()));
+        const missingDefaultTasks = (defaultData.tasks || []).filter(defTask =>
+          defTask && defTask.name && !existingNames.has(defTask.name.trim().toLowerCase())
+        );
+
+        if (missingDefaultTasks.length > 0) {
+          const defNames = new Set((defaultData.tasks || []).map(t => (t.name || '').trim().toLowerCase()));
+          const customTasks = tasksData.filter(t => !defNames.has((t.name || '').trim().toLowerCase()));
+
+          if (customTasks.length === 0) {
+            // User had standard default list, preserve their completed status overrides if any, but adopt new default ordering & completions
+            const statusMap = new Map();
+            tasksData.forEach(t => {
+              if (t && t.name) statusMap.set(t.name.trim().toLowerCase(), t.completed);
+            });
+            tasksData = defaultData.tasks.map(t => {
+              const nameKey = t.name.trim().toLowerCase();
+              return {
+                ...t,
+                completed: statusMap.has(nameKey) ? statusMap.get(nameKey) : t.completed
+              };
+            });
+          } else {
+            // Append missing default tasks with sequential IDs
+            const maxId = tasksData.reduce((max, t) => Math.max(max, t.id || 0), 0);
+            missingDefaultTasks.forEach((defTask, idx) => {
+              tasksData.push({
+                ...defTask,
+                id: maxId + idx + 1
+              });
+            });
+          }
+          saveTasks();
+        }
       } else {
         tasksData = JSON.parse(JSON.stringify(defaultData.tasks || []));
         saveTasks();
@@ -638,6 +674,11 @@
 
     if (badge) {
       badge.textContent = `${completed} / ${total} Selesai`;
+    }
+
+    const allPill = document.querySelector('.task-filter-pill[data-filter="all"]');
+    if (allPill) {
+      allPill.textContent = `Semua (${total})`;
     }
 
     if (filtered.length === 0) {
@@ -1192,7 +1233,7 @@
             <span class="ac-icon">🏆</span>
             <div class="ac-title-wrap">
               <span class="ac-title">Top 10 VIP Spender Leaderboard</span>
-              <span class="ac-sub">Peringkat donatur teratas room Nata</span>
+              <span class="ac-sub">Peringkat donatur teratas room N</span>
             </div>
           </div>
           <div class="leaderboard-list">
@@ -1215,12 +1256,12 @@
           </div>
         </div>
 
-        <!-- Card 4: Tips Host TikTok untuk Nata -->
+        <!-- Card 4: Tips Host TikTok untuk N -->
         <div class="analytics-card glass-card span-2 tips-card">
           <div class="ac-header">
             <span class="ac-icon">💡</span>
             <div class="ac-title-wrap">
-              <span class="ac-title">Panduan Cepat & Golden Rules untuk Nata</span>
+              <span class="ac-title">Panduan Cepat & Golden Rules untuk N</span>
               <span class="ac-sub">Tips praktis menyapa spender dan mengumpulkan tugas harian</span>
             </div>
           </div>
