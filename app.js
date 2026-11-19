@@ -2864,11 +2864,11 @@ window.switchScheduleDay = switchScheduleDay;
 const STORAGE_KEY_RERU = 'aero_reru_pet_v3';
 
 const DEFAULT_RERU_DATA = {
-  name: 'Reru',
+  name: 'Cat',
   type: '3D Feisty Ginger Cat',
-  avatarImg: 'assets/reru_cat.jpg',
+  avatarImg: 'assets/cat.jpg',
   color: '#ea580c',
-  sub: 'Bos Oyen Barbar • Penguasa YuTa OS ✨',
+  sub: 'Ginger Cat Companion • Sovereign of YuTa OS ✨',
   level: 1,
   xp: 30,
   maxXp: 100,
@@ -2878,48 +2878,48 @@ const DEFAULT_RERU_DATA = {
   totalPets: 0,
   pokeCount: 0,
   mood: 'happy', // 'happy' | 'angry' | 'playful' | 'sleepy'
-  dialog: "Ngapain liat-liat babu? Mau ngasih salmon apa cuma numpang lewat? 😼🐟"
+  dialog: "Purrrr... Looking for some feline company or here to give salmon treats? 😼🐟"
 };
 
 const RERU_HAPPY_DIALOGS = [
-  "Purrrrr enak bener... Dah pinter ya lu mijitnya, gue angkat jadi babu teladan! 🥰✨",
+  "Purrrrr feels so good... You give the best headpats! 🥰✨",
   "Aww yiss right on the chin! Keep petting me like this and I won't scratch your curtains 😸💖",
-  "Muka gue pasrah banget ya? Ya abis elusan lu enak sih... Muehehe 🌸",
+  "So relaxed right now... Your headpats are top-notch 🌸",
   "Meow~ You're my mood booster today, but fresh salmon is still number one! 💕🍣",
-  "Purrr... Makasih babu terbaikku! Besok jatah cemilan jangan lupa ya 🐾✨"
+  "Purrr... Thank you! Don't forget my treats tomorrow 🐾✨"
 ];
 
 const RERU_ANGRY_DIALOGS = [
   "HISSS! 😾💢 Can your hands stay still for a second?! Watch me scratch your favorite couch!",
-  "HISSSS! 😾 Apaan sih toel-toel mulu! Gue oyen barbar bukan boneka capit! 🔥",
-  "Grrrr... Senggol bacok nih! Jangan bikin jiwa preman oyen gue bangkit! 😼⚡",
-  "HISS! 😾 Salmon mana salmon?! Minta maaf pake makanan sekarang cepet! 🐟💢",
-  "Rawrr! Sekali lagi lu usil, kabel charger lu gue gigit putus ya! 😾🔥"
+  "HISSSS! 😾 Why are you poking me so much! I am a proud cat, not a plush toy! 🔥",
+  "Grrrr... Don't test my patience! 😼⚡",
+  "HISS! 😾 Where's the salmon?! Apologize with treats right now! 🐟💢",
+  "Rawrr! Poke me again and your charging cable is getting chewed! 😾🔥"
 ];
 
 const RERU_PLAYFUL_DIALOGS = [
-  "SERANGG! 🧶💨 Liat nih salto 360 derajat ala oyen profesional! (★ω★)",
+  "ATTACK! 🧶💨 Check out this 360-degree acrobatic flip! (★ω★)",
   "Whoosh! Nothing beats my speed, 3D zoomies activated! 💨🐾",
-  "Mana benangnya?! Sini gue acak-acak sampe kusut sedunia! 😼🧶",
-  "Pounce! Kecepatan kilat oyen barbar beraksi! 🌪️🐾"
+  "Where's that yarn?! Let me pounce and tangle it up! 😼🧶",
+  "Pounce! Lightning-fast feline moves in action! 🌪️🐾"
 ];
 
 const RERU_SLEEPY_DIALOGS = [
-  "Zzz... Capek abis jadi bos seharian, jangan berisik lu pada! 😴💤",
-  "Zzz... Mimpi dapet traktiran salmon sekontainer... 💤🍣",
-  "Hoammm... Jangan ganggu ritual tidur 18 jam gue! 💤✨"
+  "Zzz... Exhausted from being the boss all day, keep it quiet! 😴💤",
+  "Zzz... Dreaming of a whole container of fresh salmon... 💤🍣",
+  "Yawn... Do not disturb my sacred 18-hour beauty sleep! 💤✨"
 ];
 
 let moodResetTimer = null;
 
 function initCatSanctuary() {
   const data = getStorage(STORAGE_KEY_RERU, DEFAULT_RERU_DATA);
-  if (!data.name || data.name !== 'Reru' || !data.sub || !data.avatarImg || data.avatarImg !== 'assets/reru_cat.jpg') {
-    data.name = 'Reru';
+  if (!data.name || data.name !== 'Cat' || !data.sub || !data.avatarImg || data.avatarImg !== 'assets/cat.jpg') {
+    data.name = 'Cat';
     data.sub = DEFAULT_RERU_DATA.sub;
     data.type = DEFAULT_RERU_DATA.type;
     data.dialog = data.dialog || DEFAULT_RERU_DATA.dialog;
-    data.avatarImg = 'assets/reru_cat.jpg';
+    data.avatarImg = 'assets/cat.jpg';
     setStorage(STORAGE_KEY_RERU, data);
   }
   renderReruCard();
@@ -2935,13 +2935,13 @@ function renderReruCard() {
   const rankBadge = document.getElementById('catsTrioLevelBadge');
   if (rankBadge) {
     const rankLabel = reru.mood === 'angry' ? '😾 Grumpy Ginger (FEISTY)' : reru.level >= 10 ? 'Ginger Sovereign ⭐' : reru.level >= 5 ? 'Elite Ginger Boss 🌟' : reru.level >= 3 ? 'Cheeky Ginger Cat 🌸' : 'Adorable Fluff 🐾';
-    rankBadge.textContent = `Reru's Title: ${rankLabel} (Lv. ${reru.level})`;
+    rankBadge.textContent = `Cat's Title: ${rankLabel} (Lv. ${reru.level})`;
   }
 
   const isAngry = reru.mood === 'angry';
   const moodClass = isAngry ? 'mood-angry' : reru.mood === 'happy' ? 'mood-happy' : reru.mood === 'playful' ? 'mood-playful' : reru.mood === 'sleepy' ? 'mood-sleepy' : '';
   const faceEmoji = isAngry ? '😾💢' : reru.mood === 'sleepy' ? '😴💤' : reru.mood === 'playful' ? '😺✨' : '😸🥰';
-  const statusText = isAngry ? 'MARAH & GALAK' : reru.mood === 'sleepy' ? 'Tidur Zzz' : reru.mood === 'playful' ? 'Zoomies' : 'Senyum & Manja';
+  const statusText = isAngry ? 'FEISTY & GRUMPY' : reru.mood === 'sleepy' ? 'Sleeping Zzz' : reru.mood === 'playful' ? 'Zoomies' : 'Happy & Purring';
   const tagClass = isAngry ? 'tag-angry' : reru.mood === 'playful' ? 'tag-playful' : reru.mood === 'sleepy' ? 'tag-sleepy' : 'tag-happy';
 
   const miniLvl = document.getElementById('reruMiniLvl');
@@ -2952,13 +2952,13 @@ function renderReruCard() {
   cardContainer.innerHTML = `
     <!-- Left 3D Visual Column (Photo 100% Unobstructed) -->
     <div class="reru-visual-col">
-      <div class="reru-avatar-3d-wrap ${moodClass}" id="reruAvatarWrap" onclick="interactReruDirect(event)" title="Klik buat elus & dengerin suara Reru!">
-        <img src="${reru.avatarImg || 'assets/reru_cat.jpg'}" alt="3D Ginger Cat Reru" class="reru-3d-img" id="reruAvatarImg" />
+      <div class="reru-avatar-3d-wrap ${moodClass}" id="reruAvatarWrap" onclick="interactReruDirect(event)" title="Click to pet & hear your cat!">
+        <img src="${reru.avatarImg || 'assets/cat.jpg'}" alt="3D Ginger Cat" class="reru-3d-img" id="reruAvatarImg" />
         <div class="reru-shine-layer"></div>
         <div class="reru-glow-aura"></div>
       </div>
-      <div class="reru-speech-bubble" id="reruSpeech" onclick="interactReruDirect(event)" title="Klik buat ngobrol sama Reru">
-        "${reru.dialog || 'Purrr... Mau apa lu?'}"
+      <div class="reru-speech-bubble" id="reruSpeech" onclick="interactReruDirect(event)" title="Click to talk with your cat">
+        "${reru.dialog || 'Purrr... What can I do for you?'}"
       </div>
     </div>
 
@@ -2973,9 +2973,9 @@ function renderReruCard() {
               <span>${faceEmoji} ${statusText}</span>
             </span>
           </div>
-          <span class="reru-bio">${isAngry ? '⚠️ Awas: Mode preman oyen aktif! Kasih salmon biar jinak' : reru.sub}</span>
+          <span class="reru-bio">${isAngry ? '⚠️ Warning: Feisty mode active! Offer salmon to calm down' : reru.sub}</span>
         </div>
-        <div class="reru-lvl-badge">${isAngry ? '😾 GALAK' : `Lv. ${reru.level}`}</div>
+        <div class="reru-lvl-badge">${isAngry ? '😾 FEISTY' : `Lv. ${reru.level}`}</div>
       </div>
 
       <!-- XP Progress Track -->
@@ -2992,7 +2992,7 @@ function renderReruCard() {
       <!-- Stat Bars -->
       <div class="cat-stats-list">
         <div class="cat-stat-item">
-          <span class="cat-stat-label">${isAngry ? '💢 Emosi' : '💖 Senang'}</span>
+          <span class="cat-stat-label">${isAngry ? '💢 Temper' : '💖 Happiness'}</span>
           <div class="cat-bar-track">
             <div class="cat-bar-fill ${isAngry ? 'fill-hunger' : 'fill-happy'}" style="width: ${reru.happiness}%;"></div>
           </div>
@@ -3000,7 +3000,7 @@ function renderReruCard() {
         </div>
 
         <div class="cat-stat-item">
-          <span class="cat-stat-label">🐟 Kenyang</span>
+          <span class="cat-stat-label">🐟 Fullness</span>
           <div class="cat-bar-track">
             <div class="cat-bar-fill fill-hunger" style="width: ${reru.hunger}%;"></div>
           </div>
@@ -3008,7 +3008,7 @@ function renderReruCard() {
         </div>
 
         <div class="cat-stat-item">
-          <span class="cat-stat-label">⚡ Energi</span>
+          <span class="cat-stat-label">⚡ Energy</span>
           <div class="cat-bar-track">
             <div class="cat-bar-fill fill-energy" style="width: ${reru.energy}%;"></div>
           </div>
@@ -3018,29 +3018,29 @@ function renderReruCard() {
 
       <!-- Action Buttons Grid (6 Buttons) -->
       <div class="reru-actions-grid" style="grid-template-columns: repeat(6, 1fr);">
-        <button class="reru-act-btn" onclick="petReru(event)" title="Elus Reru (Bikin purr & senyum)">
+        <button class="reru-act-btn" onclick="petReru(event)" title="Pet Cat (Makes cat purr &amp; happy)">
           <span class="cat-btn-icon">🖐️</span>
-          <span>Elus</span>
+          <span>Pet</span>
         </button>
-        <button class="reru-act-btn" onclick="feedReru(event)" title="Kasih makan salmon segar">
+        <button class="reru-act-btn" onclick="feedReru(event)" title="Feed fresh salmon">
           <span class="cat-btn-icon">🐟</span>
           <span>Salmon</span>
         </button>
-        <button class="reru-act-btn" onclick="playWithReru(event)" title="Ajak main bola benang (Salto 3D!)">
+        <button class="reru-act-btn" onclick="playWithReru(event)" title="Play with yarn ball (3D backflip!)">
           <span class="cat-btn-icon">🧶</span>
-          <span>Main</span>
+          <span>Play</span>
         </button>
-        <button class="reru-act-btn" onclick="brushReru(event)" title="Sisir bulu oyen biar kinclong">
+        <button class="reru-act-btn" onclick="brushReru(event)" title="Groom cat coat">
           <span class="cat-btn-icon">✨</span>
-          <span>Sisir</span>
+          <span>Groom</span>
         </button>
-        <button class="reru-act-btn" onclick="teaseReru(event)" title="Culik / Toel Reru (Awas ngamuk & hissing!)" style="border-color: #ef4444; color: #b91c1c;">
+        <button class="reru-act-btn" onclick="teaseReru(event)" title="Poke Cat (Watch out for hissing!)" style="border-color: #ef4444; color: #b91c1c;">
           <span class="cat-btn-icon">🤪</span>
-          <span>Toel</span>
+          <span>Poke</span>
         </button>
-        <button class="reru-act-btn" onclick="napReru(event)" title="Suruh Reru tidur siang">
+        <button class="reru-act-btn" onclick="napReru(event)" title="Let Cat take a nap">
           <span class="cat-btn-icon">💤</span>
-          <span>Tidur</span>
+          <span>Nap</span>
         </button>
       </div>
     </div>
@@ -3108,7 +3108,7 @@ function interactReruDirect(event) {
     setStorage(STORAGE_KEY_RERU, reru);
     renderReruCard();
     if (event && event.clientX) spawnFloatingHeartAt(event.clientX, event.clientY, '💢');
-    showToast("Reru: HISSS! 😾💢 Masih kesel, jangan deket-deket!");
+    showToast("Cat: HISSS! 😾💢 Still annoyed, keep your distance!");
     return;
   }
 
@@ -3139,7 +3139,7 @@ function petReru(event) {
     spawnFloatingHeartAt(event.clientX, event.clientY, '💖');
     setTimeout(() => spawnFloatingHeartAt(event.clientX + 14, event.clientY - 14, '😸'), 120);
   }
-  showToast("Elus Reru! Purrrr... 😸 Manja banget!");
+  showToast("Petting Cat! Purrrr... 😸 So affectionate!");
 }
 
 function teaseReru(event) {
@@ -3164,7 +3164,7 @@ function teaseReru(event) {
       setTimeout(() => spawnFloatingHeartAt(event.clientX + 10, event.clientY - 15, '🔥'), 100);
       setTimeout(() => spawnFloatingHeartAt(event.clientX - 10, event.clientY - 20, '😾'), 200);
     }
-    showToast("⚠️ Reru: HISSSS! 😾💢 Marah & Galak!");
+    showToast("⚠️ Cat: HISSSS! 😾💢 Feisty & Grumpy!");
 
     // Auto calm down after 6s if not poked
     moodResetTimer = setTimeout(() => {
@@ -3172,7 +3172,7 @@ function teaseReru(event) {
       if (current.mood === 'angry') {
         current.mood = 'happy';
         current.pokeCount = 0;
-        current.dialog = "Purrr... Dah reda nih emosi gue. Jangan iseng lagi ya babu! 🐾";
+        current.dialog = "Purrr... I have calmed down now. Don't be mischievous again! 🐾";
         setStorage(STORAGE_KEY_RERU, current);
         renderReruCard();
       }
@@ -3181,14 +3181,14 @@ function teaseReru(event) {
     // Annoyed warning poke
     playSound('growl');
     reru.mood = 'angry';
-    reru.dialog = "Heh! Ngapain toel-toel? 😼 Jangan macam-macam lu!";
+    reru.dialog = "Hey! Why are you poking me? 😼 Don't push your luck!";
     setStorage(STORAGE_KEY_RERU, reru);
     renderReruCard();
 
     if (event && event.clientX) {
       spawnFloatingHeartAt(event.clientX, event.clientY, '⚡');
     }
-    showToast("Reru: Grrr... Jangan jailin gue! 😼");
+    showToast("Cat: Grrr... Don't tease me! 😼");
   }
 }
 
@@ -3212,7 +3212,7 @@ function feedReru(event) {
     reru.dialog = "Nom nom crunch! 🐟 That's the spirit, you're a top-tier hooman today! 😸✨";
     setStorage(STORAGE_KEY_RERU, reru);
     renderReruCard();
-    showToast("Gave fresh salmon to Reru! 🐟✨");
+    showToast("Gave fresh salmon to Cat! 🐟✨");
   });
 }
 
@@ -3238,7 +3238,7 @@ function playWithReru(event) {
     renderReruCard();
 
     spawnBubbleBurstAt(startX, startY);
-    showToast("Playing yarn ball with Reru! 🧶🐾 3D backflip!");
+    showToast("Playing yarn ball with Cat! 🧶🐾 3D backflip!");
   });
 }
 
@@ -3264,7 +3264,7 @@ function brushReru(event) {
     spawnFloatingHeartAt(event.clientX, event.clientY, '✨');
     spawnFloatingHeartAt(event.clientX - 10, event.clientY - 20, '🌟');
   }
-  showToast("Nyisir bulu oyen Reru sampe glowing ✨");
+  showToast("Groomed cat coat until sparkling clean! ✨");
 }
 
 function napReru(event) {
@@ -3287,7 +3287,7 @@ function napReru(event) {
     spawnCelebrationSparkles(event.clientX, event.clientY);
     spawnFloatingHeartAt(event.clientX, event.clientY, '💤');
   }
-  showToast("Reru bobo siang... Energi pulih 100% ⚡💤");
+  showToast("Cat is taking a nap... Energy 100% restored! ⚡💤");
 }
 
 function addReruXp(reru, amount) {
@@ -3297,7 +3297,7 @@ function addReruXp(reru, amount) {
     reru.xp = reru.xp - reru.maxXp;
     reru.maxXp = Math.floor(reru.maxXp * 1.35);
     playSound('chime');
-    showToast(`🎉 Reru reached Level ${reru.level}! ⭐`);
+    showToast(`🎉 Cat reached Level ${reru.level}! ⭐`);
   }
 }
 
@@ -3508,7 +3508,7 @@ function applyRemoteData(remoteData) {
             person: 'nata',
             wallet: 'nata',
             paymentMethod: 'qris',
-            desc: 'Servis / Perbaikan HP',
+            desc: 'Phone repair service',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
@@ -3523,7 +3523,7 @@ function applyRemoteData(remoteData) {
             person: 'nata',
             wallet: 'nata',
             paymentMethod: 'qris',
-            desc: 'Roti Bakar',
+            desc: 'Toast snack',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
@@ -3538,7 +3538,7 @@ function applyRemoteData(remoteData) {
             person: 'nata',
             wallet: 'nata',
             paymentMethod: 'qris',
-            desc: 'Singkong Keju',
+            desc: 'Cheese cassava snack',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
@@ -3568,7 +3568,7 @@ function applyRemoteData(remoteData) {
             person: 'nata',
             wallet: 'nata',
             paymentMethod: 'cash',
-            desc: 'Ayam Geprek Babeh',
+            desc: 'Crispy Chicken Rice',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
@@ -3598,7 +3598,7 @@ function applyRemoteData(remoteData) {
             person: 'nata',
             wallet: 'nata',
             paymentMethod: 'qris',
-            desc: 'Laundry',
+            desc: 'Laundry service',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
@@ -3613,7 +3613,7 @@ function applyRemoteData(remoteData) {
             person: 'nata',
             wallet: 'nata',
             paymentMethod: 'transfer',
-            desc: 'Latihan & Busking TWICE',
+            desc: 'Music & Performance Practice',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
@@ -3643,7 +3643,7 @@ function applyRemoteData(remoteData) {
             person: 'nata',
             wallet: 'nata',
             paymentMethod: 'transfer',
-            desc: 'Jajan',
+            desc: 'Daily snacks',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
@@ -3673,7 +3673,7 @@ function applyRemoteData(remoteData) {
             person: 'nata',
             wallet: 'nata',
             paymentMethod: 'qris',
-            desc: 'Warkop ADD',
+            desc: 'Coffee Shop',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
@@ -3688,7 +3688,7 @@ function applyRemoteData(remoteData) {
             person: 'nata',
             wallet: 'nata',
             paymentMethod: 'qris',
-            desc: 'Obat',
+            desc: 'Pharmacy / medicine',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
@@ -3718,7 +3718,7 @@ function applyRemoteData(remoteData) {
             person: 'nata',
             wallet: 'nata',
             paymentMethod: 'transfer',
-            desc: 'Latihan Dance Baemon',
+            desc: 'Dance Practice',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
@@ -3748,7 +3748,7 @@ function applyRemoteData(remoteData) {
             person: 'yuki',
             wallet: 'yuki',
             paymentMethod: 'qris',
-            desc: 'Biskuku',
+            desc: 'Cookies & bakery',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
@@ -3763,7 +3763,7 @@ function applyRemoteData(remoteData) {
             person: 'yuki',
             wallet: 'yuki',
             paymentMethod: 'cash',
-            desc: 'Es Teh',
+            desc: 'Iced tea',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
@@ -3778,7 +3778,7 @@ function applyRemoteData(remoteData) {
             person: 'yuki',
             wallet: 'yuki',
             paymentMethod: 'qris',
-            desc: 'Kentang Jamur',
+            desc: 'Crispy potato & mushroom',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
@@ -3793,7 +3793,7 @@ function applyRemoteData(remoteData) {
             person: 'yuki',
             wallet: 'yuki',
             paymentMethod: 'cash',
-            desc: 'Cilok',
+            desc: 'Snacks',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
@@ -3823,7 +3823,7 @@ function applyRemoteData(remoteData) {
             person: 'yuki',
             wallet: 'yuki',
             paymentMethod: 'qris',
-            desc: 'Paket Data / Kuota',
+            desc: 'Mobile data package',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
@@ -3838,7 +3838,7 @@ function applyRemoteData(remoteData) {
             person: 'yuki',
             wallet: 'yuki',
             paymentMethod: 'qris',
-            desc: 'Ongkir GoSend',
+            desc: 'Delivery courier fee',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
@@ -3853,7 +3853,7 @@ function applyRemoteData(remoteData) {
             person: 'yuki',
             wallet: 'yuki',
             paymentMethod: 'qris',
-            desc: 'Nescafe',
+            desc: 'Coffee',
             date: '2026-10-12',
             isSplit: false,
             splitRatio: 50,
@@ -3868,7 +3868,7 @@ function applyRemoteData(remoteData) {
             person: 'yuki',
             wallet: 'yuki',
             paymentMethod: 'qris',
-            desc: 'Belanja sopi',
+            desc: 'Online shopping',
             date: '2026-10-12',
             isSplit: false,
             splitRatio: 50,
@@ -3883,7 +3883,7 @@ function applyRemoteData(remoteData) {
             person: 'yuki',
             wallet: 'yuki',
             paymentMethod: 'cash',
-            desc: 'Jus',
+            desc: 'Fresh fruit juice',
             date: '2026-10-12',
             isSplit: false,
             splitRatio: 50,
@@ -3898,7 +3898,7 @@ function applyRemoteData(remoteData) {
             person: 'yuki',
             wallet: 'yuki',
             paymentMethod: 'qris',
-            desc: 'Pecel lele',
+            desc: 'Dinner',
             date: '2026-10-12',
             isSplit: false,
             splitRatio: 50,
@@ -3914,7 +3914,7 @@ function applyRemoteData(remoteData) {
             wallet: 'tabungan_yuki',
             source: 'tabungan',
             paymentMethod: 'qris',
-            desc: 'Belanja sayur',
+            desc: 'Fresh groceries',
             date: '2026-10-12',
             isSplit: false,
             splitRatio: 50,
@@ -3946,7 +3946,7 @@ function applyRemoteData(remoteData) {
             wallet: 'tabungan_yuki',
             source: 'tabungan',
             paymentMethod: 'cash',
-            desc: 'Bubur',
+            desc: 'Breakfast porridge',
             date: '2026-10-12',
             isSplit: false,
             splitRatio: 50,
@@ -3961,7 +3961,7 @@ function applyRemoteData(remoteData) {
             person: 'yuki',
             wallet: 'yuki',
             paymentMethod: 'transfer',
-            desc: 'Dapet 240k / Income Y',
+            desc: 'Income (Orange) / Earnings',
             date: '2026-10-10',
             isSplit: false,
             splitRatio: 50,
@@ -3976,7 +3976,7 @@ function applyRemoteData(remoteData) {
             person: 'yuki',
             wallet: 'yuki',
             paymentMethod: 'qris',
-            desc: 'Beli ketoprak',
+            desc: 'Street food snack',
             date: '2026-10-10',
             isSplit: false,
             splitRatio: 50,
@@ -3991,7 +3991,7 @@ function applyRemoteData(remoteData) {
             person: 'yuki',
             wallet: 'yuki',
             paymentMethod: 'cash',
-            desc: 'Es teh',
+            desc: 'Iced tea',
             date: '2026-10-10',
             isSplit: false,
             splitRatio: 50,
@@ -4006,7 +4006,7 @@ function applyRemoteData(remoteData) {
             person: 'yuki',
             wallet: 'yuki',
             paymentMethod: 'qris',
-            desc: 'Charger',
+            desc: 'Phone charger cable',
             date: '2026-10-10',
             isSplit: false,
             splitRatio: 50,
@@ -4036,7 +4036,7 @@ function applyRemoteData(remoteData) {
             person: 'yuki',
             wallet: 'yuki',
             paymentMethod: 'qris',
-            desc: 'Sei sapi',
+            desc: 'Smoked beef meal',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
@@ -4066,7 +4066,7 @@ function applyRemoteData(remoteData) {
             person: 'nata',
             wallet: 'nata',
             paymentMethod: 'transfer',
-            desc: 'Kuota',
+            desc: 'Mobile data package',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
@@ -4111,7 +4111,7 @@ function applyRemoteData(remoteData) {
             person: 'nata',
             wallet: 'nata',
             paymentMethod: 'cash',
-            desc: 'Bensin',
+            desc: 'Fuel & gasoline',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
@@ -4126,7 +4126,7 @@ function applyRemoteData(remoteData) {
             person: 'nata',
             wallet: 'nata',
             paymentMethod: 'qris',
-            desc: 'Nongkuy',
+            desc: 'Cafe hangout',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
@@ -4141,7 +4141,7 @@ function applyRemoteData(remoteData) {
             person: 'nata',
             wallet: 'nata',
             paymentMethod: 'cash',
-            desc: 'Latihan twice',
+            desc: 'Dance rehearsal',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
@@ -4156,7 +4156,7 @@ function applyRemoteData(remoteData) {
             person: 'nata',
             wallet: 'nata',
             paymentMethod: 'transfer',
-            desc: 'Tf gopay',
+            desc: 'Top up e-wallet',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
@@ -4171,7 +4171,7 @@ function applyRemoteData(remoteData) {
             person: 'nata',
             wallet: 'nata',
             paymentMethod: 'qris',
-            desc: 'Bioskop',
+            desc: 'Cinema movie tickets',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
@@ -4186,7 +4186,7 @@ function applyRemoteData(remoteData) {
             person: 'nata',
             wallet: 'nata',
             paymentMethod: 'qris',
-            desc: 'Nongkuy',
+            desc: 'Cafe hangout',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
@@ -4201,7 +4201,7 @@ function applyRemoteData(remoteData) {
             person: 'nata',
             wallet: 'nata',
             paymentMethod: 'qris',
-            desc: 'Sopipud',
+            desc: 'Food delivery',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
@@ -4216,7 +4216,7 @@ function applyRemoteData(remoteData) {
             person: 'nata',
             wallet: 'nata',
             paymentMethod: 'qris',
-            desc: 'dubai cuki anjing ceya gendut',
+            desc: 'Dubai chocolate snack',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
@@ -4246,7 +4246,7 @@ function applyRemoteData(remoteData) {
             person: 'nata',
             wallet: 'nata',
             paymentMethod: 'qris',
-            desc: 'SEKUISI',
+            desc: 'Squishy toy',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
@@ -4261,7 +4261,7 @@ function applyRemoteData(remoteData) {
             person: 'nata',
             wallet: 'nata',
             paymentMethod: 'qris',
-            desc: 'Teh poci pvj mahal',
+            desc: 'Tea at mall',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
@@ -4276,7 +4276,7 @@ function applyRemoteData(remoteData) {
             person: 'nata',
             wallet: 'nata',
             paymentMethod: 'qris',
-            desc: 'Aeon enak slurp',
+            desc: 'Dining out',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
@@ -4291,7 +4291,7 @@ function applyRemoteData(remoteData) {
             person: 'nata',
             wallet: 'nata',
             paymentMethod: 'qris',
-            desc: 'Warkop mahal',
+            desc: 'Coffee Shop hangout',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
@@ -4306,7 +4306,7 @@ function applyRemoteData(remoteData) {
             person: 'nata',
             wallet: 'nata',
             paymentMethod: 'qris',
-            desc: 'Borma',
+            desc: 'Supermarket shopping',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
@@ -4321,7 +4321,7 @@ function applyRemoteData(remoteData) {
             person: 'nata',
             wallet: 'nata',
             paymentMethod: 'qris',
-            desc: 'Tianlala si papi',
+            desc: 'Tea & beverage',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
@@ -4336,7 +4336,7 @@ function applyRemoteData(remoteData) {
             person: 'nata',
             wallet: 'nata',
             paymentMethod: 'qris',
-            desc: 'Nongkuy',
+            desc: 'Cafe hangout',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
@@ -4764,13 +4764,17 @@ function downloadLifetimeICS() {
 // ==================== TWO-WAY GOOGLE CALENDAR IMPORT ====================
 
 const GCAL_LINKS = {
-  yuki: 'https://calendar.google.com/calendar/ical/yukiekiyoshi123%40gmail.com/private-e1832b466c6cf6e5b6d9673f5b695038/basic.ics',
-  nata: 'https://calendar.google.com/calendar/ical/heavcnlyours%40gmail.com/private-7f8ac755df1e414b14a30ec528881b66/basic.ics'
+  yuki: '',
+  nata: '',
+  orange: '',
+  black: ''
 };
 
 const GCAL_LOCAL_FILES = {
-  yuki: 'gcal_yuki.ics',
-  nata: 'gcal_nata.ics'
+  yuki: 'gcal_orange.ics',
+  nata: 'gcal_black.ics',
+  orange: 'gcal_orange.ics',
+  black: 'gcal_black.ics'
 };
 
 function parseAndApplyICS(icsText, target = 'yuki') {
@@ -5125,7 +5129,7 @@ function getFinances() {
       person: 'nata',
       wallet: 'nata',
       paymentMethod: 'qris',
-      desc: 'Servis / Perbaikan HP',
+      desc: 'Phone repair service',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
@@ -5140,7 +5144,7 @@ function getFinances() {
       person: 'nata',
       wallet: 'nata',
       paymentMethod: 'qris',
-      desc: 'Roti Bakar',
+      desc: 'Toast snack',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
@@ -5155,7 +5159,7 @@ function getFinances() {
       person: 'nata',
       wallet: 'nata',
       paymentMethod: 'qris',
-      desc: 'Singkong Keju',
+      desc: 'Cheese cassava snack',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
@@ -5185,7 +5189,7 @@ function getFinances() {
       person: 'nata',
       wallet: 'nata',
       paymentMethod: 'cash',
-      desc: 'Ayam Geprek Babeh',
+      desc: 'Crispy Chicken Rice',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
@@ -5215,7 +5219,7 @@ function getFinances() {
       person: 'nata',
       wallet: 'nata',
       paymentMethod: 'qris',
-      desc: 'Laundry',
+      desc: 'Laundry service',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
@@ -5230,7 +5234,7 @@ function getFinances() {
       person: 'nata',
       wallet: 'nata',
       paymentMethod: 'transfer',
-      desc: 'Latihan & Busking TWICE',
+      desc: 'Music & Performance Practice',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
@@ -5260,7 +5264,7 @@ function getFinances() {
       person: 'nata',
       wallet: 'nata',
       paymentMethod: 'transfer',
-      desc: 'Jajan',
+      desc: 'Daily snacks',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
@@ -5290,7 +5294,7 @@ function getFinances() {
       person: 'nata',
       wallet: 'nata',
       paymentMethod: 'qris',
-      desc: 'Warkop ADD',
+      desc: 'Coffee Shop',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
@@ -5305,7 +5309,7 @@ function getFinances() {
       person: 'nata',
       wallet: 'nata',
       paymentMethod: 'qris',
-      desc: 'Obat',
+      desc: 'Pharmacy / medicine',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
@@ -5335,7 +5339,7 @@ function getFinances() {
       person: 'nata',
       wallet: 'nata',
       paymentMethod: 'transfer',
-      desc: 'Latihan Dance Baemon',
+      desc: 'Dance Practice',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
@@ -5365,7 +5369,7 @@ function getFinances() {
       person: 'yuki',
       wallet: 'yuki',
       paymentMethod: 'qris',
-      desc: 'Biskuku',
+      desc: 'Cookies & bakery',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
@@ -5380,7 +5384,7 @@ function getFinances() {
       person: 'yuki',
       wallet: 'yuki',
       paymentMethod: 'cash',
-      desc: 'Es Teh',
+      desc: 'Iced tea',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
@@ -5395,7 +5399,7 @@ function getFinances() {
       person: 'yuki',
       wallet: 'yuki',
       paymentMethod: 'qris',
-      desc: 'Kentang Jamur',
+      desc: 'Crispy potato & mushroom',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
@@ -5410,7 +5414,7 @@ function getFinances() {
       person: 'yuki',
       wallet: 'yuki',
       paymentMethod: 'cash',
-      desc: 'Cilok',
+      desc: 'Snacks',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
@@ -5440,7 +5444,7 @@ function getFinances() {
       person: 'yuki',
       wallet: 'yuki',
       paymentMethod: 'qris',
-      desc: 'Paket Data / Kuota',
+      desc: 'Mobile data package',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
@@ -5455,7 +5459,7 @@ function getFinances() {
       person: 'yuki',
       wallet: 'yuki',
       paymentMethod: 'qris',
-      desc: 'Ongkir GoSend',
+      desc: 'Delivery courier fee',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
@@ -5470,7 +5474,7 @@ function getFinances() {
       person: 'yuki',
       wallet: 'yuki',
       paymentMethod: 'qris',
-      desc: 'Nescafe',
+      desc: 'Coffee',
       date: '2026-10-12',
       isSplit: false,
       splitRatio: 50,
@@ -5485,7 +5489,7 @@ function getFinances() {
       person: 'yuki',
       wallet: 'yuki',
       paymentMethod: 'qris',
-      desc: 'Belanja sopi',
+      desc: 'Online shopping',
       date: '2026-10-12',
       isSplit: false,
       splitRatio: 50,
@@ -5500,7 +5504,7 @@ function getFinances() {
       person: 'yuki',
       wallet: 'yuki',
       paymentMethod: 'cash',
-      desc: 'Jus',
+      desc: 'Fresh fruit juice',
       date: '2026-10-12',
       isSplit: false,
       splitRatio: 50,
@@ -5515,7 +5519,7 @@ function getFinances() {
       person: 'yuki',
       wallet: 'yuki',
       paymentMethod: 'qris',
-      desc: 'Pecel lele',
+      desc: 'Dinner',
       date: '2026-10-12',
       isSplit: false,
       splitRatio: 50,
@@ -5531,7 +5535,7 @@ function getFinances() {
       wallet: 'tabungan_yuki',
       source: 'tabungan',
       paymentMethod: 'qris',
-      desc: 'Belanja sayur',
+      desc: 'Fresh groceries',
       date: '2026-10-12',
       isSplit: false,
       splitRatio: 50,
@@ -5563,7 +5567,7 @@ function getFinances() {
       wallet: 'tabungan_yuki',
       source: 'tabungan',
       paymentMethod: 'cash',
-      desc: 'Bubur',
+      desc: 'Breakfast porridge',
       date: '2026-10-12',
       isSplit: false,
       splitRatio: 50,
@@ -5578,7 +5582,7 @@ function getFinances() {
       person: 'yuki',
       wallet: 'yuki',
       paymentMethod: 'transfer',
-      desc: 'Dapet 240k / Income Y',
+      desc: 'Income (Orange) / Earnings',
       date: '2026-10-10',
       isSplit: false,
       splitRatio: 50,
@@ -5593,7 +5597,7 @@ function getFinances() {
       person: 'yuki',
       wallet: 'yuki',
       paymentMethod: 'qris',
-      desc: 'Beli ketoprak',
+      desc: 'Street food snack',
       date: '2026-10-10',
       isSplit: false,
       splitRatio: 50,
@@ -5608,7 +5612,7 @@ function getFinances() {
       person: 'yuki',
       wallet: 'yuki',
       paymentMethod: 'cash',
-      desc: 'Es teh',
+      desc: 'Iced tea',
       date: '2026-10-10',
       isSplit: false,
       splitRatio: 50,
@@ -5623,7 +5627,7 @@ function getFinances() {
       person: 'yuki',
       wallet: 'yuki',
       paymentMethod: 'qris',
-      desc: 'Charger',
+      desc: 'Phone charger cable',
       date: '2026-10-10',
       isSplit: false,
       splitRatio: 50,
@@ -5653,7 +5657,7 @@ function getFinances() {
       person: 'yuki',
       wallet: 'yuki',
       paymentMethod: 'qris',
-      desc: 'Sei sapi',
+      desc: 'Smoked beef meal',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
@@ -5683,7 +5687,7 @@ function getFinances() {
       person: 'nata',
       wallet: 'nata',
       paymentMethod: 'transfer',
-      desc: 'Kuota',
+      desc: 'Mobile data package',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
@@ -5728,7 +5732,7 @@ function getFinances() {
       person: 'nata',
       wallet: 'nata',
       paymentMethod: 'cash',
-      desc: 'Bensin',
+      desc: 'Fuel & gasoline',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
@@ -5743,7 +5747,7 @@ function getFinances() {
       person: 'nata',
       wallet: 'nata',
       paymentMethod: 'qris',
-      desc: 'Nongkuy',
+      desc: 'Cafe hangout',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
@@ -5758,7 +5762,7 @@ function getFinances() {
       person: 'nata',
       wallet: 'nata',
       paymentMethod: 'cash',
-      desc: 'Latihan twice',
+      desc: 'Dance rehearsal',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
@@ -5773,7 +5777,7 @@ function getFinances() {
       person: 'nata',
       wallet: 'nata',
       paymentMethod: 'transfer',
-      desc: 'Tf gopay',
+      desc: 'Top up e-wallet',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
@@ -5788,7 +5792,7 @@ function getFinances() {
       person: 'nata',
       wallet: 'nata',
       paymentMethod: 'qris',
-      desc: 'Bioskop',
+      desc: 'Cinema movie tickets',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
@@ -5803,7 +5807,7 @@ function getFinances() {
       person: 'nata',
       wallet: 'nata',
       paymentMethod: 'qris',
-      desc: 'Nongkuy',
+      desc: 'Cafe hangout',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
@@ -5818,7 +5822,7 @@ function getFinances() {
       person: 'nata',
       wallet: 'nata',
       paymentMethod: 'qris',
-      desc: 'Sopipud',
+      desc: 'Food delivery',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
@@ -5833,7 +5837,7 @@ function getFinances() {
       person: 'nata',
       wallet: 'nata',
       paymentMethod: 'qris',
-      desc: 'dubai cuki anjing ceya gendut',
+      desc: 'Dubai chocolate snack',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
@@ -5863,7 +5867,7 @@ function getFinances() {
       person: 'nata',
       wallet: 'nata',
       paymentMethod: 'qris',
-      desc: 'SEKUISI',
+      desc: 'Squishy toy',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
@@ -5878,7 +5882,7 @@ function getFinances() {
       person: 'nata',
       wallet: 'nata',
       paymentMethod: 'qris',
-      desc: 'Teh poci pvj mahal',
+      desc: 'Tea at mall',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
@@ -5893,7 +5897,7 @@ function getFinances() {
       person: 'nata',
       wallet: 'nata',
       paymentMethod: 'qris',
-      desc: 'Aeon enak slurp',
+      desc: 'Dining out',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
@@ -5908,7 +5912,7 @@ function getFinances() {
       person: 'nata',
       wallet: 'nata',
       paymentMethod: 'qris',
-      desc: 'Warkop mahal',
+      desc: 'Coffee Shop hangout',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
@@ -5923,7 +5927,7 @@ function getFinances() {
       person: 'nata',
       wallet: 'nata',
       paymentMethod: 'qris',
-      desc: 'Borma',
+      desc: 'Supermarket shopping',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
@@ -5938,7 +5942,7 @@ function getFinances() {
       person: 'nata',
       wallet: 'nata',
       paymentMethod: 'qris',
-      desc: 'Tianlala si papi',
+      desc: 'Tea & beverage',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
@@ -5953,7 +5957,7 @@ function getFinances() {
       person: 'nata',
       wallet: 'nata',
       paymentMethod: 'qris',
-      desc: 'Nongkuy',
+      desc: 'Cafe hangout',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,

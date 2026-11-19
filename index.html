@@ -218,19 +218,19 @@
       </button>
     </div>
 
-    <!-- Gadget: Reru Oyen Cat Companion Widget -->
-    <div class="gadget-card reru-mini-gadget glass-card" onclick="restoreAndSwitchTab('cats')" title="🐾 Reru Cat Companion — Click to visit sanctuary!" style="cursor:pointer;">
+    <!-- Gadget: Cat Companion Widget -->
+    <div class="gadget-card reru-mini-gadget glass-card" onclick="restoreAndSwitchTab('cats')" title="🐾 Cat Companion — Click to visit sanctuary!" style="cursor:pointer;">
       <div class="gadget-header">
-        <span class="gadget-title">RERU OYEN 🐾</span>
+        <span class="gadget-title">CAT COMPANION 🐾</span>
         <span class="mascot-badge" style="color:#f59e0b;" id="reruMiniLvl">Lv. 1</span>
       </div>
       <div style="display:flex; align-items:center; gap:6px; margin-top:2px;">
         <div style="width:34px; height:34px; border-radius:50%; overflow:hidden; border:1.5px solid rgba(255,255,255,0.85); flex-shrink:0; box-shadow:0 2px 6px rgba(0,0,0,0.25);">
-          <img src="assets/reru_cat.jpg" alt="Reru" style="width:100%; height:100%; object-fit:cover;" />
+          <img src="assets/cat.jpg" alt="Cat" style="width:100%; height:100%; object-fit:cover;" />
         </div>
         <div style="flex:1; min-width:0;">
-          <div style="font-size:0.56rem; font-weight:800; color:#0f172a; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">🐾 Reru</div>
-          <div style="font-size:0.5rem; color:#475569; line-height:1.1;" id="reruMiniMoodText">😸 Senyum & Manja</div>
+          <div style="font-size:0.56rem; font-weight:800; color:#0f172a; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">🐾 Cat</div>
+          <div style="font-size:0.5rem; color:#475569; line-height:1.1;" id="reruMiniMoodText">😸 Happy &amp; Purring</div>
         </div>
       </div>
     </div>
@@ -619,7 +619,7 @@
             <!-- Y Holographic Card -->
             <div class="vcard-card-box yuki-card-box" onclick="setFinanceFilterPerson('yuki')" title="View Orange's Wallet Transactions">
               <div class="vcard-media-wrap">
-                <img src="assets/wallet/card_yuki.jpg" alt="Orange Debit Card" class="vcard-media-img" />
+                <img src="assets/wallet/card_orange.jpg" alt="Orange Debit Card" class="vcard-media-img" />
                 <div class="vcard-glass-gloss"></div>
               </div>
               <div class="vcard-meta-glass">
@@ -642,7 +642,7 @@
             <!-- N Holographic Card -->
             <div class="vcard-card-box nata-card-box" onclick="setFinanceFilterPerson('nata')" title="View Black's Wallet Transactions">
               <div class="vcard-media-wrap">
-                <img src="assets/wallet/card_nata.jpg" alt="Black Debit Card" class="vcard-media-img" />
+                <img src="assets/wallet/card_black.jpg" alt="Black Debit Card" class="vcard-media-img" />
                 <div class="vcard-glass-gloss"></div>
               </div>
               <div class="vcard-meta-glass">
@@ -990,12 +990,12 @@
         <section class="tab-panel" id="panel-cats" role="tabpanel">
           <div class="panel-header-retro">
             <div class="panel-title-group">
-              <h2 class="retro-heading">Reru's Sanctuary</h2>
+              <h2 class="retro-heading">Cat Sanctuary</h2>
               <span class="retro-subheading">Your interactive 3D orange cat companion</span>
             </div>
             <div style="display:flex; gap:8px;">
               <button class="retro-btn-action" onclick="feedReru(event)">🐟 Give Salmon</button>
-              <button class="retro-btn-secondary" onclick="petReru(event)">💖 Pet Reru</button>
+              <button class="retro-btn-secondary" onclick="petReru(event)">💖 Pet Cat</button>
             </div>
           </div>
 
@@ -1004,12 +1004,12 @@
             <div class="reru-3d-card" id="reruCard">
               <!-- Left 3D Visual Column -->
               <div class="reru-visual-col">
-                <div class="reru-avatar-3d-wrap" id="reruAvatarWrap" onclick="interactReruDirect(event)" title="Klik buat elus & dengerin suara Reru!">
-                  <img src="assets/reru_cat.jpg" alt="3D Ginger Cat Reru" class="reru-3d-img" id="reruAvatarImg" />
+                <div class="reru-avatar-3d-wrap" id="reruAvatarWrap" onclick="interactReruDirect(event)" title="Click to pet &amp; hear your cat!">
+                  <img src="assets/cat.jpg" alt="3D Ginger Cat" class="reru-3d-img" id="reruAvatarImg" />
                   <div class="reru-shine-layer"></div>
                   <div class="reru-glow-aura"></div>
                 </div>
-                <div class="reru-speech-bubble" id="reruSpeech" onclick="interactReruDirect(event)" title="Klik buat ngobrol sama Reru">
+                <div class="reru-speech-bubble" id="reruSpeech" onclick="interactReruDirect(event)" title="Click to talk with your cat">
                   "Purrrr feels so good... You are my mood booster today! 😸✨"
                 </div>
               </div>
@@ -1019,10 +1019,10 @@
                 <div class="reru-header-row">
                   <div class="reru-name-group">
                     <div class="reru-name-line">
-                      <span class="reru-name">🐾 Reru</span>
+                      <span class="reru-name">🐾 Cat</span>
                       <span class="reru-status-tag tag-happy">
                         <span class="reru-pulse-dot"></span>
-                        <span>😸🥰 Senyum & Manja</span>
+                        <span>😸🥰 Happy &amp; Purring</span>
                       </span>
                     </div>
                     <span class="reru-bio">Feisty Ginger Boss • Sovereign of YuTa OS ✨</span>
@@ -1044,7 +1044,7 @@
                 <!-- Stat Bars -->
                 <div class="cat-stats-list">
                   <div class="cat-stat-item">
-                    <span class="cat-stat-label">💖 Senang</span>
+                    <span class="cat-stat-label">💖 Happiness</span>
                     <div class="cat-bar-track">
                       <div class="cat-bar-fill fill-happy" style="width: 90%;"></div>
                     </div>
@@ -1052,7 +1052,7 @@
                   </div>
 
                   <div class="cat-stat-item">
-                    <span class="cat-stat-label">🐟 Kenyang</span>
+                    <span class="cat-stat-label">🐟 Fullness</span>
                     <div class="cat-bar-track">
                       <div class="cat-bar-fill fill-hunger" style="width: 80%;"></div>
                     </div>
@@ -1060,7 +1060,7 @@
                   </div>
 
                   <div class="cat-stat-item">
-                    <span class="cat-stat-label">⚡ Energi</span>
+                    <span class="cat-stat-label">⚡ Energy</span>
                     <div class="cat-bar-track">
                       <div class="cat-bar-fill fill-energy" style="width: 85%;"></div>
                     </div>
@@ -1070,29 +1070,29 @@
 
                 <!-- Action Buttons Grid -->
                 <div class="reru-actions-grid" style="grid-template-columns: repeat(6, 1fr);">
-                  <button class="reru-act-btn" onclick="petReru(event)" title="Elus Reru (Bikin purr & senyum)">
+                  <button class="reru-act-btn" onclick="petReru(event)" title="Pet Cat (Makes cat purr &amp; happy)">
                     <span class="cat-btn-icon">🖐️</span>
-                    <span>Elus</span>
+                    <span>Pet</span>
                   </button>
-                  <button class="reru-act-btn" onclick="feedReru(event)" title="Kasih makan salmon segar">
+                  <button class="reru-act-btn" onclick="feedReru(event)" title="Feed fresh salmon">
                     <span class="cat-btn-icon">🐟</span>
                     <span>Salmon</span>
                   </button>
-                  <button class="reru-act-btn" onclick="playWithReru(event)" title="Ajak main bola benang">
+                  <button class="reru-act-btn" onclick="playWithReru(event)" title="Play with yarn ball">
                     <span class="cat-btn-icon">🧶</span>
-                    <span>Main</span>
+                    <span>Play</span>
                   </button>
-                  <button class="reru-act-btn" onclick="brushReru(event)" title="Sisir bulu oyen biar kinclong">
+                  <button class="reru-act-btn" onclick="brushReru(event)" title="Groom cat coat">
                     <span class="cat-btn-icon">✨</span>
-                    <span>Sisir</span>
+                    <span>Groom</span>
                   </button>
-                  <button class="reru-act-btn" onclick="teaseReru(event)" title="Toel Reru" style="border-color: #ef4444; color: #b91c1c;">
+                  <button class="reru-act-btn" onclick="teaseReru(event)" title="Poke Cat" style="border-color: #ef4444; color: #b91c1c;">
                     <span class="cat-btn-icon">🤪</span>
-                    <span>Toel</span>
+                    <span>Poke</span>
                   </button>
-                  <button class="reru-act-btn" onclick="napReru(event)" title="Suruh Reru tidur siang">
+                  <button class="reru-act-btn" onclick="napReru(event)" title="Take a cat nap">
                     <span class="cat-btn-icon">💤</span>
-                    <span>Tidur</span>
+                    <span>Nap</span>
                   </button>
                 </div>
               </div>
