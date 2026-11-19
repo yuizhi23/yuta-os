@@ -28,39 +28,39 @@
   const CHAT_TEMPLATES = [
     {
       id: 'hey_texting',
-      title: '💬 Sapaan Utama (Casual)',
-      badge: 'Pilihan Utama',
+      title: '💬 Main Greeting (Casual)',
+      badge: 'Top Pick',
       text: (name) => `hii! hope you don't mind me saying hi. i'd love to get to know you, nice to meet you! 😊`
     },
     {
       id: 'thanks_gift',
-      title: '🌸 Terima Kasih Gift Semalam',
-      badge: 'Apresiasi Gift',
-      text: (name) => `Halo kak ${name}! 🥰 Makasih banyaaak yaa sudah mampir dan support room live Yume semalam. Apresiasi dan gift dari kakak bener-bener bikin Yume semangat banget! Semoga hari ini kakak sehat selalu dan rezekinya makin lancar yaa kak~ ✨`
+      title: '🌸 Thank You for Last Night\'s Gifts',
+      badge: 'Gift Appreciation',
+      text: (name) => `Hi ${name}! 🥰 Thank you so much for stopping by and supporting my live room last night. Your appreciation and gifts truly brighten my day! Wishing you great health, happiness, and success always~ ✨`
     },
     {
       id: 'invite_live',
-      title: '⏰ Undangan Mampir Live Hari Ini',
-      badge: 'Reminder Live',
-      text: (name) => `Haloo kak ${name} ✨ Hari ini Yume bakal live lagi nih! Nanti kalau senggang, jangan lupa mampir ngobrol lagi yaa kak. Ditunggu kehadirannya di room Yume yaa kak! See you later kak ${name}~ 💖`
+      title: '⏰ Live Stream Invitation for Today',
+      badge: 'Live Reminder',
+      text: (name) => `Hello ${name} ✨ I\'ll be going live again today! If you have some free time, feel free to drop in and chat. Looking forward to seeing you in the room! See you later ${name}~ 💖`
     },
     {
       id: 'whale_vip',
-      title: '👑 Apresiasi Khusus VIP Whale',
-      badge: 'Khusus Whale',
-      text: (name) => `Hai kak ${name}! 🙏 Yume mau ucapin terima kasih yang sebesar-besarnya atas support luar biasa kakak di room Yume. Kebaikan kakak sangat berarti buat Yume. Sukses selalu buat segala aktivitas dan usahanya ya kak! Kalau ada waktu santai, mampir lagi ya kak ✨`
+      title: '👑 Special VIP Whale Appreciation',
+      badge: 'VIP Whale',
+      text: (name) => `Hi ${name}! 🙏 I wanted to express my deepest gratitude for your incredible support in my live room. Your kindness means the world to me. Wishing you continued success in everything you do! Whenever you\'d like to unwind, please visit again ✨`
     },
     {
       id: 'casual_checkin',
-      title: '☕ Sapaan Santai & Tanya Kabar',
+      title: '☕ Casual Check-in & Catch Up',
       badge: 'Casual',
-      text: (name) => `Halo kak ${name}, apa kabar hari ini? Semoga harinya menyenangkan yaa! Yume cuma mau sapa kakak dan bilang terima kasih sudah selalu baik dan support Yume. Have a wonderful day kak! 🌸`
+      text: (name) => `Hi ${name}, how are you doing today? Hope you\'re having a wonderful day! Just wanted to say hi and thank you for always being so kind and supportive. Have a fantastic day! 🌸`
     },
     {
       id: 'custom_thanks',
-      title: '💌 Terima Kasih Singkat & Manis',
-      badge: 'Singkat',
-      text: (name) => `Halo kak ${name}~ Thank you so much for the gifts & support! Senang banget bisa ketemu kakak di live. Semoga hari kakak berkah selalu yaa 💖`
+      title: '💌 Short & Sweet Thank You',
+      badge: 'Short',
+      text: (name) => `Hi ${name}~ Thank you so much for the gifts & support! So glad to have met you in the live stream. Wishing you endless blessings & joy 💖`
     }
   ];
 
@@ -186,12 +186,12 @@
     if (cleanUser && cleanUser.length >= 2 && !rawUser.includes(' ')) {
       const url = `https://www.tiktok.com/@${encodeURIComponent(cleanUser)}`;
       window.open(url, '_blank', 'noopener,noreferrer');
-      notify(`🎵 Membuka profil TikTok: @${cleanUser}`);
+      notify(`🎵 Opening TikTok profile: @${cleanUser}`);
     } else {
       const query = cleanUser || (name || '').trim();
       const url = `https://www.tiktok.com/search/user?q=${encodeURIComponent(query)}`;
       window.open(url, '_blank', 'noopener,noreferrer');
-      notify(`🔍 Mencari akun di TikTok: "${query}"`);
+      notify(`🔍 Searching TikTok for: "${query}"`);
     }
   }
 
@@ -359,7 +359,7 @@
     const paginatedList = filtered.slice(startIndex, startIndex + SPENDER_PAGE_SIZE);
 
     if (countBadge) {
-      countBadge.textContent = `${filtered.length} Spender (Hal ${spenderPage}/${totalPages} • Menampilkan ${paginatedList.length} akun)`;
+      countBadge.textContent = `${filtered.length} Spenders (Page ${spenderPage}/${totalPages} • Showing ${paginatedList.length} accounts)`;
     }
 
     // Render pagination bar
@@ -370,11 +370,11 @@
         paginationBar.style.display = 'flex';
         paginationBar.innerHTML = `
           <button type="button" class="pagination-btn" onclick="window.HostTracker.prevSpenderPage()" ${spenderPage <= 1 ? 'disabled' : ''}>
-            ◀ Halaman Sebelumnya
+            ◀ Previous Page
           </button>
-          <span class="pagination-info">Halaman <strong>${spenderPage}</strong> dari <strong>${totalPages}</strong> (${filtered.length} total akun)</span>
+          <span class="pagination-info">Page <strong>${spenderPage}</strong> of <strong>${totalPages}</strong> (${filtered.length} total accounts)</span>
           <button type="button" class="pagination-btn" onclick="window.HostTracker.nextSpenderPage()" ${spenderPage >= totalPages ? 'disabled' : ''}>
-            Halaman Berikutnya ▶
+            Next Page ▶
           </button>
         `;
       }
@@ -386,8 +386,8 @@
       const emptyHtml = `
         <div class="host-empty-state">
           <div class="empty-icon">🔍</div>
-          <h4>Tidak ada akun spender yang cocok</h4>
-          <p>Coba ubah kata kunci pencarian atau ganti filter kategori di atas.</p>
+          <h4>No matching spenders found</h4>
+          <p>Try changing your search keywords or category filters above.</p>
           <button class="bento-pill-btn" onclick="window.HostTracker.resetSpenderFilter()">Reset Filter</button>
         </div>
       `;
@@ -408,7 +408,7 @@
           let labelBadge = '';
           const lbl = (s.labelUtama || '').toLowerCase();
           if (lbl.includes('whale')) {
-            labelBadge = `<span class="badge-spender badge-whale" title="Spender Koin Teratas">🐋 Whale</span>`;
+            labelBadge = `<span class="badge-spender badge-whale" title="Top Coin Spender">🐋 Whale</span>`;
           } else if (lbl.includes('high')) {
             labelBadge = `<span class="badge-spender badge-high" title="High Spender">⭐ High</span>`;
           } else if (lbl.includes('supporter')) {
@@ -422,31 +422,31 @@
 
           // Follow status button
           const followBtn = s.sudahFollow
-            ? `<button class="host-status-btn status-follow-done" onclick="window.HostTracker.toggleFollow(${s.id})" title="Klik untuk ubah jadi Belum">✨ Sudah Follow</button>`
-            : `<button class="host-status-btn status-follow-none" onclick="window.HostTracker.toggleFollow(${s.id})" title="Klik untuk tandai Sudah Follow">➕ Belum Follow</button>`;
+            ? `<button class="host-status-btn status-follow-done" onclick="window.HostTracker.toggleFollow(${s.id})" title="Click to toggle status">✨ Followed</button>`
+            : `<button class="host-status-btn status-follow-none" onclick="window.HostTracker.toggleFollow(${s.id})" title="Click to mark as followed">➕ Follow</button>`;
 
           // Chat status button
           const chatBtn = s.sudahChat
-            ? `<button class="host-status-btn status-done" onclick="window.HostTracker.toggleChat(${s.id})" title="Klik untuk ubah jadi Belum">✅ Sudah Chat</button>`
-            : `<button class="host-status-btn status-pending" onclick="window.HostTracker.toggleChat(${s.id})" title="Klik untuk tandai Sudah Chat">⏳ Belum Chat</button>`;
+            ? `<button class="host-status-btn status-done" onclick="window.HostTracker.toggleChat(${s.id})" title="Click to toggle status">✅ Messaged</button>`
+            : `<button class="host-status-btn status-pending" onclick="window.HostTracker.toggleChat(${s.id})" title="Click to mark as messaged">⏳ Not Messaged</button>`;
 
           // Replied status button
           const replyBtn = s.sudahDibalas
-            ? `<button class="host-status-btn status-reply-done" onclick="window.HostTracker.toggleReply(${s.id})" title="Klik untuk ubah">💌 Dibalas</button>`
-            : `<button class="host-status-btn status-reply-none" onclick="window.HostTracker.toggleReply(${s.id})" title="Klik untuk tandai Dibalas">⏳ Belum</button>`;
+            ? `<button class="host-status-btn status-reply-done" onclick="window.HostTracker.toggleReply(${s.id})" title="Click to toggle status">💌 Replied</button>`
+            : `<button class="host-status-btn status-reply-none" onclick="window.HostTracker.toggleReply(${s.id})" title="Click to mark as replied">⏳ Pending</button>`;
 
           return `
             <tr class="spender-row ${s.sudahChat ? 'is-contacted' : 'is-uncontacted'}" id="spender-row-${s.id}">
               <td class="col-num">${index + 1}</td>
               <td class="col-account">
-                <div class="spender-account-info" onclick="window.HostTracker.openTikTokById(${s.id})" title="Klik untuk Langsung Buka / Cari Akun TikTok">
+                <div class="spender-account-info" onclick="window.HostTracker.openTikTokById(${s.id})" title="Click to open or search TikTok account">
                   <div class="spender-name-row">
                     <span class="spender-display-name link-tiktok">${escapeHtml(s.name)}</span>
-                    <button type="button" class="tiktok-badge-pill" onclick="event.stopPropagation(); window.HostTracker.openTikTokById(${s.id})" title="Buka Profil / Cari Akun TikTok">🎵 TikTok</button>
+                    <button type="button" class="tiktok-badge-pill" onclick="event.stopPropagation(); window.HostTracker.openTikTokById(${s.id})" title="Open TikTok Profile / Search">🎵 TikTok</button>
                   </div>
                   <div class="spender-username-row">
                     <span class="spender-uname" onclick="event.stopPropagation(); window.HostTracker.openTikTokById(${s.id})">${escapeHtml(s.username || '-')}</span>
-                    <button type="button" class="mini-copy-btn" onclick="event.stopPropagation(); window.HostTracker.copyUsernameById(${s.id})" title="Salin @username">📋</button>
+                    <button type="button" class="mini-copy-btn" onclick="event.stopPropagation(); window.HostTracker.copyUsernameById(${s.id})" title="Copy @username">📋</button>
                   </div>
                 </div>
               </td>
@@ -472,13 +472,13 @@
               <td class="col-reply">${replyBtn}</td>
               <td class="col-actions">
                 <div class="host-action-btns">
-                  <button type="button" class="tiktok-launch-btn" onclick="window.HostTracker.openTikTokById(${s.id})" title="Langsung Buka / Cari Akun di TikTok">
-                    🎵 Cari TikTok
+                  <button type="button" class="tiktok-launch-btn" onclick="window.HostTracker.openTikTokById(${s.id})" title="Directly Open / Search Account on TikTok">
+                    🎵 Search TikTok
                   </button>
-                  <button type="button" class="host-action-icon-btn chat-template-btn" onclick="window.HostTracker.openChatTemplateModal(${s.id})" title="Buka Template Chat Sapaan">
-                    💬 Sapa
+                  <button type="button" class="host-action-icon-btn chat-template-btn" onclick="window.HostTracker.openChatTemplateModal(${s.id})" title="Open Greeting Templates">
+                    💬 Greet
                   </button>
-                  <button type="button" class="host-action-icon-btn edit-note-btn" onclick="window.HostTracker.editNote(${s.id})" title="Edit Catatan Spender">
+                  <button type="button" class="host-action-icon-btn edit-note-btn" onclick="window.HostTracker.editNote(${s.id})" title="Edit Spender Note">
                     ✏️
                   </button>
                 </div>
@@ -512,7 +512,7 @@
             <div class="spender-mobile-card ${s.sudahChat ? 'is-contacted' : ''}">
               <div class="sm-card-top">
                 <div class="sm-num">#${index + 1}</div>
-                <div class="sm-name-group" onclick="window.HostTracker.openTikTokById(${s.id})" style="cursor: pointer;" title="Klik untuk Buka / Cari di TikTok">
+                <div class="sm-name-group" onclick="window.HostTracker.openTikTokById(${s.id})" style="cursor: pointer;" title="Click to open or search on TikTok">
                   <strong class="sm-name link-tiktok">${escapeHtml(s.name)} 🎵</strong>
                   <span class="sm-uname">${escapeHtml(s.username || '')}</span>
                 </div>
@@ -523,8 +523,8 @@
               </div>
               
               <div class="sm-card-meta">
-                <span class="sm-koin">🪙 ${formatNumber(s.koin)} koin</span>
-                <span class="sm-hadiah">🎁 ${formatNumber(s.hadiah)} hadiah</span>
+                <span class="sm-koin">🪙 ${formatNumber(s.koin)} coins</span>
+                <span class="sm-hadiah">🎁 ${formatNumber(s.hadiah)} gifts</span>
               </div>
 
               ${(s.catatan || s.labelLain) ? `
@@ -535,19 +535,19 @@
 
               <div class="sm-card-actions">
                 <button type="button" class="tiktok-launch-btn" onclick="window.HostTracker.openTikTokById(${s.id})">
-                  🎵 Cari TikTok
+                  🎵 Search TikTok
                 </button>
                 <button type="button" class="host-status-btn ${s.sudahFollow ? 'status-follow-done' : 'status-follow-none'}" onclick="window.HostTracker.toggleFollow(${s.id})">
-                  ${s.sudahFollow ? '✨ Sudah Follow' : '➕ Follow'}
+                  ${s.sudahFollow ? '✨ Followed' : '➕ Follow'}
                 </button>
                 <button type="button" class="host-status-btn ${s.sudahChat ? 'status-done' : 'status-pending'}" onclick="window.HostTracker.toggleChat(${s.id})">
-                  ${s.sudahChat ? '✅ Sudah Chat' : '⏳ Belum Chat'}
+                  ${s.sudahChat ? '✅ Messaged' : '⏳ Not Messaged'}
                 </button>
                 <button type="button" class="host-status-btn ${s.sudahDibalas ? 'status-reply-done' : 'status-reply-none'}" onclick="window.HostTracker.toggleReply(${s.id})">
-                  ${s.sudahDibalas ? '💌 Dibalas' : '⏳ Balas'}
+                  ${s.sudahDibalas ? '💌 Replied' : '⏳ Reply'}
                 </button>
                 <button type="button" class="host-action-icon-btn chat-template-btn" onclick="window.HostTracker.openChatTemplateModal(${s.id})">
-                  💬 Sapa
+                  💬 Greet
                 </button>
                 <button type="button" class="mini-copy-btn" onclick="window.HostTracker.copyUsernameById(${s.id})" title="Copy @username">📋</button>
               </div>
@@ -570,8 +570,8 @@
     triggerSound(spender.sudahFollow ? 'check' : 'bubble');
 
     notify(spender.sudahFollow
-      ? `✨ ${spender.name} (${spender.username || ''}) ditandai SUDAH di-follow!`
-      : `➕ ${spender.name} diubah jadi BELUM di-follow.`
+      ? `✨ ${spender.name} (${spender.username || ''}) marked as FOLLOWED!`
+      : `➕ ${spender.name} marked as UNFOLLOWED.`
     );
 
     renderSpendersTable();
@@ -587,8 +587,8 @@
     triggerSound(spender.sudahChat ? 'check' : 'bubble');
 
     notify(spender.sudahChat
-      ? `✅ ${spender.name} ditandai SUDAH di-chat!`
-      : `⏳ ${spender.name} diubah jadi BELUM di-chat.`
+      ? `✅ ${spender.name} marked as MESSAGED!`
+      : `⏳ ${spender.name} marked as UNMESSAGED.`
     );
 
     renderSpendersTable();
@@ -607,8 +607,8 @@
     triggerSound('bubble');
 
     notify(spender.sudahDibalas
-      ? `💌 ${spender.name} ditandai SUDAH membalas!`
-      : `⏳ Status balasan ${spender.name} diubah jadi Belum.`
+      ? `💌 ${spender.name} marked as REPLIED!`
+      : `⏳ Reply status for ${spender.name} marked as PENDING.`
     );
 
     renderSpendersTable();
@@ -619,9 +619,9 @@
     const textToCopy = cleanUsername.startsWith('@') ? cleanUsername : `@${cleanUsername}`;
     navigator.clipboard.writeText(textToCopy).then(() => {
       triggerSound('chime');
-      notify(`📋 Disalin ke clipboard: ${textToCopy}`);
+      notify(`📋 Copied to clipboard: ${textToCopy}`);
     }).catch(() => {
-      notify(`Gagal menyalin: ${textToCopy}`);
+      notify(`Failed to copy: ${textToCopy}`);
     });
   }
 
@@ -631,12 +631,12 @@
     if (!spender) return;
 
     const currentNote = spender.catatan || '';
-    const newNote = prompt(`Edit catatan untuk ${spender.name} (${spender.username}):`, currentNote);
+    const newNote = prompt(`Edit note for ${spender.name} (${spender.username}):`, currentNote);
     if (newNote !== null) {
       spender.catatan = newNote.trim();
       saveSpenders();
       triggerSound('bubble');
-      notify(`✏️ Catatan untuk ${spender.name} diperbarui!`);
+      notify(`✏️ Note for ${spender.name} updated!`);
       renderSpendersTable();
     }
   }
@@ -673,19 +673,19 @@
     const completed = tasksData.filter(t => t.completed).length;
 
     if (badge) {
-      badge.textContent = `${completed} / ${total} Selesai`;
+      badge.textContent = `${completed} / ${total} Done`;
     }
 
     const allPill = document.querySelector('.task-filter-pill[data-filter="all"]');
     if (allPill) {
-      allPill.textContent = `Semua (${total})`;
+      allPill.textContent = `All (${total})`;
     }
 
     if (filtered.length === 0) {
       container.innerHTML = `
         <div class="host-empty-state">
           <div class="empty-icon">📝</div>
-          <h4>Tidak ada tugas yang sesuai</h4>
+          <h4>No matching tasks found</h4>
           <p>Semua tugas sudah disaring atau kata kunci tidak cocok.</p>
         </div>
       `;
@@ -711,7 +711,7 @@
 
           <div class="task-card-status">
             <span class="task-status-pill ${t.completed ? 'pill-done' : 'pill-pending'}">
-              ${t.completed ? '✅ Sudah' : '⏳ Belum'}
+              ${t.completed ? '✅ Done' : '⏳ Pending'}
             </span>
             <button class="task-del-btn" onclick="event.stopPropagation(); window.HostTracker.deleteTask(${t.id});" title="Hapus Tugas">✕</button>
           </div>
@@ -730,17 +730,17 @@
 
     if (task.completed) {
       triggerSound('check');
-      notify(`✅ Tugas #${task.id} (${task.name}) ditandai SELESAI!`);
+      notify(`✅ Task #${task.id} (${task.name}) marked as COMPLETED!`);
 
       // Check if all tasks finished
       const allDone = tasksData.every(t => t.completed);
       if (allDone && typeof window.confetti === 'function') {
         window.confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-        notify('🎉 LUAR BIASA! Semua tugas pengumpulan harian sudah SELESAI! ✨');
+        notify('🎉 AMAZING! All daily task submissions are COMPLETED! ✨');
       }
     } else {
       triggerSound('bubble');
-      notify(`⏳ Tugas #${task.id} (${task.name}) diubah jadi BELUM.`);
+      notify(`⏳ Task #${task.id} (${task.name}) marked as PENDING.`);
     }
 
     renderTasksList();
@@ -754,7 +754,7 @@
     tasksData.forEach(t => t.completed = false);
     saveTasks();
     triggerSound('bubble');
-    notify('🔄 Checklist tugas harian berhasil di-reset untuk hari baru!');
+    notify('🔄 Daily task checklist reset for a new day!');
     renderTasksList();
   }
 
@@ -766,7 +766,7 @@
     if (typeof window.confetti === 'function') {
       window.confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
     }
-    notify('🎉 Semua tugas harian ditandai SELESAI!');
+    notify('🎉 All daily tasks marked as COMPLETED!');
     renderTasksList();
   }
 
@@ -784,7 +784,7 @@
     tasksData.unshift(newTask); // Add to top of list for immediate visibility!
     saveTasks();
     triggerSound('chime');
-    notify(`➕ Target tugas "${newTask.name}" berhasil ditambahkan!`);
+    notify(`➕ Target task "${newTask.name}" added successfully!`);
     renderTasksList();
   }
 
@@ -801,7 +801,7 @@
       triggerSound('bubble');
     } else {
       // Fallback prompt
-      const name = prompt('Masukkan nama target tugas harian baru:');
+      const name = prompt('Enter new daily target task name:');
       if (name && name.trim()) insertNewTask(name);
     }
   }
@@ -816,7 +816,7 @@
     if (e && e.preventDefault) e.preventDefault();
     const input = document.getElementById('modalNewTaskInput');
     if (!input || !input.value.trim()) {
-      alert('Nama target tugas wajib diisi!');
+      alert('Target task name is required!');
       return;
     }
     insertNewTask(input.value);
@@ -828,7 +828,7 @@
     if (e && e.preventDefault) e.preventDefault();
     const input = document.getElementById('inlineNewTaskInput');
     if (!input || !input.value.trim()) {
-      alert('Ketik nama target tugas terlebih dahulu!');
+      alert('Please type a target task name first!');
       return;
     }
     insertNewTask(input.value);
@@ -843,12 +843,12 @@
   function deleteTask(id) {
     const task = tasksData.find(t => t.id === id);
     if (!task) return;
-    if (!confirm(`Hapus tugas "${task.name}" dari daftar?`)) return;
+    if (!confirm(`Delete task "${task.name}" from list?`)) return;
 
     tasksData = tasksData.filter(t => t.id !== id);
     saveTasks();
     triggerSound('bubble');
-    notify(`🗑️ Tugas "${task.name}" telah dihapus.`);
+    notify(`🗑️ Task "${task.name}" has been deleted.`);
     renderTasksList();
   }
 
@@ -859,22 +859,22 @@
     const pendingList = tasksData.filter(t => !t.completed);
     const pct = total > 0 ? Math.round((completedList.length / total) * 100) : 0;
 
-    const todayStr = new Intl.DateTimeFormat('id-ID', {
+    const todayStr = new Intl.DateTimeFormat('en-US', {
       weekday: 'long',
       day: 'numeric',
       month: 'long',
       year: 'numeric'
     }).format(new Date());
 
-    let report = `📋 *LAPORAN PENGUMPULAN TUGAS LIVE HOST*\n`;
+    let report = `📋 *DAILY TASK SUBMISSION REPORT — LIVE HOST*\n`;
     report += `👤 *Host:* Yume\n`;
-    report += `📅 *Tanggal:* ${todayStr}\n`;
-    report += `📊 *Progres:* ${completedList.length}/${total} (${pct}% Selesai)\n`;
-    report += `✅ *Sudah:* ${completedList.length}\n`;
-    report += `⏳ *Belum:* ${pendingList.length}\n\n`;
+    report += `📅 *Date:* ${todayStr}\n`;
+    report += `📊 *Progress:* ${completedList.length}/${total} (${pct}% Done)\n`;
+    report += `✅ *Completed:* ${completedList.length}\n`;
+    report += `⏳ *Pending:* ${pendingList.length}\n\n`;
 
     if (pendingList.length > 0) {
-      report += `⏳ *Daftar yang Belum Kumpul (${pendingList.length}):*\n`;
+      report += `⏳ *Pending Submissions (${pendingList.length}):*\n`;
       pendingList.forEach((t, i) => {
         report += `${i + 1}. ${t.name}\n`;
       });
@@ -882,20 +882,20 @@
     }
 
     if (completedList.length > 0) {
-      report += `✅ *Sudah Kumpul (${completedList.length}):*\n`;
+      report += `✅ *Completed Submissions (${completedList.length}):*\n`;
       completedList.slice(0, 15).forEach((t, i) => {
         report += `${i + 1}. ${t.name}\n`;
       });
       if (completedList.length > 15) {
-        report += `... dan ${completedList.length - 15} lainnya.\n`;
+        report += `... and ${completedList.length - 15} others.\n`;
       }
     }
 
     navigator.clipboard.writeText(report).then(() => {
       triggerSound('chime');
-      notify('📋 Format Laporan Harian berhasil disalin! Siap kirim ke WA/Telegram.');
+      notify('📋 Formatted Daily Report copied! Ready to send to WA/Telegram.');
     }).catch(() => {
-      notify('Gagal menyalin laporan harian.');
+      notify('Failed to copy daily report.');
     });
   }
 
@@ -934,10 +934,10 @@
             <div class="tmpl-body">${escapeHtml(generated)}</div>
             <div class="tmpl-btn-row" style="display: flex; gap: 8px; margin-top: 8px;">
               <button type="button" class="tmpl-copy-btn btn-tmpl-launch" onclick="event.stopPropagation(); window.HostTracker.copyTemplateAndOpen('${tmpl.id}')" title="Salin pesan ini & langsung buka TikTok">
-                🚀 Salin &amp; Buka TikTok
+                🚀 Copy &amp; Open TikTok
               </button>
               <button type="button" class="tmpl-copy-btn btn-tmpl-secondary" onclick="event.stopPropagation(); window.HostTracker.copyTemplateText('${tmpl.id}')" title="Hanya salin teks ke clipboard">
-                📋 Salin
+                📋 Copy
               </button>
             </div>
           </div>
@@ -983,7 +983,7 @@
       saveSpenders();
       renderSpendersTable();
 
-      notify(`🚀 Pesan disalin! Membuka TikTok ${selectedSpenderForChat.name}... tinggal Tempel (Paste) & Kirim!`);
+      notify(`🚀 Message copied! Opening TikTok ${selectedSpenderForChat.name}... ready to Paste & Send!`);
 
       // Buka TikTok akun spender
       openTikTokAccount(selectedSpenderForChat.name, selectedSpenderForChat.username);
@@ -1012,7 +1012,7 @@
     const text = tmpl.text(selectedSpenderForChat.name);
     navigator.clipboard.writeText(text).then(() => {
       triggerSound('chime');
-      notify(`📋 Pesan sapaan untuk ${selectedSpenderForChat.name} disalin!`);
+      notify(`📋 Greeting message for ${selectedSpenderForChat.name} copied!`);
       // Auto mark as contacted prompt or automatic
       selectedSpenderForChat.sudahChat = true;
       saveSpenders();
@@ -1026,7 +1026,7 @@
 
     navigator.clipboard.writeText(editor.value).then(() => {
       triggerSound('chime');
-      notify('📋 Pesan kustom disalin ke clipboard!');
+      notify('📋 Custom message copied to clipboard!');
       if (selectedSpenderForChat) {
         selectedSpenderForChat.sudahChat = true;
         saveSpenders();
@@ -1069,7 +1069,7 @@
     const noteInput = document.getElementById('newSpenderNote');
 
     if (!nameInput || !nameInput.value.trim()) {
-      alert('Nama akun wajib diisi!');
+      alert('Account name is required!');
       return;
     }
 
@@ -1091,7 +1091,7 @@
     spendersData.unshift(newSpender); // add to top
     saveSpenders();
     triggerSound('chime');
-    notify(`➕ Akun spender "${newSpender.name}" berhasil ditambahkan!`);
+    notify(`➕ Spender account "${newSpender.name}" added successfully!`);
 
     closeAddSpenderModal();
     renderSpendersTable();
@@ -1107,7 +1107,7 @@
   // ==================== EXPORT DATA (CSV) ====================
 
   function exportSpendersCSV() {
-    let csv = 'No,Nama Akun,Username,Hadiah,Tier,Koin Total,Label Utama,Catatan,Sudah Follow,Sudah Chat,Sudah Dibalas\n';
+    let csv = 'No,Account Name,Username,Gifts,Tier,Total Coins,Primary Tag,Notes,Followed,Messaged,Replied\n';
     spendersData.forEach((s, idx) => {
       const row = [
         idx + 1,
@@ -1118,9 +1118,9 @@
         s.koin || 0,
         `"${(s.labelUtama || '').replace(/"/g, '""')}"`,
         `"${(s.catatan || s.labelLain || '').replace(/"/g, '""')}"`,
-        s.sudahFollow ? 'Sudah' : 'Belum',
-        s.sudahChat ? 'Sudah' : 'Belum',
-        s.sudahDibalas ? 'Sudah' : 'Belum'
+        s.sudahFollow ? 'Yes' : 'No',
+        s.sudahChat ? 'Yes' : 'No',
+        s.sudahDibalas ? 'Yes' : 'No'
       ];
       csv += row.join(',') + '\n';
     });
@@ -1133,13 +1133,13 @@
     a.click();
     URL.revokeObjectURL(url);
     triggerSound('chime');
-    notify('📥 File CSV Spender berhasil di-download!');
+    notify('📥 Spender CSV file downloaded successfully!');
   }
 
   function exportTasksCSV() {
-    let csv = 'No,Nama Target Tugas,Status\n';
+    let csv = 'No,Target Task Name,Status\n';
     tasksData.forEach((t, idx) => {
-      csv += `${idx + 1},"${(t.name || '').replace(/"/g, '""')}",${t.completed ? 'Sudah' : 'Belum'}\n`;
+      csv += `${idx + 1},"${(t.name || '').replace(/"/g, '""')}",${t.completed ? 'Completed' : 'Pending'}\n`;
     });
 
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -1150,7 +1150,7 @@
     a.click();
     URL.revokeObjectURL(url);
     triggerSound('chime');
-    notify('📥 File CSV Tugas Harian berhasil di-download!');
+    notify('📥 Daily Tasks CSV file downloaded successfully!');
   }
 
   // Reset to Original Excel Dataset
@@ -1164,7 +1164,7 @@
     saveSpenders();
     saveTasks();
     triggerSound('bubble');
-    notify('🔄 Berhasil mengembalikan seluruh data ke data asli Excel!');
+    notify('🔄 Successfully restored all data to original Excel dataset!');
     renderSpendersTable();
     renderTasksList();
   }
@@ -1191,14 +1191,14 @@
           <div class="ac-header">
             <span class="ac-icon">💎</span>
             <div class="ac-title-wrap">
-              <span class="ac-title">Total Akumulasi Koin</span>
-              <span class="ac-sub">Dari 329 Akun Spender Terdata</span>
+              <span class="ac-title">Total Accumulated Coins</span>
+              <span class="ac-sub">From 329 Logged Spender Accounts</span>
             </div>
           </div>
           <div class="ac-big-num">🪙 ${formatNumber(totalKoin)}</div>
           <div class="ac-meta-pills">
-            <span class="ac-pill">🎁 ${formatNumber(totalHadiah)} Hadiah Total</span>
-            <span class="ac-pill">⚡ Rata-rata: ${formatNumber(Math.round(totalKoin / (spendersData.length || 1)))} koin/spender</span>
+            <span class="ac-pill">🎁 ${formatNumber(totalHadiah)} Total Gifts</span>
+            <span class="ac-pill">⚡ Average: ${formatNumber(Math.round(totalKoin / (spendersData.length || 1)))} coins/spender</span>
           </div>
         </div>
 
@@ -1207,21 +1207,21 @@
           <div class="ac-header">
             <span class="ac-icon">📊</span>
             <div class="ac-title-wrap">
-              <span class="ac-title">Segmentasi Spender</span>
+              <span class="ac-title">Spender Segmentation</span>
               <span class="ac-sub">Whale vs High vs Supporter</span>
             </div>
           </div>
           <div class="segment-bars">
             <div class="seg-item">
-              <div class="seg-label"><span>🐋 Whale (Prioritas 1)</span> <strong>${whales.length} akun (${Math.round((whales.length / spendersData.length) * 100)}%)</strong></div>
+              <div class="seg-label"><span>🐋 Whale (Priority 1)</span> <strong>${whales.length} accounts (${Math.round((whales.length / spendersData.length) * 100)}%)</strong></div>
               <div class="seg-bar-track"><div class="seg-bar-fill fill-whale" style="width: ${(whales.length / spendersData.length) * 100}%"></div></div>
             </div>
             <div class="seg-item">
-              <div class="seg-label"><span>⭐ High Spender</span> <strong>${highs.length} akun (${Math.round((highs.length / spendersData.length) * 100)}%)</strong></div>
+              <div class="seg-label"><span>⭐ High Spender</span> <strong>${highs.length} accounts (${Math.round((highs.length / spendersData.length) * 100)}%)</strong></div>
               <div class="seg-bar-track"><div class="seg-bar-fill fill-high" style="width: ${(highs.length / spendersData.length) * 100}%"></div></div>
             </div>
             <div class="seg-item">
-              <div class="seg-label"><span>💖 Supporter</span> <strong>${supporters.length} akun (${Math.round((supporters.length / spendersData.length) * 100)}%)</strong></div>
+              <div class="seg-label"><span>💖 Supporter</span> <strong>${supporters.length} accounts (${Math.round((supporters.length / spendersData.length) * 100)}%)</strong></div>
               <div class="seg-bar-track"><div class="seg-bar-fill fill-supporter" style="width: ${(supporters.length / spendersData.length) * 100}%"></div></div>
             </div>
           </div>
@@ -1233,7 +1233,7 @@
             <span class="ac-icon">🏆</span>
             <div class="ac-title-wrap">
               <span class="ac-title">Top 10 VIP Spender Leaderboard</span>
-              <span class="ac-sub">Peringkat donatur teratas room N</span>
+              <span class="ac-sub">Top supporter rankings in Black's room</span>
             </div>
           </div>
           <div class="leaderboard-list">
@@ -1249,42 +1249,42 @@
                   <span class="badge-spender badge-whale">Whale</span>
                   <span class="lb-koin">🪙 ${formatNumber(s.koin)}</span>
                   <span class="lb-hadiah">🎁 ${formatNumber(s.hadiah)}</span>
-                  <span class="lb-status ${s.sudahChat ? 'text-green' : 'text-amber'}">${s.sudahChat ? '✅ Chat' : '⏳ Belum'}</span>
+                  <span class="lb-status ${s.sudahChat ? 'text-green' : 'text-amber'}">${s.sudahChat ? '✅ Messaged' : '⏳ Pending'}</span>
                 </div>
               `;
             }).join('')}
           </div>
         </div>
 
-        <!-- Card 4: Tips Host TikTok untuk N -->
+        <!-- Card 4: Host Tips for Black -->
         <div class="analytics-card glass-card span-2 tips-card">
           <div class="ac-header">
             <span class="ac-icon">💡</span>
             <div class="ac-title-wrap">
-              <span class="ac-title">Panduan Cepat & Golden Rules untuk N</span>
-              <span class="ac-sub">Tips praktis menyapa spender dan mengumpulkan tugas harian</span>
+              <span class="ac-title">Quick Guide & Golden Rules for Black</span>
+              <span class="ac-sub">Practical tips for greeting spenders & submitting daily tasks</span>
             </div>
           </div>
           <div class="host-tips-grid">
             <div class="tip-box">
               <div class="tip-icon">⏰</div>
-              <strong>Waktu Terbaik Chat:</strong>
-              <p>Chat spender maksimal 12-24 jam setelah sesi live selesai, atau 1-2 jam sebelum live berikutnya dimulai agar kehadiranmu segar di ingatan mereka.</p>
+              <strong>Best Time to Message:</strong>
+              <p>Message spenders within 12–24 hours after stream ends, or 1–2 hours before the next live starts so you stay fresh in their mind.</p>
             </div>
             <div class="tip-box">
               <div class="tip-icon">✨</div>
-              <strong>Gunakan Nama Panggilan:</strong>
-              <p>Selalu sebut nama akun spender saat chat. Sapaan personal terasa tulus dan membuat donatur merasa dihargai secara eksklusif.</p>
+              <strong>Use Display Names:</strong>
+              <p>Always address spenders by their name. Personal greetings feel warm, genuine, and make supporters feel valued.</p>
             </div>
             <div class="tip-box">
               <div class="tip-icon">🎯</div>
-              <strong>Fokus Whale Dulu:</strong>
-              <p>Filter kategori "Whale" dan sapa mereka terlebih dahulu. 107 akun Whale ini adalah pondasi room dan ranking agensi!</p>
+              <strong>Focus on Whales First:</strong>
+              <p>Filter by "Whale" and greet them first. These 107 Whale accounts are the foundation of your room and agency rankings!</p>
             </div>
             <div class="tip-box">
               <div class="tip-icon">📝</div>
-              <strong>Setor Laporan Tepat Waktu:</strong>
-              <p>Gunakan tombol "Salin Format Setor Tugas" untuk langsung kirim rekap ke grup WA agensi tanpa perlu mengetik manual.</p>
+              <strong>Submit Tasks on Time:</strong>
+              <p>Use the "Copy Report" button to send daily recaps directly to the agency group without manual typing.</p>
             </div>
           </div>
         </div>

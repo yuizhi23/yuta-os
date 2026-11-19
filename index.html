@@ -130,7 +130,7 @@
       <div class="icon-img-wrap"><img src="assets/cat_dialog.png" alt="Cat" /></div>
       <span class="icon-label">Purrr</span>
     </div>
-    <div class="desktop-icon" onclick="restoreAndSwitchTab('hosttracker')" title="TikTok Host &amp; Tugas Tracker (Yume)">
+    <div class="desktop-icon" onclick="restoreAndSwitchTab('hosttracker')" title="TikTok Host &amp; Task Tracker (Yume)">
       <div class="icon-img-wrap"><span class="desktop-emoji">🎯</span></div>
       <span class="icon-label">Host Yume</span>
     </div>
@@ -355,14 +355,14 @@
             <!-- Y Column -->
             <div class="todo-column yuki-col tilt-card">
               <div class="column-header">
-                <div class="col-avatar yuki-av" title="Y (Orange Cat)">🐈</div>
+                <div class="col-avatar yuki-av" title="Orange (Orange Cat)">🐈</div>
                 <div class="col-title-wrap">
-                  <h3 class="col-title">Y's Quests</h3>
+                  <h3 class="col-title">Orange's Quests</h3>
                   <span class="col-subtitle">Orange cat locking in</span>
                 </div>
               </div>
               <div class="todo-input-wrap">
-                <input type="text" id="yukiTodoInput" class="retro-text-input" placeholder="Drop a task for Y..." />
+                <input type="text" id="yukiTodoInput" class="retro-text-input" placeholder="Drop a task for Orange..." />
                 <button class="retro-add-btn" onclick="addTodo('yuki')">＋</button>
               </div>
               <ul class="todo-list" id="yukiTodoList">
@@ -374,8 +374,8 @@
               <div class="todo-footer-retro">
                 <span class="status-counter" id="yukiCount">0 / 4 completed</span>
                 <div style="display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end;">
-                  <button class="clear-btn" style="color:#ea580c; border-color:rgba(234,88,12,0.4);" onclick="syncYukiGCal()" title="Tarik Jadwal Google Calendar Y">📅 Sync GCal</button>
-                  <button class="clear-btn" style="color:#ea580c; border-color:rgba(234,88,12,0.4);" onclick="loadYukiRoutine()" title="Reload Y's 4 Tasks">⚡ Routine</button>
+                  <button class="clear-btn" style="color:#ea580c; border-color:rgba(234,88,12,0.4);" onclick="syncYukiGCal()" title="Sync Google Calendar Schedule for Orange">📅 Sync GCal</button>
+                  <button class="clear-btn" style="color:#ea580c; border-color:rgba(234,88,12,0.4);" onclick="loadYukiRoutine()" title="Reload Orange's 4 Tasks">⚡ Routine</button>
                   <button class="clear-btn" onclick="clearCompleted('yuki')">Clear</button>
                 </div>
               </div>
@@ -384,14 +384,14 @@
             <!-- N Column -->
             <div class="todo-column nata-col tilt-card">
               <div class="column-header">
-                <div class="col-avatar nata-av" title="N (Black Cat)">🐈‍⬛</div>
+                <div class="col-avatar nata-av" title="Black (Black Cat)">🐈‍⬛</div>
                 <div class="col-title-wrap">
-                  <h3 class="col-title">N's Quests</h3>
+                  <h3 class="col-title">Black's Quests</h3>
                   <span class="col-subtitle">Black cat doing her thing</span>
                 </div>
               </div>
               <div class="todo-input-wrap">
-                <input type="text" id="nataTodoInput" class="retro-text-input" placeholder="Drop a task for N..." />
+                <input type="text" id="nataTodoInput" class="retro-text-input" placeholder="Drop a task for Black..." />
                 <button class="retro-add-btn" onclick="addTodo('nata')">＋</button>
               </div>
               <ul class="todo-list" id="nataTodoList">
@@ -403,7 +403,7 @@
                 <li class="todo-item" onclick="toggleTodo('nata', 'n_live', event)"><div class="todo-checkbox"></div><span class="todo-text">Daily 1-hour stream before dual persona stream 📹</span><button class="todo-delete" onclick="deleteTodo('nata', 'n_live')">✕</button></li>
                 <li class="todo-item" onclick="toggleTodo('nata', 'n_laporan', event)">
                   <div class="todo-checkbox"></div>
-                  <span class="todo-text">Send live stream report to group 📊 <button type="button" class="routine-mini-btn" onclick="event.stopPropagation(); restoreAndSwitchTab('hosttracker'); window.HostTracker.switchSubTab('tasks');" title="Buka Pengumpulan Tugas" style="margin-left: 6px; font-size: 0.7rem; padding: 2px 7px; border-radius: 6px; background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.4); color: #059669; cursor: pointer; font-weight: 700;">📋 Buka Tugas</button></span>
+                  <span class="todo-text">Send live stream report to group 📊 <button type="button" class="routine-mini-btn" onclick="event.stopPropagation(); restoreAndSwitchTab('hosttracker'); window.HostTracker.switchSubTab('tasks');" title="Open Task Submissions" style="margin-left: 6px; font-size: 0.7rem; padding: 2px 7px; border-radius: 6px; background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.4); color: #059669; cursor: pointer; font-weight: 700;">📋 Open Tasks</button></span>
                   <button class="todo-delete" onclick="deleteTodo('nata', 'n_laporan')">✕</button>
                 </li>
                 <li class="todo-item" onclick="toggleTodo('nata', 'n_absen', event)"><div class="todo-checkbox"></div><span class="todo-text">Clock-in & clock-out attendance ⏰</span><button class="todo-delete" onclick="deleteTodo('nata', 'n_absen')">✕</button></li>
@@ -411,8 +411,8 @@
               <div class="todo-footer-retro">
                 <span class="status-counter" id="nataCount">0 / 4 completed</span>
                 <div style="display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end;">
-                  <button class="clear-btn" style="color:#64748b; border-color:rgba(100,116,139,0.4);" onclick="syncNataGCal()" title="Tarik Jadwal Google Calendar N">📅 Sync GCal</button>
-                  <button class="clear-btn" style="color:#64748b; border-color:rgba(100,116,139,0.4);" onclick="loadNataRoutine()" title="Reload N's 4 Tasks">⚡ Routine</button>
+                  <button class="clear-btn" style="color:#64748b; border-color:rgba(100,116,139,0.4);" onclick="syncNataGCal()" title="Sync Google Calendar Schedule for Black">📅 Sync GCal</button>
+                  <button class="clear-btn" style="color:#64748b; border-color:rgba(100,116,139,0.4);" onclick="loadNataRoutine()" title="Reload Black's 4 Tasks">⚡ Routine</button>
                   <button class="clear-btn" onclick="clearCompleted('nata')">Clear</button>
                 </div>
               </div>
@@ -486,9 +486,9 @@
             <!-- Y Mood -->
             <div class="mood-box-retro yuki-mood-box tilt-card">
               <div class="mood-box-header">
-                <span class="mood-avatar yuki-mood-av" title="Y (Orange Cat)">🐈</span>
+                <span class="mood-avatar yuki-mood-av" title="Orange (Orange Cat)">🐈</span>
                 <div>
-                  <h3 class="col-title">Y's Vibe Check</h3>
+                  <h3 class="col-title">Orange's Vibe Check</h3>
                   <span class="col-subtitle">Today's energy & headspace</span>
                 </div>
               </div>
@@ -509,15 +509,15 @@
                 <span class="mood-selected-big" id="yukiSelectedEmoji">—</span>
               </div>
               <textarea id="yukiMoodNote" class="retro-textarea" placeholder="How was your day? Spill anything on your mind..."></textarea>
-              <button class="retro-btn-save" onclick="saveMood('yuki')">Log Y's Vibe</button>
+              <button class="retro-btn-save" onclick="saveMood('yuki')">Log Orange's Vibe</button>
             </div>
 
             <!-- N Mood -->
             <div class="mood-box-retro nata-mood-box tilt-card">
               <div class="mood-box-header">
-                <span class="mood-avatar nata-mood-av" title="N (Black Cat)">🐈‍⬛</span>
+                <span class="mood-avatar nata-mood-av" title="Black (Black Cat)">🐈‍⬛</span>
                 <div>
-                  <h3 class="col-title">N's Vibe Check</h3>
+                  <h3 class="col-title">Black's Vibe Check</h3>
                   <span class="col-subtitle">Today's energy & headspace</span>
                 </div>
               </div>
@@ -538,7 +538,7 @@
                 <span class="mood-selected-big" id="nataSelectedEmoji">—</span>
               </div>
               <textarea id="nataMoodNote" class="retro-textarea" placeholder="How was your day? Drop your thoughts here..."></textarea>
-              <button class="retro-btn-save" onclick="saveMood('nata')">Log N's Vibe</button>
+              <button class="retro-btn-save" onclick="saveMood('nata')">Log Black's Vibe</button>
             </div>
           </div>
 
@@ -592,24 +592,24 @@
             <div class="bento-breadcrumb-wrap">
               <span class="bento-logo-icon">💠</span>
               <div>
-                <span class="bento-crumb-main">YuTa Wallet</span>
+                <span class="bento-crumb-main">Couple Wallet</span>
                 <span class="bento-crumb-sep">›</span>
-                <span class="bento-crumb-sub">Dompet Pribadi Y &amp; N</span>
+                <span class="bento-crumb-sub">Personal Wallets (Orange &amp; Black)</span>
               </div>
             </div>
             
             <div class="bento-nav-actions">
               <button class="bento-pill-btn btn-inflow" onclick="openFinanceModal('income')" title="Log New Income">
                 <span>➕</span>
-                <span>Tambah Income</span>
+                <span>Add Income</span>
               </button>
               <button class="bento-pill-btn btn-outflow" onclick="openFinanceModal('expense')" title="Log New Outcome">
                 <span>➖</span>
-                <span>Tambah Outcome</span>
+                <span>Add Expense</span>
               </button>
-              <button class="bento-pill-btn" onclick="resetWalletBalances()" title="Kosongkan Semua Transaksi / Reset Saldo ke Rp 0" style="background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.4); color: #dc2626;">
+              <button class="bento-pill-btn" onclick="resetWalletBalances()" title="Clear All Transactions / Reset Balances to Rp 0" style="background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.4); color: #dc2626;">
                 <span>🔄</span>
-                <span>Reset Saldo</span>
+                <span>Reset Balances</span>
               </button>
             </div>
           </div>
@@ -617,19 +617,19 @@
           <!-- ==================== 1. VIRTUAL 3D CARDS VISUAL SHOWCASE ==================== -->
           <div class="wallet-cards-showcase">
             <!-- Y Holographic Card -->
-            <div class="vcard-card-box yuki-card-box" onclick="setFinanceFilterPerson('yuki')" title="Lihat transaksi Dompet Y">
+            <div class="vcard-card-box yuki-card-box" onclick="setFinanceFilterPerson('yuki')" title="View Orange's Wallet Transactions">
               <div class="vcard-media-wrap">
-                <img src="assets/wallet/card_yuki.jpg" alt="Y Debit Card" class="vcard-media-img" />
+                <img src="assets/wallet/card_yuki.jpg" alt="Orange Debit Card" class="vcard-media-img" />
                 <div class="vcard-glass-gloss"></div>
               </div>
               <div class="vcard-meta-glass">
                 <div class="vcard-meta-top">
-                  <span class="vcard-owner-badge">🐈 Dompet Y</span>
+                  <span class="vcard-owner-badge">🐈 Orange's Wallet</span>
                   <span class="vcard-share-chip" id="vcardYukiShare">Surplus 🟢</span>
                 </div>
                 <div class="vcard-meta-bottom">
                   <div>
-                    <span class="vcard-label">Sisa Saldo Y</span>
+                    <span class="vcard-label">Orange's Balance</span>
                     <div class="vcard-sum" id="vcardYukiAmt">Rp 174.000</div>
                   </div>
                   <div class="vcard-sub-stats" id="vcardYukiSubStats" style="font-size:0.75rem; color:rgba(255,255,255,0.9); text-align:right;">
@@ -640,19 +640,19 @@
             </div>
 
             <!-- N Holographic Card -->
-            <div class="vcard-card-box nata-card-box" onclick="setFinanceFilterPerson('nata')" title="Lihat transaksi Dompet N">
+            <div class="vcard-card-box nata-card-box" onclick="setFinanceFilterPerson('nata')" title="View Black's Wallet Transactions">
               <div class="vcard-media-wrap">
-                <img src="assets/wallet/card_nata.jpg" alt="N Debit Card" class="vcard-media-img" />
+                <img src="assets/wallet/card_nata.jpg" alt="Black Debit Card" class="vcard-media-img" />
                 <div class="vcard-glass-gloss"></div>
               </div>
               <div class="vcard-meta-glass">
                 <div class="vcard-meta-top">
-                  <span class="vcard-owner-badge nata-badge">🐈‍⬛ Dompet N</span>
+                  <span class="vcard-owner-badge nata-badge">🐈‍⬛ Black's Wallet</span>
                   <span class="vcard-share-chip nata-chip" id="vcardNataShare">Surplus 🟢</span>
                 </div>
                 <div class="vcard-meta-bottom">
                   <div>
-                    <span class="vcard-label">Sisa Saldo N</span>
+                    <span class="vcard-label">Black's Balance</span>
                     <div class="vcard-sum" id="vcardNataAmt">Rp 0</div>
                   </div>
                   <div class="vcard-sub-stats" id="vcardNataSubStats" style="font-size:0.75rem; color:rgba(255,255,255,0.9); text-align:right;">
@@ -666,17 +666,17 @@
           <!-- ==================== 2. MAIN 2-WALLET INDIVIDUAL BENTO GRID ==================== -->
           <div class="wallet-bento-grid wallet-bento-dual">
             
-            <!-- Dompet Y Master Card -->
+            <!-- Orange's Wallet Master Card -->
             <div class="bento-card bento-peach bento-wallet-master">
               <div class="bento-card-header">
                 <div class="bento-icon-badges">
                   <span class="bento-badge-chip">🐈</span>
-                  <span class="bento-badge-chip-white">Dompet Y</span>
+                  <span class="bento-badge-chip-white">Orange's Wallet</span>
                 </div>
                 <span class="bento-tag-pill tag-yuki-pill" id="yukiStatusBadge">Surplus 🟢</span>
               </div>
               <div class="bento-card-body">
-                <span class="bento-label-small" style="font-size:0.75rem; font-weight:700; color:#c2410c; text-transform:uppercase;">Sisa Saldo Y</span>
+                <span class="bento-label-small" style="font-size:0.75rem; font-weight:700; color:#c2410c; text-transform:uppercase;">Orange's Balance</span>
                 <div class="bento-main-amount text-yuki" id="yukiBalAmount" style="font-size:2rem; margin: 4px 0 10px;">Rp 174.000</div>
                 
                 <!-- Inflow & Outflow Boxes -->
@@ -696,22 +696,22 @@
                 </div>
               </div>
               <div class="bento-card-footer" style="display:flex; justify-content:space-between; align-items:center;">
-                <span class="bento-desc-text" id="yukiExpRatioText" style="font-size:0.75rem; color:#475569;">Outcome 28% dari Income</span>
+                <span class="bento-desc-text" id="yukiExpRatioText" style="font-size:0.75rem; color:#475569;">Expenses 28% of Income</span>
                 <span style="font-size:0.75rem; font-weight:700; color:#c2410c;" id="yukiExpAmount">Outcome: Rp 66.000</span>
               </div>
             </div>
 
-            <!-- Dompet N Master Card -->
+            <!-- Black's Wallet Master Card -->
             <div class="bento-card bento-nata-dark bento-wallet-master">
               <div class="bento-card-header">
                 <div class="bento-icon-badges">
                   <span class="bento-badge-chip">🐈‍⬛</span>
-                  <span class="bento-badge-chip-white">Dompet N</span>
+                  <span class="bento-badge-chip-white">Black's Wallet</span>
                 </div>
                 <span class="bento-tag-pill tag-nata-pill" id="nataStatusBadge">Surplus 🟢</span>
               </div>
               <div class="bento-card-body">
-                <span class="bento-label-small" style="font-size:0.75rem; font-weight:700; color:#a1a1aa; text-transform:uppercase;">Sisa Saldo N</span>
+                <span class="bento-label-small" style="font-size:0.75rem; font-weight:700; color:#a1a1aa; text-transform:uppercase;">Black's Balance</span>
                 <div class="bento-main-amount text-nata" id="nataBalAmount" style="font-size:2rem; margin: 4px 0 10px;">Rp 0</div>
                 
                 <!-- Inflow & Outflow Boxes -->
@@ -731,7 +731,7 @@
                 </div>
               </div>
               <div class="bento-card-footer" style="display:flex; justify-content:space-between; align-items:center;">
-                <span class="bento-desc-text" id="nataExpRatioText" style="font-size:0.75rem; color:#a1a1aa;">Outcome 0% dari Income</span>
+                <span class="bento-desc-text" id="nataExpRatioText" style="font-size:0.75rem; color:#a1a1aa;">Expenses 0% of Income</span>
                 <span style="font-size:0.75rem; font-weight:700; color:#e4e4e7;" id="nataExpAmount">Outcome: Rp 0</span>
               </div>
             </div>
@@ -756,7 +756,7 @@
                 <label class="bento-label">Amount (Rupiah):</label>
                 <div class="bento-input-prefix-wrap">
                   <span class="bento-prefix">Rp</span>
-                  <input type="text" inputmode="decimal" id="quickDirectAmount" class="bento-styled-input" placeholder="0 (cth: 50k, 149.000)" />
+                  <input type="text" inputmode="decimal" id="quickDirectAmount" class="bento-styled-input" placeholder="0 (e.g. 50k, 149,000)" />
                 </div>
               </div>
 
@@ -780,17 +780,17 @@
               <div class="bento-input-group">
                 <label class="bento-label">Pencatat (Orang):</label>
                 <select id="quickDirectPerson" class="bento-styled-select" onchange="onQuickPersonChange(this.value)">
-                  <option value="yuki" selected>🐈 Y</option>
-                  <option value="nata">🐈‍⬛ N</option>
+                  <option value="yuki" selected>🐈 Orange</option>
+                  <option value="nata">🐈‍⬛ Black</option>
                 </select>
               </div>
 
               <div class="bento-input-group">
-                <label class="bento-label">Pilih Dompet:</label>
+                <label class="bento-label">Select Wallet:</label>
                 <select id="quickDirectWallet" class="bento-styled-select">
-                  <option value="yuki" selected>🐈 Dompet Y</option>
-                  <option value="tabungan_yuki">🏦 Tabungan Y</option>
-                  <option value="nata">🐈‍⬛ Dompet N</option>
+                  <option value="yuki" selected>🐈 Orange's Wallet</option>
+                  <option value="tabungan_yuki">🏦 Orange's Savings</option>
+                  <option value="nata">🐈‍⬛ Black's Wallet</option>
                 </select>
               </div>
 
@@ -846,38 +846,38 @@
           <!-- ==================== 6. PERORANGAN SAVINGS GOALS & WISHLIST ==================== -->
           <div class="bento-section-header">
             <div>
-              <span class="bento-section-heading">🌟 Target Tabungan &amp; Wishlist Pribadi</span>
-              <span class="bento-section-sub">Target tabungan dan impian terpisah untuk Y dan N</span>
+              <span class="bento-section-heading">🌟 Savings Goals &amp; Personal Wishlist</span>
+              <span class="bento-section-sub">Separate savings goals &amp; dreams for Orange and Black</span>
             </div>
             <button class="primary-btn-sm" onclick="openAddSavingsGoalModal()">
               <span>➕</span>
-              <span>Tambah Target</span>
+              <span>Add Target</span>
             </button>
           </div>
 
-          <!-- Kata-Kata Motivasi & Semangat Nabung Y & N -->
+          <!-- Motivational Savings Notes (Orange & Black) -->
           <div class="savings-motivation-card">
             <div class="motivation-icon-wrap">
               <span class="motivation-emoji">💌</span>
             </div>
             <div class="motivation-text-wrap">
-              <span class="motivation-badge">✨ Catatan Cinta &amp; Semangat Nabung Y &amp; N</span>
-              <p class="motivation-quote" id="savingsQuoteText">"Sedikit demi sedikit, lama-lama jadi rumah impian &amp; liburan bareng kita berdua! 🏡🌸"</p>
-              <span class="motivation-author" id="savingsQuoteAuthor">~ Y &amp; N Future Fund ✨</span>
+              <span class="motivation-badge">✨ Love Notes &amp; Savings Motivation (Orange &amp; Black)</span>
+              <p class="motivation-quote" id="savingsQuoteText">"Little by little, step by step toward our dream home &amp; trips together! 🏡🌸"</p>
+              <span class="motivation-author" id="savingsQuoteAuthor">~ Orange &amp; Black Future Fund ✨</span>
             </div>
-            <button type="button" class="motivation-refresh-btn" onclick="nextSavingQuote()" title="Ganti Kata-Kata Motivasi">
+            <button type="button" class="motivation-refresh-btn" onclick="nextSavingQuote()" title="Shuffle Motivation Quote">
               <span>✨ Ganti Kata</span>
             </button>
           </div>
 
           <!-- 2-Column Individual Goals (Y vs N) -->
           <div class="individual-goals-wrapper">
-            <!-- Y's Goals Column -->
+            <!-- Orange's Goals Column -->
             <div class="person-goals-card-box yuki-goals-theme">
               <div class="person-goals-header">
                 <div class="person-goals-title-group">
                   <span class="person-goals-icon">🐈</span>
-                  <span class="person-goals-title">Target Tabungan Y</span>
+                  <span class="person-goals-title">Orange's Savings Goals</span>
                 </div>
                 <span class="bento-tag-pill tag-yuki-pill" id="yukiGoalsCountBadge">0 Target</span>
               </div>
@@ -886,12 +886,12 @@
               </div>
             </div>
 
-            <!-- N's Goals Column -->
+            <!-- Black's Goals Column -->
             <div class="person-goals-card-box nata-goals-theme">
               <div class="person-goals-header">
                 <div class="person-goals-title-group">
                   <span class="person-goals-icon">🐈‍⬛</span>
-                  <span class="person-goals-title">Target Tabungan N</span>
+                  <span class="person-goals-title">Black's Savings Goals</span>
                 </div>
                 <span class="bento-tag-pill tag-nata-pill" id="nataGoalsCountBadge">0 Target</span>
               </div>
@@ -913,9 +913,9 @@
               <div class="bento-toolbar-right">
                 <div class="bento-pill-group">
                   <button class="wallet-pill active" data-person="all" onclick="setFinanceFilterPerson('all')">All</button>
-                  <button class="wallet-pill" data-person="yuki" onclick="setFinanceFilterPerson('yuki')">🐈 Dompet Y</button>
-                  <button class="wallet-pill" data-person="tabungan_yuki" onclick="setFinanceFilterPerson('tabungan_yuki')">🏦 Tabungan Y</button>
-                  <button class="wallet-pill" data-person="nata" onclick="setFinanceFilterPerson('nata')">🐈‍⬛ Dompet N</button>
+                  <button class="wallet-pill" data-person="yuki" onclick="setFinanceFilterPerson('yuki')">🐈 Orange's Wallet</button>
+                  <button class="wallet-pill" data-person="tabungan_yuki" onclick="setFinanceFilterPerson('tabungan_yuki')">🏦 Orange's Savings</button>
+                  <button class="wallet-pill" data-person="nata" onclick="setFinanceFilterPerson('nata')">🐈‍⬛ Black's Wallet</button>
                 </div>
 
                 <div class="bento-pill-group">
@@ -980,9 +980,9 @@
 
           <!-- Legend -->
           <div class="sched-legend">
-            <span class="sched-legend-item yuki-sched">🐈 Y</span>
-            <span class="sched-legend-item nata-sched">🐈‍⬛ N</span>
-            <span class="sched-legend-item both-sched">YuTa Duo</span>
+            <span class="sched-legend-item yuki-sched">🐈 Orange</span>
+            <span class="sched-legend-item nata-sched">🐈‍⬛ Black</span>
+            <span class="sched-legend-item both-sched">Duo (Orange &amp; Black)</span>
           </div>
         </section>
 
@@ -1005,12 +1005,12 @@
               <!-- Left 3D Visual Column -->
               <div class="reru-visual-col">
                 <div class="reru-avatar-3d-wrap" id="reruAvatarWrap" onclick="interactReruDirect(event)" title="Klik buat elus & dengerin suara Reru!">
-                  <img src="assets/reru_cat.jpg" alt="3D Kucing Oyen Reru" class="reru-3d-img" id="reruAvatarImg" />
+                  <img src="assets/reru_cat.jpg" alt="3D Ginger Cat Reru" class="reru-3d-img" id="reruAvatarImg" />
                   <div class="reru-shine-layer"></div>
                   <div class="reru-glow-aura"></div>
                 </div>
                 <div class="reru-speech-bubble" id="reruSpeech" onclick="interactReruDirect(event)" title="Klik buat ngobrol sama Reru">
-                  "Purrrr enak bener... Lu mood booster gue hari ini! 😸✨"
+                  "Purrrr feels so good... You are my mood booster today! 😸✨"
                 </div>
               </div>
 
@@ -1025,7 +1025,7 @@
                         <span>😸🥰 Senyum & Manja</span>
                       </span>
                     </div>
-                    <span class="reru-bio">Bos Oyen Barbar • Penguasa YuTa OS ✨</span>
+                    <span class="reru-bio">Feisty Ginger Boss • Sovereign of YuTa OS ✨</span>
                   </div>
                   <div class="reru-lvl-badge">Lv. 1</div>
                 </div>
@@ -1110,76 +1110,76 @@
               <div>
                 <span class="bento-crumb-main">Yume's Host Tracker</span>
                 <span class="bento-crumb-sep">›</span>
-                <span class="bento-crumb-sub">Pengumpulan Tugas Harian TikTok Live Host</span>
+                <span class="bento-crumb-sub">TikTok Live Host Daily Task Submissions</span>
               </div>
             </div>
 
             <div class="bento-nav-actions">
-              <button class="bento-pill-btn btn-inflow" onclick="window.HostTracker.copyDailyReport()" title="Salin Rekap Format Laporan untuk WhatsApp / Telegram Agensi">
+              <button class="bento-pill-btn btn-inflow" onclick="window.HostTracker.copyDailyReport()" title="Copy Report Format for Agency WA / Telegram">
                 <span>📋</span>
-                <span>Salin Laporan WA</span>
+                <span>Copy Report</span>
               </button>
-              <button class="bento-pill-btn" onclick="window.HostTracker.exportTasksCSV()" title="Download Rekap Tugas CSV untuk Excel">
+              <button class="bento-pill-btn" onclick="window.HostTracker.exportTasksCSV()" title="Download Tasks Summary as CSV for Excel">
                 <span>📥</span>
-                <span>Export CSV Tugas</span>
+                <span>Export Tasks CSV</span>
               </button>
-              <button class="bento-pill-btn btn-danger-pill" onclick="window.HostTracker.resetDailyTasks()" title="Reset Checklist Hari Baru">
+              <button class="bento-pill-btn btn-danger-pill" onclick="window.HostTracker.resetDailyTasks()" title="Reset Daily Checklist">
                 <span>🔄</span>
-                <span>Reset Hari Baru</span>
+                <span>Reset for New Day</span>
               </button>
             </div>
           </div>
 
           <!-- Running Ticker Marquee Announcement -->
-          <div class="host-marquee-container" title="Pesan Pengingat Chat Spender (Arahkan kursor untuk jeda)">
+          <div class="host-marquee-container" title="Spender Chat Reminder Message (Hover to pause)">
             <div class="host-marquee-tag">
               <span class="marquee-tag-pulse"></span>
               <span class="marquee-tag-icon">💬</span>
-              <span class="marquee-tag-text">PENGINGAT VIP</span>
+              <span class="marquee-tag-text">VIP REMINDER</span>
             </div>
             <div class="host-marquee-viewport">
               <div class="host-marquee-track">
-                <span class="marquee-item-text">🚨 <strong>jangan lupa balesin:</strong> <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('kimchi')">kimchi</span>, <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('kambing')">kambing</span>, <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('fer')">fer</span>, <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('hansell')">hansell</span>! 💬💌</span>
+                <span class="marquee-item-text">🚨 <strong>don't forget to reply to:</strong> <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('kimchi')">kimchi</span>, <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('kambing')">kambing</span>, <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('fer')">fer</span>, <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('hansell')">hansell</span>! 💬💌</span>
                 <span class="marquee-dot">✦</span>
-                <span class="marquee-item-text">✨ Prioritas balas spender: <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('kimchi')">kimchi</span> • <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('kambing')">kambing</span> • <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('fer')">fer</span> • <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('hansell')">hansell</span> 🌟</span>
+                <span class="marquee-item-text">✨ Priority spender replies: <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('kimchi')">kimchi</span> • <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('kambing')">kambing</span> • <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('fer')">fer</span> • <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('hansell')">hansell</span> 🌟</span>
                 <span class="marquee-dot">✦</span>
-                <span class="marquee-item-text">🚨 <strong>jangan lupa balesin:</strong> <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('kimchi')">kimchi</span>, <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('kambing')">kambing</span>, <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('fer')">fer</span>, <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('hansell')">hansell</span>! 💬💌</span>
+                <span class="marquee-item-text">🚨 <strong>don't forget to reply to:</strong> <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('kimchi')">kimchi</span>, <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('kambing')">kambing</span>, <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('fer')">fer</span>, <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('hansell')">hansell</span>! 💬💌</span>
                 <span class="marquee-dot">✦</span>
-                <span class="marquee-item-text">✨ Prioritas balas spender: <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('kimchi')">kimchi</span> • <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('kambing')">kambing</span> • <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('fer')">fer</span> • <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('hansell')">hansell</span> 🌟</span>
+                <span class="marquee-item-text">✨ Priority spender replies: <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('kimchi')">kimchi</span> • <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('kambing')">kambing</span> • <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('fer')">fer</span> • <span class="vip-highlight" onclick="window.HostTracker.searchSpenderByName('hansell')">hansell</span> 🌟</span>
                 <span class="marquee-dot">✦</span>
               </div>
             </div>
           </div>
 
-          <!-- Hero KPI Bento (FOKUS UTAMA: PENGUMPULAN TUGAS HARIAN YUME) -->
+          <!-- Hero KPI Bento (Yume Daily Tasks Focus) -->
           <div class="host-hero-kpi-grid single-hero">
             <div class="host-kpi-card glass-card task-kpi-hero full-width-kpi">
               <div class="kpi-icon-wrap kpi-task-icon">📋</div>
               <div class="kpi-details">
                 <div class="kpi-top-title-row">
-                  <span class="kpi-label" style="color: #065f46; font-size: 0.95rem;">Pengumpulan Tugas Harian Yume (Fokus Utama)</span>
-                  <span class="kpi-sub-text">Sudah Selesai: <strong id="statTasksDone" style="color: #059669;">28</strong> / <span id="statTasksTotal">54</span> | Belum: <strong id="statTasksPending" style="color: #d97706;">26</strong></span>
+                  <span class="kpi-label" style="color: #065f46; font-size: 0.95rem;">Yume Daily Task Submissions (Main Focus)</span>
+                  <span class="kpi-sub-text">Completed: <strong id="statTasksDone" style="color: #059669;">28</strong> / <span id="statTasksTotal">54</span> | Pending: <strong id="statTasksPending" style="color: #d97706;">26</strong></span>
                 </div>
-                <div class="kpi-val" id="hostTaskProgressText" style="color: #065f46;">28 / 54 Selesai (52%)</div>
+                <div class="kpi-val" id="hostTaskProgressText" style="color: #065f46;">28 / 54 Done (52%)</div>
                 <div class="kpi-progress-bar bar-green" style="height: 12px;">
                   <div class="kpi-progress-fill fill-green" id="hostTaskProgressFill" style="width: 52%;"></div>
                 </div>
                 <div class="kpi-meta-row" style="margin-top: 10px;">
-                  <span class="kpi-hint-text">💡 <em>Centang target yang sudah setor tugas, lalu klik "Salin Laporan WA" untuk langsung kirim rekap ke grup.</em></span>
+                  <span class="kpi-hint-text">💡 <em>Check off targets who submitted their task, then click "Copy Report" to send the recap to the group.</em></span>
                   <div class="kpi-hero-buttons">
-                    <button class="mini-kpi-btn hero-add-btn" onclick="window.HostTracker.openAddTaskModal()" title="Tambah Target Baru">➕ Tambah Target</button>
-                    <button class="mini-kpi-btn hero-wa-btn" onclick="window.HostTracker.copyDailyReport()" title="Salin Rekap WA">📋 Salin Rekap WA</button>
+                    <button class="mini-kpi-btn hero-add-btn" onclick="window.HostTracker.openAddTaskModal()" title="Add New Target">➕ Add Target</button>
+                    <button class="mini-kpi-btn hero-wa-btn" onclick="window.HostTracker.copyDailyReport()" title="Copy Report">📋 Copy Report</button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Host Sub-Nav Switcher (2 Tab Sederhana: Tugas Utama vs Data Referensi) -->
+          <!-- Host Sub-Nav Switcher (Tasks vs Spender Directory) -->
           <div class="host-subtab-bar">
             <button class="host-subtab-btn active host-subtab-highlight" data-subtab="tasks" onclick="window.HostTracker.switchSubTab('tasks')">
               <span>📋</span>
-              <span>Pengumpulan Tugas Harian (Sheet 3)</span>
+              <span>Daily Task Checklist (Sheet 3)</span>
               <span class="host-subtab-badge">Fokus Harian</span>
             </button>
             <button class="host-subtab-btn" data-subtab="spenders" onclick="window.HostTracker.switchSubTab('spenders')">
@@ -1190,47 +1190,47 @@
 
           <!-- ================= SUBPANEL 1: SPENDERS (DATA REFERENSI) ================= -->
           <div class="host-subtab-panel" id="host-subpanel-spenders">
-            <!-- Toolbar: Search, Filters, Sort & Tambah Spender (Di Sini Saja) -->
+            <!-- Toolbar: Search, Filters, Sort & Add Spender -->
             <div class="host-toolbar-box glass-card">
               <div class="toolbar-search-wrap">
                 <span class="search-icon">🔍</span>
-                <input type="text" id="spenderSearchInput" class="host-search-input" placeholder="Cari nama akun, @username, tier, catatan..." />
+                <input type="text" id="spenderSearchInput" class="host-search-input" placeholder="Search account name, @username, tier, notes..." />
               </div>
 
               <!-- Filter Pills -->
               <div class="toolbar-filters">
-                <button class="filter-pill-btn active" data-filter="all" onclick="window.HostTracker.setSpenderFilter('all')">Semua (329)</button>
-                <button class="filter-pill-btn" data-filter="unfollowed" onclick="window.HostTracker.setSpenderFilter('unfollowed')">➕ Belum Follow</button>
-                <button class="filter-pill-btn" data-filter="followed" onclick="window.HostTracker.setSpenderFilter('followed')">✨ Sudah Follow</button>
-                <button class="filter-pill-btn" data-filter="uncontacted" onclick="window.HostTracker.setSpenderFilter('uncontacted')">⏳ Belum Chat</button>
-                <button class="filter-pill-btn" data-filter="contacted" onclick="window.HostTracker.setSpenderFilter('contacted')">✅ Sudah Chat</button>
-                <button class="filter-pill-btn" data-filter="replied" onclick="window.HostTracker.setSpenderFilter('replied')">💌 Dibalas</button>
+                <button class="filter-pill-btn active" data-filter="all" onclick="window.HostTracker.setSpenderFilter('all')">All (329)</button>
+                <button class="filter-pill-btn" data-filter="unfollowed" onclick="window.HostTracker.setSpenderFilter('unfollowed')">➕ Unfollowed</button>
+                <button class="filter-pill-btn" data-filter="followed" onclick="window.HostTracker.setSpenderFilter('followed')">✨ Followed</button>
+                <button class="filter-pill-btn" data-filter="uncontacted" onclick="window.HostTracker.setSpenderFilter('uncontacted')">⏳ Not Messaged</button>
+                <button class="filter-pill-btn" data-filter="contacted" onclick="window.HostTracker.setSpenderFilter('contacted')">✅ Messaged</button>
+                <button class="filter-pill-btn" data-filter="replied" onclick="window.HostTracker.setSpenderFilter('replied')">💌 Replied</button>
                 <span class="filter-divider">|</span>
                 <button class="filter-pill-btn pill-whale" data-filter="whale" onclick="window.HostTracker.setSpenderFilter('whale')">🐋 Whale</button>
                 <button class="filter-pill-btn pill-high" data-filter="high" onclick="window.HostTracker.setSpenderFilter('high')">⭐ High</button>
                 <button class="filter-pill-btn pill-supporter" data-filter="supporter" onclick="window.HostTracker.setSpenderFilter('supporter')">💖 Supporter</button>
               </div>
 
-              <!-- Action Tambah Spender & Sort Dropdown -->
+              <!-- Action Add Spender & Sort Dropdown -->
               <div class="toolbar-sort-wrap">
-                <button type="button" class="bento-pill-btn btn-outflow" onclick="window.HostTracker.openAddSpenderModal()" title="Tambah Akun Spender Baru">
-                  <span>➕ Tambah Spender</span>
+                <button type="button" class="bento-pill-btn btn-outflow" onclick="window.HostTracker.openAddSpenderModal()" title="Add New Spender Account">
+                  <span>➕ Add Spender</span>
                 </button>
                 <select id="spenderSortSelect" class="host-select-input">
-                  <option value="koin_desc">🪙 Koin Tertinggi</option>
-                  <option value="hadiah_desc">🎁 Hadiah Terbanyak</option>
-                  <option value="tier_desc">⭐ Tier Tertinggi</option>
-                  <option value="uncontacted_first">⏳ Belum Chat Dahulu</option>
-                  <option value="name_asc">🔤 Nama Akun (A-Z)</option>
+                  <option value="koin_desc">🪙 Highest Coins</option>
+                  <option value="hadiah_desc">🎁 Most Gifts</option>
+                  <option value="tier_desc">⭐ Highest Tier</option>
+                  <option value="uncontacted_first">⏳ Uncontacted First</option>
+                  <option value="name_asc">🔤 Account Name (A-Z)</option>
                 </select>
               </div>
             </div>
 
             <!-- Table Header Stats Info -->
             <div class="table-meta-bar">
-              <span id="spendersCountBadge" class="table-count-badge">329 Spender (Data Referensi)</span>
+              <span id="spendersCountBadge" class="table-count-badge">329 Spenders (Reference Directory)</span>
               <div class="table-hints">
-                <span>💡 <em>Klik nama akun atau tombol 🎵 Cari TikTok untuk langsung membuka profil / pencarian TikTok</em></span>
+                <span>💡 <em>Click account name or 🎵 TikTok button to open profile / search immediately</em></span>
               </div>
             </div>
 
@@ -1240,14 +1240,14 @@
                 <thead>
                   <tr>
                     <th style="width: 45px;">No</th>
-                    <th style="width: 210px;">Nama Akun &amp; TikTok</th>
+                    <th style="width: 210px;">Account Name &amp; TikTok</th>
                     <th style="width: 130px;">Label &amp; Tier</th>
-                    <th style="width: 160px;">Total Koin &amp; Hadiah</th>
-                    <th>Catatan &amp; Keterangan</th>
-                    <th style="width: 125px; text-align: center;">Sudah Follow?</th>
-                    <th style="width: 125px; text-align: center;">Sudah Chat?</th>
-                    <th style="width: 100px; text-align: center;">Dibalas?</th>
-                    <th style="width: 150px; text-align: center;">Aksi TikTok</th>
+                    <th style="width: 160px;">Total Coins &amp; Gifts</th>
+                    <th>Notes &amp; Remarks</th>
+                    <th style="width: 125px; text-align: center;">Followed?</th>
+                    <th style="width: 125px; text-align: center;">Messaged?</th>
+                    <th style="width: 100px; text-align: center;">Replied?</th>
+                    <th style="width: 150px; text-align: center;">TikTok Actions</th>
                   </tr>
                 </thead>
                 <tbody id="spendersTableBody">
@@ -1271,41 +1271,41 @@
               <form onsubmit="window.HostTracker.submitInlineNewTask(event)" class="tasks-inline-form">
                 <div class="tasks-inline-input-wrap">
                   <span class="tasks-input-icon">➕</span>
-                  <input type="text" id="inlineNewTaskInput" class="tasks-inline-input" placeholder="Ketik nama akun / target tugas baru untuk Yume (lalu tekan Enter atau klik Tambah)..." autocomplete="off" />
+                  <input type="text" id="inlineNewTaskInput" class="tasks-inline-input" placeholder="Type account name or new target task for Yume (then press Enter or click Add)..." autocomplete="off" />
                 </div>
                 <button type="submit" class="bento-pill-btn btn-add-target-solid">
                   <span>➕</span>
-                  <span>Tambah Target</span>
+                  <span>Add Target</span>
                 </button>
               </form>
             </div>
 
             <div class="tasks-toolbar glass-card">
               <div class="tasks-toolbar-left">
-                <span class="tasks-tb-title">Checklist Pengumpulan Tugas Harian Yume (Sheet 3)</span>
-                <span class="tasks-tb-sub">Centang nama akun/target yang sudah mengumpulkan tugas hari ini</span>
+                <span class="tasks-tb-title">Daily Task Checklist for Yume (Sheet 3)</span>
+                <span class="tasks-tb-sub">Check off accounts/targets who submitted their task today</span>
               </div>
               <div class="tasks-toolbar-actions">
-                <button class="bento-pill-btn btn-inflow" onclick="window.HostTracker.copyDailyReport()">📋 Salin Rekap WA</button>
-                <button class="bento-pill-btn" onclick="window.HostTracker.openAddTaskModal()">➕ Tambah Target</button>
-                <button class="bento-pill-btn" onclick="window.HostTracker.markAllTasksDone()">✅ Selesai Semua</button>
-                <button class="bento-pill-btn btn-danger-pill" onclick="window.HostTracker.resetDailyTasks()">🔄 Reset Hari Baru</button>
+                <button class="bento-pill-btn btn-inflow" onclick="window.HostTracker.copyDailyReport()">📋 Copy Report</button>
+                <button class="bento-pill-btn" onclick="window.HostTracker.openAddTaskModal()">➕ Add Target</button>
+                <button class="bento-pill-btn" onclick="window.HostTracker.markAllTasksDone()">✅ Complete All</button>
+                <button class="bento-pill-btn btn-danger-pill" onclick="window.HostTracker.resetDailyTasks()">🔄 Reset for New Day</button>
               </div>
             </div>
 
             <div class="tasks-filters-row">
               <div class="toolbar-search-wrap" style="max-width: 280px;">
                 <span class="search-icon">🔍</span>
-                <input type="text" id="taskSearchInput" class="host-search-input" placeholder="Cari nama tugas/target..." />
+                <input type="text" id="taskSearchInput" class="host-search-input" placeholder="Search task or target name..." />
               </div>
 
               <div class="task-filter-pills">
-                <button class="task-filter-pill active" data-filter="all" onclick="window.HostTracker.setTaskFilter('all')">Semua (54)</button>
-                <button class="task-filter-pill" data-filter="pending" onclick="window.HostTracker.setTaskFilter('pending')">⏳ Belum Selesai</button>
-                <button class="task-filter-pill" data-filter="completed" onclick="window.HostTracker.setTaskFilter('completed')">✅ Sudah Selesai</button>
+                <button class="task-filter-pill active" data-filter="all" onclick="window.HostTracker.setTaskFilter('all')">All (54)</button>
+                <button class="task-filter-pill" data-filter="pending" onclick="window.HostTracker.setTaskFilter('pending')">⏳ Pending</button>
+                <button class="task-filter-pill" data-filter="completed" onclick="window.HostTracker.setTaskFilter('completed')">✅ Completed</button>
               </div>
 
-              <span id="tasksCountBadge" class="table-count-badge">28 / 54 Selesai</span>
+              <span id="tasksCountBadge" class="table-count-badge">28 / 54 Completed</span>
             </div>
 
             <!-- Tasks Grid Container -->
@@ -1345,10 +1345,10 @@
       </div>
     </div>
     <div class="player-controls">
-      <button class="p-btn" onclick="prevAmbientSound()" title="Previous Track (Lagu Sebelumnya)">⏮</button>
+      <button class="p-btn" onclick="prevAmbientSound()" title="Previous Track">⏮</button>
       <button class="p-btn" onclick="togglePlayMusic()" id="btnPlayPause" title="Play / Pause">▶</button>
-      <button class="p-btn" onclick="nextAmbientSound()" title="Next Track (Lagu Selanjutnya)">⏭</button>
-      <button class="p-btn" onclick="toggleTrackList()" id="btnTrackList" title="Buka Playlist Lagu">📋</button>
+      <button class="p-btn" onclick="nextAmbientSound()" title="Next Track">⏭</button>
+      <button class="p-btn" onclick="toggleTrackList()" id="btnTrackList" title="Open Music Playlist">📋</button>
       <div class="volume-slider-wrap">
         <span class="vol-icon">🔊</span>
         <input type="range" min="0" max="100" value="70" class="volume-slider" id="playerVolume" />
@@ -1408,12 +1408,12 @@
           </div>
           <div class="start-item" onclick="restoreAndSwitchTab('hosttracker'); toggleStartMenu();">
             <span class="item-icon">🎯</span>
-            <div class="item-text"><strong>TikTok Host Tracker</strong><small>329 VIP Spenders &amp; Tugas Live Yume</small></div>
+            <div class="item-text"><strong>TikTok Host Tracker</strong><small>329 VIP Spenders &amp; Yume Live Tasks</small></div>
           </div>
           <div class="start-divider"></div>
           <div class="start-item" onclick="openCloudSyncModal(); toggleStartMenu();">
             <span class="item-icon">☁️</span>
-            <div class="item-text"><strong>Live Cloud Sync</strong><small>Hubungkan HP Y & N Real-Time</small></div>
+            <div class="item-text"><strong>Live Cloud Sync</strong><small>Connect Orange &amp; Black Real-Time</small></div>
           </div>
           <div class="start-item" onclick="exportDataBackup(); toggleStartMenu();">
             <span class="item-icon">💾</span>
@@ -1456,7 +1456,7 @@
 
     <!-- System Tray -->
     <div class="system-tray">
-      <span class="tray-icon" onclick="openCloudSyncModal()" title="Live Cloud Sync Y ↔ N" style="font-size: 1.05rem; cursor: pointer;">☁️</span>
+      <span class="tray-icon" onclick="openCloudSyncModal()" title="Live Cloud Sync (Orange ↔ Black)" style="font-size: 1.05rem; cursor: pointer;">☁️</span>
       <span class="tray-icon" onclick="toggleMediaPlayer()" title="Media Player">💿</span>
       <span class="tray-icon" onclick="toggleCRT()" title="Toggle Scanlines">⚡</span>
       <span class="tray-icon" onclick="toggleWallpaper()" title="Switch Wallpaper">🖼️</span>
@@ -1602,9 +1602,9 @@
         <div class="form-group-retro">
           <label for="reminderFor">Target:</label>
           <select id="reminderFor" class="retro-select">
-            <option value="both">YuTa (Joint)</option>
-            <option value="yuki">Y</option>
-            <option value="nata">N</option>
+            <option value="both">Both (Joint)</option>
+            <option value="yuki">Orange</option>
+            <option value="nata">Black</option>
           </select>
         </div>
         <div class="form-group-retro">
@@ -1640,15 +1640,15 @@
           <div class="form-group-retro">
             <label for="noteFrom">From:</label>
             <select id="noteFrom" class="retro-select">
-              <option value="yuki">Y</option>
-              <option value="nata">N</option>
+              <option value="yuki">Orange</option>
+              <option value="nata">Black</option>
             </select>
           </div>
           <div class="form-group-retro">
             <label for="noteTo">To:</label>
             <select id="noteTo" class="retro-select">
-              <option value="nata">N</option>
-              <option value="yuki">Y</option>
+              <option value="nata">Black</option>
+              <option value="yuki">Orange</option>
             </select>
           </div>
         </div>
@@ -1714,7 +1714,7 @@
       <div class="window-titlebar">
         <div class="titlebar-left">
           <img src="assets/windows_xp.png" class="titlebar-icon" alt="XP" />
-          <span class="titlebar-text">YuTa OS — Real-Time Live Sync (Y ↔ N)</span>
+          <span class="titlebar-text">YuTa OS — Real-Time Live Sync (Orange ↔ Black)</span>
         </div>
         <button class="win-btn win-close" onclick="closeModal('cloudSyncModal')">✕</button>
       </div>
@@ -1725,42 +1725,42 @@
             <span class="sync-status-emoji" id="syncStatusEmoji">⚡</span>
           </div>
           <div>
-            <strong class="sync-status-title" id="syncStatusTitle">🟢 Terhubung & Live (Real-Time)</strong>
-            <p class="sync-status-desc" id="syncStatusDesc">Kamar "yuta-space-2026" aktif otomatis. Sinkronisasi real-time Y ↔ N selalu terhubung.</p>
+            <strong class="sync-status-title" id="syncStatusTitle">🟢 Connected &amp; Live (Real-Time)</strong>
+            <p class="sync-status-desc" id="syncStatusDesc">Room "yuta-space-2026" is active. Real-time synchronization between Orange and Black is always connected.</p>
           </div>
         </div>
 
         <div class="sync-form-group">
-          <label for="syncRoomId"><strong>Nama Kamar Bersama (Shared Room ID):</strong></label>
+          <label for="syncRoomId"><strong>Shared Room Name (Shared Room ID):</strong></label>
           <input type="text" id="syncRoomId" class="retro-input" value="yuta-space-2026" placeholder="contoh: yuta-space-2026" />
-          <small class="sync-help-text">💡 Masukkan nama kamar yang sama persis di HP/Laptop Y & N.</small>
+          <small class="sync-help-text">💡 Enter the exact same room name on Orange's &amp; Black's devices.</small>
         </div>
 
         <div class="sync-form-group">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
             <label for="syncDbUrl" style="margin-bottom:0;"><strong>Firebase Database URL:</strong></label>
-            <button type="button" onclick="fillOfficialDatabaseUrl()" style="background: rgba(2, 132, 199, 0.18); border: 1px solid #0284c7; color: #0284c7; border-radius: 6px; padding: 2px 8px; font-size: 0.72rem; cursor: pointer; font-weight: 700; transition: all 0.2s;">⚡ Pasang URL Resmi</button>
+            <button type="button" onclick="fillOfficialDatabaseUrl()" style="background: rgba(2, 132, 199, 0.18); border: 1px solid #0284c7; color: #0284c7; border-radius: 6px; padding: 2px 8px; font-size: 0.72rem; cursor: pointer; font-weight: 700; transition: all 0.2s;">⚡ Set Official URL</button>
           </div>
           <input type="text" id="syncDbUrl" class="retro-input" value="https://yuta-os-f9a95-default-rtdb.asia-southeast1.firebasedatabase.app" placeholder="https://yuta-os-f9a95-default-rtdb.asia-southeast1.firebasedatabase.app" />
-          <small class="sync-help-text">🔥 URL Realtime Database resmi YuTa OS (Gratis & Real-Time Sync).</small>
+          <small class="sync-help-text">🔥 Official YuTa OS Realtime Database URL (Free & Real-Time Sync).</small>
         </div>
 
         <div class="sync-quick-guide">
           <details>
-            <summary><strong>📖 Cara Bikin Database Firebase Gratis 1 Menit (Klik di sini)</strong></summary>
+            <summary><strong>📖 How to Set Up a Free Firebase Database in 1 Minute (Click here)</strong></summary>
             <ol style="padding-left: 18px; font-size: 0.74rem; line-height: 1.45; color: #1e3a8a; margin-top: 6px;">
-              <li>Buka <a href="https://console.firebase.google.com" target="_blank" style="color:#0284c7; font-weight:bold;">console.firebase.google.com</a> & login Google.</li>
-              <li>Klik <strong>Add Project</strong> (Beri nama misal: <code>yuta-os</code>) lalu klik Create.</li>
-              <li>Pilih menu <strong>Build → Realtime Database → Create Database</strong> (Pilih Singapore/US, pilih <em>Start in Test Mode</em>).</li>
-              <li>Salin link database (misal: <code>https://yuta-os-default-rtdb.asia-southeast1.firebasedatabase.app</code>) dan paste di kotak atas!</li>
+              <li>Open <a href="https://console.firebase.google.com" target="_blank" style="color:#0284c7; font-weight:bold;">console.firebase.google.com</a> & sign in with Google.</li>
+              <li>Click <strong>Add Project</strong> (e.g. name: <code>yuta-os</code>) and click Create.</li>
+              <li>Select <strong>Build → Realtime Database → Create Database</strong> (Choose Singapore/US, choose <em>Start in Test Mode</em>).</li>
+              <li>Copy database URL (e.g. <code>https://yuta-os-default-rtdb.asia-southeast1.firebasedatabase.app</code>) and paste above!</li>
             </ol>
           </details>
         </div>
 
         <div class="modal-btn-row" style="margin-top: 12px; gap: 6px;">
-          <button class="retro-btn-action" onclick="saveAndConnectCloudSync()">🔗 Sambungkan Live Sync</button>
-          <button class="retro-btn-secondary" onclick="forcePushToCloud()" id="btnForcePush" title="Upload semua data lokal ke Cloud">⬆️ Push ke Cloud</button>
-          <button class="retro-btn-secondary" onclick="forcePullFromCloud()" id="btnForcePull" title="Download data terbaru dari Cloud">⬇️ Tarik Cloud</button>
+          <button class="retro-btn-action" onclick="saveAndConnectCloudSync()">🔗 Connect Live Sync</button>
+          <button class="retro-btn-secondary" onclick="forcePushToCloud()" id="btnForcePush" title="Push all local data to Cloud">⬆️ Push to Cloud</button>
+          <button class="retro-btn-secondary" onclick="forcePullFromCloud()" id="btnForcePull" title="Pull latest data from Cloud">⬇️ Pull from Cloud</button>
         </div>
       </div>
     </div>
@@ -1783,7 +1783,7 @@
           </div>
           <div>
             <strong class="sync-status-title">Google Calendar Lifetime Integration</strong>
-            <p class="sync-status-desc">Simpan semua jadwal & agenda Y-N secara permanen di Google Calendar (Android, iPhone, Mac & Windows).</p>
+            <p class="sync-status-desc">Save all Orange &amp; Black schedules permanently in Google Calendar (Android, iPhone, Mac &amp; Windows).</p>
           </div>
         </div>
 
@@ -1792,7 +1792,7 @@
           <div class="gcal-export-info">
             <strong style="color: #1e3a8a; font-size: 0.86rem; display: block;">⚡ 1-Click Universal Sync (.ics File)</strong>
             <span style="font-size: 0.74rem; color: #475569; line-height: 1.35; display: block; margin-top: 2px;">
-              Download file kalender lengkap: Agenda harian Y, Tugas N, Duo Plans, <strong>Anniversary (17 Feb 2026)</strong>, dan Ulang Tahun dengan jadwal berulang otomatis.
+              Download complete calendar file: Orange's daily quests, Black's tasks, Duo Plans, <strong>Anniversary (Feb 17, 2026)</strong>, and recurring birthdays.
             </span>
           </div>
           <button class="retro-btn-action gcal-big-btn" onclick="downloadLifetimeICS()">
@@ -1801,7 +1801,7 @@
         </div>
 
         <!-- Quick Individual 1-Click Direct Links -->
-        <div class="gcal-quick-grid-title">✨ Atau Tambahkan Langsung per Acara (1-Klik Buka GCal):</div>
+        <div class="gcal-quick-grid-title">✨ Or Add Events Directly (1-Click Google Calendar):</div>
         <div class="gcal-quick-grid">
           <div class="gcal-quick-card" onclick="syncEventToGoogleCalendar('anniversary')">
             <span class="gcal-card-icon">💍</span>
@@ -1815,7 +1815,7 @@
           <div class="gcal-quick-card" onclick="syncEventToGoogleCalendar('yuki_bday')">
             <span class="gcal-card-icon">🐈</span>
             <div class="gcal-card-info">
-              <strong>Y's Birthday</strong>
+              <strong>Orange's Birthday</strong>
               <span>23 Oct (Repeats Yearly)</span>
             </div>
             <button class="gcal-add-badge">＋ Add</button>
@@ -1824,7 +1824,7 @@
           <div class="gcal-quick-card" onclick="syncEventToGoogleCalendar('nata_bday')">
             <span class="gcal-card-icon">🐈‍⬛</span>
             <div class="gcal-card-info">
-              <strong>N's Birthday</strong>
+              <strong>Black's Birthday</strong>
               <span>24 Sep (Repeats Yearly)</span>
             </div>
             <button class="gcal-add-badge">＋ Add</button>
@@ -1833,7 +1833,7 @@
           <div class="gcal-quick-card" onclick="syncEventToGoogleCalendar('yuki_routine')">
             <span class="gcal-card-icon">💻</span>
             <div class="gcal-card-info">
-              <strong>Y's 4 Quests</strong>
+              <strong>Orange's 4 Quests</strong>
               <span>LMS, Assignments, Thesis, Job Hunt</span>
             </div>
             <button class="gcal-add-badge">＋ Add</button>
@@ -1842,7 +1842,7 @@
           <div class="gcal-quick-card" onclick="syncEventToGoogleCalendar('nata_routine')">
             <span class="gcal-card-icon">🌸</span>
             <div class="gcal-card-info">
-              <strong>N's Daily Quests</strong>
+              <strong>Black's Daily Quests</strong>
               <span>Spenders, Stream, Report, Attendance</span>
             </div>
             <button class="gcal-add-badge">＋ Add</button>
@@ -1861,34 +1861,34 @@
         <!-- TWO-WAY IMPORT: FROM GOOGLE CALENDAR TO WEB APP -->
         <div class="gcal-export-box" style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-color: #86efac;">
           <div class="gcal-export-info">
-            <strong style="color: #166534; font-size: 0.88rem; display: block;">⚡ Tarik Otomatis dari Google Calendar (Y & N)</strong>
+            <strong style="color: #166534; font-size: 0.88rem; display: block;">⚡ Automatic Sync from Google Calendar (Orange &amp; Black)</strong>
             <span style="font-size: 0.74rem; color: #374151; line-height: 1.35; display: block; margin-top: 2px;">
-              Akun Google Calendar Y & N sudah terhubung! Klik tombol di bawah untuk langsung menyelaraskan jadwal ke web:
+              Google Calendar accounts for Orange &amp; Black are connected! Click the buttons below to sync schedules directly:
             </span>
           </div>
 
           <!-- Dual 1-Click Sync Buttons -->
           <div style="display: flex; gap: 8px; flex-wrap: wrap;">
             <button class="retro-btn-action" style="flex: 1; background: linear-gradient(180deg, #fb923c 0%, #ea580c 100%); font-size: 0.78rem; padding: 8px 12px;" onclick="syncYukiGCal()">
-              🐈 Tarik Kalender Y
+              🐈 Sync Orange's Calendar
             </button>
             <button class="retro-btn-action" style="flex: 1; background: linear-gradient(180deg, #94a3b8 0%, #64748b 100%); font-size: 0.78rem; padding: 8px 12px;" onclick="syncNataGCal()">
-              🐈‍⬛ Tarik Kalender N
+              🐈‍⬛ Sync Black's Calendar
             </button>
             <button class="retro-btn-action" style="width: 100%; background: linear-gradient(180deg, #10b981 0%, #047857 100%); font-size: 0.82rem; font-weight: 800; padding: 9px 14px;" onclick="syncBothGCal()">
-              ✨ Tarik Keduanya Sekaligus (Y 🐈 & N 🐈‍⬛)
+              ✨ Sync Both Simultaneously (Orange 🐈 &amp; Black 🐈‍⬛)
             </button>
           </div>
 
           <div style="border-top: 1px dashed #86efac; margin-top: 6px; padding-top: 6px; display: flex; gap: 8px; align-items: center;">
             <select id="gcalImportTarget" class="retro-input" style="flex: 1; padding: 5px 8px; font-size: 0.74rem;">
-              <option value="yuki">🐈 Masukkan ke: Y's Quests</option>
-              <option value="nata">🐈‍⬛ Masukkan ke: N's Quests</option>
-              <option value="reminders">🔔 Masukkan ke: Gentle Reminders</option>
+              <option value="yuki">🐈 Add to: Orange's Quests</option>
+              <option value="nata">🐈‍⬛ Add to: Black's Quests</option>
+              <option value="reminders">🔔 Add to: Gentle Reminders</option>
             </select>
             <input type="file" id="gcalIcsFileInput" accept=".ics,text/calendar" style="display:none;" onchange="handleGCalFileImport(event)" />
             <button class="retro-btn-secondary" style="font-size: 0.72rem; padding: 5px 10px;" onclick="document.getElementById('gcalIcsFileInput').click()">
-              📂 Upload Manual .ics
+              📂 Upload .ics File
             </button>
           </div>
         </div>
@@ -1896,11 +1896,11 @@
         <!-- 3-Step Instant Guide -->
         <div class="sync-quick-guide">
           <details>
-            <summary><strong>📖 Panduan Lengkap: Cara Sambungkan 2 Arah (Google Cal ↔ Web)</strong></summary>
+            <summary><strong>📖 Complete Guide: Two-Way Sync (Google Cal ↔ Web)</strong></summary>
             <ol style="padding-left: 18px; font-size: 0.74rem; line-height: 1.45; color: #1e3a8a; margin-top: 6px;">
-              <li><strong>Dari Web ke Google Cal:</strong> Klik <em>"Download All (.ics)"</em> di atas, lalu import di <a href="https://calendar.google.com/calendar/u/0/r/settings/export" target="_blank" style="color:#0284c7; font-weight:bold;">Google Calendar Settings</a>.</li>
-              <li><strong>Dari Google Cal ke Web:</strong> Di Google Calendar, klik ⚙️ Settings → Export untuk dapat file <code>.ics</code>, lalu klik tombol hijau <strong>"📂 Upload File .ics"</strong> di atas. Semua tugas Google Calendar langsung muncul di web ini!</li>
-              <li><strong>Atau via Link Live Feed:</strong> Buka Google Calendar Settings → Pilih nama Kalender → Salin <em>"Alamat rahasia dalam format iCal"</em> dan paste di kotak URL di atas.</li>
+              <li><strong>From Web to Google Cal:</strong> Click <em>"Download All (.ics)"</em> above, then import in <a href="https://calendar.google.com/calendar/u/0/r/settings/export" target="_blank" style="color:#0284c7; font-weight:bold;">Google Calendar Settings</a>.</li>
+              <li><strong>From Google Cal to Web:</strong> In Google Calendar, click ⚙️ Settings → Export to get your <code>.ics</code> file, then click <strong>"📂 Upload .ics File"</strong> above. All Google Calendar events will appear on the web instantly!</li>
+              <li><strong>Or via Live Feed URL:</strong> Open Google Calendar Settings → Select Calendar Name → Copy <em>"Secret address in iCal format"</em> to sync automatically.</li>
             </ol>
           </details>
         </div>
@@ -1928,19 +1928,19 @@
         <!-- 1. Type Toggle (Outcome / Income) -->
         <div class="type-toggle-pill-wrap">
           <button type="button" class="type-toggle-opt active" id="modalToggleExpense" onclick="setModalFinanceType('expense')">
-            <span>🔴 Outcome (Keluar)</span>
+            <span>🔴 Expense</span>
           </button>
           <button type="button" class="type-toggle-opt" id="modalToggleIncome" onclick="setModalFinanceType('income')">
-            <span>🟢 Income (Masuk)</span>
+            <span>🟢 Income</span>
           </button>
         </div>
 
         <!-- 2. Big Amount Input with Rupiah Prefix -->
         <div class="amount-hero-input-wrap">
           <span class="amount-currency">Rp</span>
-          <input type="text" inputmode="decimal" id="financeModalAmount" class="amount-hero-input" placeholder="0 (cth: 50k, 149.000)" required oninput="updateModalFinancePreview()" />
+          <input type="text" inputmode="decimal" id="financeModalAmount" class="amount-hero-input" placeholder="0 (e.g. 50k, 149,000)" required oninput="updateModalFinancePreview()" />
         </div>
-        <div class="amount-formatted-preview" id="financeModalPreview">Nol Rupiah</div>
+        <div class="amount-formatted-preview" id="financeModalPreview">Zero Rupiah</div>
 
         <!-- Quick Nominal Buttons -->
         <div class="quick-nominals-row">
@@ -1980,14 +1980,14 @@
                 <input type="radio" name="modalFinancePerson" value="yuki" id="radioFinanceYuki" checked />
                 <span class="person-radio-ui yuki-ui">
                   <span class="av">🐈</span>
-                  <span class="lbl">Y</span>
+                  <span class="lbl">Orange</span>
                 </span>
               </label>
               <label class="person-radio-card">
                 <input type="radio" name="modalFinancePerson" value="nata" id="radioFinanceNata" />
                 <span class="person-radio-ui partner-ui">
                   <span class="av">🐈‍⬛</span>
-                  <span class="lbl">N</span>
+                  <span class="lbl">Black</span>
                 </span>
               </label>
             </div>
@@ -1995,11 +1995,11 @@
 
           <!-- Which Wallet? -->
           <div class="form-group">
-            <label class="form-label" for="financeModalWallet">Pilih Dompet</label>
+            <label class="form-label" for="financeModalWallet">Select Wallet</label>
             <select id="financeModalWallet" class="form-select">
-              <option value="yuki" selected>🐈 Dompet Y</option>
-              <option value="tabungan_yuki">🏦 Tabungan Y</option>
-              <option value="nata">🐈‍⬛ Dompet N</option>
+              <option value="yuki" selected>🐈 Orange's Wallet</option>
+              <option value="tabungan_yuki">🏦 Orange's Savings</option>
+              <option value="nata">🐈‍⬛ Black's Wallet</option>
             </select>
           </div>
 
@@ -2043,56 +2043,56 @@
   <div class="modal-backdrop" id="modalSavingsGoal" style="display: none;" onclick="closeModalOnBackdrop(event, 'modalSavingsGoal')">
     <div class="modal-dialog" onclick="event.stopPropagation()">
       <div class="modal-header">
-        <h3 class="modal-title">Tambah Target Tabungan</h3>
+        <h3 class="modal-title">Add Savings Goal</h3>
         <button class="modal-close-btn" onclick="closeSavingsGoalModal()">✕</button>
       </div>
 
       <form id="formSavingsGoal" onsubmit="saveSavingsGoalForm(event)">
         <!-- Goal Owner -->
         <div class="form-group">
-          <label class="form-label">Pemilik Target</label>
+          <label class="form-label">Goal Owner</label>
           <div class="person-select-pair">
             <label class="person-radio-card">
               <input type="radio" name="modalGoalOwner" value="yuki" id="radioGoalYuki" checked />
               <span class="person-radio-ui yuki-ui">
                 <span class="av">🐈</span>
-                <span class="lbl">Y</span>
+                <span class="lbl">Orange</span>
               </span>
             </label>
             <label class="person-radio-card">
               <input type="radio" name="modalGoalOwner" value="nata" id="radioGoalNata" />
               <span class="person-radio-ui partner-ui">
                 <span class="av">🐈‍⬛</span>
-                <span class="lbl">N</span>
+                <span class="lbl">Black</span>
               </span>
             </label>
           </div>
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="goalInputTitle">Nama Target / Wishlist</label>
-          <input type="text" id="goalInputTitle" class="form-input" placeholder="misal: Beli HP Baru, MacBook Pro M3, Liburan ke Jepang..." required />
+          <label class="form-label" for="goalInputTitle">Goal / Wishlist Item Name *</label>
+          <input type="text" id="goalInputTitle" class="form-input" placeholder="e.g. New Phone, MacBook Pro M3, Trip to Japan..." required />
         </div>
 
         <div class="form-row-2">
           <div class="form-group">
-            <label class="form-label" for="goalInputTarget">Target Nominal (Rp)</label>
+            <label class="form-label" for="goalInputTarget">Target Amount (Rp) *</label>
             <input type="number" id="goalInputTarget" class="form-input" placeholder="5000000" min="10000" step="50000" required />
           </div>
           <div class="form-group">
-            <label class="form-label" for="goalInputInitial">Tabungan Awal (Rp)</label>
+            <label class="form-label" for="goalInputInitial">Initial Savings (Rp)</label>
             <input type="number" id="goalInputInitial" class="form-input" placeholder="0" min="0" step="10000" value="0" />
           </div>
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="goalInputDeadline">Target Selesai (Opsional)</label>
+          <label class="form-label" for="goalInputDeadline">Target Date (Optional)</label>
           <input type="date" id="goalInputDeadline" class="form-input" />
         </div>
 
         <div class="modal-actions-row">
-          <button type="button" class="secondary-btn" onclick="closeSavingsGoalModal()">Batal</button>
-          <button type="submit" class="primary-btn">Simpan Target</button>
+          <button type="button" class="secondary-btn" onclick="closeSavingsGoalModal()">Cancel</button>
+          <button type="submit" class="primary-btn">Save Goal</button>
         </div>
       </form>
     </div>
@@ -2102,20 +2102,20 @@
   <div class="modal-backdrop" id="modalGoalDeposit" style="display: none;" onclick="closeModalOnBackdrop(event, 'modalGoalDeposit')">
     <div class="modal-dialog" onclick="event.stopPropagation()">
       <div class="modal-header">
-        <h3 class="modal-title" id="modalDepositGoalTitle">Tambah Tabungan</h3>
+        <h3 class="modal-title" id="modalDepositGoalTitle">Add to Savings</h3>
         <button class="modal-close-btn" onclick="closeGoalDepositModal()">✕</button>
       </div>
 
       <form id="formGoalDeposit" onsubmit="saveGoalDepositForm(event)">
         <input type="hidden" id="depositGoalId" value="" />
         <div class="form-group">
-          <label class="form-label" for="depositAmount">Nominal Tabungan (Rp)</label>
+          <label class="form-label" for="depositAmount">Deposit Amount (Rp) *</label>
           <input type="number" id="depositAmount" class="form-input" placeholder="100000" min="1000" step="10000" required />
         </div>
 
         <div class="modal-actions-row">
-          <button type="button" class="secondary-btn" onclick="closeGoalDepositModal()">Batal</button>
-          <button type="submit" class="primary-btn">Simpan Tabungan</button>
+          <button type="button" class="secondary-btn" onclick="closeGoalDepositModal()">Cancel</button>
+          <button type="submit" class="primary-btn">Save Deposit</button>
         </div>
       </form>
     </div>
@@ -2127,7 +2127,7 @@
       <div class="modal-titlebar">
         <div class="modal-title-left">
           <span class="modal-icon">💬</span>
-          <span class="modal-heading">Template Sapaan Spender TikTok</span>
+          <span class="modal-heading">TikTok Spender Chat Templates</span>
         </div>
         <button class="modal-close" onclick="window.HostTracker.closeChatModal()">✕</button>
       </div>
@@ -2143,7 +2143,7 @@
         </div>
 
         <div style="font-size: 0.78rem; font-weight: 700; color: #0369a1; margin-bottom: 8px;">
-          Pilih Template Sapaan Manis &amp; Santun untuk N:
+          Select Warm &amp; Friendly Greeting Template for Black:
         </div>
 
         <!-- Template cards list -->
@@ -2153,17 +2153,17 @@
 
         <!-- Custom editor -->
         <div class="chat-editor-wrap">
-          <label class="chat-editor-label" for="chatCustomEditor">Edit / Sesuaikan Pesan (Live):</label>
-          <textarea id="chatCustomEditor" class="chat-custom-textarea" placeholder="Teks template akan muncul di sini..."></textarea>
+          <label class="chat-editor-label" for="chatCustomEditor">Edit / Customize Message (Live):</label>
+          <textarea id="chatCustomEditor" class="chat-custom-textarea" placeholder="Template message will appear here..."></textarea>
         </div>
 
         <div class="modal-footer-retro" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap;">
-          <span style="font-size: 0.72rem; color: #0284c7; font-weight: 700;">💡 <em>Pesan otomatis disalin ke clipboard &amp; TikTok dibuka, tinggal Tempel (Paste) lalu Kirim!</em></span>
+          <span style="font-size: 0.72rem; color: #0284c7; font-weight: 700;">💡 <em>Message is automatically copied to clipboard &amp; TikTok opens, ready to Paste &amp; Send!</em></span>
           <div style="display: flex; gap: 8px; align-items: center;">
-            <button type="button" class="retro-btn-cancel" onclick="window.HostTracker.closeChatModal()">Tutup</button>
-            <button type="button" class="bento-pill-btn" onclick="window.HostTracker.copyCustomEditorText()" title="Hanya salin pesan ke clipboard">📋 Salin Saja</button>
+            <button type="button" class="retro-btn-cancel" onclick="window.HostTracker.closeChatModal()">Close</button>
+            <button type="button" class="bento-pill-btn" onclick="window.HostTracker.copyCustomEditorText()" title="Copy message to clipboard only">📋 Copy Only</button>
             <button type="button" class="primary-btn btn-direct-tiktok-dm" onclick="window.HostTracker.copyAndOpenTikTokDM()" style="background: linear-gradient(135deg, #0284c7, #0f172a); color: #fff; font-weight: 800; border: none; box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);">
-              🚀 Salin &amp; Buka TikTok DM
+              🚀 Copy &amp; Open TikTok DM
             </button>
           </div>
         </div>
@@ -2177,29 +2177,29 @@
       <div class="modal-titlebar">
         <div class="modal-title-left">
           <span class="modal-icon">➕</span>
-          <span class="modal-heading">Tambah Akun Spender Baru</span>
+          <span class="modal-heading">Add New VIP Spender Account</span>
         </div>
         <button class="modal-close" onclick="window.HostTracker.closeAddSpenderModal()">✕</button>
       </div>
       <div class="modal-body-retro">
         <form onsubmit="window.HostTracker.submitNewSpender(event)">
           <div class="form-group" style="margin-bottom: 12px;">
-            <label class="form-label" for="newSpenderName">Nama Akun / Panggilan *</label>
-            <input type="text" id="newSpenderName" class="form-input" placeholder="Contoh: Kak Budi, SultanRoom, dll." required />
+            <label class="form-label" for="newSpenderName">Account / Nickname *</label>
+            <input type="text" id="newSpenderName" class="form-input" placeholder="e.g. Budi, RoomSultan, etc." required />
           </div>
 
           <div class="form-group" style="margin-bottom: 12px;">
             <label class="form-label" for="newSpenderUname">Username TikTok (@)</label>
-            <input type="text" id="newSpenderUname" class="form-input" placeholder="Contoh: @budi_tiktok123" />
+            <input type="text" id="newSpenderUname" class="form-input" placeholder="e.g. @budi_tiktok123" />
           </div>
 
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px;">
             <div class="form-group">
-              <label class="form-label" for="newSpenderKoin">Total Koin</label>
+              <label class="form-label" for="newSpenderKoin">Total Coins</label>
               <input type="number" id="newSpenderKoin" class="form-input" placeholder="0" min="0" />
             </div>
             <div class="form-group">
-              <label class="form-label" for="newSpenderHadiah">Total Hadiah (Gifts)</label>
+              <label class="form-label" for="newSpenderHadiah">Total Gifts</label>
               <input type="number" id="newSpenderHadiah" class="form-input" placeholder="0" min="0" />
             </div>
           </div>
@@ -2207,10 +2207,10 @@
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px;">
             <div class="form-group">
               <label class="form-label" for="newSpenderTier">Tier Level</label>
-              <input type="number" id="newSpenderTier" class="form-input" placeholder="Misal: 3, 4, 6" min="1" max="50" />
+              <input type="number" id="newSpenderTier" class="form-input" placeholder="e.g. 3, 4, 6" min="1" max="50" />
             </div>
             <div class="form-group">
-              <label class="form-label" for="newSpenderLabel">Label Utama</label>
+              <label class="form-label" for="newSpenderLabel">Main Tag</label>
               <select id="newSpenderLabel" class="form-input">
                 <option value="Whale">🐋 Whale (Top Spender)</option>
                 <option value="High spender">⭐ High Spender</option>
@@ -2220,13 +2220,13 @@
           </div>
 
           <div class="form-group" style="margin-bottom: 16px;">
-            <label class="form-label" for="newSpenderNote">Catatan Khusus</label>
-            <input type="text" id="newSpenderNote" class="form-input" placeholder="Misal: Suka gift singa, loyal di room" />
+            <label class="form-label" for="newSpenderNote">Special Notes</label>
+            <input type="text" id="newSpenderNote" class="form-input" placeholder="e.g. Loves lion gifts, very loyal in live room" />
           </div>
 
           <div class="modal-footer-retro" style="display: flex; justify-content: flex-end; gap: 8px;">
-            <button type="button" class="retro-btn-cancel" onclick="window.HostTracker.closeAddSpenderModal()">Batal</button>
-            <button type="submit" class="primary-btn">Simpan Spender</button>
+            <button type="button" class="retro-btn-cancel" onclick="window.HostTracker.closeAddSpenderModal()">Cancel</button>
+            <button type="submit" class="primary-btn">Save Spender</button>
           </div>
         </form>
       </div>
@@ -2239,20 +2239,20 @@
       <div class="modal-titlebar">
         <div class="modal-title-left">
           <span class="modal-icon">➕</span>
-          <span class="modal-heading">Tambah Target Tugas Harian</span>
+          <span class="modal-heading">Add Daily Target Task</span>
         </div>
         <button class="modal-close" onclick="window.HostTracker.closeAddTaskModal()">✕</button>
       </div>
       <div class="modal-body-retro">
         <form onsubmit="window.HostTracker.submitModalNewTask(event)">
           <div class="form-group" style="margin-bottom: 14px;">
-            <label class="form-label" for="modalNewTaskInput">Nama Akun / Target Tugas *</label>
-            <input type="text" id="modalNewTaskInput" class="form-input" placeholder="Misal: kak_budi, room_vip, donatur_x" required autofocus autocomplete="off" />
-            <small style="color: #64748b; font-size: 0.72rem; display: block; margin-top: 5px;">Target ini akan langsung masuk ke checklist tugas harian Yume.</small>
+            <label class="form-label" for="modalNewTaskInput">Account Name / Target Task *</label>
+            <input type="text" id="modalNewTaskInput" class="form-input" placeholder="e.g. kak_budi, room_vip, donator_x" required autofocus autocomplete="off" />
+            <small style="color: #64748b; font-size: 0.72rem; display: block; margin-top: 5px;">This target will be immediately added to Yume's daily task checklist.</small>
           </div>
           <div class="modal-footer-retro" style="display: flex; justify-content: flex-end; gap: 8px;">
-            <button type="button" class="retro-btn-cancel" onclick="window.HostTracker.closeAddTaskModal()">Batal</button>
-            <button type="submit" class="primary-btn" style="background: linear-gradient(135deg, #10b981, #059669); border-color: #047857;">➕ Simpan Target</button>
+            <button type="button" class="retro-btn-cancel" onclick="window.HostTracker.closeAddTaskModal()">Cancel</button>
+            <button type="submit" class="primary-btn" style="background: linear-gradient(135deg, #10b981, #059669); border-color: #047857;">➕ Save Target</button>
           </div>
         </form>
       </div>
