@@ -15,10 +15,10 @@
   --xp-blue-dark: #002e8a;
   --mint-green: #5de8b5;
   --vivid-lime: #a3e635;
-  --yuki-orange: #f97316;
-  --yuki-orange-dark: #ea580c;
-  --nata-grey: #64748b;
-  --nata-grey-dark: #475569;
+  --orange-theme: #f97316;
+  --orange-theme-dark: #ea580c;
+  --black-theme: #64748b;
+  --black-theme-dark: #475569;
   --shared-purple: #c084fc;
   
   /* Glass & Depth */
@@ -1365,8 +1365,8 @@ body.crt-active .crt-overlay {
   box-shadow: 0 4px 14px rgba(0, 80, 160, 0.08);
 }
 
-.yuki-col { border-top: 4px solid #f97316; }
-.nata-col { border-top: 4px solid #64748b; }
+.orange-col { border-top: 4px solid #f97316; }
+.black-col { border-top: 4px solid #64748b; }
 .shared-col { border-top: 4px solid var(--shared-purple); }
 
 .column-header {
@@ -1389,12 +1389,12 @@ body.crt-active .crt-overlay {
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
-.yuki-av { 
+.orange-av { 
   background: linear-gradient(135deg, #fb923c, #ea580c); 
   border-color: #ffedd5;
   box-shadow: 0 2px 8px rgba(234, 88, 12, 0.35);
 }
-.nata-av { 
+.black-av { 
   background: linear-gradient(135deg, #94a3b8, #64748b, #475569); 
   border-color: #e2e8f0;
   box-shadow: 0 2px 8px rgba(100, 116, 139, 0.35);
@@ -1752,8 +1752,8 @@ body.crt-active .crt-overlay {
   padding: 16px;
 }
 
-.yuki-mood-box { border-top: 4px solid #f97316; }
-.nata-mood-box { border-top: 4px solid #64748b; }
+.orange-mood-box { border-top: 4px solid #f97316; }
+.black-mood-box { border-top: 4px solid #64748b; }
 
 .mood-box-header {
   display: flex;
@@ -1775,12 +1775,12 @@ body.crt-active .crt-overlay {
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
-.yuki-mood-av { 
+.orange-mood-av { 
   background: linear-gradient(135deg, #fb923c, #ea580c); 
   border-color: #ffedd5;
   box-shadow: 0 2px 8px rgba(234, 88, 12, 0.35);
 }
-.nata-mood-av { 
+.black-mood-av { 
   background: linear-gradient(135deg, #94a3b8, #64748b, #475569); 
   border-color: #e2e8f0;
   box-shadow: 0 2px 8px rgba(100, 116, 139, 0.35);
@@ -3038,10 +3038,10 @@ body.atmo-midnight {
   box-shadow: 0 4px 20px rgba(100,180,255,0.2);
 }
 
-.sched-card.yuki-card { border-color: rgba(249, 115, 22, 0.45); background: rgba(50, 22, 8, 0.55); }
-.sched-card.yuki-card::before { background: linear-gradient(90deg, #fb923c, #ea580c); }
-.sched-card.nata-card { border-color: rgba(148, 163, 184, 0.55); background: rgba(30, 41, 59, 0.55); }
-.sched-card.nata-card::before { background: linear-gradient(90deg, #94a3b8, #cbd5e1); }
+.sched-card.orange-card { border-color: rgba(249, 115, 22, 0.45); background: rgba(50, 22, 8, 0.55); }
+.sched-card.orange-card::before { background: linear-gradient(90deg, #fb923c, #ea580c); }
+.sched-card.black-card { border-color: rgba(148, 163, 184, 0.55); background: rgba(30, 41, 59, 0.55); }
+.sched-card.black-card::before { background: linear-gradient(90deg, #94a3b8, #cbd5e1); }
 .sched-card.both-card { border-color: rgba(180,120,255,0.4); background: rgba(40,20,80,0.5); }
 .sched-card.both-card::before { background: linear-gradient(90deg, #a08cff, #d4a0ff, #ff9abf); }
 
@@ -3066,12 +3066,12 @@ body.atmo-midnight {
   color: rgba(255,255,255,0.8);
   border: 1px solid rgba(255,255,255,0.15);
 }
-.sched-card.yuki-card .sched-who-badge {
+.sched-card.orange-card .sched-who-badge {
   background: rgba(249, 115, 22, 0.25);
   color: #fed7aa;
   border-color: rgba(251, 146, 60, 0.5);
 }
-.sched-card.nata-card .sched-who-badge {
+.sched-card.black-card .sched-who-badge {
   background: rgba(100, 116, 139, 0.35);
   color: #f1f5f9;
   border-color: rgba(148, 163, 184, 0.5);
@@ -3114,8 +3114,8 @@ body.atmo-midnight {
   background: rgba(30,60,110,0.3);
   color: rgba(200,230,255,0.8);
 }
-.sched-legend-item.yuki-sched { border-color: rgba(251, 146, 60, 0.5); color: #fed7aa; background: rgba(60, 25, 10, 0.4); }
-.sched-legend-item.nata-sched { border-color: rgba(148, 163, 184, 0.5); color: #f1f5f9; background: rgba(30, 41, 59, 0.5); }
+.sched-legend-item.orange-sched { border-color: rgba(251, 146, 60, 0.5); color: #fed7aa; background: rgba(60, 25, 10, 0.4); }
+.sched-legend-item.black-sched { border-color: rgba(148, 163, 184, 0.5); color: #f1f5f9; background: rgba(30, 41, 59, 0.5); }
 .sched-legend-item.both-sched { border-color: rgba(180,120,255,0.4); color: #d4a0ff; }
 
 /* ==================== 3D ORANGE CAT RERU SANCTUARY ==================== */
@@ -3711,7 +3711,7 @@ body.atmo-midnight {
     white-space: nowrap !important;
   }
 
-  /* To-Do 2-Column Grid for Yuki & Nata on Tablet */
+  /* To-Do 2-Column Grid for Orange & Black on Tablet */
   .todo-grid-3col {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
@@ -4933,7 +4933,7 @@ body.atmo-midnight {
   box-shadow: 0 4px 12px rgba(15, 23, 42, 0.25);
 }
 
-/* ==================== 1. VIRTUAL 3D CARDS SHOWCASE (DOMPET YUKI & NATA) ==================== */
+/* ==================== 1. VIRTUAL 3D CARDS SHOWCASE (ORANGE & BLACK WALLETS) ==================== */
 .wallet-cards-showcase {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -5024,7 +5024,7 @@ body.atmo-midnight {
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
-.vcard-owner-badge.nata-badge { color: #cbd5e1; }
+.vcard-owner-badge.black-badge { color: #cbd5e1; }
 .vcard-owner-badge.duo-badge { color: #fbcfe8; }
 
 .vcard-share-chip {
@@ -5081,14 +5081,14 @@ body.atmo-midnight {
   min-height: 220px;
 }
 
-.text-yuki {
+.text-orange {
   color: #c2410c;
   font-family: 'Segoe UI', Tahoma, system-ui, sans-serif;
   font-weight: 900;
   letter-spacing: -0.5px;
 }
 
-.text-nata {
+.text-black {
   color: #334155;
   font-family: 'Segoe UI', Tahoma, system-ui, sans-serif;
   font-weight: 900;
@@ -5176,35 +5176,35 @@ body.atmo-midnight {
   border-color: rgba(251, 146, 60, 0.6);
 }
 
-.bento-card.bento-nata-grey,
-.bento-card.bento-nata-dark {
+.bento-card.bento-black-grey,
+.bento-card.bento-black-dark {
   background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 60%, #e2e8f0 100%);
   border-color: rgba(203, 213, 225, 0.85);
   color: #0f172a;
   box-shadow: 0 8px 24px rgba(100, 116, 139, 0.08), inset 0 1px 2px rgba(255, 255, 255, 1);
 }
-.bento-card.bento-nata-grey .bento-badge-chip,
-.bento-card.bento-nata-dark .bento-badge-chip {
+.bento-card.bento-black-grey .bento-badge-chip,
+.bento-card.bento-black-dark .bento-badge-chip {
   background: rgba(255, 255, 255, 0.9);
   border-color: rgba(203, 213, 225, 0.9);
 }
-.bento-card.bento-nata-grey .bento-badge-chip-white,
-.bento-card.bento-nata-dark .bento-badge-chip-white {
+.bento-card.bento-black-grey .bento-badge-chip-white,
+.bento-card.bento-black-dark .bento-badge-chip-white {
   background: #ffffff;
   color: #334155;
   border-color: rgba(203, 213, 225, 0.9);
 }
-.bento-card.bento-nata-grey .mini-stat-box,
-.bento-card.bento-nata-dark .mini-stat-box {
+.bento-card.bento-black-grey .mini-stat-box,
+.bento-card.bento-black-dark .mini-stat-box {
   background: rgba(255, 255, 255, 0.85);
   border-color: rgba(255, 255, 255, 0.9);
 }
-.bento-card.bento-nata-grey .mini-stat-label,
-.bento-card.bento-nata-dark .mini-stat-label {
+.bento-card.bento-black-grey .mini-stat-label,
+.bento-card.bento-black-dark .mini-stat-label {
   color: #64748b;
 }
-.bento-card.bento-nata-grey .bento-desc-text,
-.bento-card.bento-nata-dark .bento-desc-text {
+.bento-card.bento-black-grey .bento-desc-text,
+.bento-card.bento-black-dark .bento-desc-text {
   color: #475569 !important;
 }
 
@@ -5316,8 +5316,8 @@ body.atmo-midnight {
 }
 
 .bento-tag-pill.tag-danger { color: #dc2626; background: #fee2e2; }
-.bento-tag-pill.tag-yuki-pill { color: #c2410c; background: #ffedd5; border: 1px solid #fed7aa; }
-.bento-tag-pill.tag-nata-pill { color: #334155; background: #e2e8f0; border: 1px solid #cbd5e1; }
+.bento-tag-pill.tag-orange-pill { color: #c2410c; background: #ffedd5; border: 1px solid #fed7aa; }
+.bento-tag-pill.tag-black-pill { color: #334155; background: #e2e8f0; border: 1px solid #cbd5e1; }
 .bento-tag-pill.tag-both-pill { color: #0f766e; background: #ccfbf1; }
 
 .bento-progress-track {
@@ -5823,30 +5823,30 @@ body.atmo-midnight {
   gap: 14px;
 }
 
-.person-goals-card-box.yuki-goals-theme {
+.person-goals-card-box.orange-goals-theme {
   background: linear-gradient(150deg, rgba(255, 247, 237, 0.95) 0%, rgba(254, 237, 213, 0.9) 100%);
   border: 1.5px solid #fed7aa;
 }
 
-.person-goals-card-box.nata-goals-theme {
+.person-goals-card-box.black-goals-theme {
   background: linear-gradient(150deg, rgba(248, 250, 252, 0.95) 0%, rgba(241, 245, 249, 0.9) 100%);
   border: 1.5px solid #cbd5e1;
   color: #0f172a;
 }
-.person-goals-card-box.nata-goals-theme .person-goals-title {
+.person-goals-card-box.black-goals-theme .person-goals-title {
   color: #0f172a;
 }
-.person-goals-card-box.nata-goals-theme .goal-card {
+.person-goals-card-box.black-goals-theme .goal-card {
   background: rgba(255, 255, 255, 0.92);
   border: 1.5px solid rgba(255, 255, 255, 0.95);
 }
-.person-goals-card-box.nata-goals-theme .goal-title {
+.person-goals-card-box.black-goals-theme .goal-title {
   color: #0f172a;
 }
-.person-goals-card-box.nata-goals-theme .goal-amounts {
+.person-goals-card-box.black-goals-theme .goal-amounts {
   color: #475569;
 }
-.person-goals-card-box.nata-goals-theme .secondary-btn {
+.person-goals-card-box.black-goals-theme .secondary-btn {
   background: #f1f5f9;
   color: #0f172a;
   border-color: rgba(0,0,0,0.08);
@@ -6134,8 +6134,8 @@ body.atmo-midnight {
   border-radius: 12px;
 }
 
-.tag-yuki { background: #ffedd5; color: #c2410c; border: 1px solid #fed7aa; }
-.tag-nata { background: #e2e8f0; color: #334155; border: 1px solid #cbd5e1; }
+.tag-orange { background: #ffedd5; color: #c2410c; border: 1px solid #fed7aa; }
+.tag-black { background: #e2e8f0; color: #334155; border: 1px solid #cbd5e1; }
 .tag-both { background: #ccfbf1; color: #0f766e; }
 
 .trans-wallet-tag {
@@ -6147,19 +6147,19 @@ body.atmo-midnight {
   align-items: center;
   gap: 3px;
 }
-.tag-dompet-yuki {
+.tag-dompet-orange {
   background: rgba(254, 215, 170, 0.4);
   color: #9a3412;
   border: 1px solid rgba(251, 146, 60, 0.35);
 }
-.tag-tabungan-yuki {
+.tag-tabungan-orange {
   background: linear-gradient(135deg, #e0f2fe, #e0e7ff);
   color: #0284c7;
   border: 1px solid #bae6fd;
   font-weight: 800;
   box-shadow: 0 1px 3px rgba(2, 132, 199, 0.12);
 }
-.tag-dompet-nata {
+.tag-dompet-black {
   background: rgba(226, 232, 240, 0.6);
   color: #334155;
   border: 1px solid rgba(203, 213, 225, 0.6);
@@ -6481,7 +6481,7 @@ body.atmo-midnight {
   cursor: pointer;
 }
 
-.person-radio-card input:checked + .person-radio-ui.yuki-ui {
+.person-radio-card input:checked + .person-radio-ui.orange-ui {
   background: #ffedd5;
   color: #c2410c;
   border: 1.5px solid #fb923c;
@@ -7018,7 +7018,7 @@ body.atmo-midnight {
 }
 
 /* ==========================================================================
-   NATA'S TIKTOK HOST & SPENDER TRACKER (FRUTIGER AERO STYLING)
+   TIKTOK HOST & SPENDER TRACKER (FRUTIGER AERO STYLING)
    ========================================================================== */
 
 /* Top Bento Bar */

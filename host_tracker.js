@@ -1,7 +1,7 @@
 /**
- * YuTa — Aero OS: Yume's TikTok Host Tracker
+ * YuTa — Aero OS: Host's TikTok Host Tracker
  * Module for Daily Task Submissions & Reference VIP Spenders.
- * Built with Frutiger Aero aesthetic & maximum clarity for Yume.
+ * Built with Frutiger Aero aesthetic & maximum clarity for Host.
  */
 
 (function () {
@@ -24,7 +24,7 @@
   let taskSearch = '';
   let selectedSpenderForChat = null;
 
-  // Pre-defined host chat templates (Personalized for Yume)
+  // Pre-defined host chat templates (Personalized for Host)
   const CHAT_TEMPLATES = [
     {
       id: 'hey_texting',
@@ -237,7 +237,7 @@
     }
   }
 
-  // Render Host Tracker Overview Bento (Fokus Utama: Tugas Harian Yume)
+  // Render Host Tracker Overview Bento (Fokus Utama: Tugas Harian Host)
   function renderOverviewStats() {
     const totalTasks = tasksData.length;
     const completedTasks = tasksData.filter(t => t.completed).length;
@@ -292,7 +292,7 @@
         (s.username || '').toLowerCase().includes(q) ||
         (s.labelUtama || '').toLowerCase().includes(q) ||
         (s.labelLain || '').toLowerCase().includes(q) ||
-        (s.catatan || '').toLowerCase().includes(q)
+        (s.notes || '').toLowerCase().includes(q)
       );
     }
 
@@ -463,8 +463,8 @@
                 </div>
               </td>
               <td class="col-notes">
-                <div class="notes-text" title="${escapeHtml(s.catatan || s.labelLain || '')}">
-                  ${escapeHtml(s.catatan || s.labelLain || '-')}
+                <div class="notes-text" title="${escapeHtml(s.notes || s.labelLain || '')}">
+                  ${escapeHtml(s.notes || s.labelLain || '-')}
                 </div>
               </td>
               <td class="col-follow">${followBtn}</td>
@@ -527,9 +527,9 @@
                 <span class="sm-hadiah">🎁 ${formatNumber(s.hadiah)} gifts</span>
               </div>
 
-              ${(s.catatan || s.labelLain) ? `
+              ${(s.notes || s.labelLain) ? `
                 <div class="sm-note">
-                  ℹ️ ${escapeHtml(s.catatan || s.labelLain)}
+                  ℹ️ ${escapeHtml(s.notes || s.labelLain)}
                 </div>
               ` : ''}
 
@@ -630,10 +630,10 @@
     const spender = spendersData.find(s => s.id === id);
     if (!spender) return;
 
-    const currentNote = spender.catatan || '';
+    const currentNote = spender.notes || '';
     const newNote = prompt(`Edit note for ${spender.name} (${spender.username}):`, currentNote);
     if (newNote !== null) {
-      spender.catatan = newNote.trim();
+      spender.notes = newNote.trim();
       saveSpenders();
       triggerSound('bubble');
       notify(`✏️ Note for ${spender.name} updated!`);
@@ -867,7 +867,7 @@
     }).format(new Date());
 
     let report = `📋 *DAILY TASK SUBMISSION REPORT — LIVE HOST*\n`;
-    report += `👤 *Host:* Yume\n`;
+    report += `👤 *Host:* Host\n`;
     report += `📅 *Date:* ${todayStr}\n`;
     report += `📊 *Progress:* ${completedList.length}/${total} (${pct}% Done)\n`;
     report += `✅ *Completed:* ${completedList.length}\n`;
@@ -1083,7 +1083,7 @@
       koin: koinInput ? parseInt(koinInput.value) || 0 : 0,
       labelUtama: labelInput ? labelInput.value : 'Supporter',
       labelLain: '',
-      catatan: noteInput ? noteInput.value.trim() : '',
+      notes: noteInput ? noteInput.value.trim() : '',
       sudahChat: false,
       sudahDibalas: false
     };
@@ -1117,7 +1117,7 @@
         s.tier || 0,
         s.koin || 0,
         `"${(s.labelUtama || '').replace(/"/g, '""')}"`,
-        `"${(s.catatan || s.labelLain || '').replace(/"/g, '""')}"`,
+        `"${(s.notes || s.labelLain || '').replace(/"/g, '""')}"`,
         s.sudahFollow ? 'Yes' : 'No',
         s.sudahChat ? 'Yes' : 'No',
         s.sudahDibalas ? 'Yes' : 'No'
@@ -1129,7 +1129,7 @@
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `rekap_spender_yume_${new Date().toISOString().slice(0, 10)}.csv`;
+    a.download = `rekap_spender_host_${new Date().toISOString().slice(0, 10)}.csv`;
     a.click();
     URL.revokeObjectURL(url);
     triggerSound('chime');
@@ -1146,7 +1146,7 @@
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `rekap_tugas_harian_yume_${new Date().toISOString().slice(0, 10)}.csv`;
+    a.download = `rekap_tugas_harian_host_${new Date().toISOString().slice(0, 10)}.csv`;
     a.click();
     URL.revokeObjectURL(url);
     triggerSound('chime');

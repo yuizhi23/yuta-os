@@ -1310,13 +1310,13 @@ function setTodoToday() {
 
 // ==================== PERMANENT DAILY QUESTS ====================
 const PERMANENT_ROUTINES = {
-  yuki: [
+  orange: [
     { id: 'y_lms', text: 'Open LMS & check courses 💻', done: false },
     { id: 'y_tugas', text: 'Work on assignments 📚', done: false },
     { id: 'y_skripsi', text: 'Work on thesis ✍️', done: false },
     { id: 'y_kerja', text: 'Job hunting & applications 💼', done: false }
   ],
-  nata: [
+  black: [
     { id: 'n_spender', text: 'Reply to spenders 💬', done: false },
     { id: 'n_live', text: 'Daily 1-hour stream before dual persona stream 📹', done: false },
     { id: 'n_laporan', text: 'Send live stream report to group 📊', done: false },
@@ -1333,10 +1333,10 @@ const PERMANENT_ROUTINES = {
 function ensureDayRoutines(dateStr) {
   const data = getStorage(STORAGE_KEYS.TODOS, {});
   if (!data[dateStr]) {
-    data[dateStr] = { yuki: [], nata: [], shared: [] };
+    data[dateStr] = { orange: [], black: [], shared: [] };
   }
   let modified = false;
-  ['yuki', 'nata', 'shared'].forEach(owner => {
+  ['orange', 'black', 'shared'].forEach(owner => {
     if (!Array.isArray(data[dateStr][owner])) {
       data[dateStr][owner] = [];
       modified = true;
@@ -1367,7 +1367,7 @@ function initTodos() {
     });
   }
 
-  ['yuki', 'nata', 'shared'].forEach(owner => {
+  ['orange', 'black', 'shared'].forEach(owner => {
     const inp = document.getElementById(`${owner}TodoInput`);
     if (inp) {
       inp.addEventListener('keypress', (e) => {
@@ -1380,14 +1380,14 @@ function initTodos() {
   renderTodos();
 }
 
-function loadYukiRoutine() {
+function loadOrangeRoutine() {
   ensureDayRoutines(selectedTodoDate);
   playSound('chime');
   renderTodos();
   showToast('✨ Orange’s daily quests loaded!');
 }
 
-function loadNataRoutine() {
+function loadBlackRoutine() {
   ensureDayRoutines(selectedTodoDate);
   playSound('chime');
   renderTodos();
@@ -1408,7 +1408,7 @@ function addTodo(owner) {
   if (!text) return;
 
   const data = getStorage(STORAGE_KEYS.TODOS, {});
-  if (!data[selectedTodoDate]) data[selectedTodoDate] = { yuki: [], nata: [], shared: [] };
+  if (!data[selectedTodoDate]) data[selectedTodoDate] = { orange: [], black: [], shared: [] };
   if (!data[selectedTodoDate][owner]) data[selectedTodoDate][owner] = [];
 
   data[selectedTodoDate][owner].push({
@@ -1472,9 +1472,9 @@ function clearCompleted(owner) {
 
 function renderTodos() {
   const data = ensureDayRoutines(selectedTodoDate);
-  const dayTodos = data[selectedTodoDate] || { yuki: [], nata: [], shared: [] };
+  const dayTodos = data[selectedTodoDate] || { orange: [], black: [], shared: [] };
 
-  ['yuki', 'nata', 'shared'].forEach(owner => {
+  ['orange', 'black', 'shared'].forEach(owner => {
     const listEl = document.getElementById(`${owner}TodoList`);
     const countEl = document.getElementById(`${owner}Count`);
     if (!listEl) return;
@@ -1531,12 +1531,12 @@ function ensureDefaultReminders() {
 
   const GROUNDING_REMINDERS = [
     {
-      id: 'rem_nata_semangat',
+      id: 'rem_black_semangat',
       title: 'Have a Great Workday, Black 🌸',
       desc: 'Have a wonderful workday! Don\'t get overwhelmed, take breathers & stay hydrated 💖',
       time: '09:00',
       color: '#f472b6',
-      reminderFor: 'nata'
+      reminderFor: 'black'
     },
     {
       id: 'rem_grounding_1',
@@ -1552,7 +1552,7 @@ function ensureDefaultReminders() {
       desc: 'This isn’t sustainable. Nurture your body with care.',
       time: '13:30',
       color: '#38bdf8',
-      reminderFor: 'yuki'
+      reminderFor: 'orange'
     },
     {
       id: 'rem_grounding_3',
@@ -1560,7 +1560,7 @@ function ensureDefaultReminders() {
       desc: 'Slow progress is still progress. Step by step.',
       time: '14:30',
       color: '#818cf8',
-      reminderFor: 'yuki'
+      reminderFor: 'orange'
     },
     {
       id: 'rem_grounding_4',
@@ -1568,7 +1568,7 @@ function ensureDefaultReminders() {
       desc: 'Avoidance won’t fix it. You deserve healing and peace.',
       time: '16:00',
       color: '#f472b6',
-      reminderFor: 'yuki'
+      reminderFor: 'orange'
     },
     {
       id: 'rem_grounding_5',
@@ -1595,36 +1595,36 @@ function ensureDefaultReminders() {
       reminderFor: 'both'
     },
     {
-      id: 'rem_nata_absen',
+      id: 'rem_black_absen',
       title: 'Clock-In & Clock-Out Attendance ⏰',
       desc: 'Clock in & clock out on time',
       time: '09:00',
       color: '#ec4899',
-      reminderFor: 'nata'
+      reminderFor: 'black'
     },
     {
-      id: 'rem_nata_spender',
+      id: 'rem_black_spender',
       title: 'Reply to Spenders 💬',
       desc: 'Reply to all spender chats & messages',
       time: '14:00',
       color: '#f59e0b',
-      reminderFor: 'nata'
+      reminderFor: 'black'
     },
     {
-      id: 'rem_nata_live',
+      id: 'rem_black_live',
       title: 'Daily 1-Hour Stream Before Dual Persona 📹',
       desc: 'Daily 1-hour live stream before dual persona stream',
       time: '18:00',
       color: '#8b5cf6',
-      reminderFor: 'nata'
+      reminderFor: 'black'
     },
     {
-      id: 'rem_nata_laporan',
+      id: 'rem_black_laporan',
       title: 'Send Live Stream Report to Group 📊',
       desc: 'Submit live streaming report to group',
       time: '20:00',
       color: '#3b82f6',
-      reminderFor: 'nata'
+      reminderFor: 'black'
     },
     {
       id: 'rem_anniv_joint',
@@ -1739,7 +1739,7 @@ function renderReminders() {
   empty.style.display = 'none';
 
   grid.innerHTML = reminders.map(r => {
-    const forLabel = r.reminderFor === 'yuki' ? '🐈 Orange' : r.reminderFor === 'nata' ? '🐈‍⬛ Black' : '🤝 Joint';
+    const forLabel = r.reminderFor === 'orange' ? '🐈 Orange' : r.reminderFor === 'black' ? '🐈‍⬛ Black' : '🤝 Joint';
     return `
       <div class="reminder-card-retro tilt-card" style="border-left-color:${r.color || '#5bc8e8'}; opacity:${r.done ? '0.6' : '1'}">
         <div class="reminder-top-row">
@@ -1807,16 +1807,16 @@ function initLoveNotes() {
 const DEFAULT_LOVE_NOTES = [
   {
     id: 'note_welcome_1',
-    from: 'yuki',
-    to: 'nata',
+    from: 'orange',
+    to: 'black',
     title: 'For Darling Black 🌸',
     content: 'Stay positive and energized, beautiful! Remember to eat well and drink water. I am always here for you 💕',
     date: '17 Feb 2026'
   },
   {
     id: 'note_welcome_2',
-    from: 'nata',
-    to: 'yuki',
+    from: 'black',
+    to: 'orange',
     title: 'For Amazing Orange 💻',
     content: 'You got this with your thesis and job hunting! Don\'t overthink, we conquer everything together ✨',
     date: '17 Feb 2026'
@@ -1845,8 +1845,8 @@ function saveNote() {
     alert('Please enter a message.');
     return;
   }
-  const from = document.getElementById('noteFrom').value || 'yuki';
-  const to = document.getElementById('noteTo').value || 'nata';
+  const from = document.getElementById('noteFrom').value || 'orange';
+  const to = document.getElementById('noteTo').value || 'black';
   const title = document.getElementById('noteTitle').value.trim() || 'Quick Note';
 
   const notes = getStorage(STORAGE_KEYS.NOTES, []);
@@ -1892,8 +1892,8 @@ function renderNotes() {
   empty.style.display = 'none';
 
   grid.innerHTML = notes.map(n => {
-    const fromLabel = n.from === 'yuki' ? 'Orange' : 'Black';
-    const toLabel = n.to === 'yuki' ? 'Orange' : 'Black';
+    const fromLabel = n.from === 'orange' ? 'Orange' : 'Black';
+    const toLabel = n.to === 'orange' ? 'Orange' : 'Black';
 
     return `
       <div class="note-card-retro tilt-card">
@@ -2023,8 +2023,8 @@ function saveDoodleAsNote() {
   const notes = getStorage(STORAGE_KEYS.NOTES, []);
   notes.unshift({
     id: 'note_' + Date.now(),
-    from: 'nata',
-    to: 'yuki',
+    from: 'black',
+    to: 'orange',
     title: 'Canvas Sketch #01',
     content: 'Handcrafted on Aero Paint Studio.',
     emoji: '🎨',
@@ -2043,7 +2043,7 @@ function saveDoodleAsNote() {
 function downloadDoodle() {
   if (!canvas) return;
   const link = document.createElement('a');
-  link.download = `yuki_nata_doodle_${Date.now()}.png`;
+  link.download = `couple_doodle_${Date.now()}.png`;
   link.href = canvas.toDataURL('image/png');
   link.click();
   playSound('bubble');
@@ -2120,27 +2120,27 @@ function ensureDefaultCountdowns() {
   const curYear = new Date().getFullYear();
   const now = new Date();
 
-  const hasYukie = cds.some(c => c.id === 'cd_yukie_bday' || c.name.toLowerCase().includes('yukie') || c.name.toLowerCase().includes("y's"));
-  const hasNata = cds.some(c => c.id === 'cd_nata_bday' || c.name.toLowerCase().includes('nata') || c.name.toLowerCase().includes("n's"));
+  const hasOrange = cds.some(c => c.id === 'cd_orange_bday' || c.name.toLowerCase().includes('orange') || c.name.toLowerCase().includes("y's"));
+  const hasBlack = cds.some(c => c.id === 'cd_black_bday' || c.name.toLowerCase().includes('black') || c.name.toLowerCase().includes("n's"));
 
   // Y: 23 October 2005
-  if (!hasYukie) {
-    const nextYukieYear = (now.getMonth() > 9 || (now.getMonth() === 9 && now.getDate() > 23)) ? curYear + 1 : curYear;
+  if (!hasOrange) {
+    const nextOrangeYear = (now.getMonth() > 9 || (now.getMonth() === 9 && now.getDate() > 23)) ? curYear + 1 : curYear;
     cds.push({
-      id: 'cd_yukie_bday',
+      id: 'cd_orange_bday',
       name: "Orange's Birthday (23 Oct 2005)",
-      date: `${nextYukieYear}-10-23`,
+      date: `${nextOrangeYear}-10-23`,
       emoji: '🎂'
     });
   }
 
   // N: 24 September 2005
-  if (!hasNata) {
-    const nextNataYear = (now.getMonth() > 8 || (now.getMonth() === 8 && now.getDate() > 24)) ? curYear + 1 : curYear;
+  if (!hasBlack) {
+    const nextBlackYear = (now.getMonth() > 8 || (now.getMonth() === 8 && now.getDate() > 24)) ? curYear + 1 : curYear;
     cds.push({
-      id: 'cd_nata_bday',
+      id: 'cd_black_bday',
       name: "Black's Birthday (24 Sep 2005)",
-      date: `${nextNataYear}-09-24`,
+      date: `${nextBlackYear}-09-24`,
       emoji: '🎂'
     });
   }
@@ -2260,22 +2260,22 @@ function renderCountdowns() {
 
 // ==================== MOOD TRACKER ====================
 let selectedMoodDate = getTodayString();
-let selectedMoodYuki = '';
-let selectedMoodNata = '';
+let selectedMoodOrange = '';
+let selectedMoodBlack = '';
 
 function selectMoodEmoji(person, emoji, btnEl) {
-  if (person === 'yuki') {
-    selectedMoodYuki = emoji;
-    const disp = document.getElementById('yukiSelectedEmoji');
+  if (person === 'orange') {
+    selectedMoodOrange = emoji;
+    const disp = document.getElementById('orangeSelectedEmoji');
     if (disp) disp.textContent = emoji;
-    document.querySelectorAll('#yukiMoodEmojis .mood-pick').forEach(b => {
+    document.querySelectorAll('#orangeMoodEmojis .mood-pick').forEach(b => {
       b.classList.toggle('selected', b.getAttribute('data-mood') === emoji);
     });
   } else {
-    selectedMoodNata = emoji;
-    const disp = document.getElementById('nataSelectedEmoji');
+    selectedMoodBlack = emoji;
+    const disp = document.getElementById('blackSelectedEmoji');
     if (disp) disp.textContent = emoji;
-    document.querySelectorAll('#nataMoodEmojis .mood-pick').forEach(b => {
+    document.querySelectorAll('#blackMoodEmojis .mood-pick').forEach(b => {
       b.classList.toggle('selected', b.getAttribute('data-mood') === emoji);
     });
   }
@@ -2294,19 +2294,19 @@ function initMoodTracker() {
     });
   }
 
-  document.querySelectorAll('#yukiMoodEmojis .mood-pick').forEach(btn => {
+  document.querySelectorAll('#orangeMoodEmojis .mood-pick').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       const emoji = btn.getAttribute('data-mood');
-      selectMoodEmoji('yuki', emoji, btn);
+      selectMoodEmoji('orange', emoji, btn);
     });
   });
 
-  document.querySelectorAll('#nataMoodEmojis .mood-pick').forEach(btn => {
+  document.querySelectorAll('#blackMoodEmojis .mood-pick').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       const emoji = btn.getAttribute('data-mood');
-      selectMoodEmoji('nata', emoji, btn);
+      selectMoodEmoji('black', emoji, btn);
     });
   });
 
@@ -2318,23 +2318,23 @@ function loadMoodsForDate() {
   const moods = getStorage(STORAGE_KEYS.MOODS, {});
   const cur = moods[selectedMoodDate] || {};
 
-  selectedMoodYuki = cur.yuki?.emoji || '';
-  document.getElementById('yukiSelectedEmoji').textContent = selectedMoodYuki || '—';
-  document.getElementById('yukiMoodNote').value = cur.yuki?.note || '';
-  document.querySelectorAll('#yukiMoodEmojis .mood-pick').forEach(b => {
-    b.classList.toggle('selected', b.getAttribute('data-mood') === selectedMoodYuki);
+  selectedMoodOrange = cur.orange?.emoji || '';
+  document.getElementById('orangeSelectedEmoji').textContent = selectedMoodOrange || '—';
+  document.getElementById('orangeMoodNote').value = cur.orange?.note || '';
+  document.querySelectorAll('#orangeMoodEmojis .mood-pick').forEach(b => {
+    b.classList.toggle('selected', b.getAttribute('data-mood') === selectedMoodOrange);
   });
 
-  selectedMoodNata = cur.nata?.emoji || '';
-  document.getElementById('nataSelectedEmoji').textContent = selectedMoodNata || '—';
-  document.getElementById('nataMoodNote').value = cur.nata?.note || '';
-  document.querySelectorAll('#nataMoodEmojis .mood-pick').forEach(b => {
-    b.classList.toggle('selected', b.getAttribute('data-mood') === selectedMoodNata);
+  selectedMoodBlack = cur.black?.emoji || '';
+  document.getElementById('blackSelectedEmoji').textContent = selectedMoodBlack || '—';
+  document.getElementById('blackMoodNote').value = cur.black?.note || '';
+  document.querySelectorAll('#blackMoodEmojis .mood-pick').forEach(b => {
+    b.classList.toggle('selected', b.getAttribute('data-mood') === selectedMoodBlack);
   });
 }
 
 function saveMood(person) {
-  const emoji = person === 'yuki' ? selectedMoodYuki : selectedMoodNata;
+  const emoji = person === 'orange' ? selectedMoodOrange : selectedMoodBlack;
   const note = document.getElementById(`${person}MoodNote`).value.trim();
 
   if (!emoji && !note) {
@@ -2350,7 +2350,7 @@ function saveMood(person) {
 
   playSound('chime');
   renderMoodHistory();
-  showToast(`Pulse logged for ${person === 'yuki' ? 'Orange' : 'Black'}.`);
+  showToast(`Pulse logged for ${person === 'orange' ? 'Orange' : 'Black'}.`);
 }
 
 function renderMoodHistory() {
@@ -2370,8 +2370,8 @@ function renderMoodHistory() {
     return `
       <div class="mood-hist-card tilt-card">
         <div class="mhc-date">📅 ${dt}</div>
-        <div>Orange: ${data.yuki?.emoji || '—'} ${data.yuki?.note ? `"${escapeHtml(data.yuki.note)}"` : ''}</div>
-        <div>Black: ${data.nata?.emoji || '—'} ${data.nata?.note ? `"${escapeHtml(data.nata.note)}"` : ''}</div>
+        <div>Orange: ${data.orange?.emoji || '—'} ${data.orange?.note ? `"${escapeHtml(data.orange.note)}"` : ''}</div>
+        <div>Black: ${data.black?.emoji || '—'} ${data.black?.note ? `"${escapeHtml(data.black.note)}"` : ''}</div>
       </div>
     `;
   }).join('');
@@ -2392,7 +2392,7 @@ function exportDataBackup() {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `yuki_nata_aero_backup_${getTodayString()}.json`;
+  a.download = `couple_aero_backup_${getTodayString()}.json`;
   a.click();
   URL.revokeObjectURL(url);
   playSound('chime');
@@ -2622,7 +2622,7 @@ function sloshWaterTank() {
 
 // ==================== CELEBRATION SPARKLES & SWEET ENCOURAGEMENT ====================
 const SWEET_ENCOURAGEMENTS = {
-  nata: [
+  black: [
     "You're doing great sayangku! ✨💖",
     "Proud of you sweetheart! Keep shining 🥰",
     "Awesome job Black darling! One quest done 🌸✨",
@@ -2634,7 +2634,7 @@ const SWEET_ENCOURAGEMENTS = {
     "You are a champion today! Keep up the great energy ✨🐈",
     "One step closer darling! I love you so much 💕"
   ],
-  yuki: [
+  orange: [
     "You're doing great sayangku! ✨💖",
     "Keep going darling! So proud of you 🥰",
     "Awesome job Orange darling! Quest completed 🌸✨",
@@ -2654,7 +2654,7 @@ const SWEET_ENCOURAGEMENTS = {
 };
 
 function triggerTaskEncouragement(owner, clientX, clientY) {
-  const pool = SWEET_ENCOURAGEMENTS[owner] || SWEET_ENCOURAGEMENTS.nata;
+  const pool = SWEET_ENCOURAGEMENTS[owner] || SWEET_ENCOURAGEMENTS.black;
   const quote = pool[Math.floor(Math.random() * pool.length)];
 
   const posX = (clientX !== undefined && clientX > 0) ? clientX : (window.innerWidth / 2);
@@ -2765,25 +2765,25 @@ function togglePixelBuddy() {
 
 // ==================== CLASS SCHEDULE ENGINE ====================
 // Edit the schedule data below to match YuTa's actual timetable!
-// who: 'yuki' | 'nata' | 'both'
+// who: 'orange' | 'black' | 'both'
 const YUTA_SCHEDULE = {
   1: [ // Monday
-    { time: '08:30', end: '11:30', code: 'CAK4IBB3', subject: 'Interaction Design', who: 'yuki' },
-    { time: '09:30', end: '12:00', code: 'SIK3703', subject: 'Public Relations Writing', who: 'nata' },
-    { time: '12:50', end: '15:20', code: 'SIK3506', subject: 'Public Relations Management', who: 'nata' },
-    { time: '13:30', end: '16:30', code: 'CAK4JBB3', subject: 'Digital Forensics', who: 'yuki' }
+    { time: '08:30', end: '11:30', code: 'CAK4IBB3', subject: 'Interaction Design', who: 'orange' },
+    { time: '09:30', end: '12:00', code: 'SIK3703', subject: 'Public Relations Writing', who: 'black' },
+    { time: '12:50', end: '15:20', code: 'SIK3506', subject: 'Public Relations Management', who: 'black' },
+    { time: '13:30', end: '16:30', code: 'CAK4JBB3', subject: 'Digital Forensics', who: 'orange' }
   ],
   2: [ // Tuesday
-    { time: '08:30', end: '11:30', code: 'CAK4HBB3', subject: 'Big Data & AI', who: 'yuki' },
-    { time: '12:50', end: '15:20', code: 'SIK3704', subject: 'Public Relations Campaign', who: 'nata' }
+    { time: '08:30', end: '11:30', code: 'CAK4HBB3', subject: 'Big Data & AI', who: 'orange' },
+    { time: '12:50', end: '15:20', code: 'SIK3704', subject: 'Public Relations Campaign', who: 'black' }
   ],
   3: [], // Wednesday - Free day
   4: [ // Thursday
-    { time: '11:30', end: '14:30', code: 'CAK4KAB3', subject: 'English for Careers', who: 'yuki' },
-    { time: '12:50', end: '15:20', code: 'SIK3705', subject: 'Communication Research Methodology', who: 'nata' }
+    { time: '11:30', end: '14:30', code: 'CAK4KAB3', subject: 'English for Careers', who: 'orange' },
+    { time: '12:50', end: '15:20', code: 'SIK3705', subject: 'Communication Research Methodology', who: 'black' }
   ],
   5: [ // Friday
-    { time: '13:30', end: '16:30', code: 'CAK4TBB3', subject: 'Recommender Systems', who: 'yuki' }
+    { time: '13:30', end: '16:30', code: 'CAK4TBB3', subject: 'Recommender Systems', who: 'orange' }
   ],
   6: [], // Saturday - Weekend
   7: []  // Sunday - Weekend
@@ -2832,8 +2832,8 @@ function switchScheduleDay(day) {
   if (emptyEl) emptyEl.style.display = 'none';
 
   timeline.innerHTML = filteredSlots.map(slot => {
-    const cardClass = slot.who === 'yuki' ? 'yuki-card' : slot.who === 'nata' ? 'nata-card' : 'both-card';
-    const whoBadge = slot.who === 'yuki' ? '🐈 Orange' : slot.who === 'nata' ? '🐈‍⬛ Black' : 'Duo (Orange & Black)';
+    const cardClass = slot.who === 'orange' ? 'orange-card' : slot.who === 'black' ? 'black-card' : 'both-card';
+    const whoBadge = slot.who === 'orange' ? '🐈 Orange' : slot.who === 'black' ? '🐈‍⬛ Black' : 'Duo (Orange & Black)';
     return `
       <div class="sched-slot">
         <div class="sched-time-col">
@@ -3501,846 +3501,846 @@ function applyRemoteData(remoteData) {
       if (cloudKey === 'yuta_couple_finances' && Array.isArray(record.payload)) {
         const requiredTxs = [
           {
-            id: 'tx_nata_exp_benerin_hp_149k',
+            id: 'tx_black_exp_benerin_hp_149k',
             type: 'expense',
             amount: 149000,
             category: 'bills',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'qris',
             desc: 'Phone repair service',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_roti_bakar_20k',
+            id: 'tx_black_exp_roti_bakar_20k',
             type: 'expense',
             amount: 20000,
             category: 'food',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'qris',
             desc: 'Toast snack',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_singkong_keju_13k',
+            id: 'tx_black_exp_singkong_keju_13k',
             type: 'expense',
             amount: 13000,
             category: 'food',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'qris',
             desc: 'Cheese cassava snack',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_jus_stroberi_7k',
+            id: 'tx_black_exp_jus_stroberi_7k',
             type: 'expense',
             amount: 7000,
             category: 'food',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'cash',
             desc: 'Strawberry Juice Treats',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_ayam_geprek_15k',
+            id: 'tx_black_exp_ayam_geprek_15k',
             type: 'expense',
             amount: 15000,
             category: 'food',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'cash',
             desc: 'Crispy Chicken Rice',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_alfa_51k',
+            id: 'tx_black_exp_alfa_51k',
             type: 'expense',
             amount: 51000,
             category: 'shopping',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'qris',
             desc: 'Convenience Store snacks',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_laundry_60k',
+            id: 'tx_black_exp_laundry_60k',
             type: 'expense',
             amount: 60000,
             category: 'bills',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'qris',
             desc: 'Laundry service',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_latihan_busking_twice_58k',
+            id: 'tx_black_exp_latihan_busking_twice_58k',
             type: 'expense',
             amount: 58000,
             category: 'other',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'transfer',
             desc: 'Music & Performance Practice',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_sei_20k5',
+            id: 'tx_black_exp_sei_20k5',
             type: 'expense',
             amount: 20500,
             category: 'food',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'qris',
             desc: "Se'i Sapi",
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_jajan_50k',
+            id: 'tx_black_exp_jajan_50k',
             type: 'expense',
             amount: 50000,
             category: 'food',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'transfer',
             desc: 'Daily snacks',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_inc_income_97k5',
+            id: 'tx_black_inc_income_97k5',
             type: 'income',
             amount: 97500,
             category: 'salary',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'transfer',
             desc: 'Income / Earnings (Black)',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_warkop_add_33k',
+            id: 'tx_black_exp_warkop_add_33k',
             type: 'expense',
             amount: 33000,
             category: 'food',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'qris',
             desc: 'Coffee Shop',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_obat_77k6',
+            id: 'tx_black_exp_obat_77k6',
             type: 'expense',
             amount: 77600,
             category: 'bills',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'qris',
             desc: 'Pharmacy / medicine',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_galon_15k',
+            id: 'tx_black_exp_galon_15k',
             type: 'expense',
             amount: 15000,
             category: 'bills',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'cash',
             desc: 'Water Gallon Refill',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_latihan_baemon_13k3',
+            id: 'tx_black_exp_latihan_baemon_13k3',
             type: 'expense',
             amount: 13300,
             category: 'other',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'transfer',
             desc: 'Dance Practice',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_yuki_inc_tf_nata_50k',
+            id: 'tx_orange_inc_tf_black_50k',
             type: 'income',
             amount: 50000,
             category: 'pocket',
-            person: 'yuki',
-            wallet: 'yuki',
+            person: 'orange',
+            wallet: 'orange',
             paymentMethod: 'transfer',
             desc: 'Transfer from Black',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'yuki',
+            splitPaidBy: 'orange',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_yuki_exp_biskuku_35k',
+            id: 'tx_orange_exp_biskuku_35k',
             type: 'expense',
             amount: 35000,
             category: 'food',
-            person: 'yuki',
-            wallet: 'yuki',
+            person: 'orange',
+            wallet: 'orange',
             paymentMethod: 'qris',
             desc: 'Cookies & bakery',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'yuki',
+            splitPaidBy: 'orange',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_yuki_exp_es_teh_10k',
+            id: 'tx_orange_exp_es_teh_10k',
             type: 'expense',
             amount: 10000,
             category: 'food',
-            person: 'yuki',
-            wallet: 'yuki',
+            person: 'orange',
+            wallet: 'orange',
             paymentMethod: 'cash',
             desc: 'Iced tea',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'yuki',
+            splitPaidBy: 'orange',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_yuki_exp_kentang_jamur_10k5',
+            id: 'tx_orange_exp_kentang_jamur_10k5',
             type: 'expense',
             amount: 10500,
             category: 'food',
-            person: 'yuki',
-            wallet: 'yuki',
+            person: 'orange',
+            wallet: 'orange',
             paymentMethod: 'qris',
             desc: 'Crispy potato & mushroom',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'yuki',
+            splitPaidBy: 'orange',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_yuki_exp_cilok_7k',
+            id: 'tx_orange_exp_cilok_7k',
             type: 'expense',
             amount: 7000,
             category: 'food',
-            person: 'yuki',
-            wallet: 'yuki',
+            person: 'orange',
+            wallet: 'orange',
             paymentMethod: 'cash',
             desc: 'Snacks',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'yuki',
+            splitPaidBy: 'orange',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_yuki_inc_tf_mama_50k',
+            id: 'tx_orange_inc_tf_mama_50k',
             type: 'income',
             amount: 50000,
             category: 'pocket',
-            person: 'yuki',
-            wallet: 'yuki',
+            person: 'orange',
+            wallet: 'orange',
             paymentMethod: 'transfer',
             desc: 'Transfer from Mom',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'yuki',
+            splitPaidBy: 'orange',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_yuki_exp_kuota_40k',
+            id: 'tx_orange_exp_kuota_40k',
             type: 'expense',
             amount: 40000,
             category: 'bills',
-            person: 'yuki',
-            wallet: 'yuki',
+            person: 'orange',
+            wallet: 'orange',
             paymentMethod: 'qris',
             desc: 'Mobile data package',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'yuki',
+            splitPaidBy: 'orange',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_yuki_exp_gosend_12k',
+            id: 'tx_orange_exp_gosend_12k',
             type: 'expense',
             amount: 12000,
             category: 'transport',
-            person: 'yuki',
-            wallet: 'yuki',
+            person: 'orange',
+            wallet: 'orange',
             paymentMethod: 'qris',
             desc: 'Delivery courier fee',
             date: '2026-10-14',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'yuki',
+            splitPaidBy: 'orange',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_yuki_exp_nescafe_13k',
+            id: 'tx_orange_exp_nescafe_13k',
             type: 'expense',
             amount: 13000,
             category: 'food',
-            person: 'yuki',
-            wallet: 'yuki',
+            person: 'orange',
+            wallet: 'orange',
             paymentMethod: 'qris',
             desc: 'Coffee',
             date: '2026-10-12',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'yuki',
+            splitPaidBy: 'orange',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_yuki_exp_belanja_sopi_25k',
+            id: 'tx_orange_exp_belanja_sopi_25k',
             type: 'expense',
             amount: 25000,
             category: 'shopping',
-            person: 'yuki',
-            wallet: 'yuki',
+            person: 'orange',
+            wallet: 'orange',
             paymentMethod: 'qris',
             desc: 'Online shopping',
             date: '2026-10-12',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'yuki',
+            splitPaidBy: 'orange',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_yuki_exp_jus_15k',
+            id: 'tx_orange_exp_jus_15k',
             type: 'expense',
             amount: 15000,
             category: 'food',
-            person: 'yuki',
-            wallet: 'yuki',
+            person: 'orange',
+            wallet: 'orange',
             paymentMethod: 'cash',
             desc: 'Fresh fruit juice',
             date: '2026-10-12',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'yuki',
+            splitPaidBy: 'orange',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_yuki_exp_pecel_lele_47k',
+            id: 'tx_orange_exp_pecel_lele_47k',
             type: 'expense',
             amount: 47000,
             category: 'food',
-            person: 'yuki',
-            wallet: 'yuki',
+            person: 'orange',
+            wallet: 'orange',
             paymentMethod: 'qris',
             desc: 'Dinner',
             date: '2026-10-12',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'yuki',
+            splitPaidBy: 'orange',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_yuki_tab_exp_sayur_86k',
+            id: 'tx_orange_tab_exp_sayur_86k',
             type: 'expense',
             amount: 86000,
             category: 'food',
-            person: 'yuki',
-            wallet: 'tabungan_yuki',
+            person: 'orange',
+            wallet: 'tabungan_orange',
             source: 'tabungan',
             paymentMethod: 'qris',
             desc: 'Fresh groceries',
             date: '2026-10-12',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'yuki',
+            splitPaidBy: 'orange',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_yuki_tab_exp_ttcoins_20k',
+            id: 'tx_orange_tab_exp_ttcoins_20k',
             type: 'expense',
             amount: 20000,
             category: 'reward',
-            person: 'yuki',
-            wallet: 'tabungan_yuki',
+            person: 'orange',
+            wallet: 'tabungan_orange',
             source: 'tabungan',
             paymentMethod: 'qris',
             desc: 'TT Coins',
             date: '2026-10-12',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'yuki',
+            splitPaidBy: 'orange',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_yuki_tab_exp_bubur_14k',
+            id: 'tx_orange_tab_exp_bubur_14k',
             type: 'expense',
             amount: 14000,
             category: 'food',
-            person: 'yuki',
-            wallet: 'tabungan_yuki',
+            person: 'orange',
+            wallet: 'tabungan_orange',
             source: 'tabungan',
             paymentMethod: 'cash',
             desc: 'Breakfast porridge',
             date: '2026-10-12',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'yuki',
+            splitPaidBy: 'orange',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_yuki_inc_240k',
+            id: 'tx_orange_inc_240k',
             type: 'income',
             amount: 240000,
             category: 'salary',
-            person: 'yuki',
-            wallet: 'yuki',
+            person: 'orange',
+            wallet: 'orange',
             paymentMethod: 'transfer',
             desc: 'Income (Orange) / Earnings',
             date: '2026-10-10',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'yuki',
+            splitPaidBy: 'orange',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_yuki_exp_ketoprak',
+            id: 'tx_orange_exp_ketoprak',
             type: 'expense',
             amount: 28000,
             category: 'food',
-            person: 'yuki',
-            wallet: 'yuki',
+            person: 'orange',
+            wallet: 'orange',
             paymentMethod: 'qris',
             desc: 'Street food snack',
             date: '2026-10-10',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'yuki',
+            splitPaidBy: 'orange',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_yuki_exp_esteh',
+            id: 'tx_orange_exp_esteh',
             type: 'expense',
             amount: 10000,
             category: 'food',
-            person: 'yuki',
-            wallet: 'yuki',
+            person: 'orange',
+            wallet: 'orange',
             paymentMethod: 'cash',
             desc: 'Iced tea',
             date: '2026-10-10',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'yuki',
+            splitPaidBy: 'orange',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_yuki_exp_charger',
+            id: 'tx_orange_exp_charger',
             type: 'expense',
             amount: 28000,
             category: 'shopping',
-            person: 'yuki',
-            wallet: 'yuki',
+            person: 'orange',
+            wallet: 'orange',
             paymentMethod: 'qris',
             desc: 'Phone charger cable',
             date: '2026-10-10',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'yuki',
+            splitPaidBy: 'orange',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_yuki_exp_makanankucing',
+            id: 'tx_orange_exp_makanankucing',
             type: 'expense',
             amount: 20000,
             category: 'pets',
-            person: 'yuki',
-            wallet: 'yuki',
+            person: 'orange',
+            wallet: 'orange',
             paymentMethod: 'cash',
             desc: 'Cat food & treats',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'yuki',
+            splitPaidBy: 'orange',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_yuki_exp_seisapi',
+            id: 'tx_orange_exp_seisapi',
             type: 'expense',
             amount: 21000,
             category: 'food',
-            person: 'yuki',
-            wallet: 'yuki',
+            person: 'orange',
+            wallet: 'orange',
             paymentMethod: 'qris',
             desc: 'Smoked beef meal',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'yuki',
+            splitPaidBy: 'orange',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_yuki_exp_ttcoins',
+            id: 'tx_orange_exp_ttcoins',
             type: 'expense',
             amount: 20000,
             category: 'reward',
-            person: 'yuki',
-            wallet: 'yuki',
+            person: 'orange',
+            wallet: 'orange',
             paymentMethod: 'qris',
             desc: 'TT Coins',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'yuki',
+            splitPaidBy: 'orange',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_kuota',
+            id: 'tx_black_exp_kuota',
             type: 'expense',
             amount: 50000,
             category: 'bills',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'transfer',
             desc: 'Mobile data package',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_tf_papa',
+            id: 'tx_black_exp_tf_papa',
             type: 'expense',
             amount: 200400,
             category: 'bills',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'transfer',
             desc: 'Transfer to Dad',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_tf_mama',
+            id: 'tx_black_exp_tf_mama',
             type: 'expense',
             amount: 200000,
             category: 'bills',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'transfer',
             desc: 'Transfer to Mom',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_bensin',
+            id: 'tx_black_exp_bensin',
             type: 'expense',
             amount: 44800,
             category: 'transport',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'cash',
             desc: 'Fuel & gasoline',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_nongkuy_11k',
+            id: 'tx_black_exp_nongkuy_11k',
             type: 'expense',
             amount: 11000,
             category: 'food',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'qris',
             desc: 'Cafe hangout',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_latihan_twice',
+            id: 'tx_black_exp_latihan_twice',
             type: 'expense',
             amount: 10000,
             category: 'other',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'cash',
             desc: 'Dance rehearsal',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_tf_gopay',
+            id: 'tx_black_exp_tf_gopay',
             type: 'expense',
             amount: 21000,
             category: 'bills',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'transfer',
             desc: 'Top up e-wallet',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_bioskop',
+            id: 'tx_black_exp_bioskop',
             type: 'expense',
             amount: 218400,
             category: 'date',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'qris',
             desc: 'Cinema movie tickets',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_nongkuy_27k',
+            id: 'tx_black_exp_nongkuy_27k',
             type: 'expense',
             amount: 27000,
             category: 'food',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'qris',
             desc: 'Cafe hangout',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_sopipud',
+            id: 'tx_black_exp_sopipud',
             type: 'expense',
             amount: 51970,
             category: 'food',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'qris',
             desc: 'Food delivery',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_dubai_cuki',
+            id: 'tx_black_exp_dubai_cuki',
             type: 'expense',
             amount: 25000,
             category: 'food',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'qris',
             desc: 'Dubai chocolate snack',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_inc_bonus',
+            id: 'tx_black_inc_bonus',
             type: 'income',
             amount: 747500,
             category: 'salary',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'transfer',
             desc: 'Bonus',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_sekuisi',
+            id: 'tx_black_exp_sekuisi',
             type: 'expense',
             amount: 49999,
             category: 'shopping',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'qris',
             desc: 'Squishy toy',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_teh_poci',
+            id: 'tx_black_exp_teh_poci',
             type: 'expense',
             amount: 15000,
             category: 'food',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'qris',
             desc: 'Tea at mall',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_aeon',
+            id: 'tx_black_exp_aeon',
             type: 'expense',
             amount: 139800,
             category: 'food',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'qris',
             desc: 'Dining out',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_warkop',
+            id: 'tx_black_exp_warkop',
             type: 'expense',
             amount: 50000,
             category: 'food',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'qris',
             desc: 'Coffee Shop hangout',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_borma',
+            id: 'tx_black_exp_borma',
             type: 'expense',
             amount: 270300,
             category: 'shopping',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'qris',
             desc: 'Supermarket shopping',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_tianlala',
+            id: 'tx_black_exp_tianlala',
             type: 'expense',
             amount: 50000,
             category: 'food',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'qris',
             desc: 'Tea & beverage',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           },
           {
-            id: 'tx_nata_exp_nongkuy_23k',
+            id: 'tx_black_exp_nongkuy_23k',
             type: 'expense',
             amount: 23000,
             category: 'food',
-            person: 'nata',
-            wallet: 'nata',
+            person: 'black',
+            wallet: 'black',
             paymentMethod: 'qris',
             desc: 'Cafe hangout',
             date: '2026-10-11',
             isSplit: false,
             splitRatio: 50,
-            splitPaidBy: 'nata',
+            splitPaidBy: 'black',
             splitOwedAmount: 0
           }
         ];
@@ -4572,8 +4572,8 @@ window.feedAllCats = feedReru;
 window.petAllCats = petReru;
 window.petCat = petReru;
 window.feedCat = feedReru;
-window.loadNataRoutine = loadNataRoutine;
-window.loadYukiRoutine = loadYukiRoutine;
+window.loadBlackRoutine = loadBlackRoutine;
+window.loadOrangeRoutine = loadOrangeRoutine;
 window.openGCalSyncModal = openGCalSyncModal;
 window.syncEventToGoogleCalendar = syncEventToGoogleCalendar;
 window.downloadLifetimeICS = downloadLifetimeICS;
@@ -4614,7 +4614,7 @@ function syncEventToGoogleCalendar(type) {
       );
       break;
 
-    case 'yuki_bday':
+    case 'orange_bday':
       url = generateGoogleCalendarUrl(
         '🎂 Orange\'s Birthday 🐈🎉',
         'Happy Birthday Orange! Wishing a fantastic year filled with joy and success.',
@@ -4624,7 +4624,7 @@ function syncEventToGoogleCalendar(type) {
       );
       break;
 
-    case 'nata_bday':
+    case 'black_bday':
       url = generateGoogleCalendarUrl(
         '🎂 Black\'s Birthday 🐈‍⬛🌸',
         'Happy Birthday Black! Wishing endless happiness, health and love.',
@@ -4634,7 +4634,7 @@ function syncEventToGoogleCalendar(type) {
       );
       break;
 
-    case 'yuki_routine':
+    case 'orange_routine':
       url = generateGoogleCalendarUrl(
         '🐈 Orange Daily Routine: 4 Quests 💻📚✍️💼',
         'Orange\'s Daily Quests:\n1. 💻 Open LMS & check courses\n2. 📚 Work on assignments\n3. ✍️ Work on thesis\n4. 💼 Job hunting & applications',
@@ -4644,7 +4644,7 @@ function syncEventToGoogleCalendar(type) {
       );
       break;
 
-    case 'nata_routine':
+    case 'black_routine':
       url = generateGoogleCalendarUrl(
         '🐈‍⬛ Black Daily Routine: 4 Quests 💬📹📊⏰',
         'Black\'s Daily Quests:\n1. 💬 Reply to spenders\n2. 📹 Daily 1-hour stream before dual persona stream\n3. 📊 Send live stream report to group\n4. ⏰ Clock-in & clock-out attendance',
@@ -4718,22 +4718,22 @@ function downloadLifetimeICS() {
   addICSEvent('anniv_20260217', '💍 Our Anniversary (Orange & Black) 💖', 'Happy Anniversary Orange & Black! Lifetime love milestone and celebration.', '20260217T090000', '20260217T110000', 'FREQ=YEARLY');
 
   // 2. Y Birthday
-  addICSEvent('bday_yuki', '🎂 Orange\'s Birthday 🐈🎉', 'Happy Birthday Orange! Wishing you joy and blessings.', '20261023T090000', '20261023T110000', 'FREQ=YEARLY');
+  addICSEvent('bday_orange', '🎂 Orange\'s Birthday 🐈🎉', 'Happy Birthday Orange! Wishing you joy and blessings.', '20261023T090000', '20261023T110000', 'FREQ=YEARLY');
 
   // 3. N Birthday
-  addICSEvent('bday_nata', '🎂 Black\'s Birthday 🐈‍⬛🌸', 'Happy Birthday Black! Wishing you endless happiness and love.', '20260924T090000', '20260924T110000', 'FREQ=YEARLY');
+  addICSEvent('bday_black', '🎂 Black\'s Birthday 🐈‍⬛🌸', 'Happy Birthday Black! Wishing you endless happiness and love.', '20260924T090000', '20260924T110000', 'FREQ=YEARLY');
 
-  // 4. Yuki\'s 4 Quests (Daily)
-  addICSEvent('yuki_lms', '💻 Orange: Open LMS & Check Courses', 'Daily Quest: Open LMS, check materials and course announcements.', '20261004T080000', '20261004T083000', 'FREQ=DAILY');
-  addICSEvent('yuki_tugas', '📚 Orange: Work on Assignments', 'Daily Quest: Complete coursework and study tasks.', '20261004T090000', '20261004T103000', 'FREQ=DAILY');
-  addICSEvent('yuki_skripsi', '✍️ Orange: Work on Thesis', 'Daily Quest: Research, draft writing, and thesis progress.', '20261004T130000', '20261004T150000', 'FREQ=DAILY');
-  addICSEvent('yuki_kerja', '💼 Orange: Job Hunting & Applications', 'Daily Quest: Apply for jobs and submit applications.', '20261004T160000', '20261004T173000', 'FREQ=DAILY');
+  // 4. Orange\'s 4 Quests (Daily)
+  addICSEvent('orange_lms', '💻 Orange: Open LMS & Check Courses', 'Daily Quest: Open LMS, check materials and course announcements.', '20261004T080000', '20261004T083000', 'FREQ=DAILY');
+  addICSEvent('orange_tugas', '📚 Orange: Work on Assignments', 'Daily Quest: Complete coursework and study tasks.', '20261004T090000', '20261004T103000', 'FREQ=DAILY');
+  addICSEvent('orange_skripsi', '✍️ Orange: Work on Thesis', 'Daily Quest: Research, draft writing, and thesis progress.', '20261004T130000', '20261004T150000', 'FREQ=DAILY');
+  addICSEvent('orange_kerja', '💼 Orange: Job Hunting & Applications', 'Daily Quest: Apply for jobs and submit applications.', '20261004T160000', '20261004T173000', 'FREQ=DAILY');
 
-  // 5. Nata\'s 4 Quests (Daily)
-  addICSEvent('nata_spender', '💬 Black: Reply to Spenders', 'Daily Quest: Reply to messages and spenders.', '20261004T163000', '20261004T173000', 'FREQ=DAILY');
-  addICSEvent('nata_live', '📹 Black: Daily 1-Hour Stream', 'Daily Quest: 1-hour live stream before dual persona stream.', '20261004T180000', '20261004T190000', 'FREQ=DAILY');
-  addICSEvent('nata_laporan', '📊 Black: Send Stream Report to Group', 'Daily Quest: Submit daily live stream report to group.', '20261004T200000', '20261004T201500', 'FREQ=DAILY');
-  addICSEvent('nata_absen', '⏰ Black: Clock-in & Attendance', 'Daily Quest: Clock-in & clock-out attendance.', '20261004T210000', '20261004T211500', 'FREQ=DAILY');
+  // 5. Black\'s 4 Quests (Daily)
+  addICSEvent('black_spender', '💬 Black: Reply to Spenders', 'Daily Quest: Reply to messages and spenders.', '20261004T163000', '20261004T173000', 'FREQ=DAILY');
+  addICSEvent('black_live', '📹 Black: Daily 1-Hour Stream', 'Daily Quest: 1-hour live stream before dual persona stream.', '20261004T180000', '20261004T190000', 'FREQ=DAILY');
+  addICSEvent('black_laporan', '📊 Black: Send Stream Report to Group', 'Daily Quest: Submit daily live stream report to group.', '20261004T200000', '20261004T201500', 'FREQ=DAILY');
+  addICSEvent('black_absen', '⏰ Black: Clock-in & Attendance', 'Daily Quest: Clock-in & clock-out attendance.', '20261004T210000', '20261004T211500', 'FREQ=DAILY');
 
   // 6. Duo Weekly Date & Care
   addICSEvent('duo_date_weekly', '🍿 YuTa Weekly Date Night ✨', 'Cozy date night, movies, and quality time together.', '20261010T190000', '20261010T220000', 'FREQ=WEEKLY');
@@ -4764,20 +4764,20 @@ function downloadLifetimeICS() {
 // ==================== TWO-WAY GOOGLE CALENDAR IMPORT ====================
 
 const GCAL_LINKS = {
-  yuki: '',
-  nata: '',
+  orange: '',
+  black: '',
   orange: '',
   black: ''
 };
 
 const GCAL_LOCAL_FILES = {
-  yuki: 'gcal_orange.ics',
-  nata: 'gcal_black.ics',
+  orange: 'gcal_orange.ics',
+  black: 'gcal_black.ics',
   orange: 'gcal_orange.ics',
   black: 'gcal_black.ics'
 };
 
-function parseAndApplyICS(icsText, target = 'yuki') {
+function parseAndApplyICS(icsText, target = 'orange') {
   if (!icsText || typeof icsText !== 'string') {
     showToast('⚠️ iCal file or data is empty or invalid.');
     return;
@@ -4836,7 +4836,7 @@ function parseAndApplyICS(icsText, target = 'yuki') {
   }
 
   const data = getStorage(STORAGE_KEYS.TODOS, {});
-  const validTarget = ['yuki', 'nata', 'shared'].includes(target) ? target : 'yuki';
+  const validTarget = ['orange', 'black', 'shared'].includes(target) ? target : 'orange';
 
   // Clean out any old/mismatched gcal tasks from all dates to strictly align
   Object.keys(data).forEach(d => {
@@ -4853,7 +4853,7 @@ function parseAndApplyICS(icsText, target = 'yuki') {
     // Put task ONLY on its exact date
     const targetDate = ev.dateStr;
     if (!data[targetDate]) {
-      data[targetDate] = { yuki: [], nata: [], shared: [] };
+      data[targetDate] = { orange: [], black: [], shared: [] };
     }
     if (!Array.isArray(data[targetDate][validTarget])) {
       data[targetDate][validTarget] = [];
@@ -4886,9 +4886,9 @@ function parseAndApplyICS(icsText, target = 'yuki') {
   showToast();
 }
 
-async function fetchCalendarICS(owner = 'yuki') {
-  const url = GCAL_LINKS[owner] || GCAL_LINKS.yuki;
-  const localFile = GCAL_LOCAL_FILES[owner] || 'gcal_yuki.ics';
+async function fetchCalendarICS(owner = 'orange') {
+  const url = GCAL_LINKS[owner] || GCAL_LINKS.orange;
+  const localFile = GCAL_LOCAL_FILES[owner] || 'gcal_orange.ics';
 
   const endpoints = [
     localFile,
@@ -4912,21 +4912,21 @@ async function fetchCalendarICS(owner = 'yuki') {
   return null;
 }
 
-async function syncYukiGCal() {
+async function syncOrangeGCal() {
   showToast('⏳ Fetching Google Calendar for Orange...');
-  const ics = await fetchCalendarICS('yuki');
+  const ics = await fetchCalendarICS('orange');
   if (ics) {
-    parseAndApplyICS(ics, 'yuki');
+    parseAndApplyICS(ics, 'orange');
   } else {
     showToast('❌ Failed to fetch calendar for Orange.');
   }
 }
 
-async function syncNataGCal() {
+async function syncBlackGCal() {
   showToast('⏳ Fetching Google Calendar for Black...');
-  const ics = await fetchCalendarICS('nata');
+  const ics = await fetchCalendarICS('black');
   if (ics) {
-    parseAndApplyICS(ics, 'nata');
+    parseAndApplyICS(ics, 'black');
   } else {
     showToast('❌ Failed to fetch calendar for Black.');
   }
@@ -4934,15 +4934,15 @@ async function syncNataGCal() {
 
 async function syncBothGCal() {
   showToast('⏳ Menyelaraskan Google Calendar Y & N...');
-  const [yukiIcs, nataIcs] = await Promise.all([
-    fetchCalendarICS('yuki'),
-    fetchCalendarICS('nata')
+  const [orangeIcs, blackIcs] = await Promise.all([
+    fetchCalendarICS('orange'),
+    fetchCalendarICS('black')
   ]);
 
-  if (yukiIcs) parseAndApplyICS(yukiIcs, 'yuki');
-  if (nataIcs) parseAndApplyICS(nataIcs, 'nata');
+  if (orangeIcs) parseAndApplyICS(orangeIcs, 'orange');
+  if (blackIcs) parseAndApplyICS(blackIcs, 'black');
 
-  if (yukiIcs || nataIcs) {
+  if (orangeIcs || blackIcs) {
     playSound('chime');
     showToast('🎉 Successfully synced Google Calendar for Orange 🐈 & Black 🐈‍⬛!');
   } else {
@@ -4954,7 +4954,7 @@ function handleGCalFileImport(event) {
   const file = event.target.files && event.target.files[0];
   if (!file) return;
 
-  const target = document.getElementById('gcalImportTarget') ? document.getElementById('gcalImportTarget').value : 'yuki';
+  const target = document.getElementById('gcalImportTarget') ? document.getElementById('gcalImportTarget').value : 'orange';
   const reader = new FileReader();
   reader.onload = (e) => {
     const text = e.target.result;
@@ -4965,11 +4965,11 @@ function handleGCalFileImport(event) {
 }
 
 async function importFromGCalUrl() {
-  const target = document.getElementById('gcalImportTarget') ? document.getElementById('gcalImportTarget').value : 'yuki';
-  if (target === 'nata') {
-    await syncNataGCal();
-  } else if (target === 'yuki') {
-    await syncYukiGCal();
+  const target = document.getElementById('gcalImportTarget') ? document.getElementById('gcalImportTarget').value : 'orange';
+  if (target === 'black') {
+    await syncBlackGCal();
+  } else if (target === 'orange') {
+    await syncOrangeGCal();
   } else {
     await syncBothGCal();
   }
@@ -4979,8 +4979,8 @@ async function importFromGCalUrl() {
 window.handleGCalFileImport = handleGCalFileImport;
 window.importFromGCalUrl = importFromGCalUrl;
 window.parseAndApplyICS = parseAndApplyICS;
-window.syncYukiGCal = syncYukiGCal;
-window.syncNataGCal = syncNataGCal;
+window.syncOrangeGCal = syncOrangeGCal;
+window.syncBlackGCal = syncBlackGCal;
 window.syncBothGCal = syncBothGCal;
 
 // ==========================================================================
@@ -5018,32 +5018,32 @@ const DEFAULT_FINANCE_BUDGETS = {
 
 const DEFAULT_FINANCE_GOALS = [
   {
-    id: 'goal_yuki_1',
-    owner: 'yuki',
+    id: 'goal_orange_1',
+    owner: 'orange',
     title: 'MacBook Pro & Setup 💻',
     targetAmount: 18000000,
     currentAmount: 0,
     deadline: '2026-12-25'
   },
   {
-    id: 'goal_yuki_2',
-    owner: 'yuki',
+    id: 'goal_orange_2',
+    owner: 'orange',
     title: 'Trip to Japan 🌸',
     targetAmount: 15000000,
     currentAmount: 0,
     deadline: '2027-04-15'
   },
   {
-    id: 'goal_nata_1',
-    owner: 'nata',
+    id: 'goal_black_1',
+    owner: 'black',
     title: 'Beli HP Baru 📱✨',
     targetAmount: 15000000,
     currentAmount: 0,
     deadline: '2026-11-30'
   },
   {
-    id: 'goal_nata_2',
-    owner: 'nata',
+    id: 'goal_black_2',
+    owner: 'black',
     title: 'Cat Playground & Vet Care 🐈',
     targetAmount: 3000000,
     currentAmount: 0,
@@ -5122,846 +5122,846 @@ function getFinances() {
 
   const initialTxs = [
     {
-      id: 'tx_nata_exp_benerin_hp_149k',
+      id: 'tx_black_exp_benerin_hp_149k',
       type: 'expense',
       amount: 149000,
       category: 'bills',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'qris',
       desc: 'Phone repair service',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_roti_bakar_20k',
+      id: 'tx_black_exp_roti_bakar_20k',
       type: 'expense',
       amount: 20000,
       category: 'food',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'qris',
       desc: 'Toast snack',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_singkong_keju_13k',
+      id: 'tx_black_exp_singkong_keju_13k',
       type: 'expense',
       amount: 13000,
       category: 'food',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'qris',
       desc: 'Cheese cassava snack',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_jus_stroberi_7k',
+      id: 'tx_black_exp_jus_stroberi_7k',
       type: 'expense',
       amount: 7000,
       category: 'food',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'cash',
       desc: 'Strawberry Juice Treats',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_ayam_geprek_15k',
+      id: 'tx_black_exp_ayam_geprek_15k',
       type: 'expense',
       amount: 15000,
       category: 'food',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'cash',
       desc: 'Crispy Chicken Rice',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_alfa_51k',
+      id: 'tx_black_exp_alfa_51k',
       type: 'expense',
       amount: 51000,
       category: 'shopping',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'qris',
       desc: 'Convenience Store snacks',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_laundry_60k',
+      id: 'tx_black_exp_laundry_60k',
       type: 'expense',
       amount: 60000,
       category: 'bills',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'qris',
       desc: 'Laundry service',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_latihan_busking_twice_58k',
+      id: 'tx_black_exp_latihan_busking_twice_58k',
       type: 'expense',
       amount: 58000,
       category: 'other',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'transfer',
       desc: 'Music & Performance Practice',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_sei_20k5',
+      id: 'tx_black_exp_sei_20k5',
       type: 'expense',
       amount: 20500,
       category: 'food',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'qris',
       desc: "Se'i Sapi",
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_jajan_50k',
+      id: 'tx_black_exp_jajan_50k',
       type: 'expense',
       amount: 50000,
       category: 'food',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'transfer',
       desc: 'Daily snacks',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_inc_income_97k5',
+      id: 'tx_black_inc_income_97k5',
       type: 'income',
       amount: 97500,
       category: 'salary',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'transfer',
       desc: 'Income / Earnings (Black)',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_warkop_add_33k',
+      id: 'tx_black_exp_warkop_add_33k',
       type: 'expense',
       amount: 33000,
       category: 'food',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'qris',
       desc: 'Coffee Shop',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_obat_77k6',
+      id: 'tx_black_exp_obat_77k6',
       type: 'expense',
       amount: 77600,
       category: 'bills',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'qris',
       desc: 'Pharmacy / medicine',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_galon_15k',
+      id: 'tx_black_exp_galon_15k',
       type: 'expense',
       amount: 15000,
       category: 'bills',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'cash',
       desc: 'Water Gallon Refill',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_latihan_baemon_13k3',
+      id: 'tx_black_exp_latihan_baemon_13k3',
       type: 'expense',
       amount: 13300,
       category: 'other',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'transfer',
       desc: 'Dance Practice',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_yuki_inc_tf_nata_50k',
+      id: 'tx_orange_inc_tf_black_50k',
       type: 'income',
       amount: 50000,
       category: 'pocket',
-      person: 'yuki',
-      wallet: 'yuki',
+      person: 'orange',
+      wallet: 'orange',
       paymentMethod: 'transfer',
       desc: 'Transfer from Black',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'yuki',
+      splitPaidBy: 'orange',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_yuki_exp_biskuku_35k',
+      id: 'tx_orange_exp_biskuku_35k',
       type: 'expense',
       amount: 35000,
       category: 'food',
-      person: 'yuki',
-      wallet: 'yuki',
+      person: 'orange',
+      wallet: 'orange',
       paymentMethod: 'qris',
       desc: 'Cookies & bakery',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'yuki',
+      splitPaidBy: 'orange',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_yuki_exp_es_teh_10k',
+      id: 'tx_orange_exp_es_teh_10k',
       type: 'expense',
       amount: 10000,
       category: 'food',
-      person: 'yuki',
-      wallet: 'yuki',
+      person: 'orange',
+      wallet: 'orange',
       paymentMethod: 'cash',
       desc: 'Iced tea',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'yuki',
+      splitPaidBy: 'orange',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_yuki_exp_kentang_jamur_10k5',
+      id: 'tx_orange_exp_kentang_jamur_10k5',
       type: 'expense',
       amount: 10500,
       category: 'food',
-      person: 'yuki',
-      wallet: 'yuki',
+      person: 'orange',
+      wallet: 'orange',
       paymentMethod: 'qris',
       desc: 'Crispy potato & mushroom',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'yuki',
+      splitPaidBy: 'orange',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_yuki_exp_cilok_7k',
+      id: 'tx_orange_exp_cilok_7k',
       type: 'expense',
       amount: 7000,
       category: 'food',
-      person: 'yuki',
-      wallet: 'yuki',
+      person: 'orange',
+      wallet: 'orange',
       paymentMethod: 'cash',
       desc: 'Snacks',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'yuki',
+      splitPaidBy: 'orange',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_yuki_inc_tf_mama_50k',
+      id: 'tx_orange_inc_tf_mama_50k',
       type: 'income',
       amount: 50000,
       category: 'pocket',
-      person: 'yuki',
-      wallet: 'yuki',
+      person: 'orange',
+      wallet: 'orange',
       paymentMethod: 'transfer',
       desc: 'Transfer from Mom',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'yuki',
+      splitPaidBy: 'orange',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_yuki_exp_kuota_40k',
+      id: 'tx_orange_exp_kuota_40k',
       type: 'expense',
       amount: 40000,
       category: 'bills',
-      person: 'yuki',
-      wallet: 'yuki',
+      person: 'orange',
+      wallet: 'orange',
       paymentMethod: 'qris',
       desc: 'Mobile data package',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'yuki',
+      splitPaidBy: 'orange',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_yuki_exp_gosend_12k',
+      id: 'tx_orange_exp_gosend_12k',
       type: 'expense',
       amount: 12000,
       category: 'transport',
-      person: 'yuki',
-      wallet: 'yuki',
+      person: 'orange',
+      wallet: 'orange',
       paymentMethod: 'qris',
       desc: 'Delivery courier fee',
       date: '2026-10-14',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'yuki',
+      splitPaidBy: 'orange',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_yuki_exp_nescafe_13k',
+      id: 'tx_orange_exp_nescafe_13k',
       type: 'expense',
       amount: 13000,
       category: 'food',
-      person: 'yuki',
-      wallet: 'yuki',
+      person: 'orange',
+      wallet: 'orange',
       paymentMethod: 'qris',
       desc: 'Coffee',
       date: '2026-10-12',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'yuki',
+      splitPaidBy: 'orange',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_yuki_exp_belanja_sopi_25k',
+      id: 'tx_orange_exp_belanja_sopi_25k',
       type: 'expense',
       amount: 25000,
       category: 'shopping',
-      person: 'yuki',
-      wallet: 'yuki',
+      person: 'orange',
+      wallet: 'orange',
       paymentMethod: 'qris',
       desc: 'Online shopping',
       date: '2026-10-12',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'yuki',
+      splitPaidBy: 'orange',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_yuki_exp_jus_15k',
+      id: 'tx_orange_exp_jus_15k',
       type: 'expense',
       amount: 15000,
       category: 'food',
-      person: 'yuki',
-      wallet: 'yuki',
+      person: 'orange',
+      wallet: 'orange',
       paymentMethod: 'cash',
       desc: 'Fresh fruit juice',
       date: '2026-10-12',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'yuki',
+      splitPaidBy: 'orange',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_yuki_exp_pecel_lele_47k',
+      id: 'tx_orange_exp_pecel_lele_47k',
       type: 'expense',
       amount: 47000,
       category: 'food',
-      person: 'yuki',
-      wallet: 'yuki',
+      person: 'orange',
+      wallet: 'orange',
       paymentMethod: 'qris',
       desc: 'Dinner',
       date: '2026-10-12',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'yuki',
+      splitPaidBy: 'orange',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_yuki_tab_exp_sayur_86k',
+      id: 'tx_orange_tab_exp_sayur_86k',
       type: 'expense',
       amount: 86000,
       category: 'food',
-      person: 'yuki',
-      wallet: 'tabungan_yuki',
+      person: 'orange',
+      wallet: 'tabungan_orange',
       source: 'tabungan',
       paymentMethod: 'qris',
       desc: 'Fresh groceries',
       date: '2026-10-12',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'yuki',
+      splitPaidBy: 'orange',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_yuki_tab_exp_ttcoins_20k',
+      id: 'tx_orange_tab_exp_ttcoins_20k',
       type: 'expense',
       amount: 20000,
       category: 'reward',
-      person: 'yuki',
-      wallet: 'tabungan_yuki',
+      person: 'orange',
+      wallet: 'tabungan_orange',
       source: 'tabungan',
       paymentMethod: 'qris',
       desc: 'TT Coins',
       date: '2026-10-12',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'yuki',
+      splitPaidBy: 'orange',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_yuki_tab_exp_bubur_14k',
+      id: 'tx_orange_tab_exp_bubur_14k',
       type: 'expense',
       amount: 14000,
       category: 'food',
-      person: 'yuki',
-      wallet: 'tabungan_yuki',
+      person: 'orange',
+      wallet: 'tabungan_orange',
       source: 'tabungan',
       paymentMethod: 'cash',
       desc: 'Breakfast porridge',
       date: '2026-10-12',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'yuki',
+      splitPaidBy: 'orange',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_yuki_inc_240k',
+      id: 'tx_orange_inc_240k',
       type: 'income',
       amount: 240000,
       category: 'salary',
-      person: 'yuki',
-      wallet: 'yuki',
+      person: 'orange',
+      wallet: 'orange',
       paymentMethod: 'transfer',
       desc: 'Income (Orange) / Earnings',
       date: '2026-10-10',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'yuki',
+      splitPaidBy: 'orange',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_yuki_exp_ketoprak',
+      id: 'tx_orange_exp_ketoprak',
       type: 'expense',
       amount: 28000,
       category: 'food',
-      person: 'yuki',
-      wallet: 'yuki',
+      person: 'orange',
+      wallet: 'orange',
       paymentMethod: 'qris',
       desc: 'Street food snack',
       date: '2026-10-10',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'yuki',
+      splitPaidBy: 'orange',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_yuki_exp_esteh',
+      id: 'tx_orange_exp_esteh',
       type: 'expense',
       amount: 10000,
       category: 'food',
-      person: 'yuki',
-      wallet: 'yuki',
+      person: 'orange',
+      wallet: 'orange',
       paymentMethod: 'cash',
       desc: 'Iced tea',
       date: '2026-10-10',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'yuki',
+      splitPaidBy: 'orange',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_yuki_exp_charger',
+      id: 'tx_orange_exp_charger',
       type: 'expense',
       amount: 28000,
       category: 'shopping',
-      person: 'yuki',
-      wallet: 'yuki',
+      person: 'orange',
+      wallet: 'orange',
       paymentMethod: 'qris',
       desc: 'Phone charger cable',
       date: '2026-10-10',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'yuki',
+      splitPaidBy: 'orange',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_yuki_exp_makanankucing',
+      id: 'tx_orange_exp_makanankucing',
       type: 'expense',
       amount: 20000,
       category: 'pets',
-      person: 'yuki',
-      wallet: 'yuki',
+      person: 'orange',
+      wallet: 'orange',
       paymentMethod: 'cash',
       desc: 'Cat food & treats',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'yuki',
+      splitPaidBy: 'orange',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_yuki_exp_seisapi',
+      id: 'tx_orange_exp_seisapi',
       type: 'expense',
       amount: 21000,
       category: 'food',
-      person: 'yuki',
-      wallet: 'yuki',
+      person: 'orange',
+      wallet: 'orange',
       paymentMethod: 'qris',
       desc: 'Smoked beef meal',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'yuki',
+      splitPaidBy: 'orange',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_yuki_exp_ttcoins',
+      id: 'tx_orange_exp_ttcoins',
       type: 'expense',
       amount: 20000,
       category: 'reward',
-      person: 'yuki',
-      wallet: 'yuki',
+      person: 'orange',
+      wallet: 'orange',
       paymentMethod: 'qris',
       desc: 'TT Coins',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'yuki',
+      splitPaidBy: 'orange',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_kuota',
+      id: 'tx_black_exp_kuota',
       type: 'expense',
       amount: 50000,
       category: 'bills',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'transfer',
       desc: 'Mobile data package',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_tf_papa',
+      id: 'tx_black_exp_tf_papa',
       type: 'expense',
       amount: 200400,
       category: 'bills',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'transfer',
       desc: 'Transfer to Dad',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_tf_mama',
+      id: 'tx_black_exp_tf_mama',
       type: 'expense',
       amount: 200000,
       category: 'bills',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'transfer',
       desc: 'Transfer to Mom',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_bensin',
+      id: 'tx_black_exp_bensin',
       type: 'expense',
       amount: 44800,
       category: 'transport',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'cash',
       desc: 'Fuel & gasoline',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_nongkuy_11k',
+      id: 'tx_black_exp_nongkuy_11k',
       type: 'expense',
       amount: 11000,
       category: 'food',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'qris',
       desc: 'Cafe hangout',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_latihan_twice',
+      id: 'tx_black_exp_latihan_twice',
       type: 'expense',
       amount: 10000,
       category: 'other',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'cash',
       desc: 'Dance rehearsal',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_tf_gopay',
+      id: 'tx_black_exp_tf_gopay',
       type: 'expense',
       amount: 21000,
       category: 'bills',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'transfer',
       desc: 'Top up e-wallet',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_bioskop',
+      id: 'tx_black_exp_bioskop',
       type: 'expense',
       amount: 218400,
       category: 'date',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'qris',
       desc: 'Cinema movie tickets',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_nongkuy_27k',
+      id: 'tx_black_exp_nongkuy_27k',
       type: 'expense',
       amount: 27000,
       category: 'food',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'qris',
       desc: 'Cafe hangout',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_sopipud',
+      id: 'tx_black_exp_sopipud',
       type: 'expense',
       amount: 51970,
       category: 'food',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'qris',
       desc: 'Food delivery',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_dubai_cuki',
+      id: 'tx_black_exp_dubai_cuki',
       type: 'expense',
       amount: 25000,
       category: 'food',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'qris',
       desc: 'Dubai chocolate snack',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_inc_bonus',
+      id: 'tx_black_inc_bonus',
       type: 'income',
       amount: 747500,
       category: 'salary',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'transfer',
       desc: 'Bonus',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_sekuisi',
+      id: 'tx_black_exp_sekuisi',
       type: 'expense',
       amount: 49999,
       category: 'shopping',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'qris',
       desc: 'Squishy toy',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_teh_poci',
+      id: 'tx_black_exp_teh_poci',
       type: 'expense',
       amount: 15000,
       category: 'food',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'qris',
       desc: 'Tea at mall',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_aeon',
+      id: 'tx_black_exp_aeon',
       type: 'expense',
       amount: 139800,
       category: 'food',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'qris',
       desc: 'Dining out',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_warkop',
+      id: 'tx_black_exp_warkop',
       type: 'expense',
       amount: 50000,
       category: 'food',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'qris',
       desc: 'Coffee Shop hangout',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_borma',
+      id: 'tx_black_exp_borma',
       type: 'expense',
       amount: 270300,
       category: 'shopping',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'qris',
       desc: 'Supermarket shopping',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_tianlala',
+      id: 'tx_black_exp_tianlala',
       type: 'expense',
       amount: 50000,
       category: 'food',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'qris',
       desc: 'Tea & beverage',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     },
     {
-      id: 'tx_nata_exp_nongkuy_23k',
+      id: 'tx_black_exp_nongkuy_23k',
       type: 'expense',
       amount: 23000,
       category: 'food',
-      person: 'nata',
-      wallet: 'nata',
+      person: 'black',
+      wallet: 'black',
       paymentMethod: 'qris',
       desc: 'Cafe hangout',
       date: '2026-10-11',
       isSplit: false,
       splitRatio: 50,
-      splitPaidBy: 'nata',
+      splitPaidBy: 'black',
       splitOwedAmount: 0
     }
   ];
@@ -5996,7 +5996,7 @@ function getFinanceBudgets() {
 }
 
 function getFinanceGoals() {
-  const goalsKey = 'yuta_goals_hp_nata_v1';
+  const goalsKey = 'yuta_goals_hp_black_v1';
   if (!localStorage.getItem(goalsKey)) {
     localStorage.setItem(STORAGE_KEYS.FINANCE_GOALS, JSON.stringify(DEFAULT_FINANCE_GOALS));
     localStorage.setItem(goalsKey, 'true');
@@ -6019,12 +6019,12 @@ function renderFinances() {
   const allFinances = getFinances();
 
   // 1. Calculate stats for Orange and Black separately
-  let yukiIncome = 0;
-  let yukiExpense = 0;
-  let yukiWalletExpense = 0;
-  let yukiTabunganExpense = 0;
-  let nataIncome = 0;
-  let nataExpense = 0;
+  let orangeIncome = 0;
+  let orangeExpense = 0;
+  let orangeWalletExpense = 0;
+  let orangeTabunganExpense = 0;
+  let blackIncome = 0;
+  let blackExpense = 0;
   let totalIncome = 0;
   let totalExpense = 0;
   let countIncome = 0;
@@ -6034,26 +6034,26 @@ function renderFinances() {
 
   allFinances.forEach(tx => {
     const amt = Number(tx.amount) || 0;
-    const isTabunganYuki = tx.wallet === 'tabungan_yuki' || (tx.person === 'yuki' && tx.source === 'tabungan');
-    const isYuki = tx.person === 'yuki' || tx.wallet === 'yuki' || isTabunganYuki;
+    const isTabunganOrange = tx.wallet === 'tabungan_orange' || (tx.person === 'orange' && tx.source === 'tabungan');
+    const isOrange = tx.person === 'orange' || tx.wallet === 'orange' || isTabunganOrange;
 
     if (tx.type === 'income') {
       totalIncome += amt;
       countIncome++;
-      if (isYuki) yukiIncome += amt;
-      else nataIncome += amt;
+      if (isOrange) orangeIncome += amt;
+      else blackIncome += amt;
     } else {
       totalExpense += amt;
       countExpense++;
-      if (isYuki) {
-        yukiExpense += amt;
-        if (isTabunganYuki) {
-          yukiTabunganExpense += amt;
+      if (isOrange) {
+        orangeExpense += amt;
+        if (isTabunganOrange) {
+          orangeTabunganExpense += amt;
         } else {
-          yukiWalletExpense += amt;
+          orangeWalletExpense += amt;
         }
       } else {
-        nataExpense += amt;
+        blackExpense += amt;
       }
 
       const catKey = tx.category || 'other';
@@ -6061,86 +6061,86 @@ function renderFinances() {
     }
   });
 
-  const yukiBalance = yukiIncome - yukiExpense;
-  const nataBalance = nataIncome - nataExpense;
-  const yukiExpRatio = yukiIncome > 0 ? Math.min(100, Math.round((yukiExpense / yukiIncome) * 100)) : 0;
-  const nataExpRatio = nataIncome > 0 ? Math.min(100, Math.round((nataExpense / nataIncome) * 100)) : 0;
+  const orangeBalance = orangeIncome - orangeExpense;
+  const blackBalance = blackIncome - blackExpense;
+  const orangeExpRatio = orangeIncome > 0 ? Math.min(100, Math.round((orangeExpense / orangeIncome) * 100)) : 0;
+  const blackExpRatio = blackIncome > 0 ? Math.min(100, Math.round((blackExpense / blackIncome) * 100)) : 0;
 
   // 2. Update Orange's Wallet Bento Master Card
-  const yukiBalEl = document.getElementById('yukiBalAmount');
-  const yukiIncEl = document.getElementById('yukiIncomeAmount');
-  const yukiOutEl = document.getElementById('yukiOutcomeAmount');
-  const yukiExpBarEl = document.getElementById('yukiExpBar');
-  const yukiRatioText = document.getElementById('yukiExpRatioText');
-  const yukiExpAmtEl = document.getElementById('yukiExpAmount');
-  const yukiStatusBadge = document.getElementById('yukiStatusBadge');
+  const orangeBalEl = document.getElementById('orangeBalAmount');
+  const orangeIncEl = document.getElementById('orangeIncomeAmount');
+  const orangeOutEl = document.getElementById('orangeOutcomeAmount');
+  const orangeExpBarEl = document.getElementById('orangeExpBar');
+  const orangeRatioText = document.getElementById('orangeExpRatioText');
+  const orangeExpAmtEl = document.getElementById('orangeExpAmount');
+  const orangeStatusBadge = document.getElementById('orangeStatusBadge');
 
-  if (yukiBalEl) yukiBalEl.textContent = formatRupiah(yukiBalance);
-  if (yukiIncEl) yukiIncEl.textContent = '+' + formatRupiah(yukiIncome);
-  if (yukiOutEl) yukiOutEl.textContent = '-' + formatRupiah(yukiExpense);
-  if (yukiExpBarEl) yukiExpBarEl.style.width = `${yukiExpRatio}%`;
-  if (yukiRatioText) {
-    if (yukiTabunganExpense > 0) {
-      yukiRatioText.textContent = `Expenses ${yukiExpRatio}% (Savings: ${formatRupiah(yukiTabunganExpense)})`;
+  if (orangeBalEl) orangeBalEl.textContent = formatRupiah(orangeBalance);
+  if (orangeIncEl) orangeIncEl.textContent = '+' + formatRupiah(orangeIncome);
+  if (orangeOutEl) orangeOutEl.textContent = '-' + formatRupiah(orangeExpense);
+  if (orangeExpBarEl) orangeExpBarEl.style.width = `${orangeExpRatio}%`;
+  if (orangeRatioText) {
+    if (orangeTabunganExpense > 0) {
+      orangeRatioText.textContent = `Expenses ${orangeExpRatio}% (Savings: ${formatRupiah(orangeTabunganExpense)})`;
     } else {
-      yukiRatioText.textContent = `Expenses ${yukiExpRatio}% of Income`;
+      orangeRatioText.textContent = `Expenses ${orangeExpRatio}% of Income`;
     }
   }
-  if (yukiExpAmtEl) {
-    if (yukiTabunganExpense > 0) {
-      yukiExpAmtEl.textContent = `Wallet: ${formatRupiah(yukiWalletExpense)} | Savings: ${formatRupiah(yukiTabunganExpense)}`;
+  if (orangeExpAmtEl) {
+    if (orangeTabunganExpense > 0) {
+      orangeExpAmtEl.textContent = `Wallet: ${formatRupiah(orangeWalletExpense)} | Savings: ${formatRupiah(orangeTabunganExpense)}`;
     } else {
-      yukiExpAmtEl.textContent = `Outcome: ${formatRupiah(yukiExpense)}`;
+      orangeExpAmtEl.textContent = `Outcome: ${formatRupiah(orangeExpense)}`;
     }
   }
-  if (yukiStatusBadge) {
-    yukiStatusBadge.textContent = yukiBalance >= 0 ? 'Surplus 🟢' : 'Defisit ⚠️';
-    yukiStatusBadge.className = yukiBalance >= 0 ? 'bento-tag-pill tag-yuki-pill' : 'bento-tag-pill tag-danger';
+  if (orangeStatusBadge) {
+    orangeStatusBadge.textContent = orangeBalance >= 0 ? 'Surplus 🟢' : 'Defisit ⚠️';
+    orangeStatusBadge.className = orangeBalance >= 0 ? 'bento-tag-pill tag-orange-pill' : 'bento-tag-pill tag-danger';
   }
 
   // 3. Update Black's Wallet Bento Master Card
-  const nataBalEl = document.getElementById('nataBalAmount');
-  const nataIncEl = document.getElementById('nataIncomeAmount');
-  const nataOutEl = document.getElementById('nataOutcomeAmount');
-  const nataExpBarEl = document.getElementById('nataExpBar');
-  const nataRatioText = document.getElementById('nataExpRatioText');
-  const nataExpAmtEl = document.getElementById('nataExpAmount');
-  const nataStatusBadge = document.getElementById('nataStatusBadge');
+  const blackBalEl = document.getElementById('blackBalAmount');
+  const blackIncEl = document.getElementById('blackIncomeAmount');
+  const blackOutEl = document.getElementById('blackOutcomeAmount');
+  const blackExpBarEl = document.getElementById('blackExpBar');
+  const blackRatioText = document.getElementById('blackExpRatioText');
+  const blackExpAmtEl = document.getElementById('blackExpAmount');
+  const blackStatusBadge = document.getElementById('blackStatusBadge');
 
-  if (nataBalEl) nataBalEl.textContent = formatRupiah(nataBalance);
-  if (nataIncEl) nataIncEl.textContent = '+' + formatRupiah(nataIncome);
-  if (nataOutEl) nataOutEl.textContent = '-' + formatRupiah(nataExpense);
-  if (nataExpBarEl) nataExpBarEl.style.width = `${nataExpRatio}%`;
-  if (nataRatioText) nataRatioText.textContent = `Expenses ${nataExpRatio}% of Income`;
-  if (nataExpAmtEl) nataExpAmtEl.textContent = `Outcome: ${formatRupiah(nataExpense)}`;
-  if (nataStatusBadge) {
-    nataStatusBadge.textContent = nataBalance >= 0 ? 'Surplus 🟢' : 'Defisit ⚠️';
-    nataStatusBadge.className = nataBalance >= 0 ? 'bento-tag-pill tag-nata-pill' : 'bento-tag-pill tag-danger';
+  if (blackBalEl) blackBalEl.textContent = formatRupiah(blackBalance);
+  if (blackIncEl) blackIncEl.textContent = '+' + formatRupiah(blackIncome);
+  if (blackOutEl) blackOutEl.textContent = '-' + formatRupiah(blackExpense);
+  if (blackExpBarEl) blackExpBarEl.style.width = `${blackExpRatio}%`;
+  if (blackRatioText) blackRatioText.textContent = `Expenses ${blackExpRatio}% of Income`;
+  if (blackExpAmtEl) blackExpAmtEl.textContent = `Outcome: ${formatRupiah(blackExpense)}`;
+  if (blackStatusBadge) {
+    blackStatusBadge.textContent = blackBalance >= 0 ? 'Surplus 🟢' : 'Defisit ⚠️';
+    blackStatusBadge.className = blackBalance >= 0 ? 'bento-tag-pill tag-black-pill' : 'bento-tag-pill tag-danger';
   }
 
   // 4. Update 3D Virtual Cards Showcase
-  const vcardYukiAmt = document.getElementById('vcardYukiAmt');
-  const vcardYukiShare = document.getElementById('vcardYukiShare');
-  const vcardYukiSubStats = document.getElementById('vcardYukiSubStats');
+  const vcardOrangeAmt = document.getElementById('vcardOrangeAmt');
+  const vcardOrangeShare = document.getElementById('vcardOrangeShare');
+  const vcardOrangeSubStats = document.getElementById('vcardOrangeSubStats');
 
-  const vcardNataAmt = document.getElementById('vcardNataAmt');
-  const vcardNataShare = document.getElementById('vcardNataShare');
-  const vcardNataSubStats = document.getElementById('vcardNataSubStats');
+  const vcardBlackAmt = document.getElementById('vcardBlackAmt');
+  const vcardBlackShare = document.getElementById('vcardBlackShare');
+  const vcardBlackSubStats = document.getElementById('vcardBlackSubStats');
 
-  if (vcardYukiAmt) vcardYukiAmt.textContent = formatRupiah(yukiBalance);
-  if (vcardYukiShare) vcardYukiShare.textContent = yukiBalance >= 0 ? 'Surplus 🟢' : 'Defisit ⚠️';
-  if (vcardYukiSubStats) {
-    if (yukiTabunganExpense > 0) {
-      vcardYukiSubStats.textContent = `In: +${formatRupiah(yukiIncome)} | Out: -${formatRupiah(yukiExpense)} (Tab: ${formatRupiah(yukiTabunganExpense)})`;
+  if (vcardOrangeAmt) vcardOrangeAmt.textContent = formatRupiah(orangeBalance);
+  if (vcardOrangeShare) vcardOrangeShare.textContent = orangeBalance >= 0 ? 'Surplus 🟢' : 'Defisit ⚠️';
+  if (vcardOrangeSubStats) {
+    if (orangeTabunganExpense > 0) {
+      vcardOrangeSubStats.textContent = `In: +${formatRupiah(orangeIncome)} | Out: -${formatRupiah(orangeExpense)} (Tab: ${formatRupiah(orangeTabunganExpense)})`;
     } else {
-      vcardYukiSubStats.textContent = `In: +${formatRupiah(yukiIncome)} | Out: -${formatRupiah(yukiExpense)}`;
+      vcardOrangeSubStats.textContent = `In: +${formatRupiah(orangeIncome)} | Out: -${formatRupiah(orangeExpense)}`;
     }
   }
 
-  if (vcardNataAmt) vcardNataAmt.textContent = formatRupiah(nataBalance);
-  if (vcardNataShare) vcardNataShare.textContent = nataBalance >= 0 ? 'Surplus 🟢' : 'Defisit ⚠️';
-  if (vcardNataSubStats) {
-    vcardNataSubStats.textContent = `In: +${formatRupiah(nataIncome)} | Out: -${formatRupiah(nataExpense)}`;
+  if (vcardBlackAmt) vcardBlackAmt.textContent = formatRupiah(blackBalance);
+  if (vcardBlackShare) vcardBlackShare.textContent = blackBalance >= 0 ? 'Surplus 🟢' : 'Defisit ⚠️';
+  if (vcardBlackSubStats) {
+    vcardBlackSubStats.textContent = `In: +${formatRupiah(blackIncome)} | Out: -${formatRupiah(blackExpense)}`;
   }
 
   // 5. Update Savings Motivation Quote
@@ -6184,20 +6184,20 @@ function renderFinances() {
   // 8. Filter & Render Transaction History List
   let filtered = allFinances.filter(tx => {
     if (financeFilterPerson !== 'all') {
-      const isTabunganYuki = tx.wallet === 'tabungan_yuki' || (tx.person === 'yuki' && tx.source === 'tabungan');
-      const isYuki = tx.person === 'yuki' || tx.wallet === 'yuki' || isTabunganYuki;
-      if (financeFilterPerson === 'tabungan_yuki') {
-        if (!isTabunganYuki) return false;
-      } else if (financeFilterPerson === 'yuki') {
-        if (!isYuki || isTabunganYuki) return false;
-      } else if (financeFilterPerson === 'nata') {
-        if (tx.person !== 'nata' && tx.wallet !== 'nata') return false;
+      const isTabunganOrange = tx.wallet === 'tabungan_orange' || (tx.person === 'orange' && tx.source === 'tabungan');
+      const isOrange = tx.person === 'orange' || tx.wallet === 'orange' || isTabunganOrange;
+      if (financeFilterPerson === 'tabungan_orange') {
+        if (!isTabunganOrange) return false;
+      } else if (financeFilterPerson === 'orange') {
+        if (!isOrange || isTabunganOrange) return false;
+      } else if (financeFilterPerson === 'black') {
+        if (tx.person !== 'black' && tx.wallet !== 'black') return false;
       }
     }
     if (financeFilterType !== 'all' && tx.type !== financeFilterType) return false;
     if (financeSearchQuery) {
       const catLabel = FINANCE_CATEGORIES[tx.category]?.label || '';
-      const walletText = (tx.wallet === 'tabungan_yuki' || tx.source === 'tabungan') ? 'tabungan' : '';
+      const walletText = (tx.wallet === 'tabungan_orange' || tx.source === 'tabungan') ? 'tabungan' : '';
       const text = `${tx.desc || ''} ${catLabel} ${tx.person || ''} ${tx.wallet || ''} ${walletText} ${tx.amount}`.toLowerCase();
       if (!text.includes(financeSearchQuery)) return false;
     }
@@ -6209,11 +6209,11 @@ function renderFinances() {
   const countLabel = document.getElementById('transCountLabel');
 
   if (countLabel) {
-    if (financeFilterPerson === 'tabungan_yuki') {
+    if (financeFilterPerson === 'tabungan_orange') {
       countLabel.textContent = `${filtered.length} Orange's Savings`;
-    } else if (financeFilterPerson === 'yuki') {
+    } else if (financeFilterPerson === 'orange') {
       countLabel.textContent = `${filtered.length} Orange's Wallet`;
-    } else if (financeFilterPerson === 'nata') {
+    } else if (financeFilterPerson === 'black') {
       countLabel.textContent = `${filtered.length} Black's Wallet`;
     } else {
       countLabel.textContent = `${filtered.length} Entries`;
@@ -6297,17 +6297,17 @@ function renderFinances() {
 
     groupTxs.forEach(tx => {
       const isIncome = tx.type === 'income';
-      const isTabunganYuki = tx.wallet === 'tabungan_yuki' || (tx.person === 'yuki' && tx.source === 'tabungan');
-      const isYuki = tx.person === 'yuki' || tx.wallet === 'yuki' || isTabunganYuki;
+      const isTabunganOrange = tx.wallet === 'tabungan_orange' || (tx.person === 'orange' && tx.source === 'tabungan');
+      const isOrange = tx.person === 'orange' || tx.wallet === 'orange' || isTabunganOrange;
 
-      const personLabel = isYuki ? '🐈 Orange' : '🐈‍⬛ Black';
-      const personClass = isYuki ? 'tag-yuki' : 'tag-nata';
+      const personLabel = isOrange ? '🐈 Orange' : '🐈‍⬛ Black';
+      const personClass = isOrange ? 'tag-orange' : 'tag-black';
 
-      let walletLabel = isYuki ? "💳 Orange's Wallet" : "💳 Black's Wallet";
-      let walletClass = isYuki ? 'tag-dompet-yuki' : 'tag-dompet-nata';
-      if (isTabunganYuki) {
+      let walletLabel = isOrange ? "💳 Orange's Wallet" : "💳 Black's Wallet";
+      let walletClass = isOrange ? 'tag-dompet-orange' : 'tag-dompet-black';
+      if (isTabunganOrange) {
         walletLabel = "🏦 Orange's Savings";
-        walletClass = 'tag-tabungan-yuki';
+        walletClass = 'tag-tabungan-orange';
       }
 
       const cat = FINANCE_CATEGORIES[tx.category] || { label: 'Lainnya', icon: '✨' };
@@ -6316,7 +6316,7 @@ function renderFinances() {
                              tx.paymentMethod === 'cash' ? '💵 Cash' : '💳 Card';
 
       html += `
-        <div class="trans-item-card ${isIncome ? 'is-income' : 'is-expense'} ${isTabunganYuki ? 'is-tabungan' : ''}">
+        <div class="trans-item-card ${isIncome ? 'is-income' : 'is-expense'} ${isTabunganOrange ? 'is-tabungan' : ''}">
           <div class="trans-icon-bubble" title="${cat.label}">${cat.icon}</div>
           <div class="trans-info-col">
             <div class="trans-title-line">
@@ -6384,17 +6384,17 @@ window.nextSavingQuote = nextSavingQuote;
 
 // Individual Savings Goals (Y & N)
 function renderSavingsGoals() {
-  const yukiGrid = document.getElementById('yukiGoalsGrid');
-  const nataGrid = document.getElementById('nataGoalsGrid');
-  const yukiBadge = document.getElementById('yukiGoalsCountBadge');
-  const nataBadge = document.getElementById('nataGoalsCountBadge');
+  const orangeGrid = document.getElementById('orangeGoalsGrid');
+  const blackGrid = document.getElementById('blackGoalsGrid');
+  const orangeBadge = document.getElementById('orangeGoalsCountBadge');
+  const blackBadge = document.getElementById('blackGoalsCountBadge');
 
   const goals = getFinanceGoals();
-  const yukiGoals = goals.filter(g => g.owner === 'yuki' || !g.owner);
-  const nataGoals = goals.filter(g => g.owner === 'nata');
+  const orangeGoals = goals.filter(g => g.owner === 'orange' || !g.owner);
+  const blackGoals = goals.filter(g => g.owner === 'black');
 
-  if (yukiBadge) yukiBadge.textContent = `${yukiGoals.length} Target`;
-  if (nataBadge) nataBadge.textContent = `${nataGoals.length} Target`;
+  if (orangeBadge) orangeBadge.textContent = `${orangeGoals.length} Target`;
+  if (blackBadge) blackBadge.textContent = `${blackGoals.length} Target`;
 
   const renderGoalList = (list, ownerName) => {
     if (list.length === 0) {
@@ -6426,8 +6426,8 @@ function renderSavingsGoals() {
     }).join('');
   };
 
-  if (yukiGrid) yukiGrid.innerHTML = renderGoalList(yukiGoals, 'Orange');
-  if (nataGrid) nataGrid.innerHTML = renderGoalList(nataGoals, 'Black');
+  if (orangeGrid) orangeGrid.innerHTML = renderGoalList(orangeGoals, 'Orange');
+  if (blackGrid) blackGrid.innerHTML = renderGoalList(blackGoals, 'Black');
 }
 
 // Quick Log Handlers
@@ -6455,11 +6455,11 @@ function resetDirectQuickNominal() {
 function onQuickPersonChange(val) {
   const walletSelect = document.getElementById('quickDirectWallet');
   if (walletSelect) {
-    if (val === 'nata') {
-      walletSelect.value = 'nata';
+    if (val === 'black') {
+      walletSelect.value = 'black';
     } else {
-      if (walletSelect.value !== 'tabungan_yuki') {
-        walletSelect.value = 'yuki';
+      if (walletSelect.value !== 'tabungan_orange') {
+        walletSelect.value = 'orange';
       }
     }
   }
@@ -6481,7 +6481,7 @@ function submitDirectQuickFinance() {
   }
 
   const category = catInp?.value || 'other';
-  const person = personInp?.value || 'yuki';
+  const person = personInp?.value || 'orange';
   const wallet = walletInp?.value || person;
   const paymentMethod = payInp?.value || 'qris';
   const desc = descInp?.value.trim() || (FINANCE_CATEGORIES[category]?.label || 'Transaction');
@@ -6513,7 +6513,7 @@ function submitDirectQuickFinance() {
 
   playSound('chime');
   renderFinances();
-  showToast(`Recorded in ${person === 'yuki' ? "Orange's" : "Black's"} Wallet: ${formatRupiah(amount)} ✨`);
+  showToast(`Recorded in ${person === 'orange' ? "Orange's" : "Black's"} Wallet: ${formatRupiah(amount)} ✨`);
 }
 
 function quickFilterByCategory(catKey) {
@@ -6569,9 +6569,9 @@ function openFinanceModal(type = 'expense', editId = null) {
       document.getElementById('financeModalAmount').value = tx.amount;
       document.getElementById('financeModalDesc').value = tx.desc || '';
       document.getElementById('financeModalDate').value = tx.date || getTodayString();
-      if (tx.person === 'yuki') document.getElementById('radioFinanceYuki').checked = true;
-      else document.getElementById('radioFinanceNata').checked = true;
-      document.getElementById('financeModalWallet').value = tx.wallet === 'nata' ? 'nata' : 'yuki';
+      if (tx.person === 'orange') document.getElementById('radioFinanceOrange').checked = true;
+      else document.getElementById('radioFinanceBlack').checked = true;
+      document.getElementById('financeModalWallet').value = tx.wallet === 'black' ? 'black' : 'orange';
       document.getElementById('financeModalPayment').value = tx.paymentMethod || 'qris';
       document.getElementById('financeModalToggleSplit').checked = !!tx.isSplit;
       document.getElementById('financeModalSplitDrawer').style.display = tx.isSplit ? 'flex' : 'none';
@@ -6581,8 +6581,8 @@ function openFinanceModal(type = 'expense', editId = null) {
     document.getElementById('financeModalAmount').value = '';
     document.getElementById('financeModalDesc').value = '';
     document.getElementById('financeModalDate').value = getTodayString();
-    document.getElementById('radioFinanceYuki').checked = true;
-    document.getElementById('financeModalWallet').value = 'yuki';
+    document.getElementById('radioFinanceOrange').checked = true;
+    document.getElementById('financeModalWallet').value = 'orange';
     document.getElementById('financeModalPayment').value = 'qris';
     document.getElementById('financeModalToggleSplit').checked = false;
     document.getElementById('financeModalSplitDrawer').style.display = 'none';
@@ -6657,7 +6657,7 @@ function saveFinanceModalTransaction(event) {
   const category = document.getElementById('financeModalCategory').value;
   const desc = document.getElementById('financeModalDesc').value.trim() || FINANCE_CATEGORIES[category]?.label;
   const date = document.getElementById('financeModalDate').value || getTodayString();
-  const person = document.getElementById('radioFinanceYuki').checked ? 'yuki' : 'nata';
+  const person = document.getElementById('radioFinanceOrange').checked ? 'orange' : 'black';
   const wallet = document.getElementById('financeModalWallet').value;
   const paymentMethod = document.getElementById('financeModalPayment').value;
   const txData = {
@@ -6700,15 +6700,15 @@ function deleteFinanceTransaction(id) {
 }
 
 // Goals Modals
-function openAddSavingsGoalModal(defaultOwner = 'yuki') {
+function openAddSavingsGoalModal(defaultOwner = 'orange') {
   document.getElementById('goalInputTitle').value = '';
   document.getElementById('goalInputTarget').value = '';
   document.getElementById('goalInputInitial').value = '0';
   document.getElementById('goalInputDeadline').value = '';
-  if (defaultOwner === 'nata') {
-    document.getElementById('radioGoalNata').checked = true;
+  if (defaultOwner === 'black') {
+    document.getElementById('radioGoalBlack').checked = true;
   } else {
-    document.getElementById('radioGoalYuki').checked = true;
+    document.getElementById('radioGoalOrange').checked = true;
   }
   document.getElementById('modalSavingsGoal').style.display = 'flex';
 }
@@ -6719,7 +6719,7 @@ function closeSavingsGoalModal() {
 
 function saveSavingsGoalForm(event) {
   event.preventDefault();
-  const owner = document.getElementById('radioGoalNata').checked ? 'nata' : 'yuki';
+  const owner = document.getElementById('radioGoalBlack').checked ? 'black' : 'orange';
   const title = document.getElementById('goalInputTitle').value.trim();
   const targetAmount = Number(document.getElementById('goalInputTarget').value);
   const initial = Number(document.getElementById('goalInputInitial').value) || 0;
@@ -6741,7 +6741,7 @@ function saveSavingsGoalForm(event) {
   closeSavingsGoalModal();
   playSound('chime');
   renderFinances();
-  showToast(`Savings goal for ${owner === 'yuki' ? 'Orange' : 'Black'} added! 🌟`);
+  showToast(`Savings goal for ${owner === 'orange' ? 'Orange' : 'Black'} added! 🌟`);
 }
 
 function openGoalDepositModal(goalId) {

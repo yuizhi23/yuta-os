@@ -130,9 +130,9 @@
       <div class="icon-img-wrap"><img src="assets/cat_dialog.png" alt="Cat" /></div>
       <span class="icon-label">Purrr</span>
     </div>
-    <div class="desktop-icon" onclick="restoreAndSwitchTab('hosttracker')" title="TikTok Host &amp; Task Tracker (Yume)">
+    <div class="desktop-icon" onclick="restoreAndSwitchTab('hosttracker')" title="TikTok Host &amp; Task Tracker">
       <div class="icon-img-wrap"><span class="desktop-emoji">🎯</span></div>
-      <span class="icon-label">Host Yume</span>
+      <span class="icon-label">Host Tracker</span>
     </div>
   </aside>
 
@@ -300,7 +300,7 @@
         <span class="menu-item" onclick="spawnFloatingBubbleSwarm()"><u>B</u>ubbles</span>
         <span class="menu-item" onclick="switchTab('lovenotes')"><u>F</u>avorites</span>
         <span class="menu-item" onclick="toggleMediaPlayer()"><u>T</u>ools</span>
-        <span class="menu-item" onclick="restoreAndSwitchTab('hosttracker')"><u>H</u>ost Tracker (Yume)</span>
+        <span class="menu-item" onclick="restoreAndSwitchTab('hosttracker')"><u>H</u>ost Tracker</span>
         <span class="menu-item" onclick="openCatDialog()"><u>H</u>elp</span>
         <div class="menubar-time" id="menubarClock">00:00:00</div>
       </div>
@@ -353,67 +353,67 @@
 
           <div class="todo-grid-3col">
             <!-- Y Column -->
-            <div class="todo-column yuki-col tilt-card">
+            <div class="todo-column orange-col tilt-card">
               <div class="column-header">
-                <div class="col-avatar yuki-av" title="Orange (Orange Cat)">🐈</div>
+                <div class="col-avatar orange-av" title="Orange (Orange Cat)">🐈</div>
                 <div class="col-title-wrap">
                   <h3 class="col-title">Orange's Quests</h3>
                   <span class="col-subtitle">Orange cat locking in</span>
                 </div>
               </div>
               <div class="todo-input-wrap">
-                <input type="text" id="yukiTodoInput" class="retro-text-input" placeholder="Drop a task for Orange..." />
-                <button class="retro-add-btn" onclick="addTodo('yuki')">＋</button>
+                <input type="text" id="orangeTodoInput" class="retro-text-input" placeholder="Drop a task for Orange..." />
+                <button class="retro-add-btn" onclick="addTodo('orange')">＋</button>
               </div>
-              <ul class="todo-list" id="yukiTodoList">
-                <li class="todo-item" onclick="toggleTodo('yuki', 'y_lms', event)"><div class="todo-checkbox"></div><span class="todo-text">Open LMS &amp; check courses 💻</span><button class="todo-delete" onclick="deleteTodo('yuki', 'y_lms')">✕</button></li>
-                <li class="todo-item" onclick="toggleTodo('yuki', 'y_tugas', event)"><div class="todo-checkbox"></div><span class="todo-text">Work on assignments 📚</span><button class="todo-delete" onclick="deleteTodo('yuki', 'y_tugas')">✕</button></li>
-                <li class="todo-item" onclick="toggleTodo('yuki', 'y_skripsi', event)"><div class="todo-checkbox"></div><span class="todo-text">Work on thesis ✍️</span><button class="todo-delete" onclick="deleteTodo('yuki', 'y_skripsi')">✕</button></li>
-                <li class="todo-item" onclick="toggleTodo('yuki', 'y_kerja', event)"><div class="todo-checkbox"></div><span class="todo-text">Job hunting &amp; applications 💼</span><button class="todo-delete" onclick="deleteTodo('yuki', 'y_kerja')">✕</button></li>
+              <ul class="todo-list" id="orangeTodoList">
+                <li class="todo-item" onclick="toggleTodo('orange', 'y_lms', event)"><div class="todo-checkbox"></div><span class="todo-text">Open LMS &amp; check courses 💻</span><button class="todo-delete" onclick="deleteTodo('orange', 'y_lms')">✕</button></li>
+                <li class="todo-item" onclick="toggleTodo('orange', 'y_tugas', event)"><div class="todo-checkbox"></div><span class="todo-text">Work on assignments 📚</span><button class="todo-delete" onclick="deleteTodo('orange', 'y_tugas')">✕</button></li>
+                <li class="todo-item" onclick="toggleTodo('orange', 'y_skripsi', event)"><div class="todo-checkbox"></div><span class="todo-text">Work on thesis ✍️</span><button class="todo-delete" onclick="deleteTodo('orange', 'y_skripsi')">✕</button></li>
+                <li class="todo-item" onclick="toggleTodo('orange', 'y_kerja', event)"><div class="todo-checkbox"></div><span class="todo-text">Job hunting &amp; applications 💼</span><button class="todo-delete" onclick="deleteTodo('orange', 'y_kerja')">✕</button></li>
               </ul>
               <div class="todo-footer-retro">
-                <span class="status-counter" id="yukiCount">0 / 4 completed</span>
+                <span class="status-counter" id="orangeCount">0 / 4 completed</span>
                 <div style="display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end;">
-                  <button class="clear-btn" style="color:#ea580c; border-color:rgba(234,88,12,0.4);" onclick="syncYukiGCal()" title="Sync Google Calendar Schedule for Orange">📅 Sync GCal</button>
-                  <button class="clear-btn" style="color:#ea580c; border-color:rgba(234,88,12,0.4);" onclick="loadYukiRoutine()" title="Reload Orange's 4 Tasks">⚡ Routine</button>
-                  <button class="clear-btn" onclick="clearCompleted('yuki')">Clear</button>
+                  <button class="clear-btn" style="color:#ea580c; border-color:rgba(234,88,12,0.4);" onclick="syncOrangeGCal()" title="Sync Google Calendar Schedule for Orange">📅 Sync GCal</button>
+                  <button class="clear-btn" style="color:#ea580c; border-color:rgba(234,88,12,0.4);" onclick="loadOrangeRoutine()" title="Reload Orange's 4 Tasks">⚡ Routine</button>
+                  <button class="clear-btn" onclick="clearCompleted('orange')">Clear</button>
                 </div>
               </div>
             </div>
 
             <!-- N Column -->
-            <div class="todo-column nata-col tilt-card">
+            <div class="todo-column black-col tilt-card">
               <div class="column-header">
-                <div class="col-avatar nata-av" title="Black (Black Cat)">🐈‍⬛</div>
+                <div class="col-avatar black-av" title="Black (Black Cat)">🐈‍⬛</div>
                 <div class="col-title-wrap">
                   <h3 class="col-title">Black's Quests</h3>
                   <span class="col-subtitle">Black cat doing her thing</span>
                 </div>
               </div>
               <div class="todo-input-wrap">
-                <input type="text" id="nataTodoInput" class="retro-text-input" placeholder="Drop a task for Black..." />
-                <button class="retro-add-btn" onclick="addTodo('nata')">＋</button>
+                <input type="text" id="blackTodoInput" class="retro-text-input" placeholder="Drop a task for Black..." />
+                <button class="retro-add-btn" onclick="addTodo('black')">＋</button>
               </div>
-              <ul class="todo-list" id="nataTodoList">
-                <li class="todo-item" onclick="toggleTodo('nata', 'n_spender', event)">
+              <ul class="todo-list" id="blackTodoList">
+                <li class="todo-item" onclick="toggleTodo('black', 'n_spender', event)">
                   <div class="todo-checkbox"></div>
                   <span class="todo-text">Reply to spenders 💬 <button type="button" class="routine-mini-btn" onclick="event.stopPropagation(); restoreAndSwitchTab('hosttracker');" title="Buka Tracker Spender" style="margin-left: 6px; font-size: 0.7rem; padding: 2px 7px; border-radius: 6px; background: rgba(14, 165, 233, 0.2); border: 1px solid rgba(14, 165, 233, 0.4); color: #0284c7; cursor: pointer; font-weight: 700;">🎯 Buka Tracker</button></span>
-                  <button class="todo-delete" onclick="deleteTodo('nata', 'n_spender')">✕</button>
+                  <button class="todo-delete" onclick="deleteTodo('black', 'n_spender')">✕</button>
                 </li>
-                <li class="todo-item" onclick="toggleTodo('nata', 'n_live', event)"><div class="todo-checkbox"></div><span class="todo-text">Daily 1-hour stream before dual persona stream 📹</span><button class="todo-delete" onclick="deleteTodo('nata', 'n_live')">✕</button></li>
-                <li class="todo-item" onclick="toggleTodo('nata', 'n_laporan', event)">
+                <li class="todo-item" onclick="toggleTodo('black', 'n_live', event)"><div class="todo-checkbox"></div><span class="todo-text">Daily 1-hour stream before dual persona stream 📹</span><button class="todo-delete" onclick="deleteTodo('black', 'n_live')">✕</button></li>
+                <li class="todo-item" onclick="toggleTodo('black', 'n_laporan', event)">
                   <div class="todo-checkbox"></div>
                   <span class="todo-text">Send live stream report to group 📊 <button type="button" class="routine-mini-btn" onclick="event.stopPropagation(); restoreAndSwitchTab('hosttracker'); window.HostTracker.switchSubTab('tasks');" title="Open Task Submissions" style="margin-left: 6px; font-size: 0.7rem; padding: 2px 7px; border-radius: 6px; background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.4); color: #059669; cursor: pointer; font-weight: 700;">📋 Open Tasks</button></span>
-                  <button class="todo-delete" onclick="deleteTodo('nata', 'n_laporan')">✕</button>
+                  <button class="todo-delete" onclick="deleteTodo('black', 'n_laporan')">✕</button>
                 </li>
-                <li class="todo-item" onclick="toggleTodo('nata', 'n_absen', event)"><div class="todo-checkbox"></div><span class="todo-text">Clock-in & clock-out attendance ⏰</span><button class="todo-delete" onclick="deleteTodo('nata', 'n_absen')">✕</button></li>
+                <li class="todo-item" onclick="toggleTodo('black', 'n_absen', event)"><div class="todo-checkbox"></div><span class="todo-text">Clock-in & clock-out attendance ⏰</span><button class="todo-delete" onclick="deleteTodo('black', 'n_absen')">✕</button></li>
               </ul>
               <div class="todo-footer-retro">
-                <span class="status-counter" id="nataCount">0 / 4 completed</span>
+                <span class="status-counter" id="blackCount">0 / 4 completed</span>
                 <div style="display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end;">
-                  <button class="clear-btn" style="color:#64748b; border-color:rgba(100,116,139,0.4);" onclick="syncNataGCal()" title="Sync Google Calendar Schedule for Black">📅 Sync GCal</button>
-                  <button class="clear-btn" style="color:#64748b; border-color:rgba(100,116,139,0.4);" onclick="loadNataRoutine()" title="Reload Black's 4 Tasks">⚡ Routine</button>
-                  <button class="clear-btn" onclick="clearCompleted('nata')">Clear</button>
+                  <button class="clear-btn" style="color:#64748b; border-color:rgba(100,116,139,0.4);" onclick="syncBlackGCal()" title="Sync Google Calendar Schedule for Black">📅 Sync GCal</button>
+                  <button class="clear-btn" style="color:#64748b; border-color:rgba(100,116,139,0.4);" onclick="loadBlackRoutine()" title="Reload Black's 4 Tasks">⚡ Routine</button>
+                  <button class="clear-btn" onclick="clearCompleted('black')">Clear</button>
                 </div>
               </div>
             </div>
@@ -484,61 +484,61 @@
           <!-- Section 1: Daily Vibe Check -->
           <div class="mood-container-grid" style="margin-bottom: 24px;">
             <!-- Y Mood -->
-            <div class="mood-box-retro yuki-mood-box tilt-card">
+            <div class="mood-box-retro orange-mood-box tilt-card">
               <div class="mood-box-header">
-                <span class="mood-avatar yuki-mood-av" title="Orange (Orange Cat)">🐈</span>
+                <span class="mood-avatar orange-mood-av" title="Orange (Orange Cat)">🐈</span>
                 <div>
                   <h3 class="col-title">Orange's Vibe Check</h3>
                   <span class="col-subtitle">Today's energy & headspace</span>
                 </div>
               </div>
-              <div class="mood-emoji-selector" id="yukiMoodEmojis">
-                <button type="button" class="mood-pick" data-mood="😄" data-person="yuki" title="Radiant" onclick="selectMoodEmoji('yuki', '😄', this)">😄</button>
-                <button type="button" class="mood-pick" data-mood="🥰" data-person="yuki" title="Loved" onclick="selectMoodEmoji('yuki', '🥰', this)">🥰</button>
-                <button type="button" class="mood-pick" data-mood="😊" data-person="yuki" title="Peaceful" onclick="selectMoodEmoji('yuki', '😊', this)">😊</button>
-                <button type="button" class="mood-pick" data-mood="🤩" data-person="yuki" title="Hyped" onclick="selectMoodEmoji('yuki', '🤩', this)">🤩</button>
-                <button type="button" class="mood-pick" data-mood="😐" data-person="yuki" title="Neutral" onclick="selectMoodEmoji('yuki', '😐', this)">😐</button>
-                <button type="button" class="mood-pick" data-mood="😴" data-person="yuki" title="Sleepy" onclick="selectMoodEmoji('yuki', '😴', this)">😴</button>
-                <button type="button" class="mood-pick" data-mood="🥺" data-person="yuki" title="Soft" onclick="selectMoodEmoji('yuki', '🥺', this)">🥺</button>
-                <button type="button" class="mood-pick" data-mood="😔" data-person="yuki" title="Low" onclick="selectMoodEmoji('yuki', '😔', this)">😔</button>
-                <button type="button" class="mood-pick" data-mood="😤" data-person="yuki" title="Restless" onclick="selectMoodEmoji('yuki', '😤', this)">😤</button>
-                <button type="button" class="mood-pick" data-mood="😰" data-person="yuki" title="Busy" onclick="selectMoodEmoji('yuki', '😰', this)">😰</button>
+              <div class="mood-emoji-selector" id="orangeMoodEmojis">
+                <button type="button" class="mood-pick" data-mood="😄" data-person="orange" title="Radiant" onclick="selectMoodEmoji('orange', '😄', this)">😄</button>
+                <button type="button" class="mood-pick" data-mood="🥰" data-person="orange" title="Loved" onclick="selectMoodEmoji('orange', '🥰', this)">🥰</button>
+                <button type="button" class="mood-pick" data-mood="😊" data-person="orange" title="Peaceful" onclick="selectMoodEmoji('orange', '😊', this)">😊</button>
+                <button type="button" class="mood-pick" data-mood="🤩" data-person="orange" title="Hyped" onclick="selectMoodEmoji('orange', '🤩', this)">🤩</button>
+                <button type="button" class="mood-pick" data-mood="😐" data-person="orange" title="Neutral" onclick="selectMoodEmoji('orange', '😐', this)">😐</button>
+                <button type="button" class="mood-pick" data-mood="😴" data-person="orange" title="Sleepy" onclick="selectMoodEmoji('orange', '😴', this)">😴</button>
+                <button type="button" class="mood-pick" data-mood="🥺" data-person="orange" title="Soft" onclick="selectMoodEmoji('orange', '🥺', this)">🥺</button>
+                <button type="button" class="mood-pick" data-mood="😔" data-person="orange" title="Low" onclick="selectMoodEmoji('orange', '😔', this)">😔</button>
+                <button type="button" class="mood-pick" data-mood="😤" data-person="orange" title="Restless" onclick="selectMoodEmoji('orange', '😤', this)">😤</button>
+                <button type="button" class="mood-pick" data-mood="😰" data-person="orange" title="Busy" onclick="selectMoodEmoji('orange', '😰', this)">😰</button>
               </div>
               <div class="mood-status-row">
                 <span>Selected:</span>
-                <span class="mood-selected-big" id="yukiSelectedEmoji">—</span>
+                <span class="mood-selected-big" id="orangeSelectedEmoji">—</span>
               </div>
-              <textarea id="yukiMoodNote" class="retro-textarea" placeholder="How was your day? Spill anything on your mind..."></textarea>
-              <button class="retro-btn-save" onclick="saveMood('yuki')">Log Orange's Vibe</button>
+              <textarea id="orangeMoodNote" class="retro-textarea" placeholder="How was your day? Spill anything on your mind..."></textarea>
+              <button class="retro-btn-save" onclick="saveMood('orange')">Log Orange's Vibe</button>
             </div>
 
             <!-- N Mood -->
-            <div class="mood-box-retro nata-mood-box tilt-card">
+            <div class="mood-box-retro black-mood-box tilt-card">
               <div class="mood-box-header">
-                <span class="mood-avatar nata-mood-av" title="Black (Black Cat)">🐈‍⬛</span>
+                <span class="mood-avatar black-mood-av" title="Black (Black Cat)">🐈‍⬛</span>
                 <div>
                   <h3 class="col-title">Black's Vibe Check</h3>
                   <span class="col-subtitle">Today's energy & headspace</span>
                 </div>
               </div>
-              <div class="mood-emoji-selector" id="nataMoodEmojis">
-                <button type="button" class="mood-pick" data-mood="😄" data-person="nata" title="Radiant" onclick="selectMoodEmoji('nata', '😄', this)">😄</button>
-                <button type="button" class="mood-pick" data-mood="🥰" data-person="nata" title="Loved" onclick="selectMoodEmoji('nata', '🥰', this)">🥰</button>
-                <button type="button" class="mood-pick" data-mood="😊" data-person="nata" title="Peaceful" onclick="selectMoodEmoji('nata', '😊', this)">😊</button>
-                <button type="button" class="mood-pick" data-mood="🤩" data-person="nata" title="Hyped" onclick="selectMoodEmoji('nata', '🤩', this)">🤩</button>
-                <button type="button" class="mood-pick" data-mood="😐" data-person="nata" title="Neutral" onclick="selectMoodEmoji('nata', '😐', this)">😐</button>
-                <button type="button" class="mood-pick" data-mood="😴" data-person="nata" title="Sleepy" onclick="selectMoodEmoji('nata', '😴', this)">😴</button>
-                <button type="button" class="mood-pick" data-mood="🥺" data-person="nata" title="Soft" onclick="selectMoodEmoji('nata', '🥺', this)">🥺</button>
-                <button type="button" class="mood-pick" data-mood="😔" data-person="nata" title="Low" onclick="selectMoodEmoji('nata', '😔', this)">😔</button>
-                <button type="button" class="mood-pick" data-mood="😤" data-person="nata" title="Restless" onclick="selectMoodEmoji('nata', '😤', this)">😤</button>
-                <button type="button" class="mood-pick" data-mood="😰" data-person="nata" title="Busy" onclick="selectMoodEmoji('nata', '😰', this)">😰</button>
+              <div class="mood-emoji-selector" id="blackMoodEmojis">
+                <button type="button" class="mood-pick" data-mood="😄" data-person="black" title="Radiant" onclick="selectMoodEmoji('black', '😄', this)">😄</button>
+                <button type="button" class="mood-pick" data-mood="🥰" data-person="black" title="Loved" onclick="selectMoodEmoji('black', '🥰', this)">🥰</button>
+                <button type="button" class="mood-pick" data-mood="😊" data-person="black" title="Peaceful" onclick="selectMoodEmoji('black', '😊', this)">😊</button>
+                <button type="button" class="mood-pick" data-mood="🤩" data-person="black" title="Hyped" onclick="selectMoodEmoji('black', '🤩', this)">🤩</button>
+                <button type="button" class="mood-pick" data-mood="😐" data-person="black" title="Neutral" onclick="selectMoodEmoji('black', '😐', this)">😐</button>
+                <button type="button" class="mood-pick" data-mood="😴" data-person="black" title="Sleepy" onclick="selectMoodEmoji('black', '😴', this)">😴</button>
+                <button type="button" class="mood-pick" data-mood="🥺" data-person="black" title="Soft" onclick="selectMoodEmoji('black', '🥺', this)">🥺</button>
+                <button type="button" class="mood-pick" data-mood="😔" data-person="black" title="Low" onclick="selectMoodEmoji('black', '😔', this)">😔</button>
+                <button type="button" class="mood-pick" data-mood="😤" data-person="black" title="Restless" onclick="selectMoodEmoji('black', '😤', this)">😤</button>
+                <button type="button" class="mood-pick" data-mood="😰" data-person="black" title="Busy" onclick="selectMoodEmoji('black', '😰', this)">😰</button>
               </div>
               <div class="mood-status-row">
                 <span>Selected:</span>
-                <span class="mood-selected-big" id="nataSelectedEmoji">—</span>
+                <span class="mood-selected-big" id="blackSelectedEmoji">—</span>
               </div>
-              <textarea id="nataMoodNote" class="retro-textarea" placeholder="How was your day? Drop your thoughts here..."></textarea>
-              <button class="retro-btn-save" onclick="saveMood('nata')">Log Black's Vibe</button>
+              <textarea id="blackMoodNote" class="retro-textarea" placeholder="How was your day? Drop your thoughts here..."></textarea>
+              <button class="retro-btn-save" onclick="saveMood('black')">Log Black's Vibe</button>
             </div>
           </div>
 
@@ -617,7 +617,7 @@
           <!-- ==================== 1. VIRTUAL 3D CARDS VISUAL SHOWCASE ==================== -->
           <div class="wallet-cards-showcase">
             <!-- Y Holographic Card -->
-            <div class="vcard-card-box yuki-card-box" onclick="setFinanceFilterPerson('yuki')" title="View Orange's Wallet Transactions">
+            <div class="vcard-card-box orange-card-box" onclick="setFinanceFilterPerson('orange')" title="View Orange's Wallet Transactions">
               <div class="vcard-media-wrap">
                 <img src="assets/wallet/card_orange.jpg" alt="Orange Debit Card" class="vcard-media-img" />
                 <div class="vcard-glass-gloss"></div>
@@ -625,14 +625,14 @@
               <div class="vcard-meta-glass">
                 <div class="vcard-meta-top">
                   <span class="vcard-owner-badge">🐈 Orange's Wallet</span>
-                  <span class="vcard-share-chip" id="vcardYukiShare">Surplus 🟢</span>
+                  <span class="vcard-share-chip" id="vcardOrangeShare">Surplus 🟢</span>
                 </div>
                 <div class="vcard-meta-bottom">
                   <div>
                     <span class="vcard-label">Orange's Balance</span>
-                    <div class="vcard-sum" id="vcardYukiAmt">Rp 174.000</div>
+                    <div class="vcard-sum" id="vcardOrangeAmt">Rp 174.000</div>
                   </div>
-                  <div class="vcard-sub-stats" id="vcardYukiSubStats" style="font-size:0.75rem; color:rgba(255,255,255,0.9); text-align:right;">
+                  <div class="vcard-sub-stats" id="vcardOrangeSubStats" style="font-size:0.75rem; color:rgba(255,255,255,0.9); text-align:right;">
                     In: +Rp 240.000 | Out: -Rp 66.000
                   </div>
                 </div>
@@ -640,22 +640,22 @@
             </div>
 
             <!-- N Holographic Card -->
-            <div class="vcard-card-box nata-card-box" onclick="setFinanceFilterPerson('nata')" title="View Black's Wallet Transactions">
+            <div class="vcard-card-box black-card-box" onclick="setFinanceFilterPerson('black')" title="View Black's Wallet Transactions">
               <div class="vcard-media-wrap">
                 <img src="assets/wallet/card_black.jpg" alt="Black Debit Card" class="vcard-media-img" />
                 <div class="vcard-glass-gloss"></div>
               </div>
               <div class="vcard-meta-glass">
                 <div class="vcard-meta-top">
-                  <span class="vcard-owner-badge nata-badge">🐈‍⬛ Black's Wallet</span>
-                  <span class="vcard-share-chip nata-chip" id="vcardNataShare">Surplus 🟢</span>
+                  <span class="vcard-owner-badge black-badge">🐈‍⬛ Black's Wallet</span>
+                  <span class="vcard-share-chip black-chip" id="vcardBlackShare">Surplus 🟢</span>
                 </div>
                 <div class="vcard-meta-bottom">
                   <div>
                     <span class="vcard-label">Black's Balance</span>
-                    <div class="vcard-sum" id="vcardNataAmt">Rp 0</div>
+                    <div class="vcard-sum" id="vcardBlackAmt">Rp 0</div>
                   </div>
-                  <div class="vcard-sub-stats" id="vcardNataSubStats" style="font-size:0.75rem; color:rgba(255,255,255,0.9); text-align:right;">
+                  <div class="vcard-sub-stats" id="vcardBlackSubStats" style="font-size:0.75rem; color:rgba(255,255,255,0.9); text-align:right;">
                     In: +Rp 4.000.000 | Out: -Rp 0
                   </div>
                 </div>
@@ -673,66 +673,66 @@
                   <span class="bento-badge-chip">🐈</span>
                   <span class="bento-badge-chip-white">Orange's Wallet</span>
                 </div>
-                <span class="bento-tag-pill tag-yuki-pill" id="yukiStatusBadge">Surplus 🟢</span>
+                <span class="bento-tag-pill tag-orange-pill" id="orangeStatusBadge">Surplus 🟢</span>
               </div>
               <div class="bento-card-body">
                 <span class="bento-label-small" style="font-size:0.75rem; font-weight:700; color:#c2410c; text-transform:uppercase;">Orange's Balance</span>
-                <div class="bento-main-amount text-yuki" id="yukiBalAmount" style="font-size:2rem; margin: 4px 0 10px;">Rp 174.000</div>
+                <div class="bento-main-amount text-orange" id="orangeBalAmount" style="font-size:2rem; margin: 4px 0 10px;">Rp 174.000</div>
                 
                 <!-- Inflow & Outflow Boxes -->
                 <div class="wallet-mini-stats-grid">
                   <div class="mini-stat-box in-box">
                     <span class="mini-stat-label">Income</span>
-                    <span class="mini-stat-val amount-green" id="yukiIncomeAmount">+Rp 240.000</span>
+                    <span class="mini-stat-val amount-green" id="orangeIncomeAmount">+Rp 240.000</span>
                   </div>
                   <div class="mini-stat-box out-box">
                     <span class="mini-stat-label">Outcome</span>
-                    <span class="mini-stat-val amount-red" id="yukiOutcomeAmount">-Rp 66.000</span>
+                    <span class="mini-stat-val amount-red" id="orangeOutcomeAmount">-Rp 66.000</span>
                   </div>
                 </div>
 
                 <div class="bento-progress-track" style="margin-top: 10px;">
-                  <div class="bento-progress-fill fill-peach" id="yukiExpBar" style="width: 28%;"></div>
+                  <div class="bento-progress-fill fill-peach" id="orangeExpBar" style="width: 28%;"></div>
                 </div>
               </div>
               <div class="bento-card-footer" style="display:flex; justify-content:space-between; align-items:center;">
-                <span class="bento-desc-text" id="yukiExpRatioText" style="font-size:0.75rem; color:#475569;">Expenses 28% of Income</span>
-                <span style="font-size:0.75rem; font-weight:700; color:#c2410c;" id="yukiExpAmount">Outcome: Rp 66.000</span>
+                <span class="bento-desc-text" id="orangeExpRatioText" style="font-size:0.75rem; color:#475569;">Expenses 28% of Income</span>
+                <span style="font-size:0.75rem; font-weight:700; color:#c2410c;" id="orangeExpAmount">Outcome: Rp 66.000</span>
               </div>
             </div>
 
             <!-- Black's Wallet Master Card -->
-            <div class="bento-card bento-nata-dark bento-wallet-master">
+            <div class="bento-card bento-black-dark bento-wallet-master">
               <div class="bento-card-header">
                 <div class="bento-icon-badges">
                   <span class="bento-badge-chip">🐈‍⬛</span>
                   <span class="bento-badge-chip-white">Black's Wallet</span>
                 </div>
-                <span class="bento-tag-pill tag-nata-pill" id="nataStatusBadge">Surplus 🟢</span>
+                <span class="bento-tag-pill tag-black-pill" id="blackStatusBadge">Surplus 🟢</span>
               </div>
               <div class="bento-card-body">
                 <span class="bento-label-small" style="font-size:0.75rem; font-weight:700; color:#a1a1aa; text-transform:uppercase;">Black's Balance</span>
-                <div class="bento-main-amount text-nata" id="nataBalAmount" style="font-size:2rem; margin: 4px 0 10px;">Rp 0</div>
+                <div class="bento-main-amount text-black" id="blackBalAmount" style="font-size:2rem; margin: 4px 0 10px;">Rp 0</div>
                 
                 <!-- Inflow & Outflow Boxes -->
                 <div class="wallet-mini-stats-grid">
                   <div class="mini-stat-box in-box">
                     <span class="mini-stat-label">Income</span>
-                    <span class="mini-stat-val amount-green" id="nataIncomeAmount">+Rp 0</span>
+                    <span class="mini-stat-val amount-green" id="blackIncomeAmount">+Rp 0</span>
                   </div>
                   <div class="mini-stat-box out-box">
                     <span class="mini-stat-label">Outcome</span>
-                    <span class="mini-stat-val amount-red" id="nataOutcomeAmount">-Rp 0</span>
+                    <span class="mini-stat-val amount-red" id="blackOutcomeAmount">-Rp 0</span>
                   </div>
                 </div>
 
                 <div class="bento-progress-track" style="margin-top: 10px;">
-                  <div class="bento-progress-fill fill-lavender" id="nataExpBar" style="width: 0%;"></div>
+                  <div class="bento-progress-fill fill-lavender" id="blackExpBar" style="width: 0%;"></div>
                 </div>
               </div>
               <div class="bento-card-footer" style="display:flex; justify-content:space-between; align-items:center;">
-                <span class="bento-desc-text" id="nataExpRatioText" style="font-size:0.75rem; color:#a1a1aa;">Expenses 0% of Income</span>
-                <span style="font-size:0.75rem; font-weight:700; color:#e4e4e7;" id="nataExpAmount">Outcome: Rp 0</span>
+                <span class="bento-desc-text" id="blackExpRatioText" style="font-size:0.75rem; color:#a1a1aa;">Expenses 0% of Income</span>
+                <span style="font-size:0.75rem; font-weight:700; color:#e4e4e7;" id="blackExpAmount">Outcome: Rp 0</span>
               </div>
             </div>
 
@@ -780,17 +780,17 @@
               <div class="bento-input-group">
                 <label class="bento-label">Pencatat (Orang):</label>
                 <select id="quickDirectPerson" class="bento-styled-select" onchange="onQuickPersonChange(this.value)">
-                  <option value="yuki" selected>🐈 Orange</option>
-                  <option value="nata">🐈‍⬛ Black</option>
+                  <option value="orange" selected>🐈 Orange</option>
+                  <option value="black">🐈‍⬛ Black</option>
                 </select>
               </div>
 
               <div class="bento-input-group">
                 <label class="bento-label">Select Wallet:</label>
                 <select id="quickDirectWallet" class="bento-styled-select">
-                  <option value="yuki" selected>🐈 Orange's Wallet</option>
-                  <option value="tabungan_yuki">🏦 Orange's Savings</option>
-                  <option value="nata">🐈‍⬛ Black's Wallet</option>
+                  <option value="orange" selected>🐈 Orange's Wallet</option>
+                  <option value="tabungan_orange">🏦 Orange's Savings</option>
+                  <option value="black">🐈‍⬛ Black's Wallet</option>
                 </select>
               </div>
 
@@ -873,29 +873,29 @@
           <!-- 2-Column Individual Goals (Y vs N) -->
           <div class="individual-goals-wrapper">
             <!-- Orange's Goals Column -->
-            <div class="person-goals-card-box yuki-goals-theme">
+            <div class="person-goals-card-box orange-goals-theme">
               <div class="person-goals-header">
                 <div class="person-goals-title-group">
                   <span class="person-goals-icon">🐈</span>
                   <span class="person-goals-title">Orange's Savings Goals</span>
                 </div>
-                <span class="bento-tag-pill tag-yuki-pill" id="yukiGoalsCountBadge">0 Target</span>
+                <span class="bento-tag-pill tag-orange-pill" id="orangeGoalsCountBadge">0 Target</span>
               </div>
-              <div class="savings-goals-subgrid" id="yukiGoalsGrid">
+              <div class="savings-goals-subgrid" id="orangeGoalsGrid">
                 <!-- Rendered dynamically -->
               </div>
             </div>
 
             <!-- Black's Goals Column -->
-            <div class="person-goals-card-box nata-goals-theme">
+            <div class="person-goals-card-box black-goals-theme">
               <div class="person-goals-header">
                 <div class="person-goals-title-group">
                   <span class="person-goals-icon">🐈‍⬛</span>
                   <span class="person-goals-title">Black's Savings Goals</span>
                 </div>
-                <span class="bento-tag-pill tag-nata-pill" id="nataGoalsCountBadge">0 Target</span>
+                <span class="bento-tag-pill tag-black-pill" id="blackGoalsCountBadge">0 Target</span>
               </div>
-              <div class="savings-goals-subgrid" id="nataGoalsGrid">
+              <div class="savings-goals-subgrid" id="blackGoalsGrid">
                 <!-- Rendered dynamically -->
               </div>
             </div>
@@ -913,9 +913,9 @@
               <div class="bento-toolbar-right">
                 <div class="bento-pill-group">
                   <button class="wallet-pill active" data-person="all" onclick="setFinanceFilterPerson('all')">All</button>
-                  <button class="wallet-pill" data-person="yuki" onclick="setFinanceFilterPerson('yuki')">🐈 Orange's Wallet</button>
-                  <button class="wallet-pill" data-person="tabungan_yuki" onclick="setFinanceFilterPerson('tabungan_yuki')">🏦 Orange's Savings</button>
-                  <button class="wallet-pill" data-person="nata" onclick="setFinanceFilterPerson('nata')">🐈‍⬛ Black's Wallet</button>
+                  <button class="wallet-pill" data-person="orange" onclick="setFinanceFilterPerson('orange')">🐈 Orange's Wallet</button>
+                  <button class="wallet-pill" data-person="tabungan_orange" onclick="setFinanceFilterPerson('tabungan_orange')">🏦 Orange's Savings</button>
+                  <button class="wallet-pill" data-person="black" onclick="setFinanceFilterPerson('black')">🐈‍⬛ Black's Wallet</button>
                 </div>
 
                 <div class="bento-pill-group">
@@ -980,8 +980,8 @@
 
           <!-- Legend -->
           <div class="sched-legend">
-            <span class="sched-legend-item yuki-sched">🐈 Orange</span>
-            <span class="sched-legend-item nata-sched">🐈‍⬛ Black</span>
+            <span class="sched-legend-item orange-sched">🐈 Orange</span>
+            <span class="sched-legend-item black-sched">🐈‍⬛ Black</span>
             <span class="sched-legend-item both-sched">Duo (Orange &amp; Black)</span>
           </div>
         </section>
@@ -1108,7 +1108,7 @@
             <div class="bento-breadcrumb-wrap">
               <span class="bento-logo-icon">🎯</span>
               <div>
-                <span class="bento-crumb-main">Yume's Host Tracker</span>
+                <span class="bento-crumb-main">TikTok Host Tracker</span>
                 <span class="bento-crumb-sep">›</span>
                 <span class="bento-crumb-sub">TikTok Live Host Daily Task Submissions</span>
               </div>
@@ -1151,13 +1151,13 @@
             </div>
           </div>
 
-          <!-- Hero KPI Bento (Yume Daily Tasks Focus) -->
+          <!-- Hero KPI Bento (Daily Tasks Focus) -->
           <div class="host-hero-kpi-grid single-hero">
             <div class="host-kpi-card glass-card task-kpi-hero full-width-kpi">
               <div class="kpi-icon-wrap kpi-task-icon">📋</div>
               <div class="kpi-details">
                 <div class="kpi-top-title-row">
-                  <span class="kpi-label" style="color: #065f46; font-size: 0.95rem;">Yume Daily Task Submissions (Main Focus)</span>
+                  <span class="kpi-label" style="color: #065f46; font-size: 0.95rem;">Daily Task Submissions (Main Focus)</span>
                   <span class="kpi-sub-text">Completed: <strong id="statTasksDone" style="color: #059669;">28</strong> / <span id="statTasksTotal">54</span> | Pending: <strong id="statTasksPending" style="color: #d97706;">26</strong></span>
                 </div>
                 <div class="kpi-val" id="hostTaskProgressText" style="color: #065f46;">28 / 54 Done (52%)</div>
@@ -1263,7 +1263,7 @@
             <div class="spender-pagination-bar" id="spenderPaginationBar"></div>
           </div>
 
-          <!-- ================= SUBPANEL 2: TASKS (FOKUS UTAMA HARIAN YUME) ================= -->
+          <!-- ================= SUBPANEL 2: TASKS (DAILY TASK FOCUS) ================= -->
           <div class="host-subtab-panel active" id="host-subpanel-tasks">
             
             <!-- Quick Add Target Bar (Sangat Mudah & Langsung Masuk) -->
@@ -1271,7 +1271,7 @@
               <form onsubmit="window.HostTracker.submitInlineNewTask(event)" class="tasks-inline-form">
                 <div class="tasks-inline-input-wrap">
                   <span class="tasks-input-icon">➕</span>
-                  <input type="text" id="inlineNewTaskInput" class="tasks-inline-input" placeholder="Type account name or new target task for Yume (then press Enter or click Add)..." autocomplete="off" />
+                  <input type="text" id="inlineNewTaskInput" class="tasks-inline-input" placeholder="Type account name or new target task (then press Enter or click Add)..." autocomplete="off" />
                 </div>
                 <button type="submit" class="bento-pill-btn btn-add-target-solid">
                   <span>➕</span>
@@ -1282,7 +1282,7 @@
 
             <div class="tasks-toolbar glass-card">
               <div class="tasks-toolbar-left">
-                <span class="tasks-tb-title">Daily Task Checklist for Yume (Sheet 3)</span>
+                <span class="tasks-tb-title">Daily Task Checklist (Sheet 3)</span>
                 <span class="tasks-tb-sub">Check off accounts/targets who submitted their task today</span>
               </div>
               <div class="tasks-toolbar-actions">
@@ -1408,7 +1408,7 @@
           </div>
           <div class="start-item" onclick="restoreAndSwitchTab('hosttracker'); toggleStartMenu();">
             <span class="item-icon">🎯</span>
-            <div class="item-text"><strong>TikTok Host Tracker</strong><small>329 VIP Spenders &amp; Yume Live Tasks</small></div>
+            <div class="item-text"><strong>TikTok Host Tracker</strong><small>329 VIP Spenders &amp; Host Live Tasks</small></div>
           </div>
           <div class="start-divider"></div>
           <div class="start-item" onclick="openCloudSyncModal(); toggleStartMenu();">
@@ -1603,8 +1603,8 @@
           <label for="reminderFor">Target:</label>
           <select id="reminderFor" class="retro-select">
             <option value="both">Both (Joint)</option>
-            <option value="yuki">Orange</option>
-            <option value="nata">Black</option>
+            <option value="orange">Orange</option>
+            <option value="black">Black</option>
           </select>
         </div>
         <div class="form-group-retro">
@@ -1640,15 +1640,15 @@
           <div class="form-group-retro">
             <label for="noteFrom">From:</label>
             <select id="noteFrom" class="retro-select">
-              <option value="yuki">Orange</option>
-              <option value="nata">Black</option>
+              <option value="orange">Orange</option>
+              <option value="black">Black</option>
             </select>
           </div>
           <div class="form-group-retro">
             <label for="noteTo">To:</label>
             <select id="noteTo" class="retro-select">
-              <option value="nata">Black</option>
-              <option value="yuki">Orange</option>
+              <option value="black">Black</option>
+              <option value="orange">Orange</option>
             </select>
           </div>
         </div>
@@ -1812,7 +1812,7 @@
             <button class="gcal-add-badge">＋ Add</button>
           </div>
 
-          <div class="gcal-quick-card" onclick="syncEventToGoogleCalendar('yuki_bday')">
+          <div class="gcal-quick-card" onclick="syncEventToGoogleCalendar('orange_bday')">
             <span class="gcal-card-icon">🐈</span>
             <div class="gcal-card-info">
               <strong>Orange's Birthday</strong>
@@ -1821,7 +1821,7 @@
             <button class="gcal-add-badge">＋ Add</button>
           </div>
 
-          <div class="gcal-quick-card" onclick="syncEventToGoogleCalendar('nata_bday')">
+          <div class="gcal-quick-card" onclick="syncEventToGoogleCalendar('black_bday')">
             <span class="gcal-card-icon">🐈‍⬛</span>
             <div class="gcal-card-info">
               <strong>Black's Birthday</strong>
@@ -1830,7 +1830,7 @@
             <button class="gcal-add-badge">＋ Add</button>
           </div>
 
-          <div class="gcal-quick-card" onclick="syncEventToGoogleCalendar('yuki_routine')">
+          <div class="gcal-quick-card" onclick="syncEventToGoogleCalendar('orange_routine')">
             <span class="gcal-card-icon">💻</span>
             <div class="gcal-card-info">
               <strong>Orange's 4 Quests</strong>
@@ -1839,7 +1839,7 @@
             <button class="gcal-add-badge">＋ Add</button>
           </div>
 
-          <div class="gcal-quick-card" onclick="syncEventToGoogleCalendar('nata_routine')">
+          <div class="gcal-quick-card" onclick="syncEventToGoogleCalendar('black_routine')">
             <span class="gcal-card-icon">🌸</span>
             <div class="gcal-card-info">
               <strong>Black's Daily Quests</strong>
@@ -1869,10 +1869,10 @@
 
           <!-- Dual 1-Click Sync Buttons -->
           <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <button class="retro-btn-action" style="flex: 1; background: linear-gradient(180deg, #fb923c 0%, #ea580c 100%); font-size: 0.78rem; padding: 8px 12px;" onclick="syncYukiGCal()">
+            <button class="retro-btn-action" style="flex: 1; background: linear-gradient(180deg, #fb923c 0%, #ea580c 100%); font-size: 0.78rem; padding: 8px 12px;" onclick="syncOrangeGCal()">
               🐈 Sync Orange's Calendar
             </button>
-            <button class="retro-btn-action" style="flex: 1; background: linear-gradient(180deg, #94a3b8 0%, #64748b 100%); font-size: 0.78rem; padding: 8px 12px;" onclick="syncNataGCal()">
+            <button class="retro-btn-action" style="flex: 1; background: linear-gradient(180deg, #94a3b8 0%, #64748b 100%); font-size: 0.78rem; padding: 8px 12px;" onclick="syncBlackGCal()">
               🐈‍⬛ Sync Black's Calendar
             </button>
             <button class="retro-btn-action" style="width: 100%; background: linear-gradient(180deg, #10b981 0%, #047857 100%); font-size: 0.82rem; font-weight: 800; padding: 9px 14px;" onclick="syncBothGCal()">
@@ -1882,8 +1882,8 @@
 
           <div style="border-top: 1px dashed #86efac; margin-top: 6px; padding-top: 6px; display: flex; gap: 8px; align-items: center;">
             <select id="gcalImportTarget" class="retro-input" style="flex: 1; padding: 5px 8px; font-size: 0.74rem;">
-              <option value="yuki">🐈 Add to: Orange's Quests</option>
-              <option value="nata">🐈‍⬛ Add to: Black's Quests</option>
+              <option value="orange">🐈 Add to: Orange's Quests</option>
+              <option value="black">🐈‍⬛ Add to: Black's Quests</option>
               <option value="reminders">🔔 Add to: Gentle Reminders</option>
             </select>
             <input type="file" id="gcalIcsFileInput" accept=".ics,text/calendar" style="display:none;" onchange="handleGCalFileImport(event)" />
@@ -1977,14 +1977,14 @@
             <label class="form-label">Who Paid / Earned?</label>
             <div class="person-select-pair">
               <label class="person-radio-card">
-                <input type="radio" name="modalFinancePerson" value="yuki" id="radioFinanceYuki" checked />
-                <span class="person-radio-ui yuki-ui">
+                <input type="radio" name="modalFinancePerson" value="orange" id="radioFinanceOrange" checked />
+                <span class="person-radio-ui orange-ui">
                   <span class="av">🐈</span>
                   <span class="lbl">Orange</span>
                 </span>
               </label>
               <label class="person-radio-card">
-                <input type="radio" name="modalFinancePerson" value="nata" id="radioFinanceNata" />
+                <input type="radio" name="modalFinancePerson" value="black" id="radioFinanceBlack" />
                 <span class="person-radio-ui partner-ui">
                   <span class="av">🐈‍⬛</span>
                   <span class="lbl">Black</span>
@@ -1997,9 +1997,9 @@
           <div class="form-group">
             <label class="form-label" for="financeModalWallet">Select Wallet</label>
             <select id="financeModalWallet" class="form-select">
-              <option value="yuki" selected>🐈 Orange's Wallet</option>
-              <option value="tabungan_yuki">🏦 Orange's Savings</option>
-              <option value="nata">🐈‍⬛ Black's Wallet</option>
+              <option value="orange" selected>🐈 Orange's Wallet</option>
+              <option value="tabungan_orange">🏦 Orange's Savings</option>
+              <option value="black">🐈‍⬛ Black's Wallet</option>
             </select>
           </div>
 
@@ -2053,14 +2053,14 @@
           <label class="form-label">Goal Owner</label>
           <div class="person-select-pair">
             <label class="person-radio-card">
-              <input type="radio" name="modalGoalOwner" value="yuki" id="radioGoalYuki" checked />
-              <span class="person-radio-ui yuki-ui">
+              <input type="radio" name="modalGoalOwner" value="orange" id="radioGoalOrange" checked />
+              <span class="person-radio-ui orange-ui">
                 <span class="av">🐈</span>
                 <span class="lbl">Orange</span>
               </span>
             </label>
             <label class="person-radio-card">
-              <input type="radio" name="modalGoalOwner" value="nata" id="radioGoalNata" />
+              <input type="radio" name="modalGoalOwner" value="black" id="radioGoalBlack" />
               <span class="person-radio-ui partner-ui">
                 <span class="av">🐈‍⬛</span>
                 <span class="lbl">Black</span>
@@ -2248,7 +2248,7 @@
           <div class="form-group" style="margin-bottom: 14px;">
             <label class="form-label" for="modalNewTaskInput">Account Name / Target Task *</label>
             <input type="text" id="modalNewTaskInput" class="form-input" placeholder="e.g. kak_budi, room_vip, donator_x" required autofocus autocomplete="off" />
-            <small style="color: #64748b; font-size: 0.72rem; display: block; margin-top: 5px;">This target will be immediately added to Yume's daily task checklist.</small>
+            <small style="color: #64748b; font-size: 0.72rem; display: block; margin-top: 5px;">This target will be immediately added to the daily task checklist.</small>
           </div>
           <div class="modal-footer-retro" style="display: flex; justify-content: flex-end; gap: 8px;">
             <button type="button" class="retro-btn-cancel" onclick="window.HostTracker.closeAddTaskModal()">Cancel</button>
@@ -2281,7 +2281,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 
-  <!-- Yume's Host Tracker Data & Logic -->
+  <!-- TikTok Host Tracker Data & Logic -->
   <script src="host_tracker_data.js?v=20261014_v1"></script>
   <script src="app.js?v=20261014_v1"></script>
   <script src="host_tracker.js?v=20261014_v1"></script>
