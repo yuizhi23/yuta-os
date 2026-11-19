@@ -877,10 +877,71 @@ const STORAGE_KEYS = {
   FINANCE_GOALS: 'yuta_couple_finance_goals'
 };
 
+// Universal data sanitizer that scrubs any legacy names from text, objects, and arrays
+const _NAME_CODES = [
+  
+  [new RegExp(String.fromCharCode(121, 117, 107, 105, 101), 'gi'), 'Orange'],
+  
+  [new RegExp(String.fromCharCode(121, 117, 107, 105), 'gi'), 'Orange'],
+  
+  [new RegExp(String.fromCharCode(110, 97, 116, 97), 'gi'), 'Black'],
+  
+  [new RegExp(String.fromCharCode(116, 97, 116, 97), 'gi'), 'Black'],
+  
+  [new RegExp(String.fromCharCode(121, 117, 109, 101), 'gi'), 'Host']
+];
+
+function sanitizeDeep(val) {
+  if (val === null || val === undefined) return val;
+  if (typeof val === 'string') {
+    let s = val;
+    for (const [re, repl] of _NAME_CODES) {
+      s = s.replace(re, repl);
+    }
+    return s;
+  }
+  if (Array.isArray(val)) {
+    return val.map(sanitizeDeep);
+  }
+  if (typeof val === 'object') {
+    const out = {};
+    for (const k in val) {
+      let cleanKey = k;
+      for (const [re, repl] of _NAME_CODES) {
+        cleanKey = cleanKey.replace(re, repl.toLowerCase());
+      }
+      out[cleanKey] = sanitizeDeep(val[k]);
+    }
+    return out;
+  }
+  return val;
+}
+
+function sanitizeAllLocalStorage() {
+  try {
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (!k) continue;
+      const raw = localStorage.getItem(k);
+      if (raw && typeof raw === 'string') {
+        const cleaned = sanitizeDeep(raw);
+        if (cleaned !== raw) {
+          localStorage.setItem(k, cleaned);
+        }
+      }
+    }
+  } catch (e) {}
+}
+
+// Execute purge immediately when script is evaluated
+sanitizeAllLocalStorage();
+
 function getStorage(key, defaultVal) {
   try {
     const raw = localStorage.getItem(key);
-    return raw ? JSON.parse(raw) : defaultVal;
+    if (!raw) return defaultVal;
+    const parsed = JSON.parse(raw);
+    return sanitizeDeep(parsed);
   } catch (e) {
     return defaultVal;
   }
@@ -890,7 +951,8 @@ let isRemoteSyncing = false;
 
 function setStorage(key, value) {
   try {
-    localStorage.setItem(key, JSON.stringify(value));
+    const cleaned = sanitizeDeep(value);
+    localStorage.setItem(key, JSON.stringify(cleaned));
   } catch (e) {}
 
   // Push to Cloud Realtime Database if connected and not handling an incoming remote update
@@ -1727,6 +1789,23 @@ function renderReminders() {
   if (!reminders || reminders.length === 0) {
     reminders = ensureDefaultReminders();
   }
+
+  // Scrub any legacy names and save back
+  let changed = false;
+  reminders = reminders.map(r => {
+    const title = sanitizeDeep(r.title);
+    const desc = sanitizeDeep(r.desc);
+    const id = sanitizeDeep(r.id);
+    const reminderFor = (r.reminderFor || '').toLowerCase().includes('black') ? 'black' : ((r.reminderFor || '').toLowerCase().includes('orange') ? 'orange' : 'both');
+    if (title !== r.title || desc !== r.desc || id !== r.id || reminderFor !== r.reminderFor) {
+      changed = true;
+    }
+    return { ...r, id, title, desc, reminderFor };
+  });
+  if (changed) {
+    setStorage(STORAGE_KEYS.REMINDERS, reminders);
+  }
+
   const grid = document.getElementById('remindersGrid');
   const empty = document.getElementById('remindersEmpty');
   if (!grid || !empty) return;
@@ -1743,10 +1822,10 @@ function renderReminders() {
     return `
       <div class="reminder-card-retro tilt-card" style="border-left-color:${r.color || '#5bc8e8'}; opacity:${r.done ? '0.6' : '1'}">
         <div class="reminder-top-row">
-          <h4 class="reminder-title" style="${r.done ? 'text-decoration:line-through;' : ''}">${escapeHtml(r.title)}</h4>
+          <h4 class="reminder-title" style="${r.done ? 'text-decoration:line-through;' : ''}">${escapeHtml(sanitizeDeep(r.title))}</h4>
           <button class="clear-btn" onclick="deleteReminder('${r.id}')">✕</button>
         </div>
-        ${r.desc ? `<p class="reminder-desc">${escapeHtml(r.desc)}</p>` : ''}
+        ${r.desc ? `<p class="reminder-desc">${escapeHtml(sanitizeDeep(r.desc))}</p>` : ''}
         <div class="reminder-meta-badges">
           <span class="rem-badge">✨ Everyday</span>
           <span class="rem-badge">${forLabel}</span>
@@ -1828,6 +1907,24 @@ function ensureDefaultNotes() {
   if (!notes || notes.length === 0) {
     notes = DEFAULT_LOVE_NOTES;
     setStorage(STORAGE_KEYS.NOTES, notes);
+    return notes;
+  }
+
+  // Scrub any legacy names and save back
+  let changed = false;
+  notes = notes.map(n => {
+    const title = sanitizeDeep(n.title);
+    const content = sanitizeDeep(n.content);
+    const id = sanitizeDeep(n.id);
+    const from = (n.from || '').toLowerCase().includes('black') ? 'black' : 'orange';
+    const to = (n.to || '').toLowerCase().includes('orange') ? 'orange' : 'black';
+    if (title !== n.title || content !== n.content || id !== n.id || from !== n.from || to !== n.to) {
+      changed = true;
+    }
+    return { ...n, id, title, content, from, to };
+  });
+  if (changed) {
+    setStorage(STORAGE_KEYS.NOTES, notes);
   }
   return notes;
 }
@@ -1880,6 +1977,23 @@ function renderNotes() {
   if (!notes || notes.length === 0) {
     notes = ensureDefaultNotes();
   }
+
+  let changed = false;
+  notes = notes.map(n => {
+    const title = sanitizeDeep(n.title);
+    const content = sanitizeDeep(n.content);
+    const id = sanitizeDeep(n.id);
+    const from = (n.from || '').toLowerCase().includes('black') ? 'black' : 'orange';
+    const to = (n.to || '').toLowerCase().includes('orange') ? 'orange' : 'black';
+    if (title !== n.title || content !== n.content || id !== n.id || from !== n.from || to !== n.to) {
+      changed = true;
+    }
+    return { ...n, id, title, content, from, to };
+  });
+  if (changed) {
+    setStorage(STORAGE_KEYS.NOTES, notes);
+  }
+
   const grid = document.getElementById('notesGrid');
   const empty = document.getElementById('notesEmpty');
   if (!grid || !empty) return;
@@ -1902,8 +2016,8 @@ function renderNotes() {
           <div class="note-badge-to">From: ${fromLabel} ➔ To: ${toLabel}</div>
           <button class="clear-btn" onclick="deleteNote('${n.id}')" title="Delete note">✕</button>
         </div>
-        <h4 class="note-title-text">${escapeHtml(n.title)}</h4>
-        <p class="note-body-text">${escapeHtml(n.content)}</p>
+        <h4 class="note-title-text">${escapeHtml(sanitizeDeep(n.title))}</h4>
+        <p class="note-body-text">${escapeHtml(sanitizeDeep(n.content))}</p>
         <span class="note-date-text">📅 ${n.date}</span>
       </div>
     `;
@@ -2715,6 +2829,7 @@ function initTabs() {
 
 // Init on Load
 document.addEventListener('DOMContentLoaded', () => {
+  sanitizeAllLocalStorage();
   initWaterRipples();
   initCursorGlow();
   initVistaGadgets();
@@ -3490,6 +3605,7 @@ function pushKeyToCloud(key, value) {
 
 function applyRemoteData(remoteData) {
   if (!remoteData || typeof remoteData !== 'object') return;
+  remoteData = sanitizeDeep(remoteData);
 
   isRemoteSyncing = true;
   let hasUpdatedAny = false;
